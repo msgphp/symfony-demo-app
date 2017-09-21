@@ -1,0 +1,33 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    # User
+    MsgPhp\User\PasswordEncoderInterface: '@MsgPhp\User\Infra\Security\PasswordEncoder'
+    MsgPhp\User\Repository\PendingUserRepositoryInterface: '@MsgPhp\User\Infra\Doctrine\Repository\PendingUserRepository'
+    MsgPhp\User\Repository\UserRepositoryInterface: '@MsgPhp\User\Infra\Doctrine\Repository\UserRepository'
+    MsgPhp\User\Repository\UserRoleRepositoryInterface: '@MsgPhp\User\Infra\Doctrine\Repository\UserRoleRepository'
+    MsgPhp\User\Repository\UserSecondaryEmailRepositoryInterface: '@MsgPhp\User\Infra\Doctrine\Repository\UserSecondaryEmailRepository'
+
+    MsgPhp\User\Infra\Console\Command\:
+        resource: '../../vendor/msgphp/user/Infra/Console/Command'
+        tags: [console.command]
+    MsgPhp\User\Infra\Doctrine\Repository\:
+        resource: '../../vendor/msgphp/user/Infra/Doctrine/Repository'
+    MsgPhp\User\Infra\Doctrine\SqlEmailLookup: ~
+    MsgPhp\User\Infra\Security\PasswordEncoder:
+        arguments:
+            - !service
+                class: Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface
+                factory: ['@security.encoder_factory', getEncoder]
+                arguments: [MsgPhp\User\Infra\Security\SecurityUser]
+    MsgPhp\User\Infra\Security\SecurityUserChecker: ~
+    MsgPhp\User\Infra\Security\SecurityUserFactory: ~
+    MsgPhp\User\Infra\Security\SecurityUserProvider: ~
+    MsgPhp\User\Infra\Security\UserRoleProviderInterface: '@App\Security\UserRoleProvider'
+    MsgPhp\User\Infra\Twig\UserExtension: ~
+    MsgPhp\User\Infra\Validator\EmailLookupInterface: '@MsgPhp\User\Infra\Doctrine\SqlEmailLookup'
+    MsgPhp\User\Infra\Validator\ExistingEmailValidator: ~
+    MsgPhp\User\Infra\Validator\UniqueEmailValidator: ~

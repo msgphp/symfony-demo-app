@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+        <p><a href="{{ path('index') }}">Home</a></p>
+
+        {% set flashes = app.flashes %}
+        {% if flashes|length > 0 %}
+            {% include 'flashes.html.twig' %}
+        {% endif %}
+
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

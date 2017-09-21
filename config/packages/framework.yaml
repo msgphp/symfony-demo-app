@@ -1,0 +1,6 @@
+framework:
+    secret: '%env(APP_SECRET)%'
+    php_errors: { log: true }
+    translator: false
+    csrf_protection: true
+    session: { save_path: '%kernel.project_dir%/var/sessions/%kernel.environment%' }

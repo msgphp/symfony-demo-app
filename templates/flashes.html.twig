@@ -1,0 +1,7 @@
+<ul>
+{% for label, messages in flashes %}
+    {% for message in messages %}
+        <li>[{{ label|upper }}] {{ message }}</li>
+    {% endfor %}
+{% endfor %}
+</ul>

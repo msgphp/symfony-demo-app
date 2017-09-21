@@ -1,0 +1,18 @@
+doctrine:
+    dbal:
+        url: '%env(DATABASE_URL)%'
+        charset: utf8mb4
+        default_table_options:
+            charset: utf8mb4
+            collate: utf8mb4_unicode_ci
+        types:
+            MsgPhp.User.Infra.Doctrine.Type.UserIdType: MsgPhp\User\Infra\Doctrine\Type\UserIdType
+
+    orm:
+        auto_generate_proxy_classes: '%kernel.debug%'
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        mappings:
+            domain_user:
+                dir: '%kernel.project_dir%/vendor/msgphp/user/Infra/Doctrine/Resources/mapping'
+                type: xml
+                prefix: MsgPhp\User\Entity
