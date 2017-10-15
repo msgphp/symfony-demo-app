@@ -1043,12 +1043,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/domain.git",
-                "reference": "e35edc9d7fad13905380aab276cbf0546c2da2b2"
+                "reference": "1ad1655cb1dbc91c47011a915a22906b2eabf4c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/domain/zipball/e35edc9d7fad13905380aab276cbf0546c2da2b2",
-                "reference": "e35edc9d7fad13905380aab276cbf0546c2da2b2",
+                "url": "https://api.github.com/repos/msgphp/domain/zipball/1ad1655cb1dbc91c47011a915a22906b2eabf4c5",
+                "reference": "1ad1655cb1dbc91c47011a915a22906b2eabf4c5",
                 "shasum": ""
             },
             "require-dev": {
@@ -1084,7 +1084,7 @@
                 }
             ],
             "description": "MsgPhp Base domain layer",
-            "time": "2017-10-15T13:39:45+00:00"
+            "time": "2017-10-15T19:10:09+00:00"
         },
         {
             "name": "msgphp/user",
@@ -1092,12 +1092,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user.git",
-                "reference": "5216d796b576101b64b220333b9e650ba8f7da4a"
+                "reference": "c36db856241922eeeeff80270c609d48bde486eb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/user/zipball/5216d796b576101b64b220333b9e650ba8f7da4a",
-                "reference": "5216d796b576101b64b220333b9e650ba8f7da4a",
+                "url": "https://api.github.com/repos/msgphp/user/zipball/c36db856241922eeeeff80270c609d48bde486eb",
+                "reference": "c36db856241922eeeeff80270c609d48bde486eb",
                 "shasum": ""
             },
             "require": {
@@ -1143,7 +1143,7 @@
                 }
             ],
             "description": "MsgPhp User domain layer",
-            "time": "2017-10-15T16:12:15+00:00"
+            "time": "2017-10-15T19:10:09+00:00"
         },
         {
             "name": "paragonie/random_compat",
