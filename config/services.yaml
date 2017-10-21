@@ -4,20 +4,7 @@ services:
         autoconfigure: true
         public: false
 
-    # Application
     App\Controller\:
         resource: '../src/Controller'
         tags: [controller.service_arguments]
-    App\Security\UserRoleProvider: ~
     App\Security\PasswordConfirmation: ~
-
-    # Domain
-    MsgPhp\Domain\CommandBusInterface: '@MsgPhp\Domain\Infra\MessageBus\DomainCommandBus'
-    MsgPhp\Domain\EventBusInterface: '@MsgPhp\Domain\Infra\MessageBus\DomainEventBus'
-
-    # Infrastructure
-    MsgPhp\Domain\Infra\MessageBus\DomainCommandBus: ['@command_bus']
-    MsgPhp\Domain\Infra\MessageBus\DomainEventBus: ['@event_bus']
-
-msgphp_user:
-    user_class: App\Entity\User\User

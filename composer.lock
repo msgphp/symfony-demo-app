@@ -1043,12 +1043,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/domain.git",
-                "reference": "02a7e4996c28fda7ab79481b94cb87c38552199f"
+                "reference": "9f389b193cbd8be93b7142a067217f3ae0954b99"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/domain/zipball/02a7e4996c28fda7ab79481b94cb87c38552199f",
-                "reference": "02a7e4996c28fda7ab79481b94cb87c38552199f",
+                "url": "https://api.github.com/repos/msgphp/domain/zipball/9f389b193cbd8be93b7142a067217f3ae0954b99",
+                "reference": "9f389b193cbd8be93b7142a067217f3ae0954b99",
                 "shasum": ""
             },
             "require-dev": {
@@ -1084,7 +1084,7 @@
                 }
             ],
             "description": "MsgPhp Base domain layer",
-            "time": "2017-10-21T09:53:04+00:00"
+            "time": "2017-10-22T10:38:21+00:00"
         },
         {
             "name": "msgphp/user",
@@ -1092,12 +1092,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user.git",
-                "reference": "5fa35021fd2680e2414987d8845e58ad20d1109c"
+                "reference": "9db923f2c00914c092717158ce4c521609505f7a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/user/zipball/5fa35021fd2680e2414987d8845e58ad20d1109c",
-                "reference": "5fa35021fd2680e2414987d8845e58ad20d1109c",
+                "url": "https://api.github.com/repos/msgphp/user/zipball/9db923f2c00914c092717158ce4c521609505f7a",
+                "reference": "9db923f2c00914c092717158ce4c521609505f7a",
                 "shasum": ""
             },
             "require": {
@@ -1144,7 +1144,7 @@
                 }
             ],
             "description": "MsgPhp User domain layer",
-            "time": "2017-10-21T14:53:30+00:00"
+            "time": "2017-10-22T10:38:21+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -4580,12 +4580,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "92cba1d0bce5fd91ef74a49c31a8cbf1a42a79ef"
+                "reference": "1435f8a06ad9013f587ca04c3e160b236814e915"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/92cba1d0bce5fd91ef74a49c31a8cbf1a42a79ef",
-                "reference": "92cba1d0bce5fd91ef74a49c31a8cbf1a42a79ef",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/1435f8a06ad9013f587ca04c3e160b236814e915",
+                "reference": "1435f8a06ad9013f587ca04c3e160b236814e915",
                 "shasum": ""
             },
             "require": {
@@ -4656,7 +4656,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-10-19T18:18:42+00:00"
+            "time": "2017-10-22T03:56:45+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

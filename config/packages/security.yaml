@@ -3,15 +3,14 @@ security:
         MsgPhp\User\Infra\Security\SecurityUser: bcrypt
 
     providers:
-         in_memory: { memory: ~ }
-         domain_user: { id: MsgPhp\User\Infra\Security\SecurityUserProvider }
+         msgphp_user: { id: MsgPhp\User\Infra\Security\SecurityUserProvider }
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
-            provider: domain_user
+            provider: msgphp_user
             user_checker: MsgPhp\User\Infra\Security\SecurityUserChecker
             anonymous: ~
             form_login:

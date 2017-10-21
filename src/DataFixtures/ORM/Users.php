@@ -27,11 +27,11 @@ final class Users extends Fixture
         $user = $this->createUser('user+admin@domain.dev');
         $user->enable();
         $manager->persist($user);
-        $manager->persist(new UserRole($user, UserRoleProvider::ROLE_ADMIN_USER));
+        $manager->persist(new UserRole($user, UserRoleProvider::ROLE_ADMIN));
 
         $user = $this->createUser('user+admin+disabled@domain.dev');
         $manager->persist($user);
-        $manager->persist(new UserRole($user, UserRoleProvider::ROLE_ADMIN_USER));
+        $manager->persist(new UserRole($user, UserRoleProvider::ROLE_ADMIN));
 
         $manager->flush();
     }

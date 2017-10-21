@@ -11,11 +11,11 @@ final class UserRoleProvider implements UserRoleProviderInterface
 {
     public const ROLE_USER = 'ROLE_USER';
     public const ROLE_DISABLED_USER = 'ROLE_DISABLED_USER';
-    public const ROLE_ADMIN_USER = 'ROLE_ADMIN_USER';
+    public const ROLE_ADMIN = 'ROLE_ADMIN';
 
     private $repository;
 
-    public function __construct(UserRoleRepositoryInterface $repository)
+    public function __construct(?UserRoleRepositoryInterface $repository)
     {
         $this->repository = $repository;
     }

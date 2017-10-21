@@ -5,8 +5,6 @@ doctrine:
         default_table_options:
             charset: utf8mb4
             collate: utf8mb4_unicode_ci
-        types:
-            MsgPhp.User.Infra.Doctrine.Type.UserIdType: MsgPhp\User\Infra\Doctrine\Type\UserIdType
 
     orm:
         auto_generate_proxy_classes: '%kernel.debug%'
