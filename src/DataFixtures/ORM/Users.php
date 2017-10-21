@@ -2,11 +2,11 @@
 
 namespace App\DataFixtures\ORM;
 
+use App\Entity\User\User;
+use App\Entity\User\UserRole;
 use App\Security\UserRoleProvider;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use MsgPhp\User\Entity\User;
-use MsgPhp\User\Entity\UserRole;
 use MsgPhp\User\Infra\Security\SecurityUser;
 use MsgPhp\User\Infra\Uuid\UserId;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;

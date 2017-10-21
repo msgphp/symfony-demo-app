@@ -18,3 +18,6 @@ services:
     # Infrastructure
     MsgPhp\Domain\Infra\MessageBus\DomainCommandBus: ['@command_bus']
     MsgPhp\Domain\Infra\MessageBus\DomainEventBus: ['@event_bus']
+
+msgphp_user:
+    user_class: App\Entity\User\User
