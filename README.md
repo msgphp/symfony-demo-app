@@ -26,7 +26,6 @@
 
 - Configure access control / domain exception handling in HTTP
 - Set a security token for pending users (?)
-- Consider moving controllers / commands / forms to infra layer
 - Add behavior / functional tests (!)
 - Facebook / Two-factor / external authentication
 - Concept of a `Profile` / `EAV` domain

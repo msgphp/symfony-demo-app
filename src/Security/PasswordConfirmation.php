@@ -44,7 +44,6 @@ final class PasswordConfirmation
 
         $form = $this->formFactory->createNamedBuilder($hash)
             ->add('password', PasswordType::class, [
-                'required' => true,
                 'constraints' => [new UserPassword()],
             ])
             ->add('referer', HiddenType::class, [

@@ -2,10 +2,12 @@
 
 namespace App\Controller\User;
 
+use App\Entity\User\UserSecondaryEmail;
 use MsgPhp\Domain\CommandBusInterface;
 use MsgPhp\User\Command\ConfirmUserSecondaryEmailCommand;
 use MsgPhp\User\Infra\Security\SecurityUserFactory;
 use MsgPhp\User\Repository\UserSecondaryEmailRepositoryInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
@@ -15,8 +17,11 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 final class ConfirmEmailController
 {
+    /**
+     * @ParamConverter("userSecondaryEmail", options={"mapping": {"token": "token"}})
+     */
     public function __invoke(
-        string $token,
+        UserSecondaryEmail $userSecondaryEmail,
         SecurityUserFactory $securityUserFactory,
         TokenStorageInterface $tokenStorage,
         FlashBagInterface $flashBag,
@@ -25,15 +30,13 @@ final class ConfirmEmailController
         UserSecondaryEmailRepositoryInterface $userSecondaryEmailRepository
     ): Response
     {
-        $userSecondaryEmail = $userSecondaryEmailRepository->findByToken($token);
-
         if (!$userSecondaryEmail->getUserId()->equals($securityUserFactory->getUserId())) {
-            throw new NotFoundHttpException('Token not found.');
+            throw new NotFoundHttpException();
         }
 
         $wasPendingPrimary = $userSecondaryEmail->isPendingPrimary();
 
-        $commandBus->handle(new ConfirmUserSecondaryEmailCommand($token));
+        $commandBus->handle(new ConfirmUserSecondaryEmailCommand($userSecondaryEmail->getToken()));
 
         if ($wasPendingPrimary) {
             $flashBag->add('success', sprintf('Hi, your e-mail is confirmed. Please login again.'));

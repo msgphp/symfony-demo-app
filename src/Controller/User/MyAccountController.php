@@ -40,6 +40,10 @@ final class MyAccountController
         PasswordConfirmation $passwordConfirmation
     ): Response
     {
+        if (!$securityUser->isAuthenticated()) {
+            return new RedirectResponse($urlGenerator->generate('login'));
+        }
+
         // change primary e-mail
         $emailForm = $formFactory->create(ChangeEmailType::class);
 
