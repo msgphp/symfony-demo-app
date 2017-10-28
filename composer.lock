@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "374aaebe45301fc88f15faf10bddda48",
+    "content-hash": "de8fafbec93f9536f1e92eab2a17c6fa",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1043,13 +1043,16 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/domain.git",
-                "reference": "9f389b193cbd8be93b7142a067217f3ae0954b99"
+                "reference": "dfd7b1b19d92dca1825ca44d5c94281fcdd161f5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/domain/zipball/9f389b193cbd8be93b7142a067217f3ae0954b99",
-                "reference": "9f389b193cbd8be93b7142a067217f3ae0954b99",
+                "url": "https://api.github.com/repos/msgphp/domain/zipball/dfd7b1b19d92dca1825ca44d5c94281fcdd161f5",
+                "reference": "dfd7b1b19d92dca1825ca44d5c94281fcdd161f5",
                 "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.0"
             },
             "require-dev": {
                 "doctrine/collections": "^1.5",
@@ -1084,7 +1087,7 @@
                 }
             ],
             "description": "MsgPhp Base domain layer",
-            "time": "2017-10-22T10:38:21+00:00"
+            "time": "2017-10-28T13:05:15+00:00"
         },
         {
             "name": "msgphp/user",
@@ -1092,12 +1095,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user.git",
-                "reference": "9db923f2c00914c092717158ce4c521609505f7a"
+                "reference": "056aeb06435dca3e2994736d99d6688471119bcb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/user/zipball/9db923f2c00914c092717158ce4c521609505f7a",
-                "reference": "9db923f2c00914c092717158ce4c521609505f7a",
+                "url": "https://api.github.com/repos/msgphp/user/zipball/056aeb06435dca3e2994736d99d6688471119bcb",
+                "reference": "056aeb06435dca3e2994736d99d6688471119bcb",
                 "shasum": ""
             },
             "require": {
@@ -1144,7 +1147,51 @@
                 }
             ],
             "description": "MsgPhp User domain layer",
-            "time": "2017-10-22T10:38:21+00:00"
+            "time": "2017-10-28T13:02:11+00:00"
+        },
+        {
+            "name": "msgphp/user-bundle",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/msgphp/user-bundle.git",
+                "reference": "337f8b23617b02d76b04b0d183a9826494ae2ee7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/msgphp/user-bundle/zipball/337f8b23617b02d76b04b0d183a9826494ae2ee7",
+                "reference": "337f8b23617b02d76b04b0d183a9826494ae2ee7",
+                "shasum": ""
+            },
+            "require": {
+                "msgphp/user": "^1.0",
+                "symfony/config": "^3.4|^4.0",
+                "symfony/dependency-injection": "^3.4|^4.0",
+                "symfony/http-kernel": "^3.4|^4.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "MsgPhp\\UserBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Roland Franssen",
+                    "email": "franssen.roland@gmail.com"
+                }
+            ],
+            "description": "MsgPhp User Bundle",
+            "time": "2017-10-28T13:17:05+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -3487,27 +3534,24 @@
         },
         {
             "name": "symfony/security",
-            "version": "3.4.x-dev",
+            "version": "v4.0.0-BETA1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security.git",
-                "reference": "2903a421aa118661f6e22aaa00b455ad3f852e7f"
+                "reference": "993114344ba3ae1f54068445e989c3baeb981f42"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security/zipball/2903a421aa118661f6e22aaa00b455ad3f852e7f",
-                "reference": "2903a421aa118661f6e22aaa00b455ad3f852e7f",
+                "url": "https://api.github.com/repos/symfony/security/zipball/993114344ba3ae1f54068445e989c3baeb981f42",
+                "reference": "993114344ba3ae1f54068445e989c3baeb981f42",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.5.9|>=7.0.8",
-                "symfony/event-dispatcher": "~2.8|~3.0|~4.0",
-                "symfony/http-foundation": "~2.8|~3.0|~4.0",
-                "symfony/http-kernel": "~3.3|~4.0",
-                "symfony/polyfill-php56": "~1.0",
-                "symfony/polyfill-php70": "~1.0",
-                "symfony/polyfill-util": "~1.0",
-                "symfony/property-access": "~2.8|~3.0|~4.0"
+                "php": "^7.1.3",
+                "symfony/event-dispatcher": "~3.4|~4.0",
+                "symfony/http-foundation": "~3.4|~4.0",
+                "symfony/http-kernel": "~3.4|~4.0",
+                "symfony/property-access": "~3.4|~4.0"
             },
             "replace": {
                 "symfony/security-core": "self.version",
@@ -3518,12 +3562,12 @@
             "require-dev": {
                 "psr/container": "^1.0",
                 "psr/log": "~1.0",
-                "symfony/expression-language": "~2.8|~3.0|~4.0",
-                "symfony/finder": "~2.8|~3.0|~4.0",
-                "symfony/ldap": "~3.1|~4.0",
+                "symfony/expression-language": "~3.4|~4.0",
+                "symfony/finder": "~3.4|~4.0",
+                "symfony/ldap": "~3.4|~4.0",
                 "symfony/polyfill-intl-icu": "~1.0",
-                "symfony/routing": "~2.8|~3.0|~4.0",
-                "symfony/validator": "^3.2.5|~4.0"
+                "symfony/routing": "~3.4|~4.0",
+                "symfony/validator": "~3.4|~4.0"
             },
             "suggest": {
                 "psr/container": "To instantiate the Security class",
@@ -3536,7 +3580,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.4-dev"
+                    "dev-master": "4.0-dev"
                 }
             },
             "autoload": {
@@ -3563,7 +3607,7 @@
             ],
             "description": "Symfony Security Component",
             "homepage": "https://symfony.com",
-            "time": "2017-10-24T19:52:50+00:00"
+            "time": "2017-10-19T00:12:27+00:00"
         },
         {
             "name": "symfony/security-bundle",
@@ -3647,6 +3691,64 @@
                 }
             ],
             "description": "Symfony SecurityBundle",
+            "homepage": "https://symfony.com",
+            "time": "2017-10-24T14:12:06+00:00"
+        },
+        {
+            "name": "symfony/security-csrf",
+            "version": "3.4.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/security-csrf.git",
+                "reference": "cc0736d48c619bc510445d18ae82fb8a764a303d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/security-csrf/zipball/cc0736d48c619bc510445d18ae82fb8a764a303d",
+                "reference": "cc0736d48c619bc510445d18ae82fb8a764a303d",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.5.9|>=7.0.8",
+                "symfony/polyfill-php56": "~1.0",
+                "symfony/polyfill-php70": "~1.0",
+                "symfony/security-core": "~2.8|~3.0|~4.0"
+            },
+            "require-dev": {
+                "symfony/http-foundation": "~2.8|~3.0|~4.0"
+            },
+            "suggest": {
+                "symfony/http-foundation": "For using the class SessionTokenStorage."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.4-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\Security\\Csrf\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony Security Component - CSRF Library",
             "homepage": "https://symfony.com",
             "time": "2017-10-24T14:12:06+00:00"
         },
@@ -4040,24 +4142,25 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.x-dev",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "66a912abc3ee48ef4fb5a506457fb33b0a6ac9ea"
+                "reference": "3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/66a912abc3ee48ef4fb5a506457fb33b0a6ac9ea",
-                "reference": "66a912abc3ee48ef4fb5a506457fb33b0a6ac9ea",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e",
+                "reference": "3b8a3a99ba1f6a3952ac2747d989303cbd6b7a3e",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.4.0"
+                "php": "^5.6 || ^7.0"
             },
             "require-dev": {
                 "doctrine/collections": "^1.0",
-                "phpunit/phpunit": "~4.1"
+                "doctrine/common": "^2.6",
+                "phpunit/phpunit": "^4.1"
             },
             "type": "library",
             "autoload": {
@@ -4080,7 +4183,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2017-10-15T18:29:05+00:00"
+            "time": "2017-10-19T19:58:43+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -5991,13 +6094,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "sensio/framework-extra-bundle": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": {
-        "php": "^7.1.3"
-    },
+    "platform": [],
     "platform-dev": []
 }
