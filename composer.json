@@ -3,6 +3,7 @@
     "license": "MIT",
     "minimum-stability": "dev",
     "require": {
+        "msgphp/eav": "^1.0",
         "msgphp/user-bundle": "^1.0",
         "ramsey/uuid": "^3.7",
         "sensio/framework-extra-bundle": "^5.0",
