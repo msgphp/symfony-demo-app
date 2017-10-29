@@ -2,18 +2,14 @@
 
 namespace App\DataFixtures\ORM;
 
-use App\Entity\Eav\Attribute;
-use App\Entity\User\User;
-use App\Entity\User\UserAttributeValue;
-use App\Entity\User\UserRole;
+use App\Entity\Eav\{Attribute, AttributeValue};
+use App\Entity\User\{User, UserAttributeValue, UserRole};
 use App\Security\UserRoleProvider;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use MsgPhp\Eav\Infra\Uuid\AttributeId;
-use MsgPhp\Eav\Infra\Uuid\AttributeValueId;
-use MsgPhp\User\Infra\Security\SecurityUser;
+use MsgPhp\Eav\Infra\Uuid\{AttributeId, AttributeValueId};
 use MsgPhp\User\Infra\Uuid\UserId;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+use MsgPhp\User\PasswordEncoderInterface;
 
 final class Users extends Fixture
 {
@@ -21,18 +17,27 @@ final class Users extends Fixture
 
     public function load(ObjectManager $manager)
     {
+        $manager->persist(new Attribute(Attribute::getOauthId('google')));
+        $manager->persist($boolAttr = new Attribute(new AttributeId()));
+        $manager->persist($intAttr = new Attribute(new AttributeId()));
+        $manager->persist($floatAttr = new Attribute(new AttributeId()));
+        $manager->persist($stringAttr = new Attribute(new AttributeId()));
+        $manager->persist($dateTimeAttr = new Attribute(new AttributeId()));
+
+        $manager->flush();
+
         $user = $this->createUser('user@domain.dev');
         $user->enable();
         $manager->persist($user);
-        $manager->persist(new UserAttributeValue(new AttributeValueId(), $user, $boolAttr = new Attribute(new AttributeId()), true));
-        $manager->persist(new UserAttributeValue(new AttributeValueId(), $user, $boolAttr, false));
-        $manager->persist(new UserAttributeValue(new AttributeValueId(), $user, $boolAttr, null));
-        $manager->persist(new UserAttributeValue(new AttributeValueId(), $user, $intAttr = new Attribute(new AttributeId()), 123));
-        $manager->persist(new UserAttributeValue(new AttributeValueId(), $user, $intAttr, -123));
-        $manager->persist(new UserAttributeValue(new AttributeValueId(), $user, $floatAttr = new Attribute(new AttributeId()), 123.1223456789));
-        $manager->persist(new UserAttributeValue(new AttributeValueId(), $user, $floatAttr, -0.123));
-        $manager->persist(new UserAttributeValue(new AttributeValueId(), $user, $stringAttr = new Attribute(new AttributeId()), 'text'));
-        $manager->persist(new UserAttributeValue(new AttributeValueId(), $user, $dateTimeAttr = new Attribute(new AttributeId()), new \DateTime()));
+        $manager->persist($this->createUserAttributeValue($user, $boolAttr, true));
+        $manager->persist($this->createUserAttributeValue($user, $boolAttr, false));
+        $manager->persist($this->createUserAttributeValue($user, $boolAttr, null));
+        $manager->persist($this->createUserAttributeValue($user, $intAttr, 123));
+        $manager->persist($this->createUserAttributeValue($user, $intAttr, -456));
+        $manager->persist($this->createUserAttributeValue($user, $floatAttr, 123.0123456789));
+        $manager->persist($this->createUserAttributeValue($user, $floatAttr, -0.123));
+        $manager->persist($this->createUserAttributeValue($user, $stringAttr, 'text'));
+        $manager->persist($this->createUserAttributeValue($user, $dateTimeAttr, new \DateTimeImmutable()));
 
         $user = $this->createUser('user+disabled@domain.dev');
         $manager->persist($user);
@@ -51,9 +56,14 @@ final class Users extends Fixture
 
     private function createUser(string $email, string $password = self::PASSWORD): User
     {
-        /** @var EncoderFactoryInterface $encoder */
-        $encoder = $this->container->get('security.encoder_factory');
+        /** @var PasswordEncoderInterface $encoder */
+        $encoder = $this->container->get('fixtures')->get('password_encoder');
 
-        return new User(new UserId(), $email, $encoder->getEncoder(SecurityUser::class)->encodePassword($password, null));
+        return new User(new UserId(), $email, $encoder->encode($password));
+    }
+
+    private function createUserAttributeValue(User $user, Attribute $attribute, $value): UserAttributeValue
+    {
+        return new UserAttributeValue($user, new AttributeValue(new AttributeValueId(), $attribute, $value));
     }
 }

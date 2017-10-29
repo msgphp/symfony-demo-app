@@ -11,4 +11,11 @@
             <input type="submit" value="Login" />
         </div>
     {{ form_end(form) }}
+
+    <p>Or login using:</p>
+    <ul>
+    {% for owner in hwi_oauth_resource_owners() %}
+        <li><a href="{{ hwi_oauth_login_url(owner) }}">{{ owner | trans({}, 'HWIOAuthBundle') }}</a></li>
+    {% endfor %}
+    </ul>
 {% endblock %}

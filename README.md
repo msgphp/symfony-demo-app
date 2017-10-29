@@ -12,6 +12,7 @@
 ## Features
 
 - Symfony application with security setup
+- HWIOAuthBundle setup (google)
 - Event / command driven
 - Shipped with `Doctrine` and `InMemory` persistence infrastructure
 - `User` domain

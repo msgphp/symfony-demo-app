@@ -10,7 +10,7 @@
         <fieldset>
             <legend>Primary e-mail</legend>
             <ul>
-                <li>Current: {{ current_user().email }}</li>
+                <li>Current: {{ msgphp_current_user().email }}</li>
                 {% if pendingPrimaryEmail %}
                     <li>
                         Pending confirmation: {{ pendingPrimaryEmail }}

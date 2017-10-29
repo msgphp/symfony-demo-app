@@ -7,4 +7,15 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: [controller.service_arguments]
+    App\Security\OauthUserProvider: ~
     App\Security\PasswordConfirmation: ~
+    App\Security\UserRoleProvider: ~
+    MsgPhp\User\Infra\Security\UserRoleProviderInterface: '@App\Security\UserRoleProvider'
+
+    fixtures:
+        class: Symfony\Component\DependencyInjection\ServiceLocator
+        arguments:
+            -
+                password_encoder: '@MsgPhp\User\PasswordEncoderInterface'
+        tags: [container.service_locator]
+        public: true
