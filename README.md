@@ -21,12 +21,4 @@
   - Primary / secondary e-mails
   - Disabled / enabled users
   - User roles
-
-## Roadmap
-
-- Configure access control / domain exception handling in HTTP
-- Set a security token for pending users (?)
-- Add behavior / functional tests (!)
-- Facebook / Two-factor / external authentication
-- Concept of a `Profile` / `EAV` domain
-- ...
+  - User attribute values
