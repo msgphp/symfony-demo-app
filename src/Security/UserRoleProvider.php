@@ -2,7 +2,7 @@
 
 namespace App\Security;
 
-use App\Entity\User\User as AppUser;
+use App\Entity\User\{User as AppUser, UserRole as AppUserRole};
 use MsgPhp\User\Entity\User;
 use MsgPhp\User\Infra\Security\UserRoleProviderInterface;
 
@@ -19,6 +19,8 @@ final class UserRoleProvider implements UserRoleProviderInterface
     {
         $roles = $user->isEnabled() ? [self::ROLE_USER] : [self::ROLE_DISABLED_USER];
 
-        return array_merge($roles, $user->getRoles());
+        return array_merge($roles, $user->getRoles()->map(function (AppUserRole $userRole) {
+            return $userRole->getRole();
+        })->toArray());
     }
 }

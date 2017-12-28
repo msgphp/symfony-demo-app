@@ -2,19 +2,13 @@
 
 namespace App\Controller\User;
 
+use App\Entity\User\User;
 use App\EventSubscriber\SendEmailConfirmationUrlToUser;
-use App\Form\User\AddSecondaryEmailType;
-use App\Form\User\ChangeEmailType;
-use App\Form\User\ChangePasswordType;
+use App\Form\User\{AddSecondaryEmailType, ChangeEmailType, ChangePasswordType};
 use App\Security\PasswordConfirmation;
 use MsgPhp\Domain\CommandBusInterface;
-use MsgPhp\User\Command\AddUserSecondaryEmailCommand;
-use MsgPhp\User\Command\ChangeUserPasswordCommand;
-use MsgPhp\User\Command\DeleteUserSecondaryEmailCommand;
-use MsgPhp\User\Command\MarkUserSecondaryEmailPrimaryCommand;
-use MsgPhp\User\Command\SetUserPendingPrimaryEmailCommand;
+use MsgPhp\User\Command\{AddUserSecondaryEmailCommand, ChangeUserPasswordCommand, DeleteUserSecondaryEmailCommand, MarkUserSecondaryEmailPrimaryCommand, SetUserPendingPrimaryEmailCommand};
 use MsgPhp\User\Infra\Security\SecurityUserFactory;
-use MsgPhp\User\Repository\UserSecondaryEmailRepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,18 +29,15 @@ final class MyAccountController
         UrlGeneratorInterface $urlGenerator,
         Environment $twig,
         CommandBusInterface $commandBus,
-        UserSecondaryEmailRepositoryInterface $userSecondaryEmailRepository,
         SendEmailConfirmationUrlToUser $sendEmailConfirmationUrlToUser,
         PasswordConfirmation $passwordConfirmation
     ): Response
     {
-        if (!$securityUser->isAuthenticated()) {
-            return new RedirectResponse($urlGenerator->generate('login'));
-        }
+        /** @var User $user */
+        $user = $securityUser->getUser();
 
         // change primary e-mail
         $emailForm = $formFactory->create(ChangeEmailType::class);
-
         $emailForm->handleRequest($request);
 
         if ($emailForm->isSubmitted() && $emailForm->isValid()) {
@@ -72,7 +63,6 @@ final class MyAccountController
 
         // add secondary email
         $secondaryEmailForm = $formFactory->create(AddSecondaryEmailType::class);
-
         $secondaryEmailForm->handleRequest($request);
 
         if ($secondaryEmailForm->isSubmitted() && $secondaryEmailForm->isValid()) {
@@ -92,8 +82,7 @@ final class MyAccountController
 
             $commandBus->handle(new MarkUserSecondaryEmailPrimaryCommand($securityUser->getUserId(), $primaryEmail));
 
-            $currentSecondaryEmail = $userSecondaryEmailRepository->find($securityUser->getUserId(), $primaryEmail);
-            if ($currentSecondaryEmail->getConfirmedAt()) {
+            if (($currentSecondaryEmail = $user->getSecondaryEmail($primaryEmail)) && $currentSecondaryEmail->getConfirmedAt()) {
                 $flashBag->add('success', 'We\'ve changed your primary e-mail. Please login again.');
                 $tokenStorage->setToken(null);
 
@@ -119,7 +108,6 @@ final class MyAccountController
 
         // change password
         $passwordForm = $formFactory->create(ChangePasswordType::class);
-
         $passwordForm->handleRequest($request);
 
         if ($passwordForm->isSubmitted() && $passwordForm->isValid()) {
@@ -134,8 +122,7 @@ final class MyAccountController
 
         // send secondary / pending primary email confirmation link
         if ($confirmEmail = $request->query->get('confirm-email')) {
-            $currentSecondaryEmail = $userSecondaryEmailRepository->find($securityUser->getUserId(), $confirmEmail);
-            if (!$currentSecondaryEmail->getConfirmedAt()) {
+            if (($currentSecondaryEmail = $user->getSecondaryEmail($confirmEmail)) && !$currentSecondaryEmail->getConfirmedAt()) {
                 $sendEmailConfirmationUrlToUser->notify($currentSecondaryEmail);
                 $flashBag->add('success', 'We\'ve re-send you a confirmation link.');
             }
@@ -146,7 +133,6 @@ final class MyAccountController
         // render view
         return new Response($twig->render('User/my_account.html.twig', [
             'emailForm' => $emailForm->createView(),
-            'secondaryEmails' => $userSecondaryEmailRepository->findAllByUserId($securityUser->getUserId()),
             'secondaryEmailForm' => $secondaryEmailForm->createView(),
             'passwordForm' => $passwordForm->createView(),
         ]));

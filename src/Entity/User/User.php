@@ -34,65 +34,42 @@ class User extends BaseUser
         $this->secondaryEmails = new ArrayCollection();
     }
 
-    public function hasRole(string $role): bool
+    public function getRole(string $role): ?UserRole
     {
-        return in_array($role, $this->getRoles(), true);
-    }
-
-    public function addRole(string $role): void
-    {
-        if (!$this->hasRole($role)) {
-            $this->roles->add(new UserRole($this, $role));
-        }
-    }
-
-    public function removeRole(string $role): void
-    {
-        $this->roles->removeElement(
-            $this->roles->filter(function (UserRole $userRole) use ($role) {
-                return $userRole->getRole() === $role;
-            })->first()
-        );
+        return $this->roles->filter(function (UserRole $userRole) use ($role) {
+            return $userRole->getRole() === $role;
+        })->first() ?: null;
     }
 
     /**
-     * @return string[]
+     * @return Collection|UserRole[]
      */
-    public function getRoles(): array
+    public function getRoles(): Collection
     {
-        return $this->roles->map(function (UserRole $userRole) {
-            return $userRole->getRole();
-        })->toArray();
+        return $this->roles;
     }
 
-    public function hasSecondaryEmail(string $email): bool
+    public function getPendingPrimaryEmail(): ?string
     {
-        return in_array($email, $this->getSecondaryEmails(), true);
-    }
-
-    public function addSecondaryEmail(string $email): void
-    {
-        if (!$this->hasSecondaryEmail($email)) {
-            $this->secondaryEmails->add(new UserSecondaryEmail($this, $email));
-        }
-    }
-
-    public function removeSecondaryEmail(string $email): void
-    {
-        $this->secondaryEmails->removeElement(
-            $this->secondaryEmails->filter(function (UserSecondaryEmail $userSecondaryEmail) use ($email) {
-                return $userSecondaryEmail->getEmail() === $email;
-            })->first()
-        );
-    }
-
-    /**
-     * @return string[]
-     */
-    public function getSecondaryEmails(): array
-    {
-        return $this->secondaryEmails->map(function (UserSecondaryEmail $userSecondaryEmail) {
+        return $this->secondaryEmails->filter(function (UserSecondaryEmail $userSecondaryEmail) {
+            return $userSecondaryEmail->isPendingPrimary();
+        })->map(function (UserSecondaryEmail $userSecondaryEmail) {
             return $userSecondaryEmail->getEmail();
-        })->toArray();
+        })->first() ?: null;
+    }
+
+    public function getSecondaryEmail(string $email): ?UserSecondaryEmail
+    {
+        return $this->secondaryEmails->filter(function (UserSecondaryEmail $userSecondaryEmail) use ($email) {
+            return $userSecondaryEmail->getEmail() === $email;
+        })->first() ?: null;
+    }
+
+    /**
+     * @return Collection|UserSecondaryEmail
+     */
+    public function getSecondaryEmails(): Collection
+    {
+        return $this->secondaryEmails;
     }
 }

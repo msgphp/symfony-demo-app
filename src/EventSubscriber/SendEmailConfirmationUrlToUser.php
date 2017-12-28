@@ -19,14 +19,14 @@ final class SendEmailConfirmationUrlToUser
 
     public function __invoke(UserSecondaryEmailAddedEvent $event): void
     {
-        if (!$event->userSecondaryEmail->getConfirmedAt()) {
+        if (null === $event->userSecondaryEmail->getConfirmedAt()) {
             $this->notify($event->userSecondaryEmail);
         }
     }
 
     public function notify(UserSecondaryEmail $userSecondaryEmail): void
     {
-        if ($userSecondaryEmail->getConfirmedAt()) {
+        if (null !== $userSecondaryEmail->getConfirmedAt()) {
             throw new \LogicException('Cannot notify a secondary user e-mail which is already confirmed.');
         }
 

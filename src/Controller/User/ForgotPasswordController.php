@@ -32,7 +32,6 @@ final class ForgotPasswordController
         }
 
         $form = $formFactory->createNamed('', ForgotPasswordType::class);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
