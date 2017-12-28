@@ -5,7 +5,7 @@ namespace App\Controller\User;
 use App\Entity\User\User;
 use App\Form\User\ResetPasswordType;
 use MsgPhp\Domain\CommandBusInterface;
-use MsgPhp\User\Command\ResetUserPasswordCommand;
+use MsgPhp\User\Command\ChangeUserPasswordCommand;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -38,7 +38,7 @@ final class ResetPasswordController
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
 
-            $commandBus->handle(new ResetUserPasswordCommand($user->getPasswordResetToken(), $data['password']));
+            $commandBus->handle(new ChangeUserPasswordCommand($user->getId(), $data['password']));
             $flashBag->add('success', 'Hi, we\'ve reset your password. Please login again.');
             $tokenStorage->setToken(null);
 

@@ -1611,12 +1611,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/eav.git",
-                "reference": "72fdc45c03c01f9db9ba37256b4724e0990eac12"
+                "reference": "dd54a8498c439f340ae49ac650714a3d521bfa39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/eav/zipball/72fdc45c03c01f9db9ba37256b4724e0990eac12",
-                "reference": "72fdc45c03c01f9db9ba37256b4724e0990eac12",
+                "url": "https://api.github.com/repos/msgphp/eav/zipball/dd54a8498c439f340ae49ac650714a3d521bfa39",
+                "reference": "dd54a8498c439f340ae49ac650714a3d521bfa39",
                 "shasum": ""
             },
             "require": {
@@ -1652,7 +1652,7 @@
                 }
             ],
             "description": "MsgPhp Entity-Attribute-Value domain layer",
-            "time": "2017-12-28T19:54:55+00:00"
+            "time": "2017-12-28T21:56:37+00:00"
         },
         {
             "name": "msgphp/eav-bundle",
@@ -1707,12 +1707,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user.git",
-                "reference": "5c28342e9818b2a4c32b1837e76eead7487d8c11"
+                "reference": "58c0a7021d070278609475d018cd27896eb35f0b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/user/zipball/5c28342e9818b2a4c32b1837e76eead7487d8c11",
-                "reference": "5c28342e9818b2a4c32b1837e76eead7487d8c11",
+                "url": "https://api.github.com/repos/msgphp/user/zipball/58c0a7021d070278609475d018cd27896eb35f0b",
+                "reference": "58c0a7021d070278609475d018cd27896eb35f0b",
                 "shasum": ""
             },
             "require": {
@@ -1756,7 +1756,7 @@
                 }
             ],
             "description": "MsgPhp User domain layer",
-            "time": "2017-12-28T19:54:55+00:00"
+            "time": "2017-12-28T23:52:22+00:00"
         },
         {
             "name": "msgphp/user-bundle",

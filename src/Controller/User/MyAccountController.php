@@ -7,7 +7,7 @@ use App\EventSubscriber\SendEmailConfirmationUrlToUser;
 use App\Form\User\{AddSecondaryEmailType, ChangeEmailType, ChangePasswordType};
 use App\Security\PasswordConfirmation;
 use MsgPhp\Domain\CommandBusInterface;
-use MsgPhp\User\Command\{AddUserSecondaryEmailCommand, ChangeUserPasswordCommand, DeleteUserSecondaryEmailCommand, MarkUserSecondaryEmailPrimaryCommand, SetUserPendingPrimaryEmailCommand};
+use MsgPhp\User\Command\{AddUserSecondaryEmailCommand, ChangeUserPasswordCommand, CancelUserPendingPrimaryEmailCommand, DeleteUserSecondaryEmailCommand, MarkUserSecondaryEmailPrimaryCommand, SetUserPendingPrimaryEmailCommand};
 use MsgPhp\User\Infra\Security\SecurityUserFactory;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -55,7 +55,7 @@ final class MyAccountController
                 return $confirmResponse;
             }
 
-            $commandBus->handle(new SetUserPendingPrimaryEmailCommand($securityUser->getUserId(), null));
+            $commandBus->handle(new CancelUserPendingPrimaryEmailCommand($securityUser->getUserId()));
             $flashBag->add('success', 'Cancelled pending primary e-mail.');
 
             return new RedirectResponse($urlGenerator->generate('my_account'));
