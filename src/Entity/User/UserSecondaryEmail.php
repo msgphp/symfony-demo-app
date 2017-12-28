@@ -7,6 +7,9 @@ use MsgPhp\User\Entity\UserSecondaryEmail as BaseUserSecondaryEmail;
 
 /**
  * @ORM\Entity()
+ * @ORM\AssociationOverrides({
+ *     @ORM\AssociationOverride(name="user", inversedBy="secondaryEmails")
+ * })
  *
  * @final
  */
