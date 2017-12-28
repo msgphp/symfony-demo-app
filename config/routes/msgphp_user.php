@@ -18,7 +18,7 @@ return function (RoutingConfigurator $routes) {
             ->controller(ForgotPasswordController::class)
         ->add('reset_password', '/reset-password/{token}')
             ->controller(ResetPasswordController::class)
-        ->add('my_account', '/my-accounts')
+        ->add('my_account', '/my-account')
             ->controller(MyAccountController::class)
     ;
 };
