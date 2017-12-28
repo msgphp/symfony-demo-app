@@ -80,9 +80,11 @@ final class MyAccountController
                 return $confirmResponse;
             }
 
+            $wasConfirmed = ($currentSecondaryEmail = $user->getSecondaryEmail($primaryEmail)) && $currentSecondaryEmail->getConfirmedAt();
+
             $commandBus->handle(new MarkUserSecondaryEmailPrimaryCommand($securityUser->getUserId(), $primaryEmail));
 
-            if (($currentSecondaryEmail = $user->getSecondaryEmail($primaryEmail)) && $currentSecondaryEmail->getConfirmedAt()) {
+            if ($wasConfirmed) {
                 $flashBag->add('success', 'We\'ve changed your primary e-mail. Please login again.');
                 $tokenStorage->setToken(null);
 

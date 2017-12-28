@@ -2,6 +2,7 @@
 
 namespace App\Entity\User;
 
+use App\Entity\Eav\Attribute;
 use Doctrine\Common\Collections\{ArrayCollection, Collection};
 use Doctrine\ORM\Mapping as ORM;
 use MsgPhp\User\Entity\User as BaseUser;
@@ -26,12 +27,19 @@ class User extends BaseUser
      */
     private $secondaryEmails;
 
+    /**
+     * @var Collection|UserAttributeValue[]
+     * @ORM\OneToMany(targetEntity="UserAttributeValue", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
+     */
+    private $attributeValues;
+
     public function __construct(UserIdInterface $id, string $email, string $password)
     {
         parent::__construct($id, $email, $password);
 
         $this->roles = new ArrayCollection();
         $this->secondaryEmails = new ArrayCollection();
+        $this->attributeValues = new ArrayCollection();
     }
 
     public function getRole(string $role): ?UserRole
@@ -71,5 +79,19 @@ class User extends BaseUser
     public function getSecondaryEmails(): Collection
     {
         return $this->secondaryEmails;
+    }
+
+    /**
+     * @return Collection|UserAttributeValue[]
+     */
+    public function getAttributeValues(Attribute $attribute = null): Collection
+    {
+        if (null === $attribute) {
+            return $this->attributeValues;
+        }
+
+        return $this->attributeValues->filter(function (UserAttributeValue $userAttributeValue) use ($attribute) {
+            return $userAttributeValue->getAttributeId()->equals($attribute->getId());
+        });
     }
 }
