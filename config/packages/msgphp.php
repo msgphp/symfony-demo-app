@@ -2,8 +2,6 @@
 
 use MsgPhp\Eav\Entity\{Attribute, AttributeValue};
 use MsgPhp\User\Entity\{PendingUser, User, UserAttributeValue, UserRole, UserSecondaryEmail};
-use MsgPhp\Eav\Infra\Doctrine\Type\{AttributeIdType, AttributeValueIdType};
-use MsgPhp\User\Infra\Doctrine\Type\UserIdType;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return function (ContainerConfigurator $container) {
