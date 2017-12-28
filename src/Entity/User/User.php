@@ -74,7 +74,7 @@ class User extends BaseUser
     }
 
     /**
-     * @return Collection|UserSecondaryEmail
+     * @return Collection|UserSecondaryEmail[]
      */
     public function getSecondaryEmails(): Collection
     {
