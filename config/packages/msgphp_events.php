@@ -13,7 +13,6 @@ return function (ContainerConfigurator $container) {
             ->tag('event_subscriber', ['subscribes_to' => PendingUserCreatedEvent::class])
         ->set(SendEmailConfirmationUrlToUser::class)
             ->tag('event_subscriber', ['subscribes_to' => UserSecondaryEmailAddedEvent::class])
-            ->tag('event_subscriber', ['subscribes_to' => UserPendingPrimaryEmailSetEvent::class])
         ->set(SendPasswordResetUrlToUser::class)
             ->tag('event_subscriber', ['subscribes_to' => UserPasswordRequestedEvent::class])
     ;

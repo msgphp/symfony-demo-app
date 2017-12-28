@@ -37,7 +37,7 @@
                     <li>
                         {{ secondaryEmail.email }}
                         {% if secondaryEmail.confirmedAt %}
-                            - Confimed
+                            - Confirmed
                         {% else %}
                             - Unconfirmed
                             - <a href="{{ path('my_account', {'confirm-email': secondaryEmail.email}) }}">Send confirmation link</a>
