@@ -26,8 +26,7 @@ final class ConfirmEmailController
         TokenStorageInterface $tokenStorage,
         FlashBagInterface $flashBag,
         UrlGeneratorInterface $urlGenerator,
-        CommandBusInterface $commandBus,
-        UserSecondaryEmailRepositoryInterface $userSecondaryEmailRepository
+        CommandBusInterface $commandBus
     ): Response
     {
         if (!$userSecondaryEmail->getUserId()->equals($securityUserFactory->getUserId())) {

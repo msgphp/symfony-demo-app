@@ -7,6 +7,9 @@ use MsgPhp\User\Entity\UserAttributeValue as BaseUserAttributeValue;
 
 /**
  * @ORM\Entity()
+ * @ORM\AssociationOverrides({
+ *     @ORM\AssociationOverride(name="user", inversedBy="attributeValues")
+ * })
  *
  * @final
  */

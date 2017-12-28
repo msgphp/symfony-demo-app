@@ -32,7 +32,6 @@ final class RegisterController
         }
 
         $form = $formFactory->createNamed('', RegisterType::class);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

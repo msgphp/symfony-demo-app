@@ -33,7 +33,6 @@ final class ResetPasswordController
     ): Response
     {
         $form = $formFactory->createNamed('', ResetPasswordType::class);
-
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
