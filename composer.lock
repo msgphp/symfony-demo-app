@@ -1561,12 +1561,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/domain.git",
-                "reference": "6d48eb32f363ff5de861a1f152d9d6f137b49a0c"
+                "reference": "69cdde1e8038e55a9d8c56c4e5447b3c26606ca3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/domain/zipball/6d48eb32f363ff5de861a1f152d9d6f137b49a0c",
-                "reference": "6d48eb32f363ff5de861a1f152d9d6f137b49a0c",
+                "url": "https://api.github.com/repos/msgphp/domain/zipball/69cdde1e8038e55a9d8c56c4e5447b3c26606ca3",
+                "reference": "69cdde1e8038e55a9d8c56c4e5447b3c26606ca3",
                 "shasum": ""
             },
             "require": {
@@ -1574,9 +1574,9 @@
             },
             "require-dev": {
                 "doctrine/orm": "^2.5",
-                "phpunit/phpunit": "^6.4",
                 "ramsey/uuid": "^3.7",
-                "simple-bus/message-bus": "^3.0"
+                "simple-bus/message-bus": "^3.0",
+                "symfony/phpunit-bridge": "^3.4|^4.0"
             },
             "type": "library",
             "extra": {
@@ -1603,7 +1603,7 @@
                 }
             ],
             "description": "MsgPhp Base domain layer",
-            "time": "2017-12-27T11:17:50+00:00"
+            "time": "2017-12-28T11:23:42+00:00"
         },
         {
             "name": "msgphp/eav",
@@ -1611,12 +1611,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/eav.git",
-                "reference": "480a91411909687cd0f466b60d3671cb651c39ec"
+                "reference": "5443afff36c34f6bc8255483c41eb2650ed2ed78"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/eav/zipball/480a91411909687cd0f466b60d3671cb651c39ec",
-                "reference": "480a91411909687cd0f466b60d3671cb651c39ec",
+                "url": "https://api.github.com/repos/msgphp/eav/zipball/5443afff36c34f6bc8255483c41eb2650ed2ed78",
+                "reference": "5443afff36c34f6bc8255483c41eb2650ed2ed78",
                 "shasum": ""
             },
             "require": {
@@ -1624,8 +1624,8 @@
             },
             "require-dev": {
                 "doctrine/orm": "^2.5",
-                "phpunit/phpunit": "^6.4",
-                "ramsey/uuid": "^3.7"
+                "ramsey/uuid": "^3.7",
+                "symfony/phpunit-bridge": "^3.4|^4.0"
             },
             "type": "library",
             "extra": {
@@ -1652,7 +1652,7 @@
                 }
             ],
             "description": "MsgPhp Entity-Attribute-Value domain layer",
-            "time": "2017-12-27T11:17:50+00:00"
+            "time": "2017-12-28T08:06:18+00:00"
         },
         {
             "name": "msgphp/eav-bundle",
@@ -1660,12 +1660,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/eav-bundle.git",
-                "reference": "0a80fb0dedd27c4f17ad961b6b3d68907ef8a766"
+                "reference": "eff799f270164afe635d8fe74a38feafc4969131"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/eav-bundle/zipball/0a80fb0dedd27c4f17ad961b6b3d68907ef8a766",
-                "reference": "0a80fb0dedd27c4f17ad961b6b3d68907ef8a766",
+                "url": "https://api.github.com/repos/msgphp/eav-bundle/zipball/eff799f270164afe635d8fe74a38feafc4969131",
+                "reference": "eff799f270164afe635d8fe74a38feafc4969131",
                 "shasum": ""
             },
             "require": {
@@ -1699,7 +1699,7 @@
                 }
             ],
             "description": "MsgPhp Entity-Attribute-Value Bundle",
-            "time": "2017-12-27T10:49:21+00:00"
+            "time": "2017-12-28T11:24:40+00:00"
         },
         {
             "name": "msgphp/user",
@@ -1707,12 +1707,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user.git",
-                "reference": "883658e56ad9ce4abe26f6d9a1efa7c47b013605"
+                "reference": "68e6eb4e170e79aa4fbb0c0e14608d14e5df0cfa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/user/zipball/883658e56ad9ce4abe26f6d9a1efa7c47b013605",
-                "reference": "883658e56ad9ce4abe26f6d9a1efa7c47b013605",
+                "url": "https://api.github.com/repos/msgphp/user/zipball/68e6eb4e170e79aa4fbb0c0e14608d14e5df0cfa",
+                "reference": "68e6eb4e170e79aa4fbb0c0e14608d14e5df0cfa",
                 "shasum": ""
             },
             "require": {
@@ -1722,11 +1722,11 @@
                 "doctrine/collections": "^1.5",
                 "doctrine/dbal": "^2.6",
                 "doctrine/orm": "^2.5",
-                "phpunit/phpunit": "^6.4",
                 "psr/log": "^1.0",
                 "ramsey/uuid": "^3.7",
                 "simple-bus/message-bus": "^3.0",
                 "symfony/console": "^3.4|^4.0",
+                "symfony/phpunit-bridge": "^3.4|^4.0",
                 "symfony/security-core": "^3.4|^4.0",
                 "symfony/validator": "^3.4|^4.0",
                 "twig/twig": "^2.4"
@@ -1756,7 +1756,7 @@
                 }
             ],
             "description": "MsgPhp User domain layer",
-            "time": "2017-12-27T11:17:50+00:00"
+            "time": "2017-12-28T11:23:42+00:00"
         },
         {
             "name": "msgphp/user-bundle",
@@ -1764,12 +1764,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user-bundle.git",
-                "reference": "0348fba4d7d2d274c50104f40b0773b27237f068"
+                "reference": "190c8d3a6d9a43944096c76e14380410c9336c71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/user-bundle/zipball/0348fba4d7d2d274c50104f40b0773b27237f068",
-                "reference": "0348fba4d7d2d274c50104f40b0773b27237f068",
+                "url": "https://api.github.com/repos/msgphp/user-bundle/zipball/190c8d3a6d9a43944096c76e14380410c9336c71",
+                "reference": "190c8d3a6d9a43944096c76e14380410c9336c71",
                 "shasum": ""
             },
             "require": {
@@ -1811,7 +1811,7 @@
                 }
             ],
             "description": "MsgPhp User Bundle",
-            "time": "2017-12-27T17:13:29+00:00"
+            "time": "2017-12-28T11:21:27+00:00"
         },
         {
             "name": "ocramius/package-versions",
