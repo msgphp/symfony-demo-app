@@ -57,7 +57,7 @@ final class Users extends Fixture
     private function createUser(string $email, string $password = self::PASSWORD): User
     {
         /** @var PasswordEncoderInterface $encoder */
-        $encoder = $this->container->get('fixtures')->get('password_encoder');
+        $encoder = $this->container->get('dev.'.PasswordEncoderInterface::class);
 
         return new User(new UserId(), $email, $encoder->encode($password));
     }
