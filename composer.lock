@@ -1660,12 +1660,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/eav-bundle.git",
-                "reference": "eff799f270164afe635d8fe74a38feafc4969131"
+                "reference": "37d89d59c5bac1fccbeac3093ec02231e0dc7a9d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/eav-bundle/zipball/eff799f270164afe635d8fe74a38feafc4969131",
-                "reference": "eff799f270164afe635d8fe74a38feafc4969131",
+                "url": "https://api.github.com/repos/msgphp/eav-bundle/zipball/37d89d59c5bac1fccbeac3093ec02231e0dc7a9d",
+                "reference": "37d89d59c5bac1fccbeac3093ec02231e0dc7a9d",
                 "shasum": ""
             },
             "require": {
@@ -1699,7 +1699,7 @@
                 }
             ],
             "description": "MsgPhp Entity-Attribute-Value Bundle",
-            "time": "2017-12-28T11:24:40+00:00"
+            "time": "2017-12-28T14:44:06+00:00"
         },
         {
             "name": "msgphp/user",
@@ -1764,12 +1764,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user-bundle.git",
-                "reference": "190c8d3a6d9a43944096c76e14380410c9336c71"
+                "reference": "3c9ed88ae2564cd38427493381408da8c6760b1b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/user-bundle/zipball/190c8d3a6d9a43944096c76e14380410c9336c71",
-                "reference": "190c8d3a6d9a43944096c76e14380410c9336c71",
+                "url": "https://api.github.com/repos/msgphp/user-bundle/zipball/3c9ed88ae2564cd38427493381408da8c6760b1b",
+                "reference": "3c9ed88ae2564cd38427493381408da8c6760b1b",
                 "shasum": ""
             },
             "require": {
@@ -1811,7 +1811,7 @@
                 }
             ],
             "description": "MsgPhp User Bundle",
-            "time": "2017-12-28T11:21:27+00:00"
+            "time": "2017-12-28T14:44:32+00:00"
         },
         {
             "name": "ocramius/package-versions",
