@@ -1,3 +1,6 @@
+imports:
+    - services_dev.yaml
+
 services:
     _defaults:
         public: true
