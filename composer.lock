@@ -1561,12 +1561,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/domain.git",
-                "reference": "0aadfe2ce60800084d6bcf22141fe78d310e45a5"
+                "reference": "c49a687ac5e14acd6c7854b0f32c88bec86c0c5e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/domain/zipball/0aadfe2ce60800084d6bcf22141fe78d310e45a5",
-                "reference": "0aadfe2ce60800084d6bcf22141fe78d310e45a5",
+                "url": "https://api.github.com/repos/msgphp/domain/zipball/c49a687ac5e14acd6c7854b0f32c88bec86c0c5e",
+                "reference": "c49a687ac5e14acd6c7854b0f32c88bec86c0c5e",
                 "shasum": ""
             },
             "require": {
@@ -1605,8 +1605,11 @@
                     "email": "franssen.roland@gmail.com"
                 }
             ],
-            "description": "MsgPhp Base domain layer",
-            "time": "2017-12-30T17:55:53+00:00"
+            "description": "Base domain layer",
+            "keywords": [
+                "entity"
+            ],
+            "time": "2017-12-30T22:27:44+00:00"
         },
         {
             "name": "msgphp/eav",
@@ -1614,12 +1617,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/eav.git",
-                "reference": "516e3a26aa28d84f0fc747556db2ff6d3a7f1d17"
+                "reference": "9080bfb084c04c15381e24e6bb99667ede86f83e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/eav/zipball/516e3a26aa28d84f0fc747556db2ff6d3a7f1d17",
-                "reference": "516e3a26aa28d84f0fc747556db2ff6d3a7f1d17",
+                "url": "https://api.github.com/repos/msgphp/eav/zipball/9080bfb084c04c15381e24e6bb99667ede86f83e",
+                "reference": "9080bfb084c04c15381e24e6bb99667ede86f83e",
                 "shasum": ""
             },
             "require": {
@@ -1655,8 +1658,12 @@
                     "email": "franssen.roland@gmail.com"
                 }
             ],
-            "description": "MsgPhp Entity-Attribute-Value domain layer",
-            "time": "2017-12-30T14:16:12+00:00"
+            "description": "Entity-Attribute-Value domain layer",
+            "keywords": [
+                "eav",
+                "entity-attribute-value"
+            ],
+            "time": "2017-12-30T22:27:44+00:00"
         },
         {
             "name": "msgphp/eav-bundle",
@@ -1664,12 +1671,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/eav-bundle.git",
-                "reference": "398cde2524275fdb5fa94832b4c7288825965848"
+                "reference": "843f1999a1f9650e1cbb5fae34704e1524d57d58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/eav-bundle/zipball/398cde2524275fdb5fa94832b4c7288825965848",
-                "reference": "398cde2524275fdb5fa94832b4c7288825965848",
+                "url": "https://api.github.com/repos/msgphp/eav-bundle/zipball/843f1999a1f9650e1cbb5fae34704e1524d57d58",
+                "reference": "843f1999a1f9650e1cbb5fae34704e1524d57d58",
                 "shasum": ""
             },
             "require": {
@@ -1679,7 +1686,9 @@
                 "symfony/http-kernel": "^3.4|^4.0"
             },
             "require-dev": {
-                "doctrine/doctrine-bundle": "^1.8"
+                "doctrine/doctrine-bundle": "^1.8",
+                "symfony/phpunit-bridge": "^3.4|^4.0",
+                "symfony/var-dumper": "^3.4|^4.0"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -1689,8 +1698,11 @@
             },
             "autoload": {
                 "psr-4": {
-                    "MsgPhp\\EavBundle\\": "src/"
-                }
+                    "MsgPhp\\EavBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1702,8 +1714,12 @@
                     "email": "franssen.roland@gmail.com"
                 }
             ],
-            "description": "MsgPhp Entity-Attribute-Value Bundle",
-            "time": "2017-12-30T17:58:30+00:00"
+            "description": "Entity-Attribute-Value domain layer",
+            "keywords": [
+                "eav",
+                "entity-attribute-value"
+            ],
+            "time": "2017-12-30T22:27:44+00:00"
         },
         {
             "name": "msgphp/user",
@@ -1711,12 +1727,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user.git",
-                "reference": "f7864dbe53690501ba594b55f244eaf88024d0cc"
+                "reference": "c45e7c3fbf959be58491d606bf0b9a12a0113a20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/user/zipball/f7864dbe53690501ba594b55f244eaf88024d0cc",
-                "reference": "f7864dbe53690501ba594b55f244eaf88024d0cc",
+                "url": "https://api.github.com/repos/msgphp/user/zipball/c45e7c3fbf959be58491d606bf0b9a12a0113a20",
+                "reference": "c45e7c3fbf959be58491d606bf0b9a12a0113a20",
                 "shasum": ""
             },
             "require": {
@@ -1762,8 +1778,12 @@
                     "email": "franssen.roland@gmail.com"
                 }
             ],
-            "description": "MsgPhp User domain layer",
-            "time": "2017-12-30T17:02:17+00:00"
+            "description": "User domain layer",
+            "keywords": [
+                "security",
+                "user"
+            ],
+            "time": "2017-12-30T22:27:44+00:00"
         },
         {
             "name": "msgphp/user-bundle",
@@ -1771,12 +1791,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user-bundle.git",
-                "reference": "effc82bfb2417184b741529caca6ce7f7e7ab59d"
+                "reference": "21e38575958f9170899e1f5f28c056fca59d8924"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/user-bundle/zipball/effc82bfb2417184b741529caca6ce7f7e7ab59d",
-                "reference": "effc82bfb2417184b741529caca6ce7f7e7ab59d",
+                "url": "https://api.github.com/repos/msgphp/user-bundle/zipball/21e38575958f9170899e1f5f28c056fca59d8924",
+                "reference": "21e38575958f9170899e1f5f28c056fca59d8924",
                 "shasum": ""
             },
             "require": {
@@ -1789,9 +1809,11 @@
                 "doctrine/doctrine-bundle": "^1.8",
                 "simple-bus/symfony-bridge": "^4.1",
                 "symfony/framework-bundle": "^3.4|^4.0",
+                "symfony/phpunit-bridge": "^3.4|^4.0",
                 "symfony/security-bundle": "^3.4|^4.0",
                 "symfony/twig-bundle": "^3.4|^4.0",
-                "symfony/validator": "^3.4|^4.0"
+                "symfony/validator": "^3.4|^4.0",
+                "symfony/var-dumper": "^3.4|^4.0"
             },
             "suggest": {
                 "msgphp/eav-bundle": "To enable user attributes"
@@ -1804,8 +1826,11 @@
             },
             "autoload": {
                 "psr-4": {
-                    "MsgPhp\\UserBundle\\": "src/"
-                }
+                    "MsgPhp\\UserBundle\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -1817,8 +1842,12 @@
                     "email": "franssen.roland@gmail.com"
                 }
             ],
-            "description": "MsgPhp User Bundle",
-            "time": "2017-12-30T17:59:39+00:00"
+            "description": "User domain layer",
+            "keywords": [
+                "security",
+                "user"
+            ],
+            "time": "2017-12-30T22:27:44+00:00"
         },
         {
             "name": "ocramius/package-versions",
