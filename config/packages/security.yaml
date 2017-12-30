@@ -11,7 +11,7 @@ security:
             security: false
         main:
             provider: msgphp_user
-            user_checker: MsgPhp\User\Infra\Security\SecurityUserChecker
+            user_checker: App\Security\UserChecker
             anonymous: ~
             form_login:
                 login_path: login

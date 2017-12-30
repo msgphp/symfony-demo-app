@@ -9,5 +9,9 @@ services:
         tags: [controller.service_arguments]
     App\Security\OauthUserProvider: ~
     App\Security\PasswordConfirmation: ~
+    App\Security\UserChecker: ~
     App\Security\UserRoleProvider: ~
     MsgPhp\User\Infra\Security\UserRoleProviderInterface: '@App\Security\UserRoleProvider'
+
+    App\DoctrineCanBeEnabledListener:
+        tags: [{ name: doctrine.event_listener, event: loadClassMetadata }]
