@@ -16,7 +16,7 @@ use MsgPhp\User\UserIdInterface;
  */
 class User extends BaseUser
 {
-    use CanBeEnabled; // @FIXME currently required due current doctrine mapping
+    use CanBeEnabled;
 
     /**
      * @var Collection|UserRole[]
