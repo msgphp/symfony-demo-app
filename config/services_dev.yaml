@@ -2,4 +2,4 @@ services:
     _defaults:
         public: true
 
-    dev.MsgPhp\User\PasswordEncoderInterface: '@MsgPhp\User\PasswordEncoderInterface'
+    dev.MsgPhp\User\Password\PasswordHashingInterface: '@MsgPhp\User\Password\PasswordHashingInterface'

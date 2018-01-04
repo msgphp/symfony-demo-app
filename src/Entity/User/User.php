@@ -5,7 +5,7 @@ namespace App\Entity\User;
 use App\Entity\Eav\Attribute;
 use Doctrine\Common\Collections\{ArrayCollection, Collection};
 use Doctrine\ORM\Mapping as ORM;
-use MsgPhp\Domain\Entity\Features\CanBeEnabled;
+use MsgPhp\Domain\Entity\Features\CanBeEnabledOrDisabled;
 use MsgPhp\User\Entity\User as BaseUser;
 use MsgPhp\User\UserIdInterface;
 
@@ -16,7 +16,7 @@ use MsgPhp\User\UserIdInterface;
  */
 class User extends BaseUser
 {
-    use CanBeEnabled;
+    use CanBeEnabledOrDisabled;
 
     /**
      * @var Collection|UserRole[]

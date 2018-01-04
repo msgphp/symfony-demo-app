@@ -9,7 +9,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use MsgPhp\Eav\Infra\Uuid\{AttributeId, AttributeValueId};
 use MsgPhp\User\Infra\Uuid\UserId;
-use MsgPhp\User\PasswordEncoderInterface;
+use MsgPhp\User\Password\PasswordHashingInterface;
 
 final class Users extends Fixture
 {
@@ -56,10 +56,10 @@ final class Users extends Fixture
 
     private function createUser(string $email, string $password = self::PASSWORD): User
     {
-        /** @var PasswordEncoderInterface $encoder */
-        $encoder = $this->container->get('dev.'.PasswordEncoderInterface::class);
+        /** @var PasswordHashingInterface $hashing */
+        $hashing = $this->container->get('dev.'.PasswordHashingInterface::class);
 
-        return new User(new UserId(), $email, $encoder->encode($password));
+        return new User(new UserId(), $email, $hashing->hash($password));
     }
 
     private function createUserAttributeValue(User $user, Attribute $attribute, $value): UserAttributeValue
