@@ -11,15 +11,9 @@
 
 ## Features
 
-- Symfony application with security setup
+- MsgPhp UserBundle setup
+- MsgPhp EavBundle setup
+- Symfony SecurityBundle setup
 - HWIOAuthBundle setup (google)
-- Event / command driven
-- Shipped with `Doctrine` and `InMemory` persistence infrastructure
-- `User` domain
-  - E-mail / password based authentication
-  - User registration / E-mail confirmation
-  - Forgot password / Reset password / Change password
-  - Primary / secondary e-mails
-  - Disabled / enabled users
-  - User roles
-  - User attribute values
+- DoctrineBundle setup
+- SimpleCommandBusBundle + SimpleEventBusBundle setup

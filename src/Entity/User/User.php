@@ -40,6 +40,7 @@ class User extends BaseUser
     {
         parent::__construct($id, $email, $password);
 
+        $this->enabled = false;
         $this->roles = new ArrayCollection();
         $this->secondaryEmails = new ArrayCollection();
         $this->attributeValues = new ArrayCollection();
