@@ -19,7 +19,7 @@ class Attribute extends BaseAttribute
     {
         switch ($resourceOwner) {
             case 'google':
-                return new AttributeId(self::OAUTH_GOOGLE_ID);
+                return AttributeId::fromValue(self::OAUTH_GOOGLE_ID);
             default:
                 throw new \LogicException(sprintf('Unknown oauth resource owner "%s".', $resourceOwner));
         }

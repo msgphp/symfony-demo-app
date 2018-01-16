@@ -3,9 +3,14 @@
 namespace App\Entity\User;
 
 use App\Entity\Eav\Attribute;
-use Doctrine\Common\Collections\{ArrayCollection, Collection};
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use MsgPhp\Domain\Entity\Features\CanBeEnabledOrDisabled;
+use MsgPhp\Domain\Entity\Features\CanBeConfirmed;
+use MsgPhp\Domain\Entity\Features\CanBeEnabled;
+use MsgPhp\User\Entity\Credential\EmailPassword;
+use MsgPhp\User\Entity\Features\EmailPasswordCredential;
+use MsgPhp\User\Entity\Features\ResettablePassword;
 use MsgPhp\User\Entity\User as BaseUser;
 use MsgPhp\User\UserIdInterface;
 
@@ -16,7 +21,10 @@ use MsgPhp\User\UserIdInterface;
  */
 class User extends BaseUser
 {
-    use CanBeEnabledOrDisabled;
+    use EmailPasswordCredential;
+    use ResettablePassword;
+    use CanBeEnabled;
+    use CanBeConfirmed;
 
     /**
      * @var Collection|UserRole[]
@@ -38,9 +46,9 @@ class User extends BaseUser
 
     public function __construct(UserIdInterface $id, string $email, string $password)
     {
-        parent::__construct($id, $email, $password);
+        parent::__construct($id);
 
-        $this->enabled = false;
+        $this->credential = new EmailPassword($email, $password);
         $this->roles = new ArrayCollection();
         $this->secondaryEmails = new ArrayCollection();
         $this->attributeValues = new ArrayCollection();

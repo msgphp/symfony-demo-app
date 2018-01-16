@@ -4,9 +4,9 @@ namespace App\Security;
 
 use App\Entity\User\{User as AppUser, UserRole as AppUserRole};
 use MsgPhp\User\Entity\User;
-use MsgPhp\User\Infra\Security\UserRoleProviderInterface;
+use MsgPhp\User\Infra\Security\UserRolesProviderInterface;
 
-final class UserRoleProvider implements UserRoleProviderInterface
+final class UserRolesProvider implements UserRolesProviderInterface
 {
     public const ROLE_USER = 'ROLE_USER';
     public const ROLE_DISABLED_USER = 'ROLE_DISABLED_USER';

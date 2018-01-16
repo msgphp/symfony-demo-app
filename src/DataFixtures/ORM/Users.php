@@ -4,7 +4,7 @@ namespace App\DataFixtures\ORM;
 
 use App\Entity\Eav\{Attribute, AttributeValue};
 use App\Entity\User\{User, UserAttributeValue, UserRole};
-use App\Security\UserRoleProvider;
+use App\Security\UserRolesProvider;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use MsgPhp\Eav\Infra\Uuid\{AttributeId, AttributeValueId};
@@ -14,6 +14,13 @@ use MsgPhp\User\Password\PasswordHashingInterface;
 final class Users extends Fixture
 {
     private const PASSWORD = 'pass';
+
+    private $passwordHashing;
+
+    public function __construct(PasswordHashingInterface $passwordHashing)
+    {
+        $this->passwordHashing = $passwordHashing;
+    }
 
     public function load(ObjectManager $manager)
     {
@@ -45,21 +52,18 @@ final class Users extends Fixture
         $user = $this->createUser('user+admin@domain.dev');
         $user->enable();
         $manager->persist($user);
-        $manager->persist(new UserRole($user, UserRoleProvider::ROLE_ADMIN));
+        $manager->persist(new UserRole($user, UserRolesProvider::ROLE_ADMIN));
 
         $user = $this->createUser('user+admin+disabled@domain.dev');
         $manager->persist($user);
-        $manager->persist(new UserRole($user, UserRoleProvider::ROLE_ADMIN));
+        $manager->persist(new UserRole($user, UserRolesProvider::ROLE_ADMIN));
 
         $manager->flush();
     }
 
     private function createUser(string $email, string $password = self::PASSWORD): User
     {
-        /** @var PasswordHashingInterface $hashing */
-        $hashing = $this->container->get('dev.'.PasswordHashingInterface::class);
-
-        return new User(new UserId(), $email, $hashing->hash($password));
+        return new User(new UserId(), $email, $this->passwordHashing->hash($password));
     }
 
     private function createUserAttributeValue(User $user, Attribute $attribute, $value): UserAttributeValue

@@ -1,5 +1,8 @@
 services:
     _defaults:
-        public: true
+        autowire: true
+        autoconfigure: true
+        public: false
 
-    dev.MsgPhp\User\Password\PasswordHashingInterface: '@MsgPhp\User\Password\PasswordHashingInterface'
+    App\DataFixtures\ORM\:
+        resource: '../src/DataFixtures/ORM'
