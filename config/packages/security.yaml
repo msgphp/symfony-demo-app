@@ -27,3 +27,11 @@ security:
                 path: logout
             switch_user: true
             logout_on_user_change: true
+            oauth:
+                resource_owners:
+                    google: /oauth/login/check-google
+                login_path: /oauth/login
+                use_forward: false
+                failure_path: /oauth/login
+                oauth_user_provider:
+                    service: App\Security\OauthUserProvider

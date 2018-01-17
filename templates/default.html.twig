@@ -4,10 +4,9 @@
     <p>Hello 🌍</p>
 
     <ul>
-        {% if app.user %}
-            <li><a href="{{ path('logout') }}">Logout ({{ user.email }})</a></li>
-        {% else %}
-            <li><a href="{{ path('login') }}">Login</a></li>
-        {% endif %}
+        <li><a href="{{ path('login') }}">Login</a></li>
+        <li><a href="{{ path('register') }}">Register</a></li>
+        <li><a href="{{ path('forgot_password') }}">Forgot password</a></li>
+        <li><a href="{{ path('my_account') }}">My account</a></li>
     </ul>
 {% endblock %}
