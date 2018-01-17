@@ -8,5 +8,17 @@ return function (RoutingConfigurator $routes) {
         ->add('login', '/login')
             ->controller(LoginController::class)
         ->add('logout', '/logout')
+        ->add('register', '/register')
+            ->controller(RegisterController::class)
+        ->add('confirm_account', '/confirm-account/{token}')
+            ->controller(ConfirmAccountController::class)
+        ->add('confirm_email', '/confirm-email/{token}')
+            ->controller(ConfirmEmailController::class)
+        ->add('forgot_password', '/forgot-password')
+            ->controller(ForgotPasswordController::class)
+        ->add('reset_password', '/reset-password/{token}')
+            ->controller(ResetPasswordController::class)
+        ->add('my_account', '/my-account')
+            ->controller(MyAccountController::class)
     ;
 };

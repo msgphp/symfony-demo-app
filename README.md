@@ -1,14 +1,19 @@
-# MsgPHP demo / skeleton application
+# Domain-driven Symfony skeleton application
 
-> [MsgPHP](https://msgphp.github.io/) is a project that aims to provide (common) message based domain layers for your application. It has a low development time overhead and avoids being overly opinionated.
+## Goals
+
+- Built a bare minimum, yet working application
+- Built domain layers flexible for common use cases
+
+## Screenshot
+
+![image](https://user-images.githubusercontent.com/1047696/31588014-2256f05a-b1ec-11e7-9a27-e0bc963041eb.png)
 
 ## Features
 
-- MsgPHP [UserBundle](https://github.com/msgphp/user-bundle) setup
-- MsgPHP [EavBundle](https://github.com/msgphp/eav-bundle) setup
-- Symfony [SecurityBundle](https://github.com/symfony/security-bundle) setup
-- [DoctrineBundle](https://github.com/doctrine/DoctrineBundle) setup
-
-## Screenshots
-
-![Logged out](https://user-images.githubusercontent.com/1047696/35063583-d2803fa2-fbc7-11e7-911f-a08c4df19787.png)![Login](https://user-images.githubusercontent.com/1047696/35063613-e7d41a4a-fbc7-11e7-9ef4-db3449274ce7.png)![Logged in](https://user-images.githubusercontent.com/1047696/35063632-f3da3c66-fbc7-11e7-9704-600884218eac.png)
+- MsgPhp UserBundle setup
+- MsgPhp EavBundle setup
+- Symfony SecurityBundle setup
+- HWIOAuthBundle setup (google)
+- DoctrineBundle setup
+- SimpleCommandBusBundle + SimpleEventBusBundle setup

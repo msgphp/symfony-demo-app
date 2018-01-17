@@ -24,6 +24,7 @@ final class Users extends Fixture
 
     public function load(ObjectManager $manager)
     {
+        $manager->persist(new Attribute(Attribute::getOauthId('google')));
         $manager->persist($boolAttr = new Attribute(new AttributeId()));
         $manager->persist($intAttr = new Attribute(new AttributeId()));
         $manager->persist($floatAttr = new Attribute(new AttributeId()));
