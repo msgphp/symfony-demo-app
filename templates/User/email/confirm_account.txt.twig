@@ -1,5 +1,0 @@
-{% extends 'email.txt.twig' %}
-
-{% block body %}
-Confirm your account at {{ url('confirm_account', {token: pendingUser.token}) }}
-{% endblock %}

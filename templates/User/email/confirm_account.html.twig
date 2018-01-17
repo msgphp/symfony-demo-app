@@ -1,6 +1,0 @@
-{% extends 'email.html.twig' %}
-
-{% block body %}
-    {% set url = url('confirm_account', {token: pendingUser.token}) %}
-    <p>Confirm your account at <a href="{{ url }}">{{ url }}</a></p>
-{% endblock %}

@@ -4,6 +4,7 @@ namespace App\Security;
 
 use App\Entity\User\User;
 use MsgPhp\User\Infra\Security\SecurityUser;
+use MsgPhp\User\Infra\Uuid\UserId;
 use MsgPhp\User\Repository\UserRepositoryInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
@@ -28,8 +29,10 @@ final class UserChecker implements UserCheckerInterface
             return;
         }
 
+        $userId = UserId::fromValue($user->getUsername());
+
         /** @var User $user */
-        $user = $this->repository->find($user->getId());
+        $user = $this->repository->find($userId);
 
         if (!$user->isEnabled()) {
             $this->logger->info('Disabled user login attempt.', ['id' => $user->getId()->toString(), 'email' => $user->getEmail()]);
