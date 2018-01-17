@@ -5,20 +5,17 @@ namespace App\Controller\User;
 use App\Form\User\ForgotPasswordType;
 use MsgPhp\Domain\CommandBusInterface;
 use MsgPhp\User\Command\RequestUserPasswordCommand;
-use MsgPhp\User\Infra\Security\SecurityUserFactory;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
 final class ForgotPasswordController
 {
     public function __invoke(
-        SecurityUserFactory $securityUser,
         Request $request,
         FormFactoryInterface $formFactory,
         FlashBagInterface $flashBag,
@@ -27,10 +24,6 @@ final class ForgotPasswordController
         CommandBusInterface $commandBus
     ): Response
     {
-        if ($securityUser->isAuthenticated()) {
-            return new RedirectResponse($urlGenerator->generate('my_account'));
-        }
-
         $form = $formFactory->createNamed('', ForgotPasswordType::class);
         $form->handleRequest($request);
 

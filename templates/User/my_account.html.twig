@@ -1,17 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% set currentUser = msgphp_current_user() %}
     <fieldset>
         <legend>Change e-mail</legend>
         <fieldset>
             <legend>Primary e-mail</legend>
             <ul>
-                <li>Current: {{ currentUser.email }}</li>
-                {% if currentUser.pendingPrimaryEmail %}
+                <li>Current: {{ user.email }}</li>
+                {% if user.pendingPrimaryEmail %}
                     <li>
-                        Pending confirmation: {{ currentUser.pendingPrimaryEmail }}
-                        - <a href="{{ path('my_account', {'confirm-email': currentUser.pendingPrimaryEmail}) }}">Send confirmation link</a>
+                        Pending confirmation: {{ user.pendingPrimaryEmail }}
+                        - <a href="{{ path('my_account', {'confirm-email': user.pendingPrimaryEmail}) }}">Send confirmation link</a>
                         - <a href="{{ path('my_account', {'cancel-email': true}) }}">Cancel</a>
                     </li>
                 {% endif %}
@@ -30,7 +29,7 @@
         <fieldset>
             <legend>Secondary e-mails</legend>
             <ul>
-                {% for secondaryEmail in currentUser.secondaryEmails %}
+                {% for secondaryEmail in user.secondaryEmails %}
                     <li>
                         {{ secondaryEmail.email }}
                         {% if secondaryEmail.confirmedAt %}
