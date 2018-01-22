@@ -6,7 +6,22 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        <p><a href="{{ path('index') }}">Home</a></p>
+        <header>
+            <span>★ <a href="{{ path('index') }}">The App</a></span>
+            <nav>
+                <ul>
+                    {% if app.user %}
+                        <li>Welcome <em>{{ user.email }}</em></li>
+                        <li><a href="{{ path('logout') }}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{{ path('login') }}">Login</a></li>
+                    {% endif %}
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <li><a href="{{ path('index', {_switch_user: 'user@domain.dev'}) }}">Impersonate</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </header>
 
         {% set flashes = app.flashes %}
         {% if flashes|length > 0 %}

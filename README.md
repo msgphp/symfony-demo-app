@@ -15,4 +15,6 @@
 
 ## Screenshots
 
-![Logged out](https://user-images.githubusercontent.com/1047696/35063583-d2803fa2-fbc7-11e7-911f-a08c4df19787.png)![Login](https://user-images.githubusercontent.com/1047696/35063613-e7d41a4a-fbc7-11e7-9ef4-db3449274ce7.png)![Logged in](https://user-images.githubusercontent.com/1047696/35063632-f3da3c66-fbc7-11e7-9704-600884218eac.png)
+Home (logged out) | Login | Home (logged in)
+---|---|---
+<img src="https://user-images.githubusercontent.com/1047696/35224367-0d5aecba-ff85-11e7-80ab-8d4c15dedd72.png" alt=""> | <img src="https://user-images.githubusercontent.com/1047696/35224369-10f11098-ff85-11e7-8ab4-f106b09b0b5e.png" alt=""> | <img src="https://user-images.githubusercontent.com/1047696/35224371-138dd25a-ff85-11e7-9721-ff85c2d82149.png" alt="">

@@ -25,5 +25,6 @@ security:
                 remember_me_parameter: remember_me
             logout:
                 path: logout
-            switch_user: true
+            switch_user:
+                role: ROLE_ADMIN
             logout_on_user_change: true

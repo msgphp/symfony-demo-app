@@ -1,13 +1,5 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <p>Hello 🌍</p>
-
-    <ul>
-        {% if app.user %}
-            <li><a href="{{ path('logout') }}">Logout ({{ user.email }})</a></li>
-        {% else %}
-            <li><a href="{{ path('login') }}">Login</a></li>
-        {% endif %}
-    </ul>
+    <h1>Hello 🌍</h1>
 {% endblock %}
