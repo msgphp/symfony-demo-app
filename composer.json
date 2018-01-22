@@ -2,11 +2,8 @@
     "type": "project",
     "license": "MIT",
     "require": {
-        "msgphp/domain": "@dev",
-        "msgphp/eav": "@dev",
-        "msgphp/eav-bundle": "^1.0@dev",
-        "msgphp/user": "@dev",
-        "msgphp/user-bundle": "^1.0@dev",
+        "msgphp/eav-bundle": "^0.1",
+        "msgphp/user-bundle": "^0.1",
         "ramsey/uuid": "^3.7",
         "ramsey/uuid-doctrine": "^1.4",
         "sensio/framework-extra-bundle": "^5.0",

@@ -22,5 +22,8 @@ return function (ContainerConfigurator $container) {
             User\UserRole::class => \App\Entity\User\UserRole::class,
             User\UserSecondaryEmail::class => \App\Entity\User\UserSecondaryEmail::class,
         ],
+        'username_lookup' => [
+            ['target' => User\UserSecondaryEmail::class, 'field' => 'email'],
+        ],
     ]);
 };
