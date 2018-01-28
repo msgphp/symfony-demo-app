@@ -1,13 +1,12 @@
-# MsgPHP demo / skeleton application
+# Symfony demo application
 
 > [MsgPHP](https://msgphp.github.io/) is a project that aims to provide (common) message based domain layers for your application. It has a low development time overhead and avoids being overly opinionated.
 
-## Features
+## Enabled bundles
 
-- MsgPHP [UserBundle](https://github.com/msgphp/user-bundle) setup
-- MsgPHP [EavBundle](https://github.com/msgphp/eav-bundle) setup
-- Symfony [SecurityBundle](https://github.com/symfony/security-bundle) setup
-- [DoctrineBundle](https://github.com/doctrine/DoctrineBundle) setup
+[`MsgPhpUserBundle`](https://github.com/msgphp/user-bundle), [`MsgPhpEavBundle`](https://github.com/msgphp/eav-bundle),
+[`DoctrineBundle`](https://github.com/doctrine/DoctrineBundle), [`SecurityBundle`](https://github.com/symfony/security-bundle),
+[`SimpleBusCommandBusBundle`](https://github.com/SimpleBus/SymfonyBridge)
 
 ## Documentation
 
