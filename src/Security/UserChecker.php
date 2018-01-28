@@ -37,7 +37,7 @@ final class UserChecker implements UserCheckerInterface
         if (!$user->isEnabled()) {
             $this->logger->info('Disabled user login attempt.', ['id' => $user->getId()->toString(), 'email' => $user->getEmail()]);
 
-            throw new DisabledException(sprintf('User "%s" is disabled.', $user->getEmail()));
+            throw new DisabledException('Bad credentials.');
         }
     }
 

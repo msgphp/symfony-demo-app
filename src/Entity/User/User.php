@@ -8,6 +8,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use MsgPhp\Domain\Entity\Features\CanBeConfirmed;
 use MsgPhp\Domain\Entity\Features\CanBeEnabled;
+use MsgPhp\Domain\Event\DomainEventHandlerInterface;
+use MsgPhp\Domain\Event\DomainEventHandlerTrait;
 use MsgPhp\User\Entity\Credential\EmailPassword;
 use MsgPhp\User\Entity\Features\EmailPasswordCredential;
 use MsgPhp\User\Entity\Features\ResettablePassword;
@@ -19,12 +21,13 @@ use MsgPhp\User\UserIdInterface;
  *
  * @final
  */
-class User extends BaseUser
+class User extends BaseUser implements DomainEventHandlerInterface
 {
     use EmailPasswordCredential;
     use ResettablePassword;
     use CanBeEnabled;
     use CanBeConfirmed;
+    use DomainEventHandlerTrait;
 
     /**
      * @var Collection|UserRole[]
