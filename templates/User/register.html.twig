@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Login</h1>
+    <h1>Register</h1>
 
     {{ form_start(form) }}
         {{ form_errors(form) }}
         {{ form_row(form.email, {label: 'Email'}) }}
-        {{ form_row(form.password, {label: 'Password'}) }}
-        {{ form_row(form.remember_me, {label: 'Remember me'}) }}
+        {{ form_row(form.password.first, {label: 'Password'}) }}
+        {{ form_row(form.password.second, {label: 'Confirm password'}) }}
 
         <div>
-            <input type="submit" value="Login" />
+            <input type="submit" value="Register" />
         </div>
     {{ form_end(form) }}
 {% endblock %}
