@@ -1,7 +1,6 @@
 <?php
 
-use MsgPhp\Eav\Entity as Eav;
-use MsgPhp\User\Entity as User;
+use MsgPhp\{Eav, User};
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return function (ContainerConfigurator $container) {
@@ -10,17 +9,17 @@ return function (ContainerConfigurator $container) {
 
     $container->extension('msgphp_eav', [
         'class_mapping' => [
-            Eav\Attribute::class => \App\Entity\Eav\Attribute::class,
-            Eav\AttributeValue::class => \App\Entity\Eav\AttributeValue::class,
+            Eav\Entity\Attribute::class => \App\Entity\Eav\Attribute::class,
+            Eav\Entity\AttributeValue::class => \App\Entity\Eav\AttributeValue::class,
         ],
     ]);
 
     $container->extension('msgphp_user', [
         'class_mapping' => [
-            User\User::class => \App\Entity\User\User::class,
-            User\UserAttributeValue::class => \App\Entity\User\UserAttributeValue::class,
-            User\UserRole::class => \App\Entity\User\UserRole::class,
-            User\UserSecondaryEmail::class => \App\Entity\User\UserSecondaryEmail::class,
+            User\Entity\User::class => \App\Entity\User\User::class,
+            User\Entity\UserAttributeValue::class => \App\Entity\User\UserAttributeValue::class,
+            User\Entity\UserRole::class => \App\Entity\User\UserRole::class,
+            User\Entity\UserSecondaryEmail::class => \App\Entity\User\UserSecondaryEmail::class,
         ],
         'username_lookup' => [
             ['target' => User\UserSecondaryEmail::class, 'field' => 'email'],

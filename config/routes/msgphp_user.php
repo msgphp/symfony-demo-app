@@ -1,12 +1,16 @@
 <?php
 
-use App\Controller\User\{ConfirmAccountController, ConfirmEmailController, ForgotPasswordController, LoginController, MyAccountController, RegisterController, ResetPasswordController};
+use App\Controller;
+
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 return function (RoutingConfigurator $routes) {
     $routes
         ->add('login', '/login')
-            ->controller(LoginController::class)
+            ->controller(Controller\User\LoginController::class)
         ->add('logout', '/logout')
+
+         ->add('register', '/register')
+            ->controller(Controller\User\RegisterController::class)
     ;
 };
