@@ -6,8 +6,8 @@
     {{ form_start(form) }}
         {{ form_errors(form) }}
         {{ form_row(form.email, {label: 'Email'}) }}
-        {{ form_row(form.password.first, {label: 'Password'}) }}
-        {{ form_row(form.password.second, {label: 'Confirm password'}) }}
+        {{ form_row(form.password.password, {label: 'Password'}) }}
+        {{ form_row(form.password.confirmation, {label: 'Confirm password'}) }}
 
         <div>
             <input type="submit" value="Register" />

@@ -9,8 +9,9 @@ return function (RoutingConfigurator $routes) {
         ->add('login', '/login')
             ->controller(Controller\User\LoginController::class)
         ->add('logout', '/logout')
-
-         ->add('register', '/register')
+        ->add('register', '/register')
             ->controller(Controller\User\RegisterController::class)
+        ->add('register_confirm', '/register/confirm/{token}')
+            ->controller(Controller\User\ConfirmRegistrationController::class)
     ;
 };
