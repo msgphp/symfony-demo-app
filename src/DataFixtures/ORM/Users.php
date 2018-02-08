@@ -34,6 +34,7 @@ final class Users extends Fixture
 
         $user = $this->createUser('user@domain.dev');
         $user->enable();
+        $user->confirm();
         $manager->persist($user);
         $manager->persist($this->createUserAttributeValue($user, $boolAttr, true));
         $manager->persist($this->createUserAttributeValue($user, $boolAttr, false));
@@ -54,6 +55,7 @@ final class Users extends Fixture
 
         $user = $this->createUser('user+admin@domain.dev');
         $user->enable();
+        $user->confirm();
         $manager->persist($user);
         $manager->persist(new UserRole($user, UserRolesProvider::ROLE_ADMIN));
 

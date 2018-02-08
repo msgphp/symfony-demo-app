@@ -52,6 +52,7 @@ class User extends BaseUser implements DomainEventHandlerInterface
         parent::__construct($id);
 
         $this->credential = new EmailPassword($email, $password);
+        $this->confirmationToken = bin2hex(random_bytes(32));
         $this->roles = new ArrayCollection();
         $this->secondaryEmails = new ArrayCollection();
         $this->attributeValues = new ArrayCollection();
