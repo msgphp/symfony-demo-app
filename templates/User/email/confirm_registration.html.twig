@@ -1,5 +1,6 @@
-{% extends 'email.txt.twig' %}
+{% extends 'email.html.twig' %}
 
 {% block body %}
-    Confirm your account at {{ url('register_confirm', {token: user.confirmationToken}) }}
+    {% set url = url('register_confirm', {token: user.confirmationToken}) %}
+    <p>Confirm your account at <a href="{{ url }}">{{ url }}</a></p>
 {% endblock %}

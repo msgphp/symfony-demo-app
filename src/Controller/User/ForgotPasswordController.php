@@ -2,9 +2,10 @@
 
 namespace App\Controller\User;
 
-use App\Form\User\RegisterType;
+use App\Form\User\ForgotPasswordType;
 use MsgPhp\Domain\Message\DomainMessageBusInterface;
-use MsgPhp\User\Command\CreateUserCommand;
+use MsgPhp\User\Command\RequestUserPasswordCommand;
+use MsgPhp\User\Repository\UserRepositoryInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,7 +14,7 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
-final class RegisterController
+final class ForgotPasswordController
 {
     public function __invoke(
         Request $request,
@@ -21,20 +22,21 @@ final class RegisterController
         FlashBagInterface $flashBag,
         UrlGeneratorInterface $urlGenerator,
         Environment $twig,
-        DomainMessageBusInterface $bus
+        DomainMessageBusInterface $bus,
+        UserRepositoryInterface $repository
     ): Response
     {
-        $form = $formFactory->createNamed('', RegisterType::class);
+        $form = $formFactory->createNamed('', ForgotPasswordType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $bus->dispatch(new CreateUserCommand($data = $form->getData()));
-            $flashBag->add('success', sprintf('Hi %s, you\'re successfully registered. We\'ve send you a confirmation link.', $data['email']));
+            $bus->dispatch(new RequestUserPasswordCommand($repository->findByUsername($email = $form->getData()['email'])->getId()));
+            $flashBag->add('success', sprintf('Hi %s, we\'ve send you a password reset link.', $email));
 
             return new RedirectResponse($urlGenerator->generate('index'));
         }
 
-        return new Response($twig->render('User/register.html.twig', [
+        return new Response($twig->render('User/forgot_password.html.twig', [
             'form' => $form->createView(),
         ]));
     }

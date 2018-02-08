@@ -5,12 +5,13 @@
 
     {{ form_start(form) }}
         {{ form_errors(form) }}
-        {{ form_row(form.email, {label: 'Email'}) }}
+        {{ form_row(form.email, {label: 'E-mail'}) }}
         {{ form_row(form.password, {label: 'Password'}) }}
         {{ form_row(form.remember_me, {label: 'Remember me'}) }}
 
         <div>
             <input type="submit" value="Login" />
+            <p><a href="{{ url('forgot_password') }}">Forgot password?</a></p>
         </div>
     {{ form_end(form) }}
 {% endblock %}
