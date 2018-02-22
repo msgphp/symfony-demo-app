@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use MsgPhp\Domain\Entity\Features\CanBeConfirmed;
 use MsgPhp\Domain\Entity\Features\CanBeEnabled;
+use MsgPhp\Domain\Entity\Fields\CreatedAtField;
 use MsgPhp\Domain\Event\DomainEventHandlerInterface;
 use MsgPhp\Domain\Event\DomainEventHandlerTrait;
 use MsgPhp\User\Entity\Credential\EmailPassword;
@@ -23,11 +24,15 @@ use MsgPhp\User\UserIdInterface;
  */
 class User extends BaseUser implements DomainEventHandlerInterface
 {
+    use CreatedAtField;
     use EmailPasswordCredential;
     use ResettablePassword;
     use CanBeEnabled;
     use CanBeConfirmed;
     use DomainEventHandlerTrait;
+
+    /** @ORM\Id @ORM\Column(type="msgphp_user_id") */
+    private $id;
 
     /**
      * @var Collection|UserRole[]
@@ -49,13 +54,18 @@ class User extends BaseUser implements DomainEventHandlerInterface
 
     public function __construct(UserIdInterface $id, string $email, string $password)
     {
-        parent::__construct($id);
-
+        $this->id = $id;
+        $this->createdAt = new \DateTimeImmutable();
         $this->credential = new EmailPassword($email, $password);
         $this->confirmationToken = bin2hex(random_bytes(32));
         $this->roles = new ArrayCollection();
         $this->secondaryEmails = new ArrayCollection();
         $this->attributeValues = new ArrayCollection();
+    }
+
+    public function getId(): UserIdInterface
+    {
+        return $this->id;
     }
 
     public function getRole(string $role): ?UserRole

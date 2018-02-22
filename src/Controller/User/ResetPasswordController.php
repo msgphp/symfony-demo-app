@@ -4,9 +4,9 @@ namespace App\Controller\User;
 
 use App\Entity\User\User;
 use App\Form\User\ResetPasswordType;
-use MsgPhp\Domain\Message\DomainMessageBusInterface;
 use MsgPhp\User\Command\ChangeUserCredentialCommand;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use SimpleBus\SymfonyBridge\Bus\CommandBus;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +26,7 @@ final class ResetPasswordController
         FlashBagInterface $flashBag,
         UrlGeneratorInterface $urlGenerator,
         Environment $twig,
-        DomainMessageBusInterface $bus,
+        CommandBus $bus,
         User $user
     ): Response
     {
@@ -34,7 +34,7 @@ final class ResetPasswordController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $bus->dispatch(new ChangeUserCredentialCommand($user->getId(), ['password' => $form->getData()['password']]));
+            $bus->handle(new ChangeUserCredentialCommand($user->getId(), ['password' => $form->getData()['password']]));
             $flashBag->add('success', sprintf('Hi %s, we\'ve reset your password.', $user->getEmail()));
 
             return new RedirectResponse($urlGenerator->generate('index'));
