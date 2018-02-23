@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Entity\User\PremiumUser;
 use App\Entity\User\User;
 use App\Entity\User\UserRole;
 use MsgPhp\User\Entity\User as BaseUser;
@@ -12,6 +13,7 @@ final class UserRolesProvider implements UserRolesProviderInterface
     public const ROLE_ADMIN = 'ROLE_ADMIN';
     public const ROLE_DISABLED_USER = 'ROLE_DISABLED_USER';
     public const ROLE_USER = 'ROLE_USER';
+    public const ROLE_PREMIUM_USER = 'ROLE_PREMIUM_USER';
 
     /**
      * @param User $user
@@ -19,6 +21,10 @@ final class UserRolesProvider implements UserRolesProviderInterface
     public function getRoles(BaseUser $user): array
     {
         $roles = $user->isEnabled() ? [self::ROLE_USER] : [self::ROLE_DISABLED_USER];
+
+        if ($user instanceof PremiumUser) {
+            $roles[] = self::ROLE_PREMIUM_USER;
+        }
 
         return array_merge($roles, $user->getRoles()->map(function (UserRole $userRole) {
             return $userRole->getRoleName();

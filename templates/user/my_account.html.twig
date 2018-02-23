@@ -1,24 +1,32 @@
 {% extends 'base.html.twig' %}
 
+{% set user = msgphp_user.user %}
+
 {% block body %}
     <h1>My Account</h1>
 
     <fieldset>
-        <legend>Roles</legend>
+        <legend>Information</legend>
         <ul>
-            {% for role in app.user.roles %}
-                <li>{{ role|trans({}, 'roles') }}</li>
-            {% else %}
-                <li><em>None</em></li>
-            {% endfor %}
+            <li>Premium account: {{ msgphp_user.userType(user, 'App\\Entity\\User\\PremiumUser') ? '✔ Yes' : '✗ No' }}</li>
+            <li>
+                Roles:
+                <ul>
+                    {% for role in app.user.roles %}
+                        <li>{{ role|trans({}, 'roles') }}</li>
+                    {% else %}
+                        <li><em>None</em></li>
+                    {% endfor %}
+                </ul>
+            </li>
         </ul>
     </fieldset>
 
     <fieldset>
         <legend>E-mails</legend>
         <ul>
-            <li>{{ msgphp_user.user.email }} - Primary</li>
-            {% for userEmail in msgphp_user.user.emails %}
+            <li>{{ user.email }} - Primary</li>
+            {% for userEmail in user.emails %}
                 <li>
                     {{ userEmail.email }}
                     {% if userEmail.confirmed %}

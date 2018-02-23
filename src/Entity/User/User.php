@@ -21,8 +21,9 @@ use MsgPhp\User\UserIdInterface;
 
 /**
  * @ORM\Entity()
- *
- * @final
+ * @ORM\InheritanceType("JOINED")
+ * @ORM\DiscriminatorColumn(name="discriminator", type="string")
+ * @ORM\DiscriminatorMap({"user" = "User", "premium_user" = "PremiumUser"})
  */
 class User extends BaseUser implements DomainEventHandlerInterface
 {
