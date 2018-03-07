@@ -31,7 +31,7 @@ final class SendConfirmationLinkToCreatedUser
         $params = ['user' => $user];
         $message = (new \Swift_Message('Confirm your account at The App'))
             ->addTo($user->getEmail())
-            ->setBody($this->twig->render('User/email/confirm_registration.txt.twig', $params), 'plain/text')
+            ->setBody($this->twig->render('User/email/confirm_registration.txt.twig', $params), 'text/plain')
             ->addPart($this->twig->render('User/email/confirm_registration.html.twig', $params), 'text/html');
 
         $this->mailer->send($message);

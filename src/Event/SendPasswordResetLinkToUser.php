@@ -31,7 +31,7 @@ final class SendPasswordResetLinkToUser
         $params = ['user' => $user];
         $message = (new \Swift_Message('Reset your password at The App'))
             ->addTo($user->getEmail())
-            ->setBody($this->twig->render('User/email/reset_password.txt.twig', $params), 'plain/text')
+            ->setBody($this->twig->render('User/email/reset_password.txt.twig', $params), 'text/plain')
             ->addPart($this->twig->render('User/email/reset_password.html.twig', $params), 'text/html');
 
         $this->mailer->send($message);
