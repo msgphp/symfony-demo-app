@@ -3,9 +3,9 @@
 namespace App\Controller\User;
 
 use App\Entity\User\User;
-use MsgPhp\Domain\Message\DomainMessageBusInterface;
 use MsgPhp\User\Command\ConfirmUserCommand;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use SimpleBus\SymfonyBridge\Bus\CommandBus;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
@@ -19,11 +19,11 @@ final class ConfirmRegistrationController
     public function __invoke(
         FlashBagInterface $flashBag,
         UrlGeneratorInterface $urlGenerator,
-        DomainMessageBusInterface $bus,
+        CommandBus $bus,
         User $user
     ): Response
     {
-        $bus->dispatch(new ConfirmUserCommand($user->getId()));
+        $bus->handle(new ConfirmUserCommand($user->getId()));
         $flashBag->add('success', sprintf('Hi %s, your registration is confirmed. You can now login.', $user->getCredential()->getUsername()));
 
         return new RedirectResponse($urlGenerator->generate('login'));

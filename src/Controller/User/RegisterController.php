@@ -3,8 +3,8 @@
 namespace App\Controller\User;
 
 use App\Form\User\RegisterType;
-use MsgPhp\Domain\Message\DomainMessageBusInterface;
 use MsgPhp\User\Command\CreateUserCommand;
+use SimpleBus\SymfonyBridge\Bus\CommandBus;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,14 +21,14 @@ final class RegisterController
         FlashBagInterface $flashBag,
         UrlGeneratorInterface $urlGenerator,
         Environment $twig,
-        DomainMessageBusInterface $bus
+        CommandBus $bus
     ): Response
     {
         $form = $formFactory->createNamed('', RegisterType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $bus->dispatch(new CreateUserCommand($data = $form->getData()));
+            $bus->handle(new CreateUserCommand($data = $form->getData()));
             $flashBag->add('success', sprintf('Hi %s, you\'re successfully registered. We\'ve send you a confirmation link.', $data['email']));
 
             return new RedirectResponse($urlGenerator->generate('index'));
