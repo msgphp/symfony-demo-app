@@ -10,8 +10,8 @@
             <span>★ <a href="{{ path('index') }}">The App</a></span>
             <nav>
                 <ul>
-                    {% if app.user and user is defined %}
-                        <li>Welcome <em>{{ user.email }}</em></li>
+                    {% if current_user is defined and current_user %}
+                        <li>Welcome <em>{{ current_user.email }}</em></li>
                         <li><a href="{{ path('logout') }}">Logout</a></li>
                     {% else %}
                         <li><a href="{{ path('login') }}">Login</a></li>
