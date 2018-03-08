@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 final class ConfirmRegistrationController
 {
     /**
-     * @ParamConverter("user", converter="doctrine.orm", class="App:User\User", options={"mapping": {"token": "confirmationToken"}})
+     * @ParamConverter("user", converter="doctrine.orm", options={"mapping": {"token": "confirmationToken"}})
      */
     public function __invoke(
         FlashBagInterface $flashBag,

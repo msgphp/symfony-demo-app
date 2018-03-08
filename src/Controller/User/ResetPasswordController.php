@@ -18,7 +18,7 @@ use Twig\Environment;
 final class ResetPasswordController
 {
     /**
-     * @ParamConverter("user", converter="doctrine.orm", class="App:User\User", options={"mapping": {"token": "passwordResetToken"}})
+     * @ParamConverter("user", converter="doctrine.orm", options={"mapping": {"token": "passwordResetToken"}})
      */
     public function __invoke(
         Request $request,
