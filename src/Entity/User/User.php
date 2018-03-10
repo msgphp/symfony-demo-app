@@ -14,6 +14,7 @@ use MsgPhp\Domain\Event\DomainEventHandlerTrait;
 use MsgPhp\User\Entity\Credential\EmailPassword;
 use MsgPhp\User\Entity\Features\EmailPasswordCredential;
 use MsgPhp\User\Entity\Features\ResettablePassword;
+use MsgPhp\User\Entity\Fields\EmailsField;
 use MsgPhp\User\Entity\User as BaseUser;
 use MsgPhp\User\UserIdInterface;
 
@@ -29,6 +30,7 @@ class User extends BaseUser implements DomainEventHandlerInterface
     use ResettablePassword;
     use CanBeEnabled;
     use CanBeConfirmed;
+    use EmailsField;
     use DomainEventHandlerTrait;
 
     /** @ORM\Id @ORM\Column(type="msgphp_user_id") */
@@ -39,12 +41,6 @@ class User extends BaseUser implements DomainEventHandlerInterface
      * @ORM\OneToMany(targetEntity="UserRole", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private $roles;
-
-    /**
-     * @var Collection|UserSecondaryEmail[]
-     * @ORM\OneToMany(targetEntity="UserSecondaryEmail", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    private $secondaryEmails;
 
     /**
      * @var Collection|UserAttributeValue[]
@@ -59,7 +55,6 @@ class User extends BaseUser implements DomainEventHandlerInterface
         $this->credential = new EmailPassword($email, $password);
         $this->confirmationToken = bin2hex(random_bytes(32));
         $this->roles = new ArrayCollection();
-        $this->secondaryEmails = new ArrayCollection();
         $this->attributeValues = new ArrayCollection();
     }
 
@@ -81,30 +76,6 @@ class User extends BaseUser implements DomainEventHandlerInterface
     public function getRoles(): Collection
     {
         return $this->roles;
-    }
-
-    public function getPendingPrimaryEmail(): ?string
-    {
-        return $this->secondaryEmails->filter(function (UserSecondaryEmail $userSecondaryEmail) {
-            return $userSecondaryEmail->isPendingPrimary();
-        })->map(function (UserSecondaryEmail $userSecondaryEmail) {
-            return $userSecondaryEmail->getEmail();
-        })->first() ?: null;
-    }
-
-    public function getSecondaryEmail(string $email): ?UserSecondaryEmail
-    {
-        return $this->secondaryEmails->filter(function (UserSecondaryEmail $userSecondaryEmail) use ($email) {
-            return $userSecondaryEmail->getEmail() === $email;
-        })->first() ?: null;
-    }
-
-    /**
-     * @return Collection|UserSecondaryEmail[]
-     */
-    public function getSecondaryEmails(): Collection
-    {
-        return $this->secondaryEmails;
     }
 
     /**

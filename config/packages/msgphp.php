@@ -17,11 +17,11 @@ return function (ContainerConfigurator $container) {
             User\Entity\User::class => \App\Entity\User\User::class,
             User\Entity\UserAttributeValue::class => \App\Entity\User\UserAttributeValue::class,
             User\Entity\UserRole::class => \App\Entity\User\UserRole::class,
-            User\Entity\UserSecondaryEmail::class => \App\Entity\User\UserSecondaryEmail::class,
+            User\Entity\UserEmail::class => \App\Entity\User\UserEmail::class,
         ],
         'default_id_type' => 'uuid',
         'username_lookup' => [
-            ['target' => User\Entity\UserSecondaryEmail::class, 'field' => 'email'],
+            ['target' => User\Entity\UserEmail::class, 'field' => 'email'],
         ],
     ]);
 };

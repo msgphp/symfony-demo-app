@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Event;
+namespace App\EventSubscriber;
 
 use App\Entity\User\User;
 use MsgPhp\User\Event\UserCreatedEvent;
 use Twig\Environment;
 
-final class SendConfirmationLinkToCreatedUser
+final class SendRegistrationConfirmationUrl
 {
     private $mailer;
     private $twig;
@@ -31,8 +31,8 @@ final class SendConfirmationLinkToCreatedUser
         $params = ['user' => $user];
         $message = (new \Swift_Message('Confirm your account at The App'))
             ->addTo($user->getEmail())
-            ->setBody($this->twig->render('User/email/confirm_registration.txt.twig', $params), 'text/plain')
-            ->addPart($this->twig->render('User/email/confirm_registration.html.twig', $params), 'text/html');
+            ->setBody($this->twig->render('user/email/confirm_registration.txt.twig', $params), 'text/plain')
+            ->addPart($this->twig->render('user/email/confirm_registration.html.twig', $params), 'text/html');
 
         $this->mailer->send($message);
     }

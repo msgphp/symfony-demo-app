@@ -11,7 +11,9 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: [controller.service_arguments]
-    App\Security\PasswordConfirmation: ~
+    App\Security\PasswordConfirmation:
+        arguments:
+            '$secret': '%kernel.secret%'
     App\Security\UserChecker: ~
     App\Security\UserRolesProvider: ~
     MsgPhp\User\Infra\Security\UserRolesProviderInterface: '@App\Security\UserRolesProvider'

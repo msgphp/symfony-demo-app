@@ -2,25 +2,26 @@
 
 namespace App\Security;
 
+use MsgPhp\User\Infra\Form\Type\HashedPasswordType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Twig\Environment;
 
 final class PasswordConfirmation
 {
+    private $secret;
     private $twig;
     private $formFactory;
     private $urlGenerator;
 
-    public function __construct(Environment $twig, FormFactoryInterface $formFactory, UrlGeneratorInterface $urlGenerator)
+    public function __construct(string $secret, Environment $twig, FormFactoryInterface $formFactory, UrlGeneratorInterface $urlGenerator)
     {
+        $this->secret = $secret;
         $this->twig = $twig;
         $this->formFactory = $formFactory;
         $this->urlGenerator = $urlGenerator;
@@ -32,8 +33,16 @@ final class PasswordConfirmation
             throw new \LogicException('Session not available.');
         }
 
-        if ($session->has($hash = md5($request->getUriForPath($request->getRequestUri())))) {
-            $session->remove($hash);
+        $hash = md5(implode("\0", [
+            $this->secret,
+            $request->getClientIp(),
+            $request->getUriForPath($request->getRequestUri())
+        ]));
+
+        if ($session->has($hash)) {
+            if ($session->remove($hash) !== md5($hash.$this->secret)) {
+                throw new BadRequestHttpException('Unable to confirm current request.');
+            }
 
             return null;
         }
@@ -43,8 +52,8 @@ final class PasswordConfirmation
             : $request->headers->get('referer');
 
         $form = $this->formFactory->createNamedBuilder($hash)
-            ->add('password', PasswordType::class, [
-                'constraints' => [new UserPassword()],
+            ->add('currentPassword', HashedPasswordType::class, [
+                'password_confirm_current' => true,
             ])
             ->add('referer', HiddenType::class, [
                 'data' => $referer,
@@ -55,7 +64,7 @@ final class PasswordConfirmation
 
         if ($form->isSubmitted()) {
             if ($form->isValid()) {
-                $session->set($hash, '1');
+                $session->set($hash, md5($hash.$this->secret));
 
                 return new RedirectResponse($request->getRequestUri());
             }
@@ -67,7 +76,7 @@ final class PasswordConfirmation
             throw new BadRequestHttpException('Unable to confirm current request.');
         }
 
-        return new Response($this->twig->render('confirm_password.html.twig', [
+        return new Response($this->twig->render('password_confirmation.html.twig', [
             'form' => $form->createView(),
             'cancelUrl' => $referer,
         ]));

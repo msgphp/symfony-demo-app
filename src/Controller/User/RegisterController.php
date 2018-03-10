@@ -34,7 +34,7 @@ final class RegisterController
             return new RedirectResponse($urlGenerator->generate('index'));
         }
 
-        return new Response($twig->render('User/register.html.twig', [
+        return new Response($twig->render('user/register.html.twig', [
             'form' => $form->createView(),
         ]));
     }

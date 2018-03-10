@@ -27,7 +27,7 @@ final class LoginController
             $form->addError(new FormError($error->getMessage(), $error->getMessageKey(), $error->getMessageData()));
         }
 
-        return new Response($twig->render('User/login.html.twig', [
+        return new Response($twig->render('user/login.html.twig', [
             'form' => $form->createView(),
         ]));
     }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Event;
+namespace App\EventSubscriber;
 
 use App\Entity\User\User;
 use MsgPhp\User\Entity\Credential\EmailPassword;
