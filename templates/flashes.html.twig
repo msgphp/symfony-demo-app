@@ -1,7 +1,13 @@
+{% set icons = {
+    success: '✔ ',
+    error: '✗ ',
+    warning: '⚠ ',
+} %}
+
 <ul>
 {% for label, messages in flashes %}
     {% for message in messages %}
-        <li>[{{ label|upper }}] {{ message }}</li>
+        <li>{{ (icons[label]|default('')) ~ message }}</li>
     {% endfor %}
 {% endfor %}
 </ul>
