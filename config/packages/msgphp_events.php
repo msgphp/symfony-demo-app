@@ -1,13 +1,7 @@
 <?php
 
-use App\Event\ClearPasswordResetToken;
-use App\Event\EnableConfirmedUser;
-use App\Event\SendConfirmationLinkToCreatedUser;
-use App\Event\SendPasswordResetLinkToUser;
-use MsgPhp\User\Event\UserConfirmedEvent;
-use MsgPhp\User\Event\UserCreatedEvent;
-use MsgPhp\User\Event\UserCredentialChangedEvent;
-use MsgPhp\User\Event\UserPasswordRequestedEvent;
+use App\EventSubscriber;
+use MsgPhp\User\Event as UserEvent;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return function (ContainerConfigurator $container) {
@@ -16,13 +10,15 @@ return function (ContainerConfigurator $container) {
             ->autowire()
             ->public()
 
-        ->set(ClearPasswordResetToken::class)
-            ->tag('event_subscriber', ['subscribes_to' => UserCredentialChangedEvent::class])
-        ->set(EnableConfirmedUser::class)
-            ->tag('event_subscriber', ['subscribes_to' => UserConfirmedEvent::class])
-        ->set(SendConfirmationLinkToCreatedUser::class)
-            ->tag('event_subscriber', ['subscribes_to' => UserCreatedEvent::class])
-        ->set(SendPasswordResetLinkToUser::class)
-            ->tag('event_subscriber', ['subscribes_to' => UserPasswordRequestedEvent::class])
+        ->set(EventSubscriber\ClearPasswordResetToken::class)
+            ->tag('event_subscriber', ['subscribes_to' => UserEvent\UserCredentialChangedEvent::class])
+        ->set(EventSubscriber\EnableConfirmedUser::class)
+            ->tag('event_subscriber', ['subscribes_to' => UserEvent\UserConfirmedEvent::class])
+        ->set(EventSubscriber\SendEmailConfirmationUrl::class)
+            ->tag('event_subscriber', ['subscribes_to' => UserEvent\UserEmailCreatedEvent::class])
+        ->set(EventSubscriber\SendPasswordResetUrl::class)
+            ->tag('event_subscriber', ['subscribes_to' => UserEvent\UserPasswordRequestedEvent::class])
+        ->set(EventSubscriber\SendRegistrationConfirmationUrl::class)
+            ->tag('event_subscriber', ['subscribes_to' => UserEvent\UserCreatedEvent::class])
     ;
 };

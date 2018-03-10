@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>My Account</h1>
+
+    <fieldset>
+        <legend>E-mails</legend>
+        <ul>
+            <li>{{ msgphp_user.user.email }} - Primary</li>
+            {% for userEmail in msgphp_user.user.emails %}
+                <li>
+                    {{ userEmail.email }}
+                    {% if userEmail.confirmed %}
+                        - Confirmed
+                        - <a href="{{ path('my_account', {'primary-email': userEmail.email}) }}">Mark primary</a>
+                    {% else %}
+                        - Unconfirmed
+                        - <a href="{{ path('my_account', {'confirm-email': userEmail.email}) }}">Send confirmation link</a>
+                    {% endif %}
+                    - <a href="{{ path('my_account', {'delete-email': userEmail.email}) }}">Delete</a>
+                </li>
+            {% endfor %}
+        </ul>
+
+        {{ form_start(emailForm) }}
+            {{ form_errors(emailForm) }}
+            {{ form_row(emailForm.email, {label: 'E-mail'}) }}
+
+            <div>
+                <input type="submit" value="Add" />
+            </div>
+        {{ form_end(emailForm) }}
+    </fieldset>
+
+    <fieldset>
+        <legend>Change password</legend>
+        {{ form_start(passwordForm) }}
+            {{ form_errors(passwordForm) }}
+            {{ form_row(passwordForm.currentPassword.password, {label: 'Current password'}) }}
+            {{ form_row(passwordForm.newPassword.password, {label: 'New password'}) }}
+            {{ form_row(passwordForm.newPassword.confirmation, {label: 'Confirm new password'}) }}
+
+            <div>
+                <input type="submit" value="Change password" />
+            </div>
+        {{ form_end(passwordForm) }}
+    </fieldset>
+{% endblock %}

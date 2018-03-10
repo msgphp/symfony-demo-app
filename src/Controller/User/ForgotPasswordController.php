@@ -36,7 +36,7 @@ final class ForgotPasswordController
             return new RedirectResponse($urlGenerator->generate('index'));
         }
 
-        return new Response($twig->render('User/forgot_password.html.twig', [
+        return new Response($twig->render('user/forgot_password.html.twig', [
             'form' => $form->createView(),
         ]));
     }

@@ -3,7 +3,7 @@
 namespace App\DataFixtures\ORM;
 
 use App\Entity\Eav\{Attribute, AttributeValue};
-use App\Entity\User\{User, UserAttributeValue, UserSecondaryEmail, UserRole};
+use App\Entity\User\{User, UserAttributeValue, UserEmail, UserRole};
 use App\Security\UserRolesProvider;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -30,12 +30,11 @@ final class Users extends Fixture
         $manager->persist($stringAttr = new Attribute(new AttributeId()));
         $manager->persist($dateTimeAttr = new Attribute(new AttributeId()));
 
-        $manager->flush();
-
         $user = $this->createUser('user@domain.dev');
         $user->enable();
         $user->confirm();
         $manager->persist($user);
+        $manager->persist(new UserEmail($user, 'user+secondary@domain.dev', true));
         $manager->persist($this->createUserAttributeValue($user, $boolAttr, true));
         $manager->persist($this->createUserAttributeValue($user, $boolAttr, false));
         $manager->persist($this->createUserAttributeValue($user, $boolAttr, null));
@@ -45,10 +44,6 @@ final class Users extends Fixture
         $manager->persist($this->createUserAttributeValue($user, $floatAttr, -0.123));
         $manager->persist($this->createUserAttributeValue($user, $stringAttr, 'text'));
         $manager->persist($this->createUserAttributeValue($user, $dateTimeAttr, new \DateTimeImmutable()));
-
-        $userSecondaryEmail = new UserSecondaryEmail($user, 'user+secondary@domain.dev');
-        $userSecondaryEmail->confirm();
-        $manager->persist($userSecondaryEmail);
 
         $user = $this->createUser('user+disabled@domain.dev');
         $manager->persist($user);

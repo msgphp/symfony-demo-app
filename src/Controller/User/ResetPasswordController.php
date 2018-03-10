@@ -21,13 +21,13 @@ final class ResetPasswordController
      * @ParamConverter("user", converter="doctrine.orm", options={"mapping": {"token": "passwordResetToken"}})
      */
     public function __invoke(
+        User $user,
         Request $request,
         FormFactoryInterface $formFactory,
         FlashBagInterface $flashBag,
         UrlGeneratorInterface $urlGenerator,
         Environment $twig,
-        CommandBus $bus,
-        User $user
+        CommandBus $bus
     ): Response
     {
         $form = $formFactory->createNamed('', ResetPasswordType::class);
@@ -40,7 +40,7 @@ final class ResetPasswordController
             return new RedirectResponse($urlGenerator->generate('index'));
         }
 
-        return new Response($twig->render('User/reset_password.html.twig', [
+        return new Response($twig->render('user/reset_password.html.twig', [
             'form' => $form->createView(),
         ]));
     }
