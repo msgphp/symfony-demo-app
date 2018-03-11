@@ -15,6 +15,7 @@ use MsgPhp\User\Entity\Credential\EmailPassword;
 use MsgPhp\User\Entity\Features\EmailPasswordCredential;
 use MsgPhp\User\Entity\Features\ResettablePassword;
 use MsgPhp\User\Entity\Fields\EmailsField;
+use MsgPhp\User\Entity\Fields\RolesField;
 use MsgPhp\User\Entity\User as BaseUser;
 use MsgPhp\User\UserIdInterface;
 
@@ -31,16 +32,11 @@ class User extends BaseUser implements DomainEventHandlerInterface
     use CanBeEnabled;
     use CanBeConfirmed;
     use EmailsField;
+    use RolesField;
     use DomainEventHandlerTrait;
 
-    /** @ORM\Id @ORM\Column(type="msgphp_user_id") */
+    /** @ORM\Id() @ORM\Column(type="msgphp_user_id") */
     private $id;
-
-    /**
-     * @var Collection|UserRole[]
-     * @ORM\OneToMany(targetEntity="UserRole", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    private $roles;
 
     /**
      * @var Collection|UserAttributeValue[]
@@ -54,28 +50,12 @@ class User extends BaseUser implements DomainEventHandlerInterface
         $this->createdAt = new \DateTimeImmutable();
         $this->credential = new EmailPassword($email, $password);
         $this->confirmationToken = bin2hex(random_bytes(32));
-        $this->roles = new ArrayCollection();
         $this->attributeValues = new ArrayCollection();
     }
 
     public function getId(): UserIdInterface
     {
         return $this->id;
-    }
-
-    public function getRole(string $role): ?UserRole
-    {
-        return $this->roles->filter(function (UserRole $userRole) use ($role) {
-            return $userRole->getRole() === $role;
-        })->first() ?: null;
-    }
-
-    /**
-     * @return Collection|UserRole[]
-     */
-    public function getRoles(): Collection
-    {
-        return $this->roles;
     }
 
     /**

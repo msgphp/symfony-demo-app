@@ -3,7 +3,7 @@
 namespace App\EventSubscriber;
 
 use App\Entity\User\UserEmail;
-use MsgPhp\User\Event\UserEmailCreatedEvent;
+use MsgPhp\User\Event\UserEmailAddedEvent;
 use Twig\Environment;
 
 final class SendEmailConfirmationUrl
@@ -17,7 +17,7 @@ final class SendEmailConfirmationUrl
         $this->twig = $twig;
     }
 
-    public function __invoke(UserEmailCreatedEvent $event): void
+    public function __invoke(UserEmailAddedEvent $event): void
     {
         $this->notify($event->userEmail);
     }
