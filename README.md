@@ -14,13 +14,11 @@
 
 ## Screenshots
 
-Home (logged out) | Login | Home (logged in)
----|---|---
-<img src="https://user-images.githubusercontent.com/1047696/35224367-0d5aecba-ff85-11e7-80ab-8d4c15dedd72.png" alt=""> | <img src="https://user-images.githubusercontent.com/1047696/35224369-10f11098-ff85-11e7-8ab4-f106b09b0b5e.png" alt=""> | <img src="https://user-images.githubusercontent.com/1047696/35224371-138dd25a-ff85-11e7-9721-ff85c2d82149.png" alt="">
+### Web
+![image](https://user-images.githubusercontent.com/1047696/37255089-a332e49e-2547-11e8-9b7d-2d04adddf5c1.png)
 
-Enable user | Enable user by ID | Disable user (unknown)
----|---|---
-<img src="https://user-images.githubusercontent.com/1047696/35482278-148e8ff2-0433-11e8-99b6-94d87a976713.png" alt=""> | <img src="https://user-images.githubusercontent.com/1047696/35482332-caf3f0ca-0433-11e8-813e-463239c50b06.png" alt=""> | <img src="https://user-images.githubusercontent.com/1047696/35482352-16d0a29a-0434-11e8-8984-48232a58ec30.png" alt="">
+### CLI
+![image](https://user-images.githubusercontent.com/1047696/37255113-0c0c6742-2548-11e8-9aa5-b037de466423.png)
 
 ## Blog posts
 
