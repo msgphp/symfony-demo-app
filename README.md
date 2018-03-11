@@ -15,7 +15,7 @@
 ## Screenshots
 
 ### Web
-![image](https://user-images.githubusercontent.com/1047696/37255089-a332e49e-2547-11e8-9b7d-2d04adddf5c1.png)
+![image](https://user-images.githubusercontent.com/1047696/37255184-0cf3a412-2549-11e8-99f3-07e9f016dc57.png)
 
 ### CLI
 ![image](https://user-images.githubusercontent.com/1047696/37255113-0c0c6742-2548-11e8-9aa5-b037de466423.png)
