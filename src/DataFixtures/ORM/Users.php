@@ -2,34 +2,45 @@
 
 namespace App\DataFixtures\ORM;
 
-use App\Entity\Eav\{Attribute, AttributeValue};
-use App\Entity\User\{User, UserAttributeValue, UserEmail, UserRole};
+use App\Entity\Eav\Attribute;
+use App\Entity\Eav\AttributeValue;
+use App\Entity\User\Role;
+use App\Entity\User\User;
+use App\Entity\User\UserAttributeValue;
+use App\Entity\User\UserEmail;
+use App\Entity\User\UserRole;
 use App\Security\UserRolesProvider;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use MsgPhp\Eav\Infra\Uuid\{AttributeId, AttributeValueId};
-use MsgPhp\User\Infra\Uuid\UserId;
+use MsgPhp\Domain\Factory\EntityAwareFactoryInterface;
 use MsgPhp\User\Password\PasswordHashingInterface;
 
 final class Users extends Fixture
 {
     private const PASSWORD = 'pass';
 
+    private $factory;
     private $passwordHashing;
 
-    public function __construct(PasswordHashingInterface $passwordHashing)
+    public function __construct(EntityAwareFactoryInterface $factory, PasswordHashingInterface $passwordHashing)
     {
+        $this->factory = $factory;
         $this->passwordHashing = $passwordHashing;
     }
 
     public function load(ObjectManager $manager)
     {
-        $manager->persist($boolAttr = new Attribute(new AttributeId()));
-        $manager->persist($intAttr = new Attribute(new AttributeId()));
-        $manager->persist($floatAttr = new Attribute(new AttributeId()));
-        $manager->persist($stringAttr = new Attribute(new AttributeId()));
-        $manager->persist($dateTimeAttr = new Attribute(new AttributeId()));
+        // roles
+        $manager->persist($adminRole = new Role(UserRolesProvider::ROLE_ADMIN));
 
+        // attributes
+        $manager->persist($boolAttr = $this->createAttribute());
+        $manager->persist($intAttr = $this->createAttribute());
+        $manager->persist($floatAttr = $this->createAttribute());
+        $manager->persist($stringAttr = $this->createAttribute());
+        $manager->persist($dateTimeAttr = $this->createAttribute());
+
+        // users
         $user = $this->createUser('user@domain.dev');
         $user->enable();
         $user->confirm();
@@ -52,22 +63,27 @@ final class Users extends Fixture
         $user->enable();
         $user->confirm();
         $manager->persist($user);
-        $manager->persist(new UserRole($user, UserRolesProvider::ROLE_ADMIN));
+        $manager->persist(new UserRole($user, $adminRole));
 
         $user = $this->createUser('user+admin+disabled@domain.dev');
         $manager->persist($user);
-        $manager->persist(new UserRole($user, UserRolesProvider::ROLE_ADMIN));
+        $manager->persist(new UserRole($user, $adminRole));
 
         $manager->flush();
     }
 
+    private function createAttribute(): Attribute
+    {
+        return new Attribute($this->factory->nextIdentifier(Attribute::class));
+    }
+
     private function createUser(string $email, string $password = self::PASSWORD): User
     {
-        return new User(new UserId(), $email, $this->passwordHashing->hash($password));
+        return new User($this->factory->nextIdentifier(User::class), $email, $this->passwordHashing->hash($password));
     }
 
     private function createUserAttributeValue(User $user, Attribute $attribute, $value): UserAttributeValue
     {
-        return new UserAttributeValue($user, new AttributeValue(new AttributeValueId(), $attribute, $value));
+        return new UserAttributeValue($user, new AttributeValue($this->factory->nextIdentifier(AttributeValue::class), $attribute, $value));
     }
 }

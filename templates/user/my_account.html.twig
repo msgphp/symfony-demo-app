@@ -4,6 +4,17 @@
     <h1>My Account</h1>
 
     <fieldset>
+        <legend>Roles</legend>
+        <ul>
+            {% for role in app.user.roles %}
+                <li>{{ role|trans({}, 'roles') }}</li>
+            {% else %}
+                <li><em>None</em></li>
+            {% endfor %}
+        </ul>
+    </fieldset>
+
+    <fieldset>
         <legend>E-mails</legend>
         <ul>
             <li>{{ msgphp_user.user.email }} - Primary</li>
@@ -24,7 +35,7 @@
 
         {{ form_start(emailForm) }}
             {{ form_errors(emailForm) }}
-            {{ form_row(emailForm.email, {label: 'E-mail'}) }}
+            {{ form_row(emailForm.email, {label: 'E-mail', translation_domain: false}) }}
 
             <div>
                 <input type="submit" value="Add" />
@@ -36,9 +47,9 @@
         <legend>Change password</legend>
         {{ form_start(passwordForm) }}
             {{ form_errors(passwordForm) }}
-            {{ form_row(passwordForm.currentPassword.password, {label: 'Current password'}) }}
-            {{ form_row(passwordForm.newPassword.password, {label: 'New password'}) }}
-            {{ form_row(passwordForm.newPassword.confirmation, {label: 'Confirm new password'}) }}
+            {{ form_row(passwordForm.currentPassword.password, {label: 'Current password', translation_domain: false}) }}
+            {{ form_row(passwordForm.newPassword.password, {label: 'New password', translation_domain: false}) }}
+            {{ form_row(passwordForm.newPassword.confirmation, {label: 'Confirm new password', translation_domain: false}) }}
 
             <div>
                 <input type="submit" value="Change password" />

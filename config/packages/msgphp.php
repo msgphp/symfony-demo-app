@@ -14,6 +14,7 @@ return function (ContainerConfigurator $container) {
 
     $container->extension('msgphp_user', [
         'class_mapping' => [
+            User\Entity\Role::class => \App\Entity\User\Role::class,
             User\Entity\User::class => \App\Entity\User\User::class,
             User\Entity\UserAttributeValue::class => \App\Entity\User\UserAttributeValue::class,
             User\Entity\UserRole::class => \App\Entity\User\UserRole::class,

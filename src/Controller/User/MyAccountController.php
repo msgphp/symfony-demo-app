@@ -9,7 +9,7 @@ use App\Form\User\AddEmailType;
 use App\Form\User\ChangePasswordType;
 use App\Security\PasswordConfirmation;
 use MsgPhp\User\Command\ChangeUserCredentialCommand;
-use MsgPhp\User\Command\CreateUserEmailCommand;
+use MsgPhp\User\Command\AddUserEmailCommand;
 use MsgPhp\User\Command\DeleteUserEmailCommand;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use SimpleBus\SymfonyBridge\Bus\CommandBus;
@@ -46,7 +46,7 @@ final class MyAccountController
         $emailForm->handleRequest($request);
 
         if ($emailForm->isSubmitted() && $emailForm->isValid()) {
-            $bus->handle(new CreateUserEmailCommand($user->getId(), $email = $emailForm->getData()['email']));
+            $bus->handle(new AddUserEmailCommand($user->getId(), $email = $emailForm->getData()['email']));
             $flashBag->add('success', sprintf('E-mail %s added. We\'ve send you a confirmation link.', $email));
 
             return new RedirectResponse($urlGenerator->generate('my_account'));
@@ -66,7 +66,7 @@ final class MyAccountController
             $currentEmail = $user->getEmail();
             $bus->handle(new DeleteUserEmailCommand($primaryEmail));
             $bus->handle(new ChangeUserCredentialCommand($user->getId(), ['email' => $primaryEmail]));
-            $bus->handle(new CreateUserEmailCommand($user->getId(), $currentEmail, ['confirm' => true]));
+            $bus->handle(new AddUserEmailCommand($user->getId(), $currentEmail, ['confirm' => true]));
             $flashBag->add('success', sprintf('E-mail %s marked primary.', $primaryEmail));
 
             return new RedirectResponse($urlGenerator->generate('my_account'));
