@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+composer install
+bin/console d:d:d --force
+bin/console d:d:c
+bin/console d:s:u --force
+bin/console d:f:l -n
