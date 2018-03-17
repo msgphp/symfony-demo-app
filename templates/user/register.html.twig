@@ -15,9 +15,5 @@
     {{ form_end(form) }}
 
     <p>Or register using:</p>
-    <ul>
-        {% for owner in hwi_oauth_resource_owners() %}
-            <li><a href="{{ hwi_oauth_login_url(owner) }}">{{ ('oauth_owners.' ~ owner)|trans }}</a></li>
-        {% endfor %}
-    </ul>
+    {% include 'partials/oauth_providers.html.twig' %}
 {% endblock %}

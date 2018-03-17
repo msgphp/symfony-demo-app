@@ -1,3 +1,7 @@
+parameters:
+    env(GOOGLE_OAUTH_CLIENT_ID): ~
+    env(GOOGLE_OAUTH_CLIENT_SECRET): ~
+
 hwi_oauth:
     firewall_names:
         - main
