@@ -2,9 +2,6 @@
 
 namespace App\Entity\User;
 
-use App\Entity\Eav\Attribute;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use MsgPhp\Domain\Entity\Features\CanBeConfirmed;
 use MsgPhp\Domain\Entity\Features\CanBeEnabled;
@@ -14,6 +11,7 @@ use MsgPhp\Domain\Event\DomainEventHandlerTrait;
 use MsgPhp\User\Entity\Credential\EmailPassword;
 use MsgPhp\User\Entity\Features\EmailPasswordCredential;
 use MsgPhp\User\Entity\Features\ResettablePassword;
+use MsgPhp\User\Entity\Fields\AttributeValuesField;
 use MsgPhp\User\Entity\Fields\EmailsField;
 use MsgPhp\User\Entity\Fields\RolesField;
 use MsgPhp\User\Entity\User as BaseUser;
@@ -34,16 +32,11 @@ class User extends BaseUser implements DomainEventHandlerInterface
     use CanBeConfirmed;
     use EmailsField;
     use RolesField;
+    use AttributeValuesField;
     use DomainEventHandlerTrait;
 
     /** @ORM\Id() @ORM\Column(type="msgphp_user_id") */
     private $id;
-
-    /**
-     * @var Collection|UserAttributeValue[]
-     * @ORM\OneToMany(targetEntity="UserAttributeValue", mappedBy="user", cascade={"persist", "remove"}, orphanRemoval=true)
-     */
-    private $attributeValues;
 
     public function __construct(UserIdInterface $id, string $email, string $password)
     {
@@ -51,25 +44,10 @@ class User extends BaseUser implements DomainEventHandlerInterface
         $this->createdAt = new \DateTimeImmutable();
         $this->credential = new EmailPassword($email, $password);
         $this->confirmationToken = bin2hex(random_bytes(32));
-        $this->attributeValues = new ArrayCollection();
     }
 
     public function getId(): UserIdInterface
     {
         return $this->id;
-    }
-
-    /**
-     * @return Collection|UserAttributeValue[]
-     */
-    public function getAttributeValues(Attribute $attribute = null): Collection
-    {
-        if (null === $attribute) {
-            return $this->attributeValues;
-        }
-
-        return $this->attributeValues->filter(function (UserAttributeValue $userAttributeValue) use ($attribute) {
-            return $userAttributeValue->getAttributeId()->equals($attribute->getId());
-        });
     }
 }

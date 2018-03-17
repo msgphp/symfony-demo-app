@@ -7,7 +7,10 @@ services:
         autoconfigure: true
         public: false
 
-    App\Console\ContextElementProvider: ~
+    App\Console\ClassContextElementFactory:
+        decorates: MsgPhp\Domain\Infra\Console\Context\ClassContextElementFactoryInterface
+        arguments:
+            '$factory': '@App\Console\ClassContextElementFactory.inner'
     App\Controller\:
         resource: '../src/Controller'
         tags: [controller.service_arguments]
