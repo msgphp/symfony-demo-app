@@ -36,6 +36,7 @@ final class Users extends Fixture
 
         // attributes
         $manager->persist($this->createAttribute(Attribute::GOOGLE_OAUTH_ID));
+        $manager->persist($this->createAttribute(Attribute::FACEBOOK_OAUTH_ID));
         $manager->persist($boolAttr = $this->createAttribute());
         $manager->persist($intAttr = $this->createAttribute());
         $manager->persist($floatAttr = $this->createAttribute());

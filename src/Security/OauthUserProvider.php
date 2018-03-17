@@ -38,7 +38,11 @@ final class OauthUserProvider implements OAuthAwareUserProviderInterface
         $owner = $response->getResourceOwner()->getName();
         $username = $response->getUsername();
 
-        $attributeId = $this->factory->identify(Attribute::class, Attribute::GOOGLE_OAUTH_ID);
+        if (!defined($const = Attribute::class.'::'.strtoupper($owner).'_OAUTH_ID')) {
+            throw new \LogicException(sprintf('Missing constant "%s" for OAuth resoure owner "%s"', $const, $owner));
+        }
+
+        $attributeId = $this->factory->identify(Attribute::class, constant($const));
         $userAttributeValue = $this->userAttributeValueRepository->findAllByAttributeIdAndValue($attributeId, $username)->first();
 
         if (!$userAttributeValue) {

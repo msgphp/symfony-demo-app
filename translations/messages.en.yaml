@@ -6,3 +6,4 @@ roles:
 
 oauth_owners:
     google: Google
+    facebook: Facebook

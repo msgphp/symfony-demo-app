@@ -1,6 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% set user = msgphp_user.user %}
+{% set oauth_resources = {
+    (constant('App\\Entity\\Eav\\Attribute::GOOGLE_OAUTH_ID')): 'Google',
+    (constant('App\\Entity\\Eav\\Attribute::FACEBOOK_OAUTH_ID')): 'Facebook'
+} %}
 
 {% block body %}
     <h1>My Account</h1>
@@ -10,10 +14,11 @@
         <ul>
             <li>Premium account: {{ msgphp_user.userType(user, 'App\\Entity\\User\\PremiumUser') ? '✔ Yes' : '✗ No' }}</li>
             <li>
-                Linked Google accounts:
+                Linked  accounts:
                 <ul>
-                    {% for attributeValue in user.attributeValues if attributeValue.attributeId.equals(google_oauth_id) %}
-                        <li>{{ attributeValue.value }}</li>
+                    {% for attributeValue in user.attributeValues if attributeValue.attributeId.toString in oauth_resources|keys %}
+                        {% set resource, id = oauth_resources[attributeValue.attributeId.toString], attributeValue.value %}
+                        <li>{{ resource }}: <code>{{ id }}</code></li>
                     {% else %}
                         <li><em>None</em></li>
                     {% endfor %}

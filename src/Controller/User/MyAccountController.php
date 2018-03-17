@@ -119,7 +119,6 @@ final class MyAccountController
 
         // render view
         return new Response($twig->render('user/my_account.html.twig', [
-            'google_oauth_id' => $factory->identify(Attribute::class, Attribute::GOOGLE_OAUTH_ID),
             'email_form' => $emailForm->createView(),
             'password_form' => $passwordForm->createView(),
         ]));

@@ -12,8 +12,7 @@ return function (RoutingConfigurator $routes) {
     $routes->import('@HWIOAuthBundle/Resources/config/routing/login.xml')
         ->prefix('/oauth/login')
     ;
-
     $routes
-        ->add('oauth_google_check', '/oauth/login/check-google')
+        ->add('oauth_login_check', '/oauth/login-check/{resource}')
     ;
 };
