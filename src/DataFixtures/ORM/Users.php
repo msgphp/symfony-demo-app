@@ -4,6 +4,7 @@ namespace App\DataFixtures\ORM;
 
 use App\Entity\Eav\Attribute;
 use App\Entity\Eav\AttributeValue;
+use App\Entity\User\PremiumUser;
 use App\Entity\User\Role;
 use App\Entity\User\User;
 use App\Entity\User\UserAttributeValue;
@@ -45,7 +46,8 @@ final class Users extends Fixture
         $user->enable();
         $user->confirm();
         $manager->persist($user);
-        $manager->persist(new UserEmail($user, 'user+secondary@domain.dev', true));
+        $manager->persist(new UserEmail($user, 'other@domain.dev'));
+        $manager->persist(new UserEmail($user, 'secondary@domain.dev', true));
         $manager->persist($this->createUserAttributeValue($user, $boolAttr, true));
         $manager->persist($this->createUserAttributeValue($user, $boolAttr, false));
         $manager->persist($this->createUserAttributeValue($user, $boolAttr, null));
@@ -69,6 +71,11 @@ final class Users extends Fixture
         $manager->persist($user);
         $manager->persist(new UserRole($user, $adminRole));
 
+        $premiumUser = $this->createPremiumUser('user+premium@domain.dev');
+        $premiumUser->enable();
+        $premiumUser->confirm();
+        $manager->persist($premiumUser);
+
         $manager->flush();
     }
 
@@ -77,9 +84,14 @@ final class Users extends Fixture
         return new Attribute($this->factory->nextIdentifier(Attribute::class));
     }
 
-    private function createUser(string $email, string $password = self::PASSWORD): User
+    private function createUser(string $email, string $password = self::PASSWORD, $class = User::class): User
     {
-        return new User($this->factory->nextIdentifier(User::class), $email, $this->passwordHashing->hash($password));
+        return new $class($this->factory->nextIdentifier(User::class), $email, $this->passwordHashing->hash($password));
+    }
+
+    private function createPremiumUser(string $email, string $password = self::PASSWORD): PremiumUser
+    {
+        return $this->createUser($email, $password, PremiumUser::class);
     }
 
     private function createUserAttributeValue(User $user, Attribute $attribute, $value): UserAttributeValue
