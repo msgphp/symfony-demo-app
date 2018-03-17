@@ -13,7 +13,7 @@
                 Roles:
                 <ul>
                     {% for role in app.user.roles %}
-                        <li>{{ role|trans({}, 'roles') }}</li>
+                        <li>{{ ('roles.' ~ role)|trans }}</li>
                     {% else %}
                         <li><em>None</em></li>
                     {% endfor %}

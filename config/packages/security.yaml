@@ -28,3 +28,10 @@ security:
             switch_user:
                 role: ROLE_ADMIN
             logout_on_user_change: true
+            oauth:
+                resource_owners:
+                    google: /oauth/login/check-google
+                login_path: /oauth/login
+                failure_path: /oauth/login
+                oauth_user_provider:
+                    service: App\Security\OauthUserProvider

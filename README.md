@@ -4,8 +4,11 @@
 
 ## Enabled bundles
 
-[`MsgPhpUserBundle`](https://github.com/msgphp/user-bundle), [`MsgPhpEavBundle`](https://github.com/msgphp/eav-bundle),
-[`DoctrineBundle`](https://github.com/doctrine/DoctrineBundle), [`SecurityBundle`](https://github.com/symfony/security-bundle),
+[`MsgPhpUserBundle`](https://github.com/msgphp/user-bundle),
+[`MsgPhpEavBundle`](https://github.com/msgphp/eav-bundle),
+[`DoctrineBundle`](https://github.com/doctrine/DoctrineBundle),
+[`SecurityBundle`](https://github.com/symfony/security-bundle),
+[`HWIOAuthBundle`](https://github.com/hwi/HWIOAuthBundle),
 [`SimpleBusCommandBusBundle`](https://github.com/SimpleBus/SymfonyBridge)
 
 ## Documentation

@@ -2,8 +2,11 @@
     "type": "project",
     "license": "MIT",
     "require": {
+        "hwi/oauth-bundle": "^0.6",
         "msgphp/eav-bundle": "^0.2",
         "msgphp/user-bundle": "^0.2",
+        "php-http/guzzle6-adapter": "^1.1",
+        "php-http/httplug-bundle": "^1.9",
         "ramsey/uuid": "^3.7",
         "ramsey/uuid-doctrine": "^1.4",
         "sensio/framework-extra-bundle": "^5.1",
