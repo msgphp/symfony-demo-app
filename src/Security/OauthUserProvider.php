@@ -50,6 +50,7 @@ final class OauthUserProvider implements OAuthAwareUserProviderInterface
                 $user = $this->userRepository->findByUsername($email);
                 $userId = $user->getId();
             } catch (EntityNotFoundException $e) {
+                //@todo validate username/email availability
                 $userId = $this->factory->nextIdentifier(User::class);
                 $this->bus->handle(new CreateUserCommand([
                     'id' => $userId,

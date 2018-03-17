@@ -10,6 +10,16 @@
         <ul>
             <li>Premium account: {{ msgphp_user.userType(user, 'App\\Entity\\User\\PremiumUser') ? '✔ Yes' : '✗ No' }}</li>
             <li>
+                Linked Google accounts:
+                <ul>
+                    {% for attributeValue in user.attributeValues if attributeValue.attributeId.equals(google_oauth_id) %}
+                        <li>{{ attributeValue.value }}</li>
+                    {% else %}
+                        <li><em>None</em></li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <li>
                 Roles:
                 <ul>
                     {% for role in app.user.roles %}
@@ -41,27 +51,27 @@
             {% endfor %}
         </ul>
 
-        {{ form_start(emailForm) }}
-            {{ form_errors(emailForm) }}
-            {{ form_row(emailForm.email, {label: 'E-mail', translation_domain: false}) }}
+        {{ form_start(email_form) }}
+            {{ form_errors(email_form) }}
+            {{ form_row(email_form.email, {label: 'E-mail', translation_domain: false}) }}
 
             <div>
                 <input type="submit" value="Add" />
             </div>
-        {{ form_end(emailForm) }}
+        {{ form_end(email_form) }}
     </fieldset>
 
     <fieldset>
         <legend>Change password</legend>
-        {{ form_start(passwordForm) }}
-            {{ form_errors(passwordForm) }}
-            {{ form_row(passwordForm.currentPassword.password, {label: 'Current password', translation_domain: false}) }}
-            {{ form_row(passwordForm.newPassword.password, {label: 'New password', translation_domain: false}) }}
-            {{ form_row(passwordForm.newPassword.confirmation, {label: 'Confirm new password', translation_domain: false}) }}
+        {{ form_start(password_form) }}
+            {{ form_errors(password_form) }}
+            {{ form_row(password_form.currentPassword.password, {label: 'Current password', translation_domain: false}) }}
+            {{ form_row(password_form.newPassword.password, {label: 'New password', translation_domain: false}) }}
+            {{ form_row(password_form.newPassword.confirmation, {label: 'Confirm new password', translation_domain: false}) }}
 
             <div>
                 <input type="submit" value="Change password" />
             </div>
-        {{ form_end(passwordForm) }}
+        {{ form_end(password_form) }}
     </fieldset>
 {% endblock %}

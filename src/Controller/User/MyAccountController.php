@@ -2,12 +2,14 @@
 
 namespace App\Controller\User;
 
+use App\Entity\Eav\Attribute;
 use App\Entity\User\User;
 use App\Entity\User\UserEmail;
 use App\EventSubscriber\SendEmailConfirmationUrl;
 use App\Form\User\AddEmailType;
 use App\Form\User\ChangePasswordType;
 use App\Security\PasswordConfirmation;
+use MsgPhp\Domain\Factory\EntityAwareFactoryInterface;
 use MsgPhp\User\Command\ChangeUserCredentialCommand;
 use MsgPhp\User\Command\AddUserEmailCommand;
 use MsgPhp\User\Command\DeleteUserEmailCommand;
@@ -38,7 +40,8 @@ final class MyAccountController
         TokenStorageInterface $tokenStorage,
         CommandBus $bus,
         PasswordConfirmation $passwordConfirmation,
-        SendEmailConfirmationUrl $sendEmailConfirmationUrl
+        SendEmailConfirmationUrl $sendEmailConfirmationUrl,
+        EntityAwareFactoryInterface $factory
     ): Response
     {
         // add email
@@ -116,8 +119,9 @@ final class MyAccountController
 
         // render view
         return new Response($twig->render('user/my_account.html.twig', [
-            'emailForm' => $emailForm->createView(),
-            'passwordForm' => $passwordForm->createView(),
+            'google_oauth_id' => $factory->identify(Attribute::class, Attribute::GOOGLE_OAUTH_ID),
+            'email_form' => $emailForm->createView(),
+            'password_form' => $passwordForm->createView(),
         ]));
     }
 }
