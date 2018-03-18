@@ -4,7 +4,11 @@
     "require": {
         "api-platform/api-pack": "^1.1",
         "elasticsearch/elasticsearch": "^6.0",
+<<<<<<< 5afb5900fcbca82c95115b943b0f2c3e95527db1
         "hwi/oauth-bundle": "^0.6",
+=======
+        "lexik/jwt-authentication-bundle": "dev-master",
+>>>>>>> Setup jwt authentication.
         "msgphp/eav-bundle": "^0.2",
         "msgphp/user-bundle": "^0.2",
         "php-http/guzzle6-adapter": "^1.1",
