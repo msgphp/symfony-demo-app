@@ -3,6 +3,7 @@
     "license": "MIT",
     "require": {
         "api-platform/api-pack": "^1.1",
+        "elasticsearch/elasticsearch": "^6.0",
         "msgphp/eav-bundle": "^0.2",
         "msgphp/user-bundle": "^0.2",
         "ramsey/uuid": "^3.7",
