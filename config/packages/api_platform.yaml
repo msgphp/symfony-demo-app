@@ -1,0 +1,11 @@
+api_platform:
+    title: MsgPHP demo API
+    version: 0.1.0
+    path_segment_name_generator: api_platform.path_segment_name_generator.dash
+    mapping:
+        paths:
+            - '%kernel.project_dir%/src/Api/Resource'
+    graphql:
+        enabled: false
+        graphiql:
+            enabled: true
