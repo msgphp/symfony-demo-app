@@ -1,0 +1,17 @@
+# https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/_configuration.html
+
+parameters:
+    env(ELASTICSEARCH_HOST): ~
+
+services:
+    _defaults:
+        autowire: true
+        public: false
+
+    Elasticsearch\ClientBuilder:
+        factory: Elasticsearch\ClientBuilder::create
+        shared: false
+        calls:
+            - [setHosts, [['%env(ELASTICSEARCH_HOST)%']]]
+    Elasticsearch\Client:
+        factory: ['@Elasticsearch\ClientBuilder', build]
