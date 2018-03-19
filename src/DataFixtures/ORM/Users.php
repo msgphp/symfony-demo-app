@@ -35,6 +35,8 @@ final class Users extends Fixture
         $manager->persist($adminRole = new Role(UserRolesProvider::ROLE_ADMIN));
 
         // attributes
+        $manager->persist($this->createAttribute(Attribute::GOOGLE_OAUTH_ID));
+        $manager->persist($this->createAttribute(Attribute::FACEBOOK_OAUTH_ID));
         $manager->persist($boolAttr = $this->createAttribute());
         $manager->persist($intAttr = $this->createAttribute());
         $manager->persist($floatAttr = $this->createAttribute());
@@ -79,9 +81,9 @@ final class Users extends Fixture
         $manager->flush();
     }
 
-    private function createAttribute(): Attribute
+    private function createAttribute($id = null): Attribute
     {
-        return new Attribute($this->factory->nextIdentifier(Attribute::class));
+        return new Attribute(null === $id ? $this->factory->nextIdentifier(Attribute::class) : $this->factory->identify(Attribute::class, $id));
     }
 
     private function createUser(string $email, string $password = self::PASSWORD, $class = User::class): User

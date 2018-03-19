@@ -4,8 +4,11 @@
 
 ## Enabled bundles
 
-[`MsgPhpUserBundle`](https://github.com/msgphp/user-bundle), [`MsgPhpEavBundle`](https://github.com/msgphp/eav-bundle),
-[`DoctrineBundle`](https://github.com/doctrine/DoctrineBundle), [`SecurityBundle`](https://github.com/symfony/security-bundle),
+[`MsgPhpUserBundle`](https://github.com/msgphp/user-bundle),
+[`MsgPhpEavBundle`](https://github.com/msgphp/eav-bundle),
+[`DoctrineBundle`](https://github.com/doctrine/DoctrineBundle),
+[`SecurityBundle`](https://github.com/symfony/security-bundle),
+[`HWIOAuthBundle`](https://github.com/hwi/HWIOAuthBundle),
 [`SimpleBusCommandBusBundle`](https://github.com/SimpleBus/SymfonyBridge)
 
 ## Documentation
@@ -15,10 +18,13 @@
 ## Screenshots
 
 ### Web
-![image](https://user-images.githubusercontent.com/1047696/37255184-0cf3a412-2549-11e8-99f3-07e9f016dc57.png)
+![image](https://user-images.githubusercontent.com/1047696/37556485-29ac757c-29f7-11e8-857f-473a4efac189.png)
 
 ### CLI
-![image](https://user-images.githubusercontent.com/1047696/37255113-0c0c6742-2548-11e8-9aa5-b037de466423.png)
+![image](https://user-images.githubusercontent.com/1047696/37556509-802f98e8-29f7-11e8-9ccd-6112a9bedfb5.png)
+
+### Database UML
+![image](https://user-images.githubusercontent.com/1047696/37556527-e7ead33a-29f7-11e8-84bd-0a4f0c64c871.png)
 
 ## Blog posts
 

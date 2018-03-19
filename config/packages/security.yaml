@@ -50,3 +50,11 @@ security:
             switch_user:
                 role: ROLE_ADMIN
             logout_on_user_change: true
+            oauth:
+                login_path: /oauth/login
+                failure_path: /oauth/login
+                resource_owners:
+                    google: /oauth/login-check/google
+                    facebook: /oauth/login-check/facebook
+                oauth_user_provider:
+                    service: App\Security\OauthUserProvider

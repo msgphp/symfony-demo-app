@@ -6,29 +6,30 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        <header>
-            <span>★ <a href="{{ path('index') }}">The App</a></span>
-            <nav>
-                <ul>
-                    {% if msgphp_user.user %}
-                        <li>Welcome <em>{{ msgphp_user.user.email }}</em></li>
-                        <li><a href="{{ path('my_account') }}">My account</a></li>
-                        <li><a href="{{ path('logout') }}">Logout</a></li>
-                    {% else %}
-                        <li><a href="{{ path('login') }}">Login</a></li>
-                        <li><a href="{{ path('register') }}">Register</a></li>
-                    {% endif %}
-                    {% if is_granted('ROLE_ADMIN') %}
-                        <li><a href="{{ path('index', {_switch_user: 'user@domain.dev'}) }}">Impersonate</a></li>
-                    {% endif %}
-                </ul>
-            </nav>
-        </header>
+        {% block header %}
+            <header>
+                <span>★ <a href="{{ path('index') }}">The App</a></span>
+                <nav>
+                    <ul>
+                        {% if msgphp_user.user %}
+                            <li>Welcome <em>{{ msgphp_user.user.email }}</em></li>
+                            <li><a href="{{ path('my_account') }}">My account</a></li>
+                            <li><a href="{{ path('logout') }}">Logout</a></li>
+                        {% else %}
+                            <li><a href="{{ path('login') }}">Login</a></li>
+                            <li><a href="{{ path('register') }}">Register</a></li>
+                        {% endif %}
+                        {% if is_granted('ROLE_ADMIN') %}
+                            <li><a href="{{ path('index', {_switch_user: 'user@domain.dev'}) }}">Impersonate</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </header>
+        {% endblock %}
 
-        {% set flashes = app.flashes %}
-        {% if flashes|length > 0 %}
-            {% include 'flashes.html.twig' %}
-        {% endif %}
+        {% block flashes %}
+            {% include 'partials/flashes.html.twig' with {flashes: app.flashes} only %}
+        {% endblock %}
 
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
