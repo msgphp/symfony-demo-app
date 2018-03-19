@@ -21,7 +21,5 @@ return function (RoutingConfigurator $routes) {
             ->controller(Controller\User\MyAccountController::class)
         ->add('email_confirm', '/my-account/confirm-email/{token}')
             ->controller(Controller\User\ConfirmEmailController::class)
-        ->add('api_index', '/api/test-connection')
-            ->controller(Controller\Api\DefaultController::class)
     ;
 };
