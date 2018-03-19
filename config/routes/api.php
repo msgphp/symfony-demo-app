@@ -8,6 +8,6 @@ return function (RoutingConfigurator $routes) {
     $routes
         ->add('api_index', '/api/test-connection')
             ->controller(Controller\Api\DefaultController::class)
-        ->add('api_login_check', '/api/login_check')
+        ->add('api_login_check', '/api/login-check')
     ;
 };

@@ -29,4 +29,4 @@ $fs->mkdir(dirname(__DIR__.'/../'.$_SERVER['JWT_PRIVATE_KEY_PATH']));
 $fs->dumpFile(__DIR__.'/../'.$_SERVER['JWT_PUBLIC_KEY_PATH'], $pubKeyData['key']);
 $fs->dumpFile(__DIR__.'/../'.$_SERVER['JWT_PRIVATE_KEY_PATH'], $privKeyData);
 
-echo "Keys successfully generated";
+echo "Keys successfully generated\n";
