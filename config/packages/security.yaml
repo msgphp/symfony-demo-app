@@ -4,11 +4,33 @@ security:
 
     providers:
          msgphp_user: { id: MsgPhp\User\Infra\Security\SecurityUserProvider }
+         msgphp_user_jwt: { id: MsgPhp\User\Infra\Security\Jwt\SecurityUserProvider }
 
     firewalls:
+        api_login:
+            pattern:  ^/api/login
+            stateless: true
+            anonymous: true
+            provider: msgphp_user_jwt
+            form_login:
+                check_path:               /api/login-check
+                success_handler:          lexik_jwt_authentication.handler.authentication_success
+                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
+                require_previous_session: false
+
+        api:
+            pattern:   ^/api
+            stateless: true
+            anonymous: true
+            provider: msgphp_user_jwt
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
+
         main:
             provider: msgphp_user
             user_checker: App\Security\UserChecker
