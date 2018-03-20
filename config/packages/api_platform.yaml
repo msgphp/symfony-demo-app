@@ -1,11 +1,21 @@
+services:
+    _defaults:
+        public: false
+        autoconfigure: true
+
+    api_name_converter:
+        class: Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter
+    App\Api\DataProvider\:
+        resource: '../../src/Api/DataProvider'
+
 api_platform:
     title: MsgPHP demo API
     version: 0.1.0
+    name_converter: api_name_converter
     path_segment_name_generator: api_platform.path_segment_name_generator.dash
-    mapping:
-        paths:
-            - '%kernel.project_dir%/src/Api/Resource'
+    resource_class_directories:
+        - '%kernel.project_dir%/src/Api/Resource'
     graphql:
-        enabled: false
+        enabled: true
         graphiql:
             enabled: true
