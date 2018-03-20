@@ -13,5 +13,5 @@
 ###< symfony/phpunit-bridge ###
 
 ###> lexik/jwt-authentication-bundle ###
-%CONFIG_DIR%/jwt/*.pem
+config/jwt/*.pem
 ###< lexik/jwt-authentication-bundle ###
