@@ -13,6 +13,7 @@ final class ProjectionTypeRegistry
     private $mappings;
     private $settings;
     private $logger;
+    private $types;
 
     public function __construct(Client $client, iterable $indexes, array $mappings, array $settings = [], LoggerInterface $logger = null)
     {
@@ -36,6 +37,23 @@ final class ProjectionTypeRegistry
         $this->mappings = $mappings;
         $this->settings = $settings;
         $this->logger = $logger ?? new NullLogger();
+    }
+
+    /**
+     * @return string[]
+     */
+    public function all(): array
+    {
+        if (null === $this->types) {
+            $this->types = [];
+            foreach (array_keys($this->mappings) as $type) {
+                if (is_subclass_of($type, ProjectionInterface::class)) {
+                    $this->types[] = $type;
+                }
+            }
+        }
+
+        return $this->types;
     }
 
     public function initialize(): void
