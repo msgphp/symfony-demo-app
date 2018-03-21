@@ -8,7 +8,7 @@ use App\Entity\User\User;
 
 final class UserDataTransformer
 {
-    public function transform(User $user): ProjectionInterface
+    public function __invoke(User $user): ProjectionInterface
     {
         return UserProjection::fromDocument(['id' => $user->getId()->toString()]);
     }
