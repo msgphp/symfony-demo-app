@@ -4,6 +4,9 @@ namespace App\Api;
 
 final class ProjectionSynchronization
 {
+    private const DOCUMENT_TYPE_KEY = 'document_type';
+    private const DOCUMENT_ID_KEY = 'document_id';
+
     private $repository;
     private $providers;
     private $transformers;
@@ -15,21 +18,44 @@ final class ProjectionSynchronization
         $this->transformers = $transformers;
     }
 
-    public function synchronize()
+    /**
+     * @return ProjectionDocument[]
+     */
+    public function synchronize(): iterable
     {
+        // @todo wipe data
         foreach ($this->providers as $provider) {
             foreach ($provider() as $object) {
-                $document = ($this->getTransformer($object))($object);
+                $document = new ProjectionDocument();
+                $document->source = $object;
+
+                try {
+                    $document->data = ($this->getTransformer($class = get_class($object)))($object);
+
+                    if (!isset($document->data[self::DOCUMENT_TYPE_KEY])) {
+                        throw new \LogicException(sprintf('Missing document type for class "%s".', $class));
+                    }
+
+                    if (!isset($document->data[self::DOCUMENT_ID_KEY])) {
+                        throw new \LogicException(sprintf('Missing document ID for class "%s".', $class));
+                    }
+
+                    $document->status = ProjectionDocument::STATUS_VALID;
+
+                    // @todo save data
+                } catch (\Exception $e) {
+                    $document->status = ProjectionDocument::STATUS_SKIPPED;
+                    $document->error = $e;
+                } finally {
+                    yield $document;
+                }
             }
         }
     }
 
-    /**
-     * @param object $object
-     */
-    private function getTransformer($object): callable
+    private function getTransformer(string $class): callable
     {
-        if (isset($this->transformers[$class = get_class($object)])) {
+        if (isset($this->transformers[$class])) {
             return $this->transformers[$class];
         }
 
@@ -39,6 +65,6 @@ final class ProjectionSynchronization
             }
         }
 
-        throw new \LogicException(sprintf('No document transformer found for object "%s".', $class));
+        throw new \LogicException(sprintf('No document transformer found for class "%s".', $class));
     }
 }
