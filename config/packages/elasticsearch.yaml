@@ -8,6 +8,8 @@ services:
         autowire: true
         autoconfigure: true
         public: false
+        bind:
+            '$index': 'api_projections'
 
     Elasticsearch\ClientBuilder:
         factory: Elasticsearch\ClientBuilder::create
@@ -22,9 +24,11 @@ services:
             '$registries': ['@App\Api\ProjectionTypeRegistry']
     App\Api\SynchronizeProjectionsCommand: ~
 
+    App\Api\ProjectionRepository: ~
+    App\Api\ProjectionSynchronization: ~
+
     App\Api\ProjectionTypeRegistry:
         arguments:
-            '$indexes': [api_projections]
             '$mappings':
                 App\Api\Resource\User:
                     properties:

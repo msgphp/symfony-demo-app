@@ -4,7 +4,14 @@ namespace App\Api;
 
 final class ProjectionSynchronization
 {
-    public function synchronize(string $type = null)
+    private $repository;
+
+    public function __construct(ProjectionRepository $repository)
+    {
+        $this->repository = $repository;
+    }
+
+    public function synchronize(string $type)
     {
 
     }

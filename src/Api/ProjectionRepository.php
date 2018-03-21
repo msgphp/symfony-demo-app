@@ -2,8 +2,19 @@
 
 namespace App\Api;
 
+use Elasticsearch\Client;
+
 final class ProjectionRepository
 {
+    private $client;
+    private $index;
+
+    public function __construct(Client $client, string $index)
+    {
+        $this->client = $client;
+        $this->index = $index;
+    }
+
     /**
      * @return ProjectionInterface[]
      */
