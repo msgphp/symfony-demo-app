@@ -11,6 +11,15 @@ final class SynchronizeProjectionsCommand extends Command
 {
     protected static $defaultName = 'domain:projection:synchronize';
 
+    private $synchronization;
+
+    public function __construct(ProjectionSynchronization $synchronization)
+    {
+        $this->synchronization = $synchronization;
+
+        parent::__construct();
+    }
+
     protected function configure(): void
     {
         $this
@@ -20,6 +29,8 @@ final class SynchronizeProjectionsCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
+
+        $this->synchronization->synchronize();
 
         $io->success('All projections are synchronized.');
 

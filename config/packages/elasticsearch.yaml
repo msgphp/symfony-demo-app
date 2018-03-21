@@ -25,7 +25,13 @@ services:
     App\Api\SynchronizeProjectionsCommand: ~
 
     App\Api\ProjectionRepository: ~
-    App\Api\ProjectionSynchronization: ~
+
+    App\Api\ProjectionSynchronization:
+        arguments:
+            '$providers':
+                - ['@MsgPhp\User\Repository\UserRepositoryInterface', findAll]
+            '$transformers':
+                'App\Entity\User\User': !service { class: App\Api\User\UserDocumentTransformer }
 
     App\Api\ProjectionTypeRegistry:
         arguments:
