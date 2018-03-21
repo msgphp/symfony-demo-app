@@ -6,6 +6,7 @@ parameters:
 services:
     _defaults:
         autowire: true
+        autoconfigure: true
         public: false
 
     Elasticsearch\ClientBuilder:
@@ -15,6 +16,10 @@ services:
             - [setHosts, [['%env(ELASTICSEARCH_HOST)%']]]
     Elasticsearch\Client:
         factory: ['@Elasticsearch\ClientBuilder', build]
+
+    App\Api\InitializeProjectionTypesCommand:
+        arguments:
+            '$registries': ['@App\Api\ProjectionTypeRegistry']
 
     App\Api\ProjectionTypeRegistry:
         arguments:
