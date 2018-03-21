@@ -15,3 +15,12 @@ services:
             - [setHosts, [['%env(ELASTICSEARCH_HOST)%']]]
     Elasticsearch\Client:
         factory: ['@Elasticsearch\ClientBuilder', build]
+
+    App\Api\ProjectionTypeRegistry:
+        arguments:
+            '$indexes': [api_projections]
+            '$mappings':
+                App\Api\Resource\User:
+                    properties:
+                        id: ~
+                        email: ~

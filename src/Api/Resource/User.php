@@ -25,12 +25,18 @@ final class User implements ProjectionInterface
     public $id;
 
     /**
+     * @var string Primary e-mail address
+     */
+    public $email;
+
+    /**
      * @return $this
      */
     public static function fromDocument(array $document): ProjectionInterface
     {
         $projection = new self();
         $projection->id = $document['id'] ?? null;
+        $projection->email = $document['email'] ?? null;
 
         return $projection;
     }
@@ -38,8 +44,8 @@ final class User implements ProjectionInterface
     public function toDocument(): array
     {
         return [
-            'type' => get_class($this),
             'id' => $this->id,
+            'email' => $this->email,
         ];
     }
 }
