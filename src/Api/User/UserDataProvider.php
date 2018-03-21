@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\DataProvider;
+namespace App\Api\User;
 
 use ApiPlatform\Core\DataProvider\CollectionDataProviderInterface;
 use ApiPlatform\Core\DataProvider\ItemDataProviderInterface;
@@ -16,12 +16,12 @@ final class UserDataProvider implements CollectionDataProviderInterface, ItemDat
 
     public function getCollection(string $resourceClass, string $operationName = null): iterable
     {
-        yield new User('foo');
-        yield new User('bar');
+        yield User::fromDocument(['id' => 'foo']);
+        yield User::fromDocument(['id' => 'bar']);
     }
 
     public function getItem(string $resourceClass, $id, string $operationName = null, array $context = []): ?User
     {
-        return new User($id);
+        return User::fromDocument(['id' => $id]);
     }
 }

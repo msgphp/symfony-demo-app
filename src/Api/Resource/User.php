@@ -24,6 +24,9 @@ final class User implements ProjectionInterface
      */
     public $id;
 
+    /**
+     * @return $this
+     */
     public static function fromDocument(array $document): ProjectionInterface
     {
         $projection = new self();

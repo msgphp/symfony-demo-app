@@ -5,8 +5,7 @@ services:
 
     api_name_converter:
         class: Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter
-    App\Api\DataProvider\:
-        resource: '../../src/Api/DataProvider'
+    App\Api\User\UserDataProvider: ~
 
 api_platform:
     title: MsgPHP demo API
