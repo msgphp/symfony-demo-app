@@ -2,8 +2,9 @@
 
 namespace App\Api\Resource;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiProperty;
+use ApiPlatform\Core\Annotation\ApiResource;
+use App\Api\ProjectionInterface;
 
 /**
  * @ApiResource(
@@ -15,15 +16,27 @@ use ApiPlatform\Core\Annotation\ApiProperty;
  *     }
  * )
  */
-final class User
+final class User implements ProjectionInterface
 {
     /**
+     * @var string Globally unique identifier
      * @ApiProperty(identifier=true)
      */
     public $id;
 
-    public function __construct(string $id)
+    public static function fromDocument(array $document): ProjectionInterface
     {
-        $this->id = $id;
+        $projection = new self();
+        $projection->id = $document['id'] ?? null;
+
+        return $projection;
+    }
+
+    public function toDocument(): array
+    {
+        return [
+            'type' => get_class($this),
+            'id' => $this->id,
+        ];
     }
 }
