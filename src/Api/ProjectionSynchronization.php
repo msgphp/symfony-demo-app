@@ -4,9 +4,6 @@ namespace App\Api;
 
 final class ProjectionSynchronization
 {
-    private const DOCUMENT_TYPE_KEY = 'document_type';
-    private const DOCUMENT_ID_KEY = 'document_id';
-
     private $repository;
     private $providers;
     private $transformers;
@@ -31,18 +28,9 @@ final class ProjectionSynchronization
 
                 try {
                     $document->data = ($this->getTransformer($class = get_class($object)))($object);
-
-                    if (!isset($document->data[self::DOCUMENT_TYPE_KEY])) {
-                        throw new \LogicException(sprintf('Missing document type for class "%s".', $class));
-                    }
-
-                    if (!isset($document->data[self::DOCUMENT_ID_KEY])) {
-                        throw new \LogicException(sprintf('Missing document ID for class "%s".', $class));
-                    }
-
                     $document->status = ProjectionDocument::STATUS_VALID;
 
-                    // @todo save data
+                    $this->repository->save($document);
                 } catch (\Exception $e) {
                     $document->status = ProjectionDocument::STATUS_SKIPPED;
                     $document->error = $e;

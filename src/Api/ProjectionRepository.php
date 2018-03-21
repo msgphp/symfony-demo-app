@@ -33,26 +33,31 @@ final class ProjectionRepository
 
     }
 
-    public function save(ProjectionInterface $projection): void
+    public function save(ProjectionDocument $document): void
     {
+        $params = ['index' => $this->index, 'type' => $document->getType(), 'body' => $document->getBody()];
+        if (null !== $id = $document->getId()) {
+            $params['id'] = $id;
+        }
 
+        $this->client->index($params);
     }
 
     /**
-     * @param ProjectionInterface[] $projections
+     * @param ProjectionDocument[] $documents
      */
     public function saveAll(iterable $projections): void
     {
 
     }
 
-    public function delete(ProjectionInterface $projection): void
+    public function delete(ProjectionDocument $document): void
     {
 
     }
 
     /**
-     * @param ProjectionInterface[] $projections
+     * @param ProjectionDocument[] $documents
      */
     public function deleteAll(iterable $projections): void
     {
