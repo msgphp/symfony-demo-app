@@ -12,9 +12,10 @@ final class UserDocumentTransformer
     {
         return [
             'document_type' => UserResource::class,
-            'document_id' => ShortUuid::uuid4(),
-            'id' => $user->getId()->toString(),
+            'document_id' => $id = ShortUuid::uuid4(),
+            'id' => $id,
             'email' => $user->getEmail(),
+            'user_id' => $user->getId()->toString(),
         ];
     }
 }

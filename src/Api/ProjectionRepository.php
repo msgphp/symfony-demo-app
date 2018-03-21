@@ -3,6 +3,7 @@
 namespace App\Api;
 
 use Elasticsearch\Client;
+use Elasticsearch\Common\Exceptions\Missing404Exception;
 
 final class ProjectionRepository
 {
@@ -20,12 +21,32 @@ final class ProjectionRepository
      */
     public function findAll(string $type, int $offset = 0, int $limit = 0): iterable
     {
+        $documents = $this->client->search([
+            'index' => $this->index,
+            'type' => $type,
+            'body' => [
+                'query' => ['match_all' => new \stdClass()],
+            ],
+        ]);
 
+        foreach ($documents['hits']['hits'] ?? [] as $document) {
+            yield $document['_type']::fromDocument($document['_source']);
+        }
     }
 
-    public function find(string $type, $id): ProjectionInterface
+    public function find(string $type, string $id): ?ProjectionInterface
     {
+        try {
+            $document = $this->client->get([
+                'index' => $this->index,
+                'type' => $type,
+                'id' => $id,
+            ]);
+        } catch (Missing404Exception $e) {
+            return null;
+        }
 
+        return $document['_type']::fromDocument($document['_source']);
     }
 
     public function clear(string $type): void

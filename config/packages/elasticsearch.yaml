@@ -40,3 +40,4 @@ services:
                     properties:
                         id: ~
                         email: ~
+                        user_id: ~

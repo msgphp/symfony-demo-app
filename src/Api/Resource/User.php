@@ -19,7 +19,7 @@ use App\Api\ProjectionInterface;
 final class User implements ProjectionInterface
 {
     /**
-     * @var string Globally unique identifier
+     * @var string Globally unique resource identifier
      * @ApiProperty(identifier=true)
      */
     public $id;
@@ -30,6 +30,11 @@ final class User implements ProjectionInterface
     public $email;
 
     /**
+     * @var string Globally unique domain identifier
+     */
+    public $userId;
+
+    /**
      * @return $this
      */
     public static function fromDocument(array $document): ProjectionInterface
@@ -37,6 +42,7 @@ final class User implements ProjectionInterface
         $projection = new self();
         $projection->id = $document['id'] ?? null;
         $projection->email = $document['email'] ?? null;
+        $projection->userId = $document['user_id'] ?? null;
 
         return $projection;
     }
@@ -46,6 +52,7 @@ final class User implements ProjectionInterface
         return [
             'id' => $this->id,
             'email' => $this->email,
+            'user_id' => $this->userId,
         ];
     }
 }

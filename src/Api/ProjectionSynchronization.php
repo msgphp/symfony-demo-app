@@ -27,8 +27,8 @@ final class ProjectionSynchronization
                 $document->source = $object;
 
                 try {
-                    $document->data = ($this->getTransformer($class = get_class($object)))($object);
                     $document->status = ProjectionDocument::STATUS_VALID;
+                    $document->data = ($this->getTransformer($class = get_class($object)))($object);
 
                     $this->repository->save($document);
                 } catch (\Exception $e) {
