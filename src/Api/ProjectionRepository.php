@@ -22,11 +22,6 @@ final class ProjectionRepository
 
     }
 
-    public function synchronize(string $type): void
-    {
-
-    }
-
     public function save(ProjectionInterface $projection): void
     {
 
