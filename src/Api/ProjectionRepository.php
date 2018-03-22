@@ -21,13 +21,20 @@ final class ProjectionRepository
      */
     public function findAll(string $type, int $offset = 0, int $limit = 0): iterable
     {
-        $documents = $this->client->search([
+        $params = [
             'index' => $this->index,
             'type' => $type,
             'body' => [
+                'from' => $offset,
                 'query' => ['match_all' => new \stdClass()],
             ],
-        ]);
+        ];
+
+        if ($limit) {
+            $params['body']['size'] = $limit;
+        }
+
+        $documents = $this->client->search($params);
 
         foreach ($documents['hits']['hits'] ?? [] as $document) {
             yield $document['_type']::fromDocument($document['_source']);
@@ -42,16 +49,22 @@ final class ProjectionRepository
                 'type' => $type,
                 'id' => $id,
             ]);
+
+            return $document['_type']::fromDocument($document['_source']);
         } catch (Missing404Exception $e) {
             return null;
         }
-
-        return $document['_type']::fromDocument($document['_source']);
     }
 
     public function clear(string $type): void
     {
-
+        $this->client->deleteByQuery([
+            'index' => $this->index,
+            'type' => $type,
+            'body' => [
+                'query' => ['match_all' => new \stdClass()],
+            ],
+        ]);
     }
 
     public function save(ProjectionDocument $document): void
@@ -64,24 +77,12 @@ final class ProjectionRepository
         $this->client->index($params);
     }
 
-    /**
-     * @param ProjectionDocument[] $documents
-     */
-    public function saveAll(iterable $projections): void
-    {
-
-    }
-
     public function delete(ProjectionDocument $document): void
     {
-
-    }
-
-    /**
-     * @param ProjectionDocument[] $documents
-     */
-    public function deleteAll(iterable $projections): void
-    {
-
+        $this->client->delete([
+            'index' => $this->index,
+            'type' => $document->getType(),
+            'id' => $document->getId(),
+        ]);
     }
 }

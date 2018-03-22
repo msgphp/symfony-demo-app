@@ -43,7 +43,7 @@ final class SynchronizeProjectionsCommand extends Command
             }
 
             if (null !== $document->error) {
-                $this->logger->error($message = $document->error->getMessage(), ['exception' => $document->error]);
+                $this->logger->error($document->error->getMessage(), ['exception' => $document->error]);
             }
         }
 

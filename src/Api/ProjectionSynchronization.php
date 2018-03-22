@@ -4,12 +4,14 @@ namespace App\Api;
 
 final class ProjectionSynchronization
 {
+    private $typeRegistry;
     private $repository;
     private $providers;
     private $transformers;
 
-    public function __construct(ProjectionRepository $repository, iterable $providers, array $transformers)
+    public function __construct(ProjectionTypeRegistry $typeRegistry, ProjectionRepository $repository, iterable $providers, array $transformers)
     {
+        $this->typeRegistry = $typeRegistry;
         $this->repository = $repository;
         $this->providers = $providers;
         $this->transformers = $transformers;
@@ -20,7 +22,10 @@ final class ProjectionSynchronization
      */
     public function synchronize(): iterable
     {
-        // @todo wipe data
+        foreach ($this->typeRegistry->all() as $type) {
+            $this->repository->clear($type);
+        }
+
         foreach ($this->providers as $provider) {
             foreach ($provider() as $object) {
                 $document = new ProjectionDocument();
