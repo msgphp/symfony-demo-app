@@ -27,6 +27,12 @@ services:
                 App\Entity\User\User: '@App\Api\Projection\DocumentTransformer\UserDocumentTransformer'
                 App\Entity\User\PremiumUser: '@App\Api\Projection\DocumentTransformer\UserDocumentTransformer'
 
+    App\Api\ProjectionRepository: ~
+    App\Api\ProjectionSynchronization:
+        arguments:
+            '$providers':
+                - ['@MsgPhp\User\Repository\UserRepositoryInterface', findAll]
+
     App\Api\ProjectionTypeRegistry:
         arguments:
             '$mappings':
@@ -42,13 +48,5 @@ services:
     App\Api\Projection\DocumentTransformer\:
         resource: '../../src/Api/Projection/DocumentTransformer'
 
-    App\Api\InitializeProjectionTypesCommand:
-        arguments:
-            '$registries': ['@App\Api\ProjectionTypeRegistry']
+    App\Api\InitializeProjectionTypesCommand: ~
     App\Api\SynchronizeProjectionsCommand: ~
-
-    App\Api\ProjectionRepository: ~
-    App\Api\ProjectionSynchronization:
-        arguments:
-            '$providers':
-                - ['@MsgPhp\User\Repository\UserRepositoryInterface', findAll]

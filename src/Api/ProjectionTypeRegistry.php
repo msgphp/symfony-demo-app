@@ -31,7 +31,6 @@ final class ProjectionTypeRegistry
             }
         }
 
-
         $this->client = $client;
         $this->index = $index;
         $this->mappings = $mappings;

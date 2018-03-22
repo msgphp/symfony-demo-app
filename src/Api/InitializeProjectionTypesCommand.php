@@ -12,14 +12,11 @@ final class InitializeProjectionTypesCommand extends Command
 {
     protected static $defaultName = 'domain:projection:initialize-types';
 
-    private $registries;
+    private $typeRegistry;
 
-    /**
-     * @param ProjectionTypeRegistry[] $registries
-     */
-    public function __construct(iterable $registries)
+    public function __construct(ProjectionTypeRegistry $typeRegistry)
     {
-        $this->registries = $registries;
+        $this->typeRegistry = $typeRegistry;
 
         parent::__construct();
     }
@@ -34,17 +31,15 @@ final class InitializeProjectionTypesCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $io = new SymfonyStyle($input, $output);
-        $force = $input->getOption('force');
 
-        foreach ($this->registries as $registry) {
-            if ($force) {
-                $registry->destroy();
-            }
-
-            $registry->initialize();
+        if ($input->getOption('force')) {
+            $this->typeRegistry->destroy();
         }
 
-        $io->success('All projection types are initialized.');
+        $this->typeRegistry->initialize();
+
+        $io->success('Projection types successfully initialized.');
+        $io->listing($this->typeRegistry->all());
 
         return 0;
     }
