@@ -23,6 +23,16 @@ final class ProjectionDocument
     /** @var \Exception|null $error */
     public $error;
 
+    public static function create(string $type, string $id = null, array $body = []): self
+    {
+        $document = new self();
+        $document->data[self::DATA_TYPE_KEY] = $type;
+        $document->data[self::DATA_ID_KEY] = $id;
+        $document->data += $body;
+
+        return $document;
+    }
+
     public function getType(): string
     {
         if (!isset($this->data[self::DATA_TYPE_KEY])) {
