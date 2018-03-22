@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\Resource;
+namespace App\Api\Projection;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
@@ -8,6 +8,7 @@ use App\Api\ProjectionInterface;
 
 /**
  * @ApiResource(
+ *     shortName="User",
  *     collectionOperations={
  *         "get"
  *     },
@@ -16,7 +17,7 @@ use App\Api\ProjectionInterface;
  *     }
  * )
  */
-final class User implements ProjectionInterface
+final class UserProjection implements ProjectionInterface
 {
     /**
      * @var string Globally unique resource identifier
@@ -45,14 +46,5 @@ final class User implements ProjectionInterface
         $projection->userId = $document['user_id'] ?? null;
 
         return $projection;
-    }
-
-    public function toDocument(): array
-    {
-        return [
-            'id' => $this->id,
-            'email' => $this->email,
-            'user_id' => $this->userId,
-        ];
     }
 }

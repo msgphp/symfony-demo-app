@@ -7,14 +7,14 @@ final class ProjectionSynchronization
     private $typeRegistry;
     private $repository;
     private $providers;
-    private $transformers;
+    private $transformer;
 
-    public function __construct(ProjectionTypeRegistry $typeRegistry, ProjectionRepository $repository, iterable $providers, array $transformers)
+    public function __construct(ProjectionTypeRegistry $typeRegistry, ProjectionRepository $repository, ProjectionDocumentTransformer $transformer, iterable $providers)
     {
         $this->typeRegistry = $typeRegistry;
         $this->repository = $repository;
         $this->providers = $providers;
-        $this->transformers = $transformers;
+        $this->transformer = $transformer;
     }
 
     /**
@@ -28,12 +28,20 @@ final class ProjectionSynchronization
 
         foreach ($this->providers as $provider) {
             foreach ($provider() as $object) {
-                $document = new ProjectionDocument();
-                $document->source = $object;
+                try {
+                    $document = $this->transformer->transform($object);
+                } catch (\Exception $e) {
+                    $document = new ProjectionDocument();
+                    $document->status = ProjectionDocument::STATUS_SKIPPED;
+                    $document->source = $object;
+                    $document->error = $e;
+
+                    yield $document;
+                    continue;
+                }
 
                 try {
                     $document->status = ProjectionDocument::STATUS_VALID;
-                    $document->data = ($this->getTransformer($class = get_class($object)))($object);
 
                     $this->repository->save($document);
                 } catch (\Exception $e) {

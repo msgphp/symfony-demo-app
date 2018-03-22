@@ -9,7 +9,7 @@ services:
         autoconfigure: true
         public: false
         bind:
-            '$index': 'api_projections'
+            '$index': api_projections
 
     Elasticsearch\ClientBuilder:
         factory: Elasticsearch\ClientBuilder::create
@@ -19,25 +19,36 @@ services:
     Elasticsearch\Client:
         factory: ['@Elasticsearch\ClientBuilder', build]
 
+    app.api.projection_document_transformers:
+        class: Symfony\Component\DependencyInjection\ServiceLocator
+        tags: [container.service_locator]
+        arguments:
+            -
+                App\Entity\User\User: '@App\Api\Projection\DocumentTransformer\UserDocumentTransformer'
+                App\Entity\User\PremiumUser: '@App\Api\Projection\DocumentTransformer\UserDocumentTransformer'
+
+    App\Api\ProjectionTypeRegistry:
+        arguments:
+            '$mappings':
+                App\Api\Projection\UserProjection:
+                    properties:
+                        id: ~
+                        email: ~
+                        user_id: ~
+
+    App\Api\ProjectionDocumentTransformer:
+        arguments:
+            '$transformers': '@app.api.projection_document_transformers'
+    App\Api\Projection\DocumentTransformer\:
+        resource: '../../src/Api/Projection/DocumentTransformer'
+
     App\Api\InitializeProjectionTypesCommand:
         arguments:
             '$registries': ['@App\Api\ProjectionTypeRegistry']
     App\Api\SynchronizeProjectionsCommand: ~
 
     App\Api\ProjectionRepository: ~
-
     App\Api\ProjectionSynchronization:
         arguments:
             '$providers':
                 - ['@MsgPhp\User\Repository\UserRepositoryInterface', findAll]
-            '$transformers':
-                'App\Entity\User\User': !service { class: App\Api\User\UserDocumentTransformer }
-
-    App\Api\ProjectionTypeRegistry:
-        arguments:
-            '$mappings':
-                App\Api\Resource\User:
-                    properties:
-                        id: ~
-                        email: ~
-                        user_id: ~
