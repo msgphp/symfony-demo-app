@@ -4,12 +4,20 @@
 
 ## Enabled bundles
 
+### Domain layer
 [`MsgPhpUserBundle`](https://github.com/msgphp/user-bundle),
-[`MsgPhpEavBundle`](https://github.com/msgphp/eav-bundle),
-[`DoctrineBundle`](https://github.com/doctrine/DoctrineBundle),
+[`MsgPhpEavBundle`](https://github.com/msgphp/eav-bundle)
+
+### ORM layer
+[`DoctrineBundle`](https://github.com/doctrine/DoctrineBundle)
+
+### Security layer
 [`SecurityBundle`](https://github.com/symfony/security-bundle),
 [`HWIOAuthBundle`](https://github.com/hwi/HWIOAuthBundle),
-[`SimpleBusCommandBusBundle`](https://github.com/SimpleBus/SymfonyBridge)
+[`LexikJWTAuthenticationBundle`](https://github.com/lexik/LexikJWTAuthenticationBundle)
+
+### API layer
+[`ApiPlatformBundle`](https://github.com/api-platform/api-platform)
 
 ## Documentation
 
@@ -19,6 +27,9 @@
 
 ### Web
 ![image](https://user-images.githubusercontent.com/1047696/37556485-29ac757c-29f7-11e8-857f-473a4efac189.png)
+
+### API
+![image](https://user-images.githubusercontent.com/1047696/37863973-cb74a774-2f67-11e8-95ec-9cde9da86185.png)
 
 ### CLI
 ![image](https://user-images.githubusercontent.com/1047696/37556509-802f98e8-29f7-11e8-9ccd-6112a9bedfb5.png)
