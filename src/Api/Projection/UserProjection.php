@@ -4,7 +4,7 @@ namespace App\Api\Projection;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
-use App\Api\ProjectionInterface;
+use MsgPhp\Domain\Projection\DomainProjectionInterface;
 
 /**
  * @ApiResource(
@@ -17,7 +17,7 @@ use App\Api\ProjectionInterface;
  *     }
  * )
  */
-final class UserProjection implements ProjectionInterface
+final class UserProjection implements DomainProjectionInterface
 {
     /**
      * @var string Globally unique resource identifier
@@ -38,7 +38,7 @@ final class UserProjection implements ProjectionInterface
     /**
      * @return $this
      */
-    public static function fromDocument(array $document): ProjectionInterface
+    public static function fromDocument(array $document): DomainProjectionInterface
     {
         $projection = new self();
         $projection->id = $document['id'] ?? null;

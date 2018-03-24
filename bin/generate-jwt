@@ -13,10 +13,10 @@ if (!isset($_SERVER['APP_ENV'])) {
 }
 
 $pKeyRes = openssl_pkey_new([
-    'digest_alg'         => 'sha512',
-    'private_key_bits'   => 4096,
-    'private_key_type'   => OPENSSL_KEYTYPE_RSA,
-    'encrypt_key'        => true,
+    'digest_alg' => 'sha512',
+    'private_key_bits' => 4096,
+    'private_key_type' => OPENSSL_KEYTYPE_RSA,
+    'encrypt_key' => true,
     'encrypt_key_cipher' => OPENSSL_CIPHER_AES_256_CBC,
 ]);
 openssl_pkey_export($pKeyRes, $privKeyData, $_SERVER['JWT_PASSPHRASE']);

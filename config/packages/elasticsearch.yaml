@@ -26,14 +26,23 @@ services:
             -
                 App\Entity\User\User: '@App\Api\Projection\DocumentTransformer\UserDocumentTransformer'
                 App\Entity\User\PremiumUser: '@App\Api\Projection\DocumentTransformer\UserDocumentTransformer'
+    App\Api\Projection\DocumentTransformer\:
+        resource: '../../src/Api/Projection/DocumentTransformer'
 
-    App\Api\ProjectionRepository: ~
-    App\Api\ProjectionSynchronization:
+    MsgPhp\Domain\Infra\Psr\DomainProjectionDocumentTransformer:
+        arguments:
+            '$transformers': '@app.api.projection_document_transformers'
+    MsgPhp\Domain\Projection\DomainProjectionDocumentTransformerInterface: '@MsgPhp\Domain\Infra\Psr\DomainProjectionDocumentTransformer'
+
+    MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionRepository: ~
+    MsgPhp\Domain\Projection\DomainProjectionRepositoryInterface: '@MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionRepository'
+
+    MsgPhp\Domain\Projection\DomainProjectionSynchronization:
         arguments:
             '$providers':
                 - ['@MsgPhp\User\Repository\UserRepositoryInterface', findAll]
 
-    App\Api\ProjectionTypeRegistry:
+    MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionTypeRegistry:
         arguments:
             '$mappings':
                 App\Api\Projection\UserProjection:
@@ -41,12 +50,7 @@ services:
                         id: ~
                         email: ~
                         user_id: ~
+    MsgPhp\Domain\Projection\DomainProjectionTypeRegistryInterface: '@MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionTypeRegistry'
 
-    App\Api\ProjectionDocumentTransformer:
-        arguments:
-            '$transformers': '@app.api.projection_document_transformers'
-    App\Api\Projection\DocumentTransformer\:
-        resource: '../../src/Api/Projection/DocumentTransformer'
-
-    App\Api\InitializeProjectionTypesCommand: ~
-    App\Api\SynchronizeProjectionsCommand: ~
+    MsgPhp\Domain\Infra\Console\Command\InitializeDomainProjectionTypesCommand: ~
+    MsgPhp\Domain\Infra\Console\Command\SynchronizeDomainProjectionsCommand: ~

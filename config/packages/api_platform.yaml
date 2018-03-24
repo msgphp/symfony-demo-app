@@ -6,7 +6,7 @@ services:
 
     api_name_converter:
         class: Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter
-    App\Api\ProjectionDataProvider: ~
+    MsgPhp\Domain\Infra\ApiPlatform\DomainProjectionDataProvider: ~
 
 api_platform:
     title: MsgPHP demo API
