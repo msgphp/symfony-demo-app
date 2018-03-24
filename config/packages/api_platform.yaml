@@ -1,0 +1,21 @@
+services:
+    _defaults:
+        public: false
+        autowire: true
+        autoconfigure: true
+
+    api_name_converter:
+        class: Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter
+    MsgPhp\Domain\Infra\ApiPlatform\DomainProjectionDataProvider: ~
+
+api_platform:
+    title: MsgPHP demo API
+    version: 0.1.0
+    name_converter: api_name_converter
+    path_segment_name_generator: api_platform.path_segment_name_generator.dash
+    resource_class_directories:
+        - '%kernel.project_dir%/src/Api/Projection'
+    graphql:
+        enabled: true
+        graphiql:
+            enabled: true

@@ -1,0 +1,32 @@
+#!/usr/bin/env php
+<?php
+
+use Symfony\Component\Dotenv\Dotenv;
+use Symfony\Component\Filesystem\Filesystem;
+
+set_time_limit(0);
+
+require __DIR__.'/../vendor/autoload.php';
+
+if (!isset($_SERVER['APP_ENV'])) {
+    (new Dotenv())->load(__DIR__.'/../.env');
+}
+
+$pKeyRes = openssl_pkey_new([
+    'digest_alg' => 'sha512',
+    'private_key_bits' => 4096,
+    'private_key_type' => OPENSSL_KEYTYPE_RSA,
+    'encrypt_key' => true,
+    'encrypt_key_cipher' => OPENSSL_CIPHER_AES_256_CBC,
+]);
+openssl_pkey_export($pKeyRes, $privKeyData, $_SERVER['JWT_PASSPHRASE']);
+$pubKeyData = openssl_pkey_get_details($pKeyRes);
+
+$fs = new Filesystem();
+$fs->mkdir(dirname(__DIR__.'/../'.$_SERVER['JWT_PUBLIC_KEY_PATH']));
+$fs->mkdir(dirname(__DIR__.'/../'.$_SERVER['JWT_PRIVATE_KEY_PATH']));
+
+$fs->dumpFile(__DIR__.'/../'.$_SERVER['JWT_PUBLIC_KEY_PATH'], $pubKeyData['key']);
+$fs->dumpFile(__DIR__.'/../'.$_SERVER['JWT_PRIVATE_KEY_PATH'], $privKeyData);
+
+echo "Keys successfully generated\n";
