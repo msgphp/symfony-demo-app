@@ -22,7 +22,7 @@ services:
         tags: [controller.service_arguments]
 
     # Security
-    App\Security\JwtTokenErrorHandler: ~
+    App\Security\JwtTokenSubscriber: ~
     App\Security\OauthUserProvider: ~
     App\Security\PasswordConfirmation:
         arguments:
