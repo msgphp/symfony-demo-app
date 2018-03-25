@@ -13,7 +13,13 @@ use MsgPhp\Domain\Projection\DomainProjectionInterface;
  *         "get"
  *     },
  *     itemOperations={
- *         "get"
+ *         "get",
+ *         "get_current"={
+ *             "route_name"="api_me",
+ *             "swagger_context"={
+ *                 "parameters"={}
+ *             }
+ *         }
  *     }
  * )
  */
