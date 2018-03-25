@@ -32,9 +32,10 @@ security:
             security: false
 
         main:
+            anonymous: ~
             provider: msgphp_user
             user_checker: App\Security\UserChecker
-            anonymous: ~
+            logout_on_user_change: true
             form_login:
                 login_path: login
                 check_path: login
@@ -49,12 +50,17 @@ security:
                 path: logout
             switch_user:
                 role: ROLE_ADMIN
-            logout_on_user_change: true
             oauth:
-                login_path: /oauth/login
-                failure_path: /oauth/login
+                login_path: /login
+                failure_path: /login
                 resource_owners:
                     google: /oauth/login-check/google
                     facebook: /oauth/login-check/facebook
                 oauth_user_provider:
                     service: App\Security\OauthUserProvider
+
+    access_control:
+        - { path: ^/(api/|oauth/)?login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/(forget|reset)\-password, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/my-account, roles: IS_AUTHENTICATED_FULLY }

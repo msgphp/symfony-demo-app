@@ -39,6 +39,7 @@
 
 ## Blog posts
 
+- [Domain-driven-design: Moving forward with API Platform and Elasticsearch](https://medium.com/@ro0NL/domain-driven-design-moving-forward-with-api-platform-and-elasticsearch-f1705614f9e2)
 - [Domain-driven-design: Writing domain layers. The fast way.](https://medium.com/@ro0NL/domain-driven-design-writing-domain-layers-the-fast-way-60ef87399374)
 - [Commanding a decoupled User entity](https://medium.com/@ro0NL/commanding-a-decoupled-user-entity-aee8723c43e5)
 - [Decoupling the User entity with a new Symfony User Bundle](https://medium.com/@ro0NL/decoupling-the-user-entity-with-a-new-symfony-user-bundle-7d2d5d85bdf9)
