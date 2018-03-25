@@ -110,6 +110,21 @@
     "hwi/oauth-bundle": {
         "version": "0.6.1"
     },
+    "illuminate/config": {
+        "version": "v5.6.12"
+    },
+    "illuminate/container": {
+        "version": "v5.6.12"
+    },
+    "illuminate/contracts": {
+        "version": "v5.6.12"
+    },
+    "illuminate/support": {
+        "version": "v5.6.12"
+    },
+    "jackiedo/dotenv-editor": {
+        "version": "1.0.7"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
@@ -166,6 +181,9 @@
             "version": "1.5",
             "ref": "7b6cbc842f8cd3d550815247d12294f6f304a8c4"
         }
+    },
+    "nesbot/carbon": {
+        "version": "1.25.0"
     },
     "ocramius/proxy-manager": {
         "version": "2.1.1"
@@ -268,6 +286,9 @@
     },
     "simple-bus/symfony-bridge": {
         "version": "v5.1.2"
+    },
+    "sroze/companienv": {
+        "version": "0.0.7"
     },
     "swiftmailer/swiftmailer": {
         "version": "v6.0.2"
@@ -388,6 +409,9 @@
     },
     "symfony/polyfill-util": {
         "version": "v1.7.0"
+    },
+    "symfony/process": {
+        "version": "v4.0.6"
     },
     "symfony/profiler-pack": {
         "version": "v1.0.3"
