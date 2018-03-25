@@ -19,9 +19,9 @@ security:
                 require_previous_session: false
 
         api:
+            anonymous: ~
             pattern: ^/api
             stateless: true
-            anonymous: true
             provider: msgphp_user_jwt
             guard:
                 authenticators:
@@ -64,5 +64,5 @@ security:
         - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/(forget|reset)\-password, roles: IS_AUTHENTICATED_ANONYMOUSLY }
 
-        #- { path: ^/api/me, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/me, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/my\-account, roles: IS_AUTHENTICATED_FULLY }

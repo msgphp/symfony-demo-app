@@ -14,6 +14,10 @@ services:
     App\Controller\:
         resource: '../src/Controller'
         tags: [controller.service_arguments]
+    App\Security\JwtTokenErrorHandler:
+        tags:
+            - { name: kernel.event_listener, event: !php/const Lexik\Bundle\JWTAuthenticationBundle\Events::JWT_NOT_FOUND, method: handle }
+            - { name: kernel.event_listener, event: !php/const Lexik\Bundle\JWTAuthenticationBundle\Events::JWT_INVALID, method: handle }
     App\Security\OauthUserProvider: ~
     App\Security\PasswordConfirmation:
         arguments:
