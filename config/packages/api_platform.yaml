@@ -21,7 +21,6 @@ api_platform:
             enabled: true
     http_cache:
         vary: [Accept, Authorization]
-    exception_to_status:
-        Lexik\Bundle\JWTAuthenticationBundle\Exception\ExpiredTokenException: 401
-        Lexik\Bundle\JWTAuthenticationBundle\Exception\InvalidTokenException: 401
-        Lexik\Bundle\JWTAuthenticationBundle\Exception\UserNotFoundException: 404
+    swagger:
+        api_keys:
+            - { name: Authorization, type: header }

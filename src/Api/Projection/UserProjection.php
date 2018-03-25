@@ -14,12 +14,9 @@ use MsgPhp\Domain\Projection\DomainProjectionInterface;
  *     },
  *     itemOperations={
  *         "get",
- *         "get_current"={
- *             "route_name"="api_me",
+ *         "get_current"={"route_name"="api_me",
  *             "swagger_context"={
- *                 "parameters"={
- *                     {"name"="Authorization", "in"="header", "required"=true, "default"="Bearer "}
- *                 }
+ *                 "parameters"={}
  *             }
  *         }
  *     }
