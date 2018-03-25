@@ -5,8 +5,8 @@ namespace App\Security;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTFailureEventInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Events;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 final class JwtTokenErrorHandler implements EventSubscriberInterface
 {
@@ -18,7 +18,7 @@ final class JwtTokenErrorHandler implements EventSubscriberInterface
             throw $exception;
         }
 
-        throw new BadRequestHttpException($exception->getMessage(), $exception);
+        throw new UnauthorizedHttpException('Bearer', $exception->getMessage(), $exception);
     }
 
     public static function getSubscribedEvents(): array
