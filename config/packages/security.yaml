@@ -63,4 +63,6 @@ security:
         - { path: ^/(api/|oauth/)?login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/(forget|reset)\-password, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/my-account, roles: IS_AUTHENTICATED_FULLY }
+
+        #- { path: ^/api/me, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/my\-account, roles: IS_AUTHENTICATED_FULLY }

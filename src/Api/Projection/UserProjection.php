@@ -17,7 +17,9 @@ use MsgPhp\Domain\Projection\DomainProjectionInterface;
  *         "get_current"={
  *             "route_name"="api_me",
  *             "swagger_context"={
- *                 "parameters"={}
+ *                 "parameters"={
+ *                     {"name"="Authorization", "in"="header", "required"=true}
+ *                 }
  *             }
  *         }
  *     }
