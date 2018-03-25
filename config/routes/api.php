@@ -1,13 +1,12 @@
 <?php
 
-use App\Api\Endpoint\MeEndpoint;
-
+use App\Api\Endpoint;
 use App\Api\Projection\UserProjection;
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 return function (RoutingConfigurator $routes) {
     $endpoints = [
-        'api_me' => ['/me', MeEndpoint::class,[
+        'api_me' => ['/me', Endpoint\MeEndpoint::class, [
             '_api_resource_class' => UserProjection::class,
             '_api_item_operation_name' => 'get_current',
         ]],

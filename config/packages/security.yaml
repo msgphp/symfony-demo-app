@@ -13,7 +13,10 @@ security:
             anonymous: true
             provider: msgphp_user_jwt
             form_login:
-                check_path: /api/login
+                login_path: api_login
+                check_path: api_login
+                username_parameter: email
+                password_parameter: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
                 require_previous_session: false
