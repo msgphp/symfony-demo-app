@@ -29,7 +29,7 @@
 ![image](https://user-images.githubusercontent.com/1047696/37556485-29ac757c-29f7-11e8-857f-473a4efac189.png)
 
 ### API
-![image](https://user-images.githubusercontent.com/1047696/37863973-cb74a774-2f67-11e8-95ec-9cde9da86185.png)
+![image](https://user-images.githubusercontent.com/1047696/37875384-81921b78-303e-11e8-838a-a95ad9f0f775.png)
 
 ### CLI
 ![image](https://user-images.githubusercontent.com/1047696/37556509-802f98e8-29f7-11e8-9ccd-6112a9bedfb5.png)

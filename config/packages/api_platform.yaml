@@ -19,3 +19,8 @@ api_platform:
         enabled: true
         graphiql:
             enabled: true
+    http_cache:
+        vary: [Accept, Authorization]
+    swagger:
+        api_keys:
+            - { name: Authorization, type: header }
