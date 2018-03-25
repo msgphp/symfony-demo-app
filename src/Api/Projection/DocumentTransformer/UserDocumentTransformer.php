@@ -18,7 +18,7 @@ final class UserDocumentTransformer
         $userId = $user->getId()->toString();
         $docId = ShortUuid::uuid5(self::DOCUMENT_UUID_NS, sha1($userId));
 
-        return DomainProjectionDocument::create(UserProjection::class, $docId, [
+        return new DomainProjectionDocument(UserProjection::class, $docId, [
             'id' => $docId,
             'email' => $user->getEmail(),
             'user_id' => $userId,

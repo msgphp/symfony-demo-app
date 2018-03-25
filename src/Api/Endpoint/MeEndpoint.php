@@ -13,8 +13,6 @@ final class MeEndpoint
      */
     public function __invoke(User $user, DomainProjectionDocumentTransformerInterface $transformer)
     {
-        $document = $transformer->transform($user);
-
-        return $document->getType()::fromDocument($document->getBody());
+        return $transformer->transform($user)->toProjection();
     }
 }
