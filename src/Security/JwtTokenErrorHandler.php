@@ -2,15 +2,11 @@
 
 namespace App\Security;
 
-use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationFailureEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTFailureEventInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Events;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
-use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 
 final class JwtTokenErrorHandler implements EventSubscriberInterface
 {
