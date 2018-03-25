@@ -14,7 +14,7 @@ return function (RoutingConfigurator $routes) {
     ];
 
     $routes
-        ->add('api_login_check', '/api/login-check')
+        ->add('api_login', '/api/login')
     ;
 
     foreach ($endpoints as $route => $endpoint) {
