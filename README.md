@@ -22,6 +22,7 @@
 ## Documentation
 
 - Read the [main documentation](https://msgphp.github.io/docs)
+- Get support on [Symfony's Slack `#msgphp` channel](https://symfony.com/slack-invite) or [raise an issue](https://github.com/msgphp/symfony-demo-app/issues/new)
 
 ## Screenshots
 
