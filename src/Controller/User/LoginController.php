@@ -15,7 +15,6 @@ final class LoginController
     public function __invoke(
         Environment $twig,
         FormFactoryInterface $formFactory,
-        UrlGeneratorInterface $urlGenerator,
         AuthenticationUtils $authenticationUtils
     ): Response
     {
