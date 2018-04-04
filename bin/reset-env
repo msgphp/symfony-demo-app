@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-composer install --no-progress --no-suggest --no-scripts && \
+composer install --no-scripts --quiet && \
 vendor/bin/companienv && \
 composer run-script post-install-cmd && \
-bin/console d:d:d --force  && \
-bin/console d:d:c && \
-bin/console d:s:u --force && \
-bin/console d:f:l -n
+bin/console doctrine:database:drop --force  && \
+bin/console doctrine:database:create && \
+bin/console doctrine:schema:update --force && \
+bin/console doctrine:fixtures:load -n
