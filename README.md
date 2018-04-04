@@ -19,6 +19,14 @@
 ### API layer
 [`ApiPlatformBundle`](https://github.com/api-platform/api-platform)
 
+## Try it yourself
+
+```bash
+composer create-project msgphp/symfony-demo-app && cd symfony-demo-app/
+bin/reset-env
+bin/console server:run
+```
+
 ## Documentation
 
 - Read the [main documentation](https://msgphp.github.io/docs)
