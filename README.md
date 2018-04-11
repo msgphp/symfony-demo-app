@@ -28,7 +28,13 @@ A message driven Symfony demo application with basic user management, a REST/Gra
 ```bash
 composer create-project msgphp/symfony-demo-app && cd symfony-demo-app/
 bin/reset-env
+
+# using built in web server / sqlite
 bin/console server:run
+
+# or using Lando / mariadb
+# see https://docs.devwithlando.io
+lando start
 ```
 
 ## Documentation

@@ -1,0 +1,25 @@
+name: msgphp-demo
+recipe: lemp
+
+config:
+  webroot: public
+  database: mariadb
+
+proxy:
+  pma:
+    - pma.msgphp-demo.lndo.site
+
+services:
+  pma:
+    type: phpmyadmin
+
+tooling:
+  sf:
+    service: appserver
+    description: Run Symfony commands
+    cmd:
+      - bin/console
+
+events:
+  post-start:
+    appserver: "composer install --working-dir=$LANDO_MOUNT"
