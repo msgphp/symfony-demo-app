@@ -19,6 +19,11 @@ tooling:
     description: Run Symfony commands
     cmd:
       - bin/console
+  reset-env:
+    service: appserver
+    description: Reset demo environment
+    cmd:
+      - bin/reset-env
 
 events:
   post-start:
