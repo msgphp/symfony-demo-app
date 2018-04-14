@@ -13,6 +13,8 @@ services:
   appserver:
     config:
       server: config/lando/nginx.conf
+  database:
+    portforward: 3307
   pma:
     type: phpmyadmin
 
