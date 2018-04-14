@@ -10,6 +10,9 @@ proxy:
     - pma.msgphp-demo.lndo.site
 
 services:
+  appserver:
+    config:
+      server: config/lando/nginx.conf
   pma:
     type: phpmyadmin
 
