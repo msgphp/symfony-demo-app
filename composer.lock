@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cb924fc10889a535d71e2ed36dc1c42a",
+    "content-hash": "3e15f6ec08cbb550b04a55a5fb3e3df9",
     "packages": [
         {
             "name": "api-platform/api-pack",
