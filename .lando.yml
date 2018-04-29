@@ -5,6 +5,9 @@ config:
   webroot: public
   database: mariadb
 
+compose:
+  - config/lando/compose.yaml
+
 proxy:
   pma:
     - pma.msgphp-demo.lndo.site

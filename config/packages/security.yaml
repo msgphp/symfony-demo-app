@@ -9,8 +9,8 @@ security:
     firewalls:
         api_login:
             pattern: ^/api/login
-            stateless: true
             anonymous: true
+            stateless: true
             provider: msgphp_user_jwt
             form_login:
                 login_path: api_login
@@ -22,8 +22,8 @@ security:
                 require_previous_session: false
 
         api:
-            anonymous: ~
             pattern: ^/api
+            anonymous: true
             stateless: true
             provider: msgphp_user_jwt
             guard:
@@ -35,7 +35,7 @@ security:
             security: false
 
         main:
-            anonymous: ~
+            anonymous: true
             provider: msgphp_user
             user_checker: App\Security\UserChecker
             logout_on_user_change: true
