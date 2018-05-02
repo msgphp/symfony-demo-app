@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e15f6ec08cbb550b04a55a5fb3e3df9",
+    "content-hash": "4f2e75608d3b915196df2a72a8d40166",
     "packages": [
         {
             "name": "api-platform/api-pack",
@@ -2015,16 +2015,16 @@
         },
         {
             "name": "msgphp/domain",
-            "version": "v0.3.1",
+            "version": "v0.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/domain.git",
-                "reference": "3561d6388d3b0f4bcfa0bbaad875d15900c1c2dd"
+                "reference": "4f1c448068bd6860f14f6ccbb025ae80bdc72bda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/domain/zipball/3561d6388d3b0f4bcfa0bbaad875d15900c1c2dd",
-                "reference": "3561d6388d3b0f4bcfa0bbaad875d15900c1c2dd",
+                "url": "https://api.github.com/repos/msgphp/domain/zipball/4f1c448068bd6860f14f6ccbb025ae80bdc72bda",
+                "reference": "4f1c448068bd6860f14f6ccbb025ae80bdc72bda",
                 "shasum": ""
             },
             "require": {
@@ -2042,6 +2042,7 @@
                 "symfony/config": "^3.4|^4.0",
                 "symfony/dependency-injection": "^3.4|^4.0",
                 "symfony/http-kernel": "^3.4|^4.0",
+                "symfony/messenger": "^4.1@dev",
                 "symfony/phpunit-bridge": "^3.4|^4.0",
                 "symfony/property-access": "^3.4|^4.0",
                 "symfony/var-dumper": "^3.4|^4.0"
@@ -2074,24 +2075,24 @@
             "keywords": [
                 "entity"
             ],
-            "time": "2018-04-14T10:24:00+00:00"
+            "time": "2018-05-02T11:13:30+00:00"
         },
         {
             "name": "msgphp/eav",
-            "version": "v0.3.1",
+            "version": "v0.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/eav.git",
-                "reference": "c6e93ba1232cb58e2de232846c13763fa50e87ae"
+                "reference": "3d02f37f1e31e6bf9c840a207bf724ce92576276"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/eav/zipball/c6e93ba1232cb58e2de232846c13763fa50e87ae",
-                "reference": "c6e93ba1232cb58e2de232846c13763fa50e87ae",
+                "url": "https://api.github.com/repos/msgphp/eav/zipball/3d02f37f1e31e6bf9c840a207bf724ce92576276",
+                "reference": "3d02f37f1e31e6bf9c840a207bf724ce92576276",
                 "shasum": ""
             },
             "require": {
-                "msgphp/domain": "^0.3|^1.0"
+                "msgphp/domain": "^0.4|^1.0"
             },
             "require-dev": {
                 "doctrine/orm": "^2.6",
@@ -2128,24 +2129,24 @@
                 "eav",
                 "entity-attribute-value"
             ],
-            "time": "2018-04-04T09:30:43+00:00"
+            "time": "2018-05-02T11:30:31+00:00"
         },
         {
             "name": "msgphp/eav-bundle",
-            "version": "v0.3.1",
+            "version": "v0.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/eav-bundle.git",
-                "reference": "d9cca544e77e7aef03e778aca1c8da322d322bcb"
+                "reference": "5c26bf40a6ad42c0429064fc9f4975a1f399203e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/eav-bundle/zipball/d9cca544e77e7aef03e778aca1c8da322d322bcb",
-                "reference": "d9cca544e77e7aef03e778aca1c8da322d322bcb",
+                "url": "https://api.github.com/repos/msgphp/eav-bundle/zipball/5c26bf40a6ad42c0429064fc9f4975a1f399203e",
+                "reference": "5c26bf40a6ad42c0429064fc9f4975a1f399203e",
                 "shasum": ""
             },
             "require": {
-                "msgphp/eav": "^0.3|^1.0",
+                "msgphp/eav": "^0.4|^1.0",
                 "symfony/config": "^3.4|^4.0",
                 "symfony/dependency-injection": "^3.4|^4.0",
                 "symfony/http-kernel": "^3.4|^4.0"
@@ -2180,33 +2181,33 @@
                     "email": "franssen.roland@gmail.com"
                 }
             ],
-            "description": "Entity-Attribute-Value domain layer",
+            "description": "Basic entity-attribute-value management (the `EAV` domain)",
             "keywords": [
                 "eav",
                 "entity-attribute-value"
             ],
-            "time": "2018-04-04T09:30:43+00:00"
+            "time": "2018-05-02T11:30:31+00:00"
         },
         {
             "name": "msgphp/user",
-            "version": "v0.3.1",
+            "version": "v0.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user.git",
-                "reference": "6e07e29549095226e108a3bd09a554766f48a5a0"
+                "reference": "258343fd2b2ac7a1711faccc2b2069c8b46c7792"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/user/zipball/6e07e29549095226e108a3bd09a554766f48a5a0",
-                "reference": "6e07e29549095226e108a3bd09a554766f48a5a0",
+                "url": "https://api.github.com/repos/msgphp/user/zipball/258343fd2b2ac7a1711faccc2b2069c8b46c7792",
+                "reference": "258343fd2b2ac7a1711faccc2b2069c8b46c7792",
                 "shasum": ""
             },
             "require": {
-                "msgphp/domain": "^0.3|^1.0"
+                "msgphp/domain": "^0.4|^1.0"
             },
             "require-dev": {
                 "doctrine/orm": "^2.6",
-                "lexik/jwt-authentication-bundle": "dev-master",
+                "lexik/jwt-authentication-bundle": "^2.5@dev",
                 "msgphp/eav": "^0.3|^1.0",
                 "sensio/framework-extra-bundle": "^5.1",
                 "symfony/console": "^3.4|^4.0",
@@ -2216,6 +2217,9 @@
                 "symfony/security-core": "^3.4|^4.0",
                 "symfony/validator": "^3.4|^4.0",
                 "symfony/var-dumper": "^3.4|^4.0"
+            },
+            "suggest": {
+                "msgphp/eav": "To enable user attribute values"
             },
             "type": "library",
             "extra": {
@@ -2246,24 +2250,24 @@
                 "security",
                 "user"
             ],
-            "time": "2018-04-14T10:24:00+00:00"
+            "time": "2018-05-02T11:30:31+00:00"
         },
         {
             "name": "msgphp/user-bundle",
-            "version": "v0.3.1",
+            "version": "v0.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user-bundle.git",
-                "reference": "e320ac6a5ed6319d6435db80ef5a7e44eaab712b"
+                "reference": "e1e34e8071d081748105f401084bd2486358a059"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/user-bundle/zipball/e320ac6a5ed6319d6435db80ef5a7e44eaab712b",
-                "reference": "e320ac6a5ed6319d6435db80ef5a7e44eaab712b",
+                "url": "https://api.github.com/repos/msgphp/user-bundle/zipball/e1e34e8071d081748105f401084bd2486358a059",
+                "reference": "e1e34e8071d081748105f401084bd2486358a059",
                 "shasum": ""
             },
             "require": {
-                "msgphp/user": "^0.3|^1.0",
+                "msgphp/user": "^0.4|^1.0",
                 "symfony/config": "^3.4|^4.0",
                 "symfony/dependency-injection": "^3.4|^4.0",
                 "symfony/http-kernel": "^3.4|^4.0"
@@ -2271,6 +2275,7 @@
             "require-dev": {
                 "doctrine/doctrine-bundle": "^1.8",
                 "doctrine/orm": "^2.6",
+                "lexik/jwt-authentication-bundle": "^2.5@dev",
                 "simple-bus/symfony-bridge": "^5.1",
                 "symfony/console": "^3.4|^4.0",
                 "symfony/form": "^3.4|^4.0",
@@ -2307,12 +2312,12 @@
                     "email": "franssen.roland@gmail.com"
                 }
             ],
-            "description": "User domain layer",
+            "description": "Basic user management (the `User` domain)",
             "keywords": [
                 "security",
                 "user"
             ],
-            "time": "2018-04-14T10:24:00+00:00"
+            "time": "2018-05-02T11:30:31+00:00"
         },
         {
             "name": "namshi/jose",
@@ -7640,16 +7645,16 @@
         },
         {
             "name": "sroze/companienv",
-            "version": "0.0.7",
+            "version": "0.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sroze/companienv.git",
-                "reference": "5222d479a7ee69f1f9c238b7c34f6860e64573a7"
+                "reference": "5d1986d70347d21cc30ca1d11b9e78986292ceb6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sroze/companienv/zipball/5222d479a7ee69f1f9c238b7c34f6860e64573a7",
-                "reference": "5222d479a7ee69f1f9c238b7c34f6860e64573a7",
+                "url": "https://api.github.com/repos/sroze/companienv/zipball/5d1986d70347d21cc30ca1d11b9e78986292ceb6",
+                "reference": "5d1986d70347d21cc30ca1d11b9e78986292ceb6",
                 "shasum": ""
             },
             "require": {
@@ -7689,7 +7694,7 @@
                 "configuration",
                 "dotenv"
             ],
-            "time": "2018-02-06T22:03:56+00:00"
+            "time": "2018-02-19T18:26:23+00:00"
         },
         {
             "name": "symfony/debug-bundle",
