@@ -15,7 +15,7 @@ return function (ContainerConfigurator $container) {
         ->set(EventSubscriber\EnableConfirmedUser::class)
             ->tag('event_subscriber', ['subscribes_to' => UserEvent\UserConfirmedEvent::class])
         ->set(EventSubscriber\SendEmailConfirmationUrl::class)
-            ->tag('event_subscriber', ['subscribes_to' => UserEvent\UserEmailCreatedEvent::class])
+            ->tag('event_subscriber', ['subscribes_to' => UserEvent\UserEmailAddedEvent::class])
         ->set(EventSubscriber\SendPasswordResetUrl::class)
             ->tag('event_subscriber', ['subscribes_to' => UserEvent\UserPasswordRequestedEvent::class])
         ->set(EventSubscriber\SendRegistrationConfirmationUrl::class)
