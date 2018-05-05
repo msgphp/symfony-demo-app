@@ -9,6 +9,7 @@ use App\EventSubscriber\SendEmailConfirmationUrl;
 use App\Form\User\AddEmailType;
 use App\Form\User\ChangePasswordType;
 use App\Security\PasswordConfirmation;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use MsgPhp\Domain\Factory\EntityAwareFactoryInterface;
 use MsgPhp\User\Command\ChangeUserCredentialCommand;
 use MsgPhp\User\Command\AddUserEmailCommand;
@@ -23,6 +24,7 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Twig\Environment;
 
 final class MyAccountController
@@ -33,6 +35,7 @@ final class MyAccountController
     public function __invoke(
         User $user,
         Request $request,
+        JWTTokenManagerInterface $jwtTokenManager,
         FormFactoryInterface $formFactory,
         FlashBagInterface $flashBag,
         UrlGeneratorInterface $urlGenerator,
@@ -41,9 +44,17 @@ final class MyAccountController
         CommandBus $bus,
         PasswordConfirmation $passwordConfirmation,
         SendEmailConfirmationUrl $sendEmailConfirmationUrl,
-        EntityAwareFactoryInterface $factory
+        EntityAwareFactoryInterface $factory,
+        UserInterface $securityUser
     ): Response
     {
+        // generate JWT token
+        if ($request->query->getBoolean('generate-jwt')) {
+            $flashBag->add('success', sprintf('Generated JWT token: %s', $jwtTokenManager->create($securityUser)));
+
+            return new RedirectResponse($urlGenerator->generate('my_account'));
+        }
+
         // add email
         $emailForm = $formFactory->create(AddEmailType::class);
         $emailForm->handleRequest($request);
@@ -75,6 +86,19 @@ final class MyAccountController
             return new RedirectResponse($urlGenerator->generate('my_account'));
         }
 
+        // send email confirmation link
+        if ($confirmEmail = $request->query->get('confirm-email')) {
+            /** @var UserEmail $userEmail */
+            if (!($userEmail = $user->getEmails()->get($confirmEmail)) || $userEmail->isConfirmed()) {
+                throw new NotFoundHttpException();
+            }
+
+            $sendEmailConfirmationUrl->notify($userEmail);
+            $flashBag->add('success', 'We\'ve send you a e-mail confirmation link.');
+
+            return new RedirectResponse($urlGenerator->generate('my_account'));
+        }
+
         // delete email
         if ($deleteEmail = $request->query->get('delete-email')) {
             if (!$user->getEmails()->containsKey($deleteEmail)) {
@@ -100,19 +124,6 @@ final class MyAccountController
                 'password' => $passwordForm->getData()['password'],
             ]));
             $flashBag->add('success', 'Your password is now changed.');
-
-            return new RedirectResponse($urlGenerator->generate('my_account'));
-        }
-
-        // send email confirmation link
-        if ($confirmEmail = $request->query->get('confirm-email')) {
-            /** @var UserEmail $userEmail */
-            if (!($userEmail = $user->getEmails()->get($confirmEmail)) || $userEmail->isConfirmed()) {
-                throw new NotFoundHttpException();
-            }
-
-            $sendEmailConfirmationUrl->notify($userEmail);
-            $flashBag->add('success', 'We\'ve send you a e-mail confirmation link.');
 
             return new RedirectResponse($urlGenerator->generate('my_account'));
         }

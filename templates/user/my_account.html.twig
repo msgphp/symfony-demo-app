@@ -38,6 +38,13 @@
     </fieldset>
 
     <fieldset>
+        <legend>API</legend>
+        <ul>
+            <li>JWT token: <a href="{{ path('my_account', {'generate-jwt': true}) }}">Generate</a></li>
+        </ul>
+    </fieldset>
+
+    <fieldset>
         <legend>E-mails</legend>
         <ul>
             <li>{{ user.email }} - Primary</li>
