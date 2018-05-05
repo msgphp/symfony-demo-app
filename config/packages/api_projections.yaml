@@ -1,0 +1,52 @@
+parameters:
+    projection_types:
+        - App\Api\Projection\UserProjection
+    env(ELASTICSEARCH_PROJECTION_INDEX): projections
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            '$index': '%env(ELASTICSEARCH_PROJECTION_INDEX)%'
+            '$dataProviders':
+                - ['@MsgPhp\User\Repository\UserRepositoryInterface', findAll]
+            '$documentProvider': '@MsgPhp\Domain\Projection\DomainProjectionDocumentProvider'
+
+    # Repository
+    MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionRepository: ~
+    MsgPhp\Domain\Projection\DomainProjectionRepositoryInterface: '@MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionRepository'
+
+    # Type registry
+    MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionTypeRegistry:
+        arguments:
+            '$mappings': '%projection_types%'
+    MsgPhp\Domain\Projection\DomainProjectionTypeRegistryInterface: '@MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionTypeRegistry'
+
+    # Synchronization
+    MsgPhp\Domain\Projection\DomainProjectionSynchronization: ~
+
+    # Document provider
+    MsgPhp\Domain\Projection\DomainProjectionDocumentProvider: ~
+
+    # Document transformer
+    app.api.projection_document_transformers:
+        class: Symfony\Component\DependencyInjection\ServiceLocator
+        tags: [container.service_locator]
+        arguments:
+            -
+                App\Entity\User\User: '@App\Api\Projection\DocumentTransformer\UserDocumentTransformer'
+                App\Entity\User\PremiumUser: '@App\Api\Projection\DocumentTransformer\UserDocumentTransformer'
+
+    MsgPhp\Domain\Infra\Psr\DomainProjectionDocumentTransformer:
+        arguments:
+            '$transformers': '@app.api.projection_document_transformers'
+    MsgPhp\Domain\Projection\DomainProjectionDocumentTransformerInterface: '@MsgPhp\Domain\Infra\Psr\DomainProjectionDocumentTransformer'
+
+    # Console
+    MsgPhp\Domain\Infra\Console\Command\InitializeDomainProjectionTypesCommand: ~
+    MsgPhp\Domain\Infra\Console\Command\SynchronizeDomainProjectionsCommand: ~
+
+    # API Platform
+    MsgPhp\Domain\Infra\ApiPlatform\DomainProjectionDataProvider: ~
