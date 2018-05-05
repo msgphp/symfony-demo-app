@@ -1,4 +1,4 @@
-name: msgphp-demo
+name: msgphp
 recipe: lemp
 
 config:
@@ -10,7 +10,7 @@ compose:
 
 proxy:
   pma:
-    - pma.msgphp-demo.lndo.site
+    - pma.msgphp.lndo.site
 
 services:
   appserver:
