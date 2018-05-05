@@ -16,8 +16,15 @@ services:
         shared: false
         calls:
             - [setHosts, [['%env(ELASTICSEARCH_HOST)%']]]
+
     Elasticsearch\Client:
         factory: ['@Elasticsearch\ClientBuilder', build]
+
+    MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionTypeRegistry:
+        arguments:
+            '$mappings':
+                - App\Api\Projection\UserProjection
+    MsgPhp\Domain\Projection\DomainProjectionTypeRegistryInterface: '@MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionTypeRegistry'
 
     app.api.projection_document_transformers:
         class: Symfony\Component\DependencyInjection\ServiceLocator
@@ -26,8 +33,6 @@ services:
             -
                 App\Entity\User\User: '@App\Api\Projection\DocumentTransformer\UserDocumentTransformer'
                 App\Entity\User\PremiumUser: '@App\Api\Projection\DocumentTransformer\UserDocumentTransformer'
-    App\Api\Projection\DocumentTransformer\:
-        resource: '../../src/Api/Projection/DocumentTransformer'
 
     MsgPhp\Domain\Infra\Psr\DomainProjectionDocumentTransformer:
         arguments:
@@ -42,14 +47,6 @@ services:
             '$providers':
                 - ['@MsgPhp\User\Repository\UserRepositoryInterface', findAll]
 
-    MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionTypeRegistry:
-        arguments:
-            '$mappings':
-                App\Api\Projection\UserProjection:
-                    id: ~
-                    email: ~
-                    user_id: ~
-    MsgPhp\Domain\Projection\DomainProjectionTypeRegistryInterface: '@MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionTypeRegistry'
 
     MsgPhp\Domain\Infra\Console\Command\InitializeDomainProjectionTypesCommand: ~
     MsgPhp\Domain\Infra\Console\Command\SynchronizeDomainProjectionsCommand: ~
