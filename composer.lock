@@ -2015,7 +2015,7 @@
         },
         {
             "name": "msgphp/domain",
-            "version": "v0.4.1",
+            "version": "v0.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/domain.git",
@@ -2079,7 +2079,7 @@
         },
         {
             "name": "msgphp/eav",
-            "version": "v0.4.1",
+            "version": "v0.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/eav.git",
@@ -2133,7 +2133,7 @@
         },
         {
             "name": "msgphp/eav-bundle",
-            "version": "v0.4.1",
+            "version": "v0.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/eav-bundle.git",
@@ -2190,7 +2190,7 @@
         },
         {
             "name": "msgphp/user",
-            "version": "v0.4.1",
+            "version": "v0.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user.git",
@@ -2254,16 +2254,16 @@
         },
         {
             "name": "msgphp/user-bundle",
-            "version": "v0.4.1",
+            "version": "v0.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user-bundle.git",
-                "reference": "e1e34e8071d081748105f401084bd2486358a059"
+                "reference": "338deb9ac390b603ccaadf3f825dd6d99558c3fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/user-bundle/zipball/e1e34e8071d081748105f401084bd2486358a059",
-                "reference": "e1e34e8071d081748105f401084bd2486358a059",
+                "url": "https://api.github.com/repos/msgphp/user-bundle/zipball/338deb9ac390b603ccaadf3f825dd6d99558c3fb",
+                "reference": "338deb9ac390b603ccaadf3f825dd6d99558c3fb",
                 "shasum": ""
             },
             "require": {
@@ -2317,7 +2317,7 @@
                 "security",
                 "user"
             ],
-            "time": "2018-05-02T11:30:31+00:00"
+            "time": "2018-05-02T16:18:19+00:00"
         },
         {
             "name": "namshi/jose",
@@ -4820,16 +4820,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.0.79",
+            "version": "v1.0.80",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "399e72968d5baa698788e6116fe0f47f269724e0"
+                "reference": "729aee08d62b47224e85b83c97e2824ff7d1735e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/399e72968d5baa698788e6116fe0f47f269724e0",
-                "reference": "399e72968d5baa698788e6116fe0f47f269724e0",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/729aee08d62b47224e85b83c97e2824ff7d1735e",
+                "reference": "729aee08d62b47224e85b83c97e2824ff7d1735e",
                 "shasum": ""
             },
             "require": {
@@ -4862,7 +4862,7 @@
                     "email": "fabien.potencier@gmail.com"
                 }
             ],
-            "time": "2018-04-27T05:19:26+00:00"
+            "time": "2018-05-02T19:08:56+00:00"
         },
         {
             "name": "symfony/form",
@@ -7140,26 +7140,29 @@
     "packages-dev": [
         {
             "name": "doctrine/data-fixtures",
-            "version": "v1.3.0",
+            "version": "v1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/data-fixtures.git",
-                "reference": "7b76ccc8e648c4502aad7f61347326c8a072bd3b"
+                "reference": "3a1e2c3c600e615a2dffe56d4ca0875cc5233e0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/7b76ccc8e648c4502aad7f61347326c8a072bd3b",
-                "reference": "7b76ccc8e648c4502aad7f61347326c8a072bd3b",
+                "url": "https://api.github.com/repos/doctrine/data-fixtures/zipball/3a1e2c3c600e615a2dffe56d4ca0875cc5233e0a",
+                "reference": "3a1e2c3c600e615a2dffe56d4ca0875cc5233e0a",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.2",
                 "php": "^7.1"
             },
+            "conflict": {
+                "doctrine/phpcr-odm": "<1.3.0"
+            },
             "require-dev": {
                 "doctrine/dbal": "^2.5.4",
                 "doctrine/orm": "^2.5.4",
-                "phpunit/phpunit": "^6.3"
+                "phpunit/phpunit": "^7.0"
             },
             "suggest": {
                 "alcaeus/mongo-php-adapter": "For using MongoDB ODM with PHP 7",
@@ -7193,7 +7196,7 @@
             "keywords": [
                 "database"
             ],
-            "time": "2017-11-27T18:48:06+00:00"
+            "time": "2018-03-20T09:06:36+00:00"
         },
         {
             "name": "doctrine/doctrine-fixtures-bundle",
@@ -7308,7 +7311,7 @@
         },
         {
             "name": "illuminate/config",
-            "version": "v5.6.19",
+            "version": "v5.6.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/config.git",
@@ -7352,7 +7355,7 @@
         },
         {
             "name": "illuminate/container",
-            "version": "v5.6.19",
+            "version": "v5.6.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
@@ -7396,7 +7399,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v5.6.19",
+            "version": "v5.6.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -7440,16 +7443,16 @@
         },
         {
             "name": "illuminate/support",
-            "version": "v5.6.19",
+            "version": "v5.6.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "4ecadcab0816eae4a2aeca5ec402c681ee62b191"
+                "reference": "2a97d211c052f6d6ce9756c89d64b855d860d923"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/4ecadcab0816eae4a2aeca5ec402c681ee62b191",
-                "reference": "4ecadcab0816eae4a2aeca5ec402c681ee62b191",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/2a97d211c052f6d6ce9756c89d64b855d860d923",
+                "reference": "2a97d211c052f6d6ce9756c89d64b855d860d923",
                 "shasum": ""
             },
             "require": {
@@ -7493,7 +7496,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2018-04-29T13:02:42+00:00"
+            "time": "2018-05-02T14:59:13+00:00"
         },
         {
             "name": "jackiedo/dotenv-editor",
@@ -7850,16 +7853,16 @@
         },
         {
             "name": "symfony/maker-bundle",
-            "version": "v1.4.3",
+            "version": "v1.4.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "45fe88c2260f95b20d161dba94b488181180188f"
+                "reference": "eeb9027bbd3472f2d76455cc478b04bbb0eab932"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/45fe88c2260f95b20d161dba94b488181180188f",
-                "reference": "45fe88c2260f95b20d161dba94b488181180188f",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/eeb9027bbd3472f2d76455cc478b04bbb0eab932",
+                "reference": "eeb9027bbd3472f2d76455cc478b04bbb0eab932",
                 "shasum": ""
             },
             "require": {
@@ -7911,7 +7914,7 @@
                 "scaffold",
                 "scaffolding"
             ],
-            "time": "2018-04-22T00:44:55+00:00"
+            "time": "2018-05-02T13:20:32+00:00"
         },
         {
             "name": "symfony/phpunit-bridge",
