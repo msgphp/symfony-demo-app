@@ -10,16 +10,19 @@ use MsgPhp\Domain\Projection\DomainProjectionInterface;
  * @ApiResource(
  *     shortName="User",
  *     collectionOperations={
- *         "get"
+ *         "get",
  *     },
  *     itemOperations={
  *         "get",
  *         "get_current"={
  *             "route_name"="api_me",
  *             "swagger_context"={
- *                 "parameters"={}
- *             }
- *         }
+ *                 "parameters"={},
+ *             },
+ *         },
+ *         "delete"={
+ *             "controller"="App\Api\Endpoint\DispatchMessageEndpoint",
+ *         },
  *     }
  * )
  */
