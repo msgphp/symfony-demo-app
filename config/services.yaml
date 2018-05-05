@@ -20,8 +20,6 @@ services:
     App\Api\Endpoint\:
         resource: '../src/Api/Endpoint'
         tags: [controller.service_arguments]
-    App\Api\Projection\DocumentTransformer\:
-        resource: '../src/Api/Projection/DocumentTransformer'
 
     # Security
     App\Security\JwtTokenSubscriber: ~
