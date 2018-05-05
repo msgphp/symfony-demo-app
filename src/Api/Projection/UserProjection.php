@@ -4,6 +4,7 @@ namespace App\Api\Projection;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use MsgPhp\Domain\Infra\Elasticsearch\DocumentMappingAwareInterface;
 use MsgPhp\Domain\Projection\DomainProjectionInterface;
 
 /**
@@ -20,7 +21,7 @@ use MsgPhp\Domain\Projection\DomainProjectionInterface;
  *     }
  * )
  */
-final class UserProjection implements DomainProjectionInterface
+final class UserProjection implements DomainProjectionInterface, DocumentMappingAwareInterface
 {
     /**
      * @var string Globally unique resource identifier
@@ -49,5 +50,14 @@ final class UserProjection implements DomainProjectionInterface
         $projection->userId = $document['user_id'] ?? null;
 
         return $projection;
+    }
+
+    public static function getDocumentMapping(): array
+    {
+        return [
+            'id' => 'text',
+            'email' => 'text',
+            'user_id' => 'text',
+        ];
     }
 }

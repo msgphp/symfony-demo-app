@@ -46,10 +46,9 @@ services:
         arguments:
             '$mappings':
                 App\Api\Projection\UserProjection:
-                    properties:
-                        id: ~
-                        email: ~
-                        user_id: ~
+                    id: ~
+                    email: ~
+                    user_id: ~
     MsgPhp\Domain\Projection\DomainProjectionTypeRegistryInterface: '@MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionTypeRegistry'
 
     MsgPhp\Domain\Infra\Console\Command\InitializeDomainProjectionTypesCommand: ~
