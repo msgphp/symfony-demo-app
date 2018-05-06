@@ -5,6 +5,7 @@
     "description": "A message driven Symfony demo application with basic user management, a REST/GraphQL API and OAuth/JWT authentication.",
     "require": {
         "api-platform/api-pack": "^1.1",
+        "easycorp/easyadmin-bundle": "^1.17",
         "elasticsearch/elasticsearch": "^6.0",
         "hwi/oauth-bundle": "^0.6",
         "lexik/jwt-authentication-bundle": "^2.5@dev",

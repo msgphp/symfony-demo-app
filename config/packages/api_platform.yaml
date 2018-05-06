@@ -9,7 +9,7 @@ services:
     MsgPhp\Domain\Infra\ApiPlatform\DomainProjectionDataProvider: ~
 
 api_platform:
-    title: MsgPHP demo API
+    title: MsgPHP Demo API
     version: 0.1.0
     name_converter: api_name_converter
     path_segment_name_generator: api_platform.path_segment_name_generator.dash

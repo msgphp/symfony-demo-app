@@ -1,0 +1,18 @@
+easy_admin:
+    site_name: MsgPHP Demo Administration
+    entities:
+        attribute:
+            class: App\Entity\Eav\Attribute
+            label: Attributes
+            list:
+                title: Attributes
+        user:
+            class: App\Entity\User\User
+            label: Users
+            list:
+                title: Users
+                fields:
+                    - id
+                    - createdAt
+                    - email
+                    - enabled
