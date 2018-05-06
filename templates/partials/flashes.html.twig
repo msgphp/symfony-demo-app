@@ -7,7 +7,7 @@
     <ul>
     {% for label, messages in flashes %}
         {% for message in messages %}
-            <li>{{ (icons[label]|default('')) ~ message }}</li>
+            <li style="word-break: break-word;">{{ (icons[label]|default('')) ~ message }}</li>
         {% endfor %}
     {% endfor %}
     </ul>

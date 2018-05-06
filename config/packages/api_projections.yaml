@@ -1,0 +1,45 @@
+parameters:
+    projection_types:
+        - App\Api\Projection\UserProjection
+    env(ELASTICSEARCH_PROJECTION_INDEX): projections
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        bind:
+            '$index': '%env(ELASTICSEARCH_PROJECTION_INDEX)%'
+            '$dataProviders':
+                - ['@MsgPhp\User\Repository\UserRepositoryInterface', findAll]
+            '$documentProvider': '@MsgPhp\Domain\Projection\DomainProjectionDocumentProvider'
+
+    # Document transformers
+    App\Api\Projection\DocumentTransformer\:
+        resource: '../../src/Api/Projection/DocumentTransformer'
+    App\Api\Projection\DocumentTransformer\DocumentTransformer:
+        tags: [container.service_subscriber]
+    MsgPhp\Domain\Projection\DomainProjectionDocumentTransformerInterface: '@App\Api\Projection\DocumentTransformer\DocumentTransformer'
+
+    # Document provider
+    MsgPhp\Domain\Projection\DomainProjectionDocumentProvider: ~
+
+    # Repository
+    MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionRepository: ~
+    MsgPhp\Domain\Projection\DomainProjectionRepositoryInterface: '@MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionRepository'
+
+    # Type registry
+    MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionTypeRegistry:
+        arguments:
+            '$mappings': '%projection_types%'
+    MsgPhp\Domain\Projection\DomainProjectionTypeRegistryInterface: '@MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionTypeRegistry'
+
+    # Synchronization
+    MsgPhp\Domain\Projection\DomainProjectionSynchronization: ~
+
+    # Console
+    MsgPhp\Domain\Infra\Console\Command\InitializeDomainProjectionTypesCommand: ~
+    MsgPhp\Domain\Infra\Console\Command\SynchronizeDomainProjectionsCommand: ~
+
+    # API Platform
+    MsgPhp\Domain\Infra\ApiPlatform\DomainProjectionDataProvider: ~

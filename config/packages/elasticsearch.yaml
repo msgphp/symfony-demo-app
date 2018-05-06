@@ -1,56 +1,12 @@
-# https://www.elastic.co/guide/en/elasticsearch/client/php-api/current/_configuration.html
-
-parameters:
-    env(ELASTICSEARCH_HOST): ~
-
 services:
     _defaults:
-        autowire: true
-        autoconfigure: true
         public: false
-        bind:
-            '$index': api_projections
 
+    # Client
     Elasticsearch\ClientBuilder:
         factory: Elasticsearch\ClientBuilder::create
-        shared: false
         calls:
             - [setHosts, [['%env(ELASTICSEARCH_HOST)%']]]
+
     Elasticsearch\Client:
         factory: ['@Elasticsearch\ClientBuilder', build]
-
-    app.api.projection_document_transformers:
-        class: Symfony\Component\DependencyInjection\ServiceLocator
-        tags: [container.service_locator]
-        arguments:
-            -
-                App\Entity\User\User: '@App\Api\Projection\DocumentTransformer\UserDocumentTransformer'
-                App\Entity\User\PremiumUser: '@App\Api\Projection\DocumentTransformer\UserDocumentTransformer'
-    App\Api\Projection\DocumentTransformer\:
-        resource: '../../src/Api/Projection/DocumentTransformer'
-
-    MsgPhp\Domain\Infra\Psr\DomainProjectionDocumentTransformer:
-        arguments:
-            '$transformers': '@app.api.projection_document_transformers'
-    MsgPhp\Domain\Projection\DomainProjectionDocumentTransformerInterface: '@MsgPhp\Domain\Infra\Psr\DomainProjectionDocumentTransformer'
-
-    MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionRepository: ~
-    MsgPhp\Domain\Projection\DomainProjectionRepositoryInterface: '@MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionRepository'
-
-    MsgPhp\Domain\Projection\DomainProjectionSynchronization:
-        arguments:
-            '$providers':
-                - ['@MsgPhp\User\Repository\UserRepositoryInterface', findAll]
-
-    MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionTypeRegistry:
-        arguments:
-            '$mappings':
-                App\Api\Projection\UserProjection:
-                    properties:
-                        id: ~
-                        email: ~
-                        user_id: ~
-    MsgPhp\Domain\Projection\DomainProjectionTypeRegistryInterface: '@MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionTypeRegistry'
-
-    MsgPhp\Domain\Infra\Console\Command\InitializeDomainProjectionTypesCommand: ~
-    MsgPhp\Domain\Infra\Console\Command\SynchronizeDomainProjectionsCommand: ~

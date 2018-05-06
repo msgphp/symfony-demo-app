@@ -4,26 +4,24 @@ namespace App\Api\Projection;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use MsgPhp\Domain\Infra\Elasticsearch\DocumentMappingProviderInterface;
 use MsgPhp\Domain\Projection\DomainProjectionInterface;
 
 /**
  * @ApiResource(
  *     shortName="User",
  *     collectionOperations={
- *         "get"
+ *         "get",
  *     },
  *     itemOperations={
  *         "get",
- *         "get_current"={
- *             "route_name"="api_me",
- *             "swagger_context"={
- *                 "parameters"={}
- *             }
- *         }
+ *         "delete"={
+ *             "controller"="App\Api\Endpoint\DispatchMessageEndpoint",
+ *         },
  *     }
  * )
  */
-final class UserProjection implements DomainProjectionInterface
+final class UserProjection implements DomainProjectionInterface, DocumentMappingProviderInterface
 {
     /**
      * @var string Globally unique resource identifier
@@ -52,5 +50,14 @@ final class UserProjection implements DomainProjectionInterface
         $projection->userId = $document['user_id'] ?? null;
 
         return $projection;
+    }
+
+    public static function provideDocumentMappings(): iterable
+    {
+        yield self::class => [
+            'id' => 'text',
+            'email' => 'text',
+            'user_id' => 'text',
+        ];
     }
 }
