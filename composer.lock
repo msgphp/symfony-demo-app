@@ -2016,16 +2016,16 @@
         },
         {
             "name": "msgphp/domain",
-            "version": "v0.4.2",
+            "version": "v0.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/domain.git",
-                "reference": "4f1c448068bd6860f14f6ccbb025ae80bdc72bda"
+                "reference": "abf0d196fdc6c30e37ecfb4c9a8f886979ca8769"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/domain/zipball/4f1c448068bd6860f14f6ccbb025ae80bdc72bda",
-                "reference": "4f1c448068bd6860f14f6ccbb025ae80bdc72bda",
+                "url": "https://api.github.com/repos/msgphp/domain/zipball/abf0d196fdc6c30e37ecfb4c9a8f886979ca8769",
+                "reference": "abf0d196fdc6c30e37ecfb4c9a8f886979ca8769",
                 "shasum": ""
             },
             "require": {
@@ -2076,11 +2076,11 @@
             "keywords": [
                 "entity"
             ],
-            "time": "2018-05-02T11:13:30+00:00"
+            "time": "2018-05-06T15:18:15+00:00"
         },
         {
             "name": "msgphp/eav",
-            "version": "v0.4.2",
+            "version": "v0.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/eav.git",
@@ -2134,7 +2134,7 @@
         },
         {
             "name": "msgphp/eav-bundle",
-            "version": "v0.4.2",
+            "version": "v0.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/eav-bundle.git",
@@ -2191,7 +2191,7 @@
         },
         {
             "name": "msgphp/user",
-            "version": "v0.4.2",
+            "version": "v0.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user.git",
@@ -2255,7 +2255,7 @@
         },
         {
             "name": "msgphp/user-bundle",
-            "version": "v0.4.2",
+            "version": "v0.4.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user-bundle.git",
