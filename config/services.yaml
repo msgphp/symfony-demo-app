@@ -7,19 +7,19 @@ services:
         autoconfigure: true
         public: false
 
-    # App
-    App\Console\ClassContextElementFactory:
-        decorates: MsgPhp\Domain\Infra\Console\Context\ClassContextElementFactoryInterface
-        arguments:
-            '$factory': '@App\Console\ClassContextElementFactory.inner'
+    # Controllers
     App\Controller\:
         resource: '../src/Controller'
         tags: [controller.service_arguments]
 
-    # API
+    # API endpoints
     App\Api\Endpoint\:
         resource: '../src/Api/Endpoint'
         tags: [controller.service_arguments]
+
+    # Console
+    App\Console\ClassContextElementFactory: ~
+    MsgPhp\Domain\Infra\Console\Context\ClassContextElementFactoryInterface: '@App\Console\ClassContextElementFactory'
 
     # Security
     App\Security\JwtTokenSubscriber: ~
@@ -30,3 +30,7 @@ services:
     App\Security\UserChecker: ~
     App\Security\UserRolesProvider: ~
     MsgPhp\User\Infra\Security\UserRolesProviderInterface: '@App\Security\UserRolesProvider'
+
+    # Messenger
+    App\EventSubscriber\:
+        resource: '../src/EventSubscriber'

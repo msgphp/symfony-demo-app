@@ -5,7 +5,7 @@ namespace App\Api\Projection;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use MsgPhp\Domain\Infra\Elasticsearch\DocumentMappingProviderInterface;
-use MsgPhp\Domain\Projection\DomainProjectionInterface;
+use MsgPhp\Domain\Projection\ProjectionInterface;
 
 /**
  * @ApiResource(
@@ -21,7 +21,7 @@ use MsgPhp\Domain\Projection\DomainProjectionInterface;
  *     }
  * )
  */
-final class UserProjection implements DomainProjectionInterface, DocumentMappingProviderInterface
+class UserProjection implements ProjectionInterface, DocumentMappingProviderInterface
 {
     /**
      * @var string Globally unique resource identifier
@@ -42,9 +42,9 @@ final class UserProjection implements DomainProjectionInterface, DocumentMapping
     /**
      * @return $this
      */
-    public static function fromDocument(array $document): DomainProjectionInterface
+    public static function fromDocument(array $document): ProjectionInterface
     {
-        $projection = new self();
+        $projection = new static();
         $projection->id = $document['id'] ?? null;
         $projection->email = $document['email'] ?? null;
         $projection->userId = $document['user_id'] ?? null;
@@ -54,7 +54,7 @@ final class UserProjection implements DomainProjectionInterface, DocumentMapping
 
     public static function provideDocumentMappings(): iterable
     {
-        yield self::class => [
+        yield static::class => [
             'id' => 'text',
             'email' => 'text',
             'user_id' => 'text',

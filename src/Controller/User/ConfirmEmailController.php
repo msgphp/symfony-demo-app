@@ -6,10 +6,10 @@ use App\Entity\User\User;
 use App\Entity\User\UserEmail;
 use MsgPhp\User\Command\ConfirmUserEmailCommand;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use SimpleBus\SymfonyBridge\Bus\CommandBus;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 final class ConfirmEmailController
@@ -23,10 +23,10 @@ final class ConfirmEmailController
         UserEmail $userEmail,
         FlashBagInterface $flashBag,
         UrlGeneratorInterface $urlGenerator,
-        CommandBus $bus
+        MessageBusInterface $bus
     ): Response
     {
-        $bus->handle(new ConfirmUserEmailCommand($userEmail->getEmail()));
+        $bus->dispatch(new ConfirmUserEmailCommand($userEmail->getEmail()));
         $flashBag->add('success', sprintf('Hi %s, your e-mail is confirmed.', $user->getEmail()));
 
         return new RedirectResponse($urlGenerator->generate('my_account'));

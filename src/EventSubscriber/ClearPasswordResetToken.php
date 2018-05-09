@@ -6,8 +6,9 @@ use App\Entity\User\User;
 use MsgPhp\User\Entity\Credential\EmailPassword;
 use MsgPhp\User\Event\UserCredentialChangedEvent;
 use MsgPhp\User\Repository\UserRepositoryInterface;
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 
-final class ClearPasswordResetToken
+final class ClearPasswordResetToken implements MessageHandlerInterface
 {
     private $repository;
 

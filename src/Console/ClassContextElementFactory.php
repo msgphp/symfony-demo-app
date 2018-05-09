@@ -10,18 +10,16 @@ use MsgPhp\User\Password\PasswordHashingInterface;
 
 final class ClassContextElementFactory implements ClassContextElementFactoryInterface
 {
-    private $factory;
     private $passwordHashing;
 
-    public function __construct(ClassContextElementFactoryInterface $factory, PasswordHashingInterface $passwordHashing)
+    public function __construct(PasswordHashingInterface $passwordHashing)
     {
-        $this->factory = $factory;
         $this->passwordHashing = $passwordHashing;
     }
 
     public function getElement(string $class, string $method, string $argument): ContextElement
     {
-        $element = $this->factory->getElement($class, $method, $argument);
+        $element = new ContextElement(ucfirst(preg_replace(['/([A-Z]+)([A-Z][a-z])/', '/([a-z\d])([A-Z])/'], ['\\1 \\2', '\\1 \\2'], $argument)));
 
         switch ($argument) {
             case 'email':

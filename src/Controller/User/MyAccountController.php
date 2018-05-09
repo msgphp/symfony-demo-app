@@ -2,7 +2,6 @@
 
 namespace App\Controller\User;
 
-use App\Entity\Eav\Attribute;
 use App\Entity\User\User;
 use App\Entity\User\UserEmail;
 use App\EventSubscriber\SendEmailConfirmationUrl;
@@ -15,13 +14,13 @@ use MsgPhp\User\Command\ChangeUserCredentialCommand;
 use MsgPhp\User\Command\AddUserEmailCommand;
 use MsgPhp\User\Command\DeleteUserEmailCommand;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use SimpleBus\SymfonyBridge\Bus\CommandBus;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -41,7 +40,7 @@ final class MyAccountController
         UrlGeneratorInterface $urlGenerator,
         Environment $twig,
         TokenStorageInterface $tokenStorage,
-        CommandBus $bus,
+        MessageBusInterface $bus,
         PasswordConfirmation $passwordConfirmation,
         SendEmailConfirmationUrl $sendEmailConfirmationUrl,
         EntityAwareFactoryInterface $factory,
@@ -60,7 +59,7 @@ final class MyAccountController
         $emailForm->handleRequest($request);
 
         if ($emailForm->isSubmitted() && $emailForm->isValid()) {
-            $bus->handle(new AddUserEmailCommand($user->getId(), $email = $emailForm->getData()['email']));
+            $bus->dispatch(new AddUserEmailCommand($user->getId(), $email = $emailForm->getData()['email']));
             $flashBag->add('success', sprintf('E-mail %s added. We\'ve send you a confirmation link.', $email));
 
             return new RedirectResponse($urlGenerator->generate('my_account'));
@@ -78,9 +77,9 @@ final class MyAccountController
             }
 
             $currentEmail = $user->getEmail();
-            $bus->handle(new DeleteUserEmailCommand($primaryEmail));
-            $bus->handle(new ChangeUserCredentialCommand($user->getId(), ['email' => $primaryEmail]));
-            $bus->handle(new AddUserEmailCommand($user->getId(), $currentEmail, ['confirm' => true]));
+            $bus->dispatch(new DeleteUserEmailCommand($primaryEmail));
+            $bus->dispatch(new ChangeUserCredentialCommand($user->getId(), ['email' => $primaryEmail]));
+            $bus->dispatch(new AddUserEmailCommand($user->getId(), $currentEmail, ['confirm' => true]));
             $flashBag->add('success', sprintf('E-mail %s marked primary.', $primaryEmail));
 
             return new RedirectResponse($urlGenerator->generate('my_account'));
@@ -109,7 +108,7 @@ final class MyAccountController
                 return $confirmResponse;
             }
 
-            $bus->handle(new DeleteUserEmailCommand($deleteEmail));
+            $bus->dispatch(new DeleteUserEmailCommand($deleteEmail));
             $flashBag->add('success', sprintf('E-mail %s deleted.', $deleteEmail));
 
             return new RedirectResponse($urlGenerator->generate('my_account'));
@@ -120,9 +119,7 @@ final class MyAccountController
         $passwordForm->handleRequest($request);
 
         if ($passwordForm->isSubmitted() && $passwordForm->isValid()) {
-            $bus->handle(new ChangeUserCredentialCommand($user->getId(), [
-                'password' => $passwordForm->getData()['password'],
-            ]));
+            $bus->dispatch(new ChangeUserCredentialCommand($user->getId(), ['password' => $passwordForm->getData()['password']]));
             $flashBag->add('success', 'Your password is now changed.');
 
             return new RedirectResponse($urlGenerator->generate('my_account'));

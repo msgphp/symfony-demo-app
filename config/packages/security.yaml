@@ -12,14 +12,12 @@ security:
             anonymous: true
             stateless: true
             provider: msgphp_user_jwt
-            form_login:
-                login_path: api_login
+            json_login:
                 check_path: api_login
-                username_parameter: email
-                password_parameter: password
+                username_path: email
+                password_path: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
-                require_previous_session: false
 
         api:
             pattern: ^/api
@@ -38,7 +36,6 @@ security:
             anonymous: true
             provider: msgphp_user
             user_checker: App\Security\UserChecker
-            logout_on_user_change: true
             form_login:
                 login_path: login
                 check_path: login

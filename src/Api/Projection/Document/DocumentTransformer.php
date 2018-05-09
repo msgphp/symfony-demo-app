@@ -3,12 +3,12 @@
 namespace App\Api\Projection\Document;
 
 use App\Entity\User\User;
-use MsgPhp\Domain\Projection\DomainProjectionDocument;
-use MsgPhp\Domain\Projection\DomainProjectionDocumentTransformerInterface;
+use MsgPhp\Domain\Projection\ProjectionDocumentTransformerInterface;
+use MsgPhp\Domain\Projection\ProjectionDocument;
 use Psr\Container\ContainerInterface;
 use Symfony\Component\DependencyInjection\ServiceSubscriberInterface;
 
-final class DocumentTransformer implements DomainProjectionDocumentTransformerInterface, ServiceSubscriberInterface
+final class DocumentTransformer implements ProjectionDocumentTransformerInterface, ServiceSubscriberInterface
 {
     private const MAPPING = [
         User::class => Transformer\UserDocumentTransformer::class,
@@ -21,7 +21,7 @@ final class DocumentTransformer implements DomainProjectionDocumentTransformerIn
         $this->container = $container;
     }
 
-    public function transform($object): DomainProjectionDocument
+    public function transform($object): ProjectionDocument
     {
         foreach (self::MAPPING as $type => $service) {
             if ($object instanceof $type) {

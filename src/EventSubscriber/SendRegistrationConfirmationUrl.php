@@ -4,9 +4,10 @@ namespace App\EventSubscriber;
 
 use App\Entity\User\User;
 use MsgPhp\User\Event\UserCreatedEvent;
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Twig\Environment;
 
-final class SendRegistrationConfirmationUrl
+final class SendRegistrationConfirmationUrl implements MessageHandlerInterface
 {
     private $mailer;
     private $twig;
