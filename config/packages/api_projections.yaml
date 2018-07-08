@@ -22,7 +22,7 @@ services:
         resource: '../../src/Api/Projection/Document/Transformer'
     App\Api\Projection\Document\DocumentTransformer:
         tags: [container.service_subscriber]
-    MsgPhp\Domain\Projection\DomainProjectionDocumentTransformerInterface: '@App\Api\Projection\DocumentTransformer\DocumentTransformer'
+    MsgPhp\Domain\Projection\DomainProjectionDocumentTransformerInterface: '@App\Api\Projection\Document\DocumentTransformer'
 
     # Document provider
     MsgPhp\Domain\Projection\DomainProjectionDocumentProvider: ~
