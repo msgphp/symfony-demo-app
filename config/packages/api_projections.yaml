@@ -14,10 +14,10 @@ services:
                 - ['@MsgPhp\User\Repository\UserRepositoryInterface', findAll]
             '$documentProvider': '@MsgPhp\Domain\Projection\DomainProjectionDocumentProvider'
 
-    # Document transformers
-    App\Api\Projection\DocumentTransformer\:
-        resource: '../../src/Api/Projection/DocumentTransformer'
-    App\Api\Projection\DocumentTransformer\DocumentTransformer:
+    # Document transformer
+    App\Api\Projection\Document\Transformer\:
+        resource: '../../src/Api/Projection/Document/Transformer'
+    App\Api\Projection\Document\DocumentTransformer:
         tags: [container.service_subscriber]
     MsgPhp\Domain\Projection\DomainProjectionDocumentTransformerInterface: '@App\Api\Projection\DocumentTransformer\DocumentTransformer'
 

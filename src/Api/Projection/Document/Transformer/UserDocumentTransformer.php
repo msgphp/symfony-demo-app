@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\Projection\DocumentTransformer;
+namespace App\Api\Projection\Document\Transformer;
 
 use App\Api\Projection\UserProjection;
 use App\Entity\User\User;
