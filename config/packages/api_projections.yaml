@@ -12,7 +12,7 @@ services:
             '$index': '%env(ELASTICSEARCH_PROJECTION_INDEX)%'
             '$dataProviders':
                 - ['@MsgPhp\User\Repository\UserRepositoryInterface', findAll]
-            '$documentProvider': '@MsgPhp\Domain\Projection\DomainProjectionDocumentProvider'
+            '$documentProvider': '@MsgPhp\Domain\Projection\ProjectionDocumentProvider'
 
     # Document identity
     App\Api\Projection\Document\DocumentIdentity: ~
@@ -22,27 +22,35 @@ services:
         resource: '../../src/Api/Projection/Document/Transformer'
     App\Api\Projection\Document\DocumentTransformer:
         tags: [container.service_subscriber]
-    MsgPhp\Domain\Projection\DomainProjectionDocumentTransformerInterface: '@App\Api\Projection\Document\DocumentTransformer'
+    MsgPhp\Domain\Projection\ProjectionDocumentTransformerInterface: '@App\Api\Projection\Document\DocumentTransformer'
 
     # Document provider
-    MsgPhp\Domain\Projection\DomainProjectionDocumentProvider: ~
+    MsgPhp\Domain\Projection\ProjectionDocumentProvider: ~
 
     # Repository
-    MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionRepository: ~
-    MsgPhp\Domain\Projection\DomainProjectionRepositoryInterface: '@MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionRepository'
+    MsgPhp\Domain\Infra\Elasticsearch\ProjectionRepository: ~
+    MsgPhp\Domain\Projection\ProjectionRepositoryInterface: '@MsgPhp\Domain\Infra\Elasticsearch\ProjectionRepository'
 
     # Type registry
-    MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionTypeRegistry:
+    MsgPhp\Domain\Infra\Elasticsearch\ProjectionTypeRegistry:
         arguments:
             '$mappings': '%projection_types%'
-    MsgPhp\Domain\Projection\DomainProjectionTypeRegistryInterface: '@MsgPhp\Domain\Infra\Elasticsearch\DomainProjectionTypeRegistry'
+    MsgPhp\Domain\Projection\ProjectionTypeRegistryInterface: '@MsgPhp\Domain\Infra\Elasticsearch\ProjectionTypeRegistry'
 
     # Synchronization
-    MsgPhp\Domain\Projection\DomainProjectionSynchronization: ~
+    MsgPhp\Domain\Projection\ProjectionSynchronization: ~
 
     # Console
-    MsgPhp\Domain\Infra\Console\Command\InitializeDomainProjectionTypesCommand: ~
-    MsgPhp\Domain\Infra\Console\Command\SynchronizeDomainProjectionsCommand: ~
+    MsgPhp\Domain\Infra\Console\Command\InitializeProjectionTypesCommand: ~
+    MsgPhp\Domain\Infra\Console\Command\SynchronizeProjectionsCommand: ~
 
     # API Platform
-    MsgPhp\Domain\Infra\ApiPlatform\DomainProjectionDataProvider: ~
+    MsgPhp\Domain\Infra\ApiPlatform\ProjectionDataProvider: ~
+
+    # Messenger
+    MsgPhp\Domain\Command\Handler\DeleteProjectionDocumentHandler:
+        tags:
+            - { name: messenger.message_handler, bus: command_bus }
+    MsgPhp\Domain\Command\Handler\SaveProjectionDocumentHandler:
+        tags:
+            - { name: messenger.message_handler, bus: command_bus }

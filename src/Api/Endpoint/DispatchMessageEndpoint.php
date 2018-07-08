@@ -3,20 +3,18 @@
 namespace App\Api\Endpoint;
 
 use App\Api\Projection\UserProjection;
-use MsgPhp\Domain\Message\MessageDispatchingTrait;
-use MsgPhp\Domain\Projection\DomainProjectionInterface;
-use MsgPhp\Domain\Projection\DomainProjectionRepositoryInterface;
+use MsgPhp\Domain\Projection\ProjectionInterface;
+use MsgPhp\Domain\Projection\ProjectionRepositoryInterface;
 use MsgPhp\User\Command\DeleteUserCommand;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Messenger\MessageBusInterface;
 
 final class DispatchMessageEndpoint
 {
-    use MessageDispatchingTrait;
-
-    public function __invoke(Request $request, DomainProjectionInterface $data, DomainProjectionRepositoryInterface $projectionRepository)
+    public function __invoke(Request $request, ProjectionInterface $data, ProjectionRepositoryInterface $projectionRepository, MessageBusInterface $bus)
     {
         if ($data instanceof UserProjection && $request->isMethod(Request::METHOD_DELETE)) {
-            $this->dispatch(DeleteUserCommand::class, [$data->userId]);
+            $bus->dispatch(new DeleteUserCommand($data->userId));
             $projectionRepository->delete(get_class($data), $data->id);
         }
 

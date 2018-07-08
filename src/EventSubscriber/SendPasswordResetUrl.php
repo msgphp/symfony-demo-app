@@ -4,9 +4,10 @@ namespace App\EventSubscriber;
 
 use App\Entity\User\User;
 use MsgPhp\User\Event\UserPasswordRequestedEvent;
+use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Twig\Environment;
 
-final class SendPasswordResetUrl
+final class SendPasswordResetUrl implements MessageHandlerInterface
 {
     private $mailer;
     private $twig;

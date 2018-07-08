@@ -25,4 +25,8 @@ return function (ContainerConfigurator $container) {
             ['target' => User\Entity\UserEmail::class, 'field' => 'email'],
         ],
     ]);
+
+    $container->services()
+        ->alias('msgphp.messenger.event_bus', 'event_bus')
+    ;
 };

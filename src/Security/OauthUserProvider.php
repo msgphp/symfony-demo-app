@@ -12,7 +12,7 @@ use MsgPhp\Domain\Exception\EntityNotFoundException;
 use MsgPhp\User\Command\{AddUserAttributeValueCommand, ConfirmUserCommand, CreateUserCommand};
 use MsgPhp\User\Infra\Security\SecurityUserProvider;
 use MsgPhp\User\Repository\{UserAttributeValueRepositoryInterface, UserRepositoryInterface};
-use SimpleBus\SymfonyBridge\Bus\CommandBus;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -24,7 +24,7 @@ final class OauthUserProvider implements OAuthAwareUserProviderInterface
     private $factory;
     private $bus;
 
-    public function __construct(UserRepositoryInterface $userRepository, UserAttributeValueRepositoryInterface $userAttributeValueRepository, SecurityUserProvider $securityUserProvider, EntityAwareFactoryInterface $factory, CommandBus $bus)
+    public function __construct(UserRepositoryInterface $userRepository, UserAttributeValueRepositoryInterface $userAttributeValueRepository, SecurityUserProvider $securityUserProvider, EntityAwareFactoryInterface $factory, MessageBusInterface $bus)
     {
         $this->userRepository = $userRepository;
         $this->userAttributeValueRepository = $userAttributeValueRepository;
@@ -61,12 +61,12 @@ final class OauthUserProvider implements OAuthAwareUserProviderInterface
                     'email' => $email,
                     'password' => bin2hex(random_bytes(32)),
                 ]));
-                $this->bus->handle(new ConfirmUserCommand($userId));
+                $this->bus->dispatch(new ConfirmUserCommand($userId));
 
                 $user = $this->userRepository->find($userId);
             }
 
-            $this->bus->handle(new AddUserAttributeValueCommand($userId, $attributeId, $username));
+            $this->bus->dispatch(new AddUserAttributeValueCommand($userId, $attributeId, $username));
         } else {
             /** @var UserAttributeValue $userAttributeValue */
             $user = $userAttributeValue->getUser();
