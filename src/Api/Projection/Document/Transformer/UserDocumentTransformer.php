@@ -2,21 +2,23 @@
 
 namespace App\Api\Projection\Document\Transformer;
 
+use App\Api\Projection\Document\DocumentIdentity;
 use App\Api\Projection\UserProjection;
 use App\Entity\User\User;
 use MsgPhp\Domain\Projection\DomainProjectionDocument;
-use PascalDeVink\ShortUuid\ShortUuid;
 
 final class UserDocumentTransformer
 {
-    // @todo inject as parameter, should be changed per app and is secret
-    private const DOCUMENT_UUID_NS = 'ee5b8c83-f12d-41f5-bcf9-3e83b7558317';
+    private $documentIdentity;
+
+    public function __construct(DocumentIdentity $documentIdentity)
+    {
+        $this->documentIdentity = $documentIdentity;
+    }
 
     public function __invoke(User $user): DomainProjectionDocument
     {
-        // @todo leverage service for DomainIdInterface types
-        $userId = $user->getId()->toString();
-        $docId = ShortUuid::uuid5(self::DOCUMENT_UUID_NS, sha1($userId));
+        $docId = $this->documentIdentity->identifyId($userId = $user->getId());
 
         return new DomainProjectionDocument(UserProjection::class, $docId, [
             'id' => $docId,
