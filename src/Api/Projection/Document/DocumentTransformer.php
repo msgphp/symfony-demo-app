@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Api\Projection\DocumentTransformer;
+namespace App\Api\Projection\Document;
 
 use App\Entity\User\User;
 use MsgPhp\Domain\Projection\DomainProjectionDocument;
@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\ServiceSubscriberInterface;
 final class DocumentTransformer implements DomainProjectionDocumentTransformerInterface, ServiceSubscriberInterface
 {
     private const MAPPING = [
-        User::class => UserDocumentTransformer::class,
+        User::class => Transformer\UserDocumentTransformer::class,
     ];
 
     private $container;
