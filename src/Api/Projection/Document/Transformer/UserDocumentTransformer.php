@@ -23,7 +23,7 @@ final class UserDocumentTransformer
         return new DomainProjectionDocument(UserProjection::class, $docId, [
             'id' => $docId,
             'email' => $user->getEmail(),
-            'user_id' => $userId,
+            'user_id' => $userId->toString(),
         ]);
     }
 }
