@@ -1,7 +1,6 @@
 <?php
 
 use App\Controller;
-
 use Symfony\Component\Routing\Loader\Configurator\RoutingConfigurator;
 
 return function (RoutingConfigurator $routes) {
