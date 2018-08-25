@@ -25,10 +25,16 @@ final class DispatchMessageEndpoint
             }
 
             if ($request->isMethod(Request::METHOD_POST)) {
-                $docId = $documentIdentity->identifyId($userId = UserId::fromValue($data->userId));
+                $userId = UserId::fromValue($data->userId);
+                $docId = $documentIdentity->identifyId($userId);
                 $locationUrl = $urlGenerator->generate('api_users_get_item', ['id' => $docId], UrlGeneratorInterface::ABSOLUTE_URL);
+                $bus->dispatch(new CreateUserCommand([
+                    'id' => $userId,
+                    'email' => $data->email,
+                    'password' => $passwordHashing->hash($data->password),
+                ]));
 
-                return new JsonResponse(['id' => $docId, 'user_id' => $userId->toString()], JsonResponse::HTTP_CREATED, ['Location' => $locationUrl]);
+                return new JsonResponse(['id' => $docId], JsonResponse::HTTP_CREATED, ['Location' => $locationUrl]);
             }
         }
 
