@@ -6,19 +6,25 @@ use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use MsgPhp\Domain\Infra\Elasticsearch\DocumentMappingProviderInterface;
 use MsgPhp\Domain\Projection\ProjectionInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
  * @ApiResource(
  *     shortName="User",
  *     collectionOperations={
  *         "get",
+ *         "post"={
+ *             "controller"="App\Api\Endpoint\DispatchMessageEndpoint",
+ *         },
  *     },
  *     itemOperations={
  *         "get",
  *         "delete"={
  *             "controller"="App\Api\Endpoint\DispatchMessageEndpoint",
  *         },
- *     }
+ *     },
+ *     normalizationContext={"groups"={"read"}},
+ *     denormalizationContext={"groups"={"write"}},
  * )
  */
 class UserProjection implements ProjectionInterface, DocumentMappingProviderInterface
@@ -26,18 +32,27 @@ class UserProjection implements ProjectionInterface, DocumentMappingProviderInte
     /**
      * @var string Globally unique resource identifier
      * @ApiProperty(identifier=true)
+     * @Groups({"read"})
      */
     public $id;
 
     /**
      * @var string Primary e-mail address
+     * @Groups({"read", "write"})
      */
     public $email;
 
     /**
-     * @var string Globally unique domain identifier
+     * @var string|null Globally unique domain identifier (Optional in "write")
+     * @Groups({"read", "write"})
      */
     public $userId;
+
+    /**
+     * @var string|null Plain password (Required in "write")
+     * @Groups({"write"})
+     */
+    public $password;
 
     /**
      * @return $this
