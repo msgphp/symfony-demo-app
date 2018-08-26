@@ -20,6 +20,8 @@ services:
     portforward: 3307
   pma:
     type: phpmyadmin
+  node:
+    type: node
 
 tooling:
   sf:
@@ -32,7 +34,10 @@ tooling:
     description: Reset demo environment
     cmd:
       - bin/reset-env
+  yarn:
+    service: node
 
 events:
   post-start:
-    appserver: "composer install --working-dir=$LANDO_MOUNT"
+    - appserver: "cd $LANDO_MOUNT && composer install"
+    - node: "cd $LANDO_MOUNT && yarn install"
