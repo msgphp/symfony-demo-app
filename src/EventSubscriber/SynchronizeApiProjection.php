@@ -6,6 +6,7 @@ use App\Api\Projection\Document\DocumentTransformer;
 use MsgPhp\Domain\Command\DeleteProjectionDocumentCommand;
 use MsgPhp\Domain\Command\SaveProjectionDocumentCommand;
 use MsgPhp\User\Event\UserCreatedEvent;
+use MsgPhp\User\Event\UserCredentialChangedEvent;
 use MsgPhp\User\Event\UserDeletedEvent;
 use Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -19,6 +20,7 @@ final class SynchronizeApiProjection implements MessageSubscriberInterface
     {
         return [
             UserCreatedEvent::class,
+            UserCredentialChangedEvent::class,
             UserDeletedEvent::class,
         ];
     }
@@ -32,6 +34,13 @@ final class SynchronizeApiProjection implements MessageSubscriberInterface
     public function __invoke($event): void
     {
         if ($event instanceof UserCreatedEvent) {
+            $this->notifySave($event->user);
+
+            return;
+        }
+
+        if ($event instanceof UserCredentialChangedEvent && $event->oldCredential->getUsername() !== $event->newCredential->getUsername()) {
+            // @todo could be partial update
             $this->notifySave($event->user);
 
             return;
