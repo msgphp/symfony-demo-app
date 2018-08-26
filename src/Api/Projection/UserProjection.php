@@ -14,13 +14,13 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     collectionOperations={
  *         "get",
  *         "post"={
- *             "controller"="App\Api\Endpoint\DispatchMessageEndpoint",
+ *             "controller"="App\Api\Endpoint\CreateUserEndpoint",
  *         },
  *     },
  *     itemOperations={
  *         "get",
  *         "delete"={
- *             "controller"="App\Api\Endpoint\DispatchMessageEndpoint",
+ *             "controller"="App\Api\Endpoint\DeleteUserEndpoint",
  *         },
  *     },
  *     normalizationContext={"groups"={"read"}},
