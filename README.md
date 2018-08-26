@@ -46,7 +46,7 @@ lando reset-env
 ## Screenshots
 
 ### Web
-![image](https://user-images.githubusercontent.com/1047696/39675143-4d22d438-5157-11e8-8bed-fe0762b0c97a.png)
+![image](https://user-images.githubusercontent.com/1047696/44625650-ca17e500-a90e-11e8-8fb1-f9116c504c56.png)
 
 ### API
 ![image](https://user-images.githubusercontent.com/1047696/44625637-8329ef80-a90e-11e8-99a1-9dae3377cb0d.png)
