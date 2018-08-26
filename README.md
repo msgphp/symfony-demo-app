@@ -49,7 +49,7 @@ lando reset-env
 ![image](https://user-images.githubusercontent.com/1047696/39675143-4d22d438-5157-11e8-8bed-fe0762b0c97a.png)
 
 ### API
-![image](https://user-images.githubusercontent.com/1047696/39675135-2994ee84-5157-11e8-89ad-c2a9c01ab921.png)
+![image](https://user-images.githubusercontent.com/1047696/44625637-8329ef80-a90e-11e8-99a1-9dae3377cb0d.png)
 
 ### CLI
 ![image](https://user-images.githubusercontent.com/1047696/37556509-802f98e8-29f7-11e8-9ccd-6112a9bedfb5.png)
