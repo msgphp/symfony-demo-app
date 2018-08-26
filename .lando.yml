@@ -40,4 +40,4 @@ tooling:
 events:
   post-start:
     - appserver: "cd $LANDO_MOUNT && composer install"
-    - node: "cd $LANDO_MOUNT && yarn install"
+    - node: "cd $LANDO_MOUNT/admin && yarn install"
