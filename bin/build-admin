@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+rm -rf public/admin
+
+pushd admin &> /dev/null
+
+yarn build && mv build ../public/admin
+[[ $? -ne 0 ]] && exit 1
+
+popd &> /dev/null

@@ -34,6 +34,11 @@ tooling:
     description: Reset demo environment
     cmd:
       - bin/reset-env
+  build-admin:
+    service: node
+    description: Build admin interface
+    cmd:
+      - bin/build-admin
   yarn:
     service: node
 

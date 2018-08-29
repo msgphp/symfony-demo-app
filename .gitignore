@@ -1,3 +1,5 @@
+/public/admin/
+
 ###> symfony/framework-bundle ###
 .env
 /public/bundles/

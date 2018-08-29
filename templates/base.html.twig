@@ -33,5 +33,15 @@
 
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
+
+        {% block footer %}
+            <footer>
+                <hr>
+                <small>
+                    <a href="{{ path('api_entrypoint') }}">API Documentation</a>
+                    - <a href="{{ path('admin') }}">Administration</a>
+                </small>
+            </footer>
+        {% endblock %}
     </body>
 </html>
