@@ -2,8 +2,10 @@
 
 namespace App\Entity\User;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\ORM\Mapping as ORM;
 use MsgPhp\Domain\Entity\Features\CanBeConfirmed;
 use MsgPhp\Domain\Entity\Features\CanBeEnabled;
@@ -25,6 +27,7 @@ use MsgPhp\User\UserIdInterface;
  * @ORM\DiscriminatorColumn(name="discriminator", type="string")
  * @ORM\DiscriminatorMap({"user" = "User", "premium_user" = "PremiumUser"})
  * @ApiResource(shortName="DbUser")
+ * @ApiFilter(SearchFilter::class, properties={"credential.email": "partial"})
  */
 class User extends BaseUser implements DomainEventHandlerInterface
 {
