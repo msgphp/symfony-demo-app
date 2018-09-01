@@ -22,3 +22,6 @@ api_platform:
     swagger:
         api_keys:
             - { name: Authorization, type: header }
+    collection:
+        pagination:
+            items_per_page: 2
