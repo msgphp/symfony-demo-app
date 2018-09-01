@@ -25,3 +25,9 @@ api_platform:
     collection:
         pagination:
             items_per_page: 2
+    elasticsearch:
+        host: '%env(ELASTICSEARCH_HOST)%'
+        mapping:
+            App\Api\Projection\EsUserProjection:
+                index: '%env(ELASTICSEARCH_PROJECTION_INDEX)%'
+                type: App\Api\Projection\UserProjection
