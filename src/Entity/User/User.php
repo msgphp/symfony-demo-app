@@ -2,6 +2,8 @@
 
 namespace App\Entity\User;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
+use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
 use MsgPhp\Domain\Entity\Features\CanBeConfirmed;
 use MsgPhp\Domain\Entity\Features\CanBeEnabled;
@@ -22,6 +24,7 @@ use MsgPhp\User\UserIdInterface;
  * @ORM\InheritanceType("JOINED")
  * @ORM\DiscriminatorColumn(name="discriminator", type="string")
  * @ORM\DiscriminatorMap({"user" = "User", "premium_user" = "PremiumUser"})
+ * @ApiResource(shortName="DbUser")
  */
 class User extends BaseUser implements DomainEventHandlerInterface
 {
@@ -35,7 +38,7 @@ class User extends BaseUser implements DomainEventHandlerInterface
     use AttributeValuesField;
     use DomainEventHandlerTrait;
 
-    /** @ORM\Id() @ORM\Column(type="msgphp_user_id") */
+    /** @ORM\Id() @ORM\Column(type="msgphp_user_id") @ApiProperty(identifier=true) */
     private $id;
 
     public function __construct(UserIdInterface $id, string $email, string $password)

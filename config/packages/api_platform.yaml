@@ -11,6 +11,7 @@ api_platform:
     name_converter: api_name_converter
     path_segment_name_generator: api_platform.path_segment_name_generator.dash
     resource_class_directories:
+        - '%kernel.project_dir%/src/Entity'
         - '%kernel.project_dir%/src/Api/Projection'
     graphql:
         enabled: true
