@@ -70,7 +70,7 @@ class UserProjection implements ProjectionInterface, DocumentMappingProviderInte
     public static function provideDocumentMappings(): iterable
     {
         yield static::class => [
-            'id' => 'text',
+            'id' => 'keyword',
             'email' => 'text',
             'user_id' => 'text',
         ];

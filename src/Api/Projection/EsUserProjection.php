@@ -24,5 +24,5 @@ class EsUserProjection
     /**
      * @var string|null Globally unique domain identifier (Optional in "write")
      */
-    public $userId;
+    public $user_id;
 }
