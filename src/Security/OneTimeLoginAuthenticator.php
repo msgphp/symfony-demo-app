@@ -36,7 +36,9 @@ final class OneTimeLoginAuthenticator extends AbstractGuardAuthenticator
 
     public function supports(Request $request): bool
     {
-        return $request->isMethod(Request::METHOD_GET) && $request->query->has('token');
+        return $request->isMethod(Request::METHOD_GET) &&
+            $request->query->has('token') &&
+            'login' === $request->attributes->get('_route');
     }
 
     public function getCredentials(Request $request)
