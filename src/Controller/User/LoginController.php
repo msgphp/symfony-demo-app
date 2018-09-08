@@ -4,7 +4,6 @@ namespace App\Controller\User;
 
 use App\Form\User\LoginType;
 use App\Form\User\OneTimeLoginType;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,8 +17,7 @@ final class LoginController
         Request $request,
         Environment $twig,
         FormFactoryInterface $formFactory,
-        AuthenticationUtils $authenticationUtils,
-        EntityManagerInterface $em
+        AuthenticationUtils $authenticationUtils
     ): Response
     {
         // one-time login
