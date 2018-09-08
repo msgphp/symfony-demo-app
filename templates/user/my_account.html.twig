@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% set user = msgphp_user.current %}
+{% set userId, user = msgphp_user.currentId, msgphp_user.current %}
 {% set oauth_resources = {
     (constant('App\\Entity\\Eav\\Attribute::GOOGLE_OAUTH_ID')): 'Google',
     (constant('App\\Entity\\Eav\\Attribute::FACEBOOK_OAUTH_ID')): 'Facebook'
@@ -12,6 +12,7 @@
     <fieldset>
         <legend>Information</legend>
         <ul>
+            <li>ID: <code>{{ userId }}</code></li>
             <li>Premium account: {{ msgphp_user.userType(user, 'App\\Entity\\User\\PremiumUser') ? '✔ Yes' : '✗ No' }}</li>
             <li>
                 Linked  accounts:
