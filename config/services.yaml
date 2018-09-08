@@ -21,9 +21,14 @@ services:
     App\Console\ClassContextElementFactory: ~
     MsgPhp\Domain\Infra\Console\Context\ClassContextElementFactoryInterface: '@App\Console\ClassContextElementFactory'
 
+    # Console Commands
+    App\Console\Command\:
+        resource: '../src/Console/Command'
+
     # Security
     App\Security\JwtTokenSubscriber: ~
     App\Security\OauthUserProvider: ~
+    App\Security\OneTimeLoginAuthenticator: ~
     App\Security\PasswordConfirmation:
         arguments:
             '$secret': '%kernel.secret%'

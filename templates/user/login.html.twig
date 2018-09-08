@@ -15,6 +15,18 @@
         </div>
     {{ form_end(form) }}
 
-    <p>Or login using:</p>
+    <h2>Or login using:</h2>
+
     {% include 'partials/oauth_providers.html.twig' %}
+
+    <h2>Got a one-time-login token?</h2>
+
+    {{ form_start(oneTimeLoginForm) }}
+        {{ form_errors(oneTimeLoginForm) }}
+        {{ form_row(oneTimeLoginForm.token, {label: 'Your token', translation_domain: false}) }}
+
+        <div>
+            <input type="submit" value="Login" />
+        </div>
+    {{ form_end(oneTimeLoginForm) }}
 {% endblock %}
