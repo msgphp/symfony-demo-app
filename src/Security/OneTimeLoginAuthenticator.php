@@ -36,9 +36,9 @@ final class OneTimeLoginAuthenticator extends AbstractGuardAuthenticator
 
     public function supports(Request $request): bool
     {
-        return $request->isMethod(Request::METHOD_GET) &&
-            $request->query->has('token') &&
-            'login' === $request->attributes->get('_route');
+        return 'login' === $request->attributes->get('_route')
+            && $request->isMethod(Request::METHOD_GET)
+            && $request->query->has('token');
     }
 
     public function getCredentials(Request $request)
@@ -75,9 +75,9 @@ final class OneTimeLoginAuthenticator extends AbstractGuardAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): ?Response
     {
-        $this->removeOneTimeLoginToken($this->getCredentials($request));
+        $oneTimeLoginToken = $this->getOneTimeLoginTokenOnce($this->getCredentials($request));
 
-        return new RedirectResponse($this->urlGenerator->generate('my_account'));
+        return new RedirectResponse($oneTimeLoginToken->getRedirectUrl() ?? $this->urlGenerator->generate('my_account'));
     }
 
     public function supportsRememberMe(): bool
@@ -90,11 +90,13 @@ final class OneTimeLoginAuthenticator extends AbstractGuardAuthenticator
         return $this->em->find(OneTimeLoginToken::class, $token);
     }
 
-    private function removeOneTimeLoginToken(string $token): void
+    private function getOneTimeLoginTokenOnce(string $token): ?OneTimeLoginToken
     {
-        if (null !== $oneTimeLoginToken = $this->em->getReference(OneTimeLoginToken::class, $token)) {
-            $this->em->remove($oneTimeLoginToken);
-            $this->em->flush();
-        }
+        $token = $this->getOneTimeLoginToken($token);
+
+        $this->em->remove($token);
+        $this->em->flush();
+
+        return $token;
     }
 }
