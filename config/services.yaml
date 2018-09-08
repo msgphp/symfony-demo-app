@@ -28,6 +28,7 @@ services:
     # Security
     App\Security\JwtTokenSubscriber: ~
     App\Security\OauthUserProvider: ~
+    App\Security\OneTimeLoginAuthenticator: ~
     App\Security\PasswordConfirmation:
         arguments:
             '$secret': '%kernel.secret%'
