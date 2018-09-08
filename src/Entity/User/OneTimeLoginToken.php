@@ -7,9 +7,6 @@ use MsgPhp\User\Entity\Fields\UserField;
 
 /**
  * @ORM\Entity()
- * @ORM\AssociationOverrides({
- *     @ORM\AssociationOverride(name="user", fetch="EAGER")
- * })
  *
  * @final
  */
@@ -17,7 +14,7 @@ class OneTimeLoginToken
 {
     use UserField;
 
-    /** @ORM\Column(unique=true) */
+    /** @ORM\Column() @ORM\Id() */
     private $token;
 
     public function __construct(User $user, string $token = null)
