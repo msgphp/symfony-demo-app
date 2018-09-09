@@ -46,16 +46,22 @@ lando reset-env
 ## Screenshots
 
 ### Web
-![image](https://user-images.githubusercontent.com/1047696/44625657-e582f000-a90e-11e8-9154-0f82bc37eff5.png)
+
+![image](https://user-images.githubusercontent.com/1047696/45264235-c79eaa80-b439-11e8-87b2-4e3551bdee09.png)
+
+![image](https://user-images.githubusercontent.com/1047696/45264184-c9b43980-b438-11e8-97e8-55b5150c7b6b.png)
 
 ### API
-![image](https://user-images.githubusercontent.com/1047696/44625637-8329ef80-a90e-11e8-99a1-9dae3377cb0d.png)
+
+![image](https://user-images.githubusercontent.com/1047696/45264192-ea7c8f00-b438-11e8-9aa3-9bf490c4f2d1.png)
 
 ### CLI
-![image](https://user-images.githubusercontent.com/1047696/37556509-802f98e8-29f7-11e8-9ccd-6112a9bedfb5.png)
+
+![image](https://user-images.githubusercontent.com/1047696/45264197-0b44e480-b439-11e8-83c3-45753ef79dbc.png)
 
 ### Database UML
-![image](https://user-images.githubusercontent.com/1047696/37556527-e7ead33a-29f7-11e8-84bd-0a4f0c64c871.png)
+
+![image](https://user-images.githubusercontent.com/1047696/45264216-62e35000-b439-11e8-9c04-f835f46a857b.png)
 
 ## Blog posts
 

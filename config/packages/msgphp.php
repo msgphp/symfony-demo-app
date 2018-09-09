@@ -22,7 +22,7 @@ return function (ContainerConfigurator $container) {
         ],
         'default_id_type' => 'uuid',
         'username_lookup' => [
-            ['target' => User\Entity\UserEmail::class, 'field' => 'email'],
+            ['target' => User\Entity\UserEmail::class, 'field' => 'email', 'mapped_by' => 'user'],
         ],
     ]);
 
