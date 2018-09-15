@@ -17,8 +17,9 @@ return function (ContainerConfigurator $container) {
             User\Entity\Role::class => \App\Entity\User\Role::class,
             User\Entity\User::class => \App\Entity\User\User::class,
             User\Entity\UserAttributeValue::class => \App\Entity\User\UserAttributeValue::class,
-            User\Entity\UserRole::class => \App\Entity\User\UserRole::class,
             User\Entity\UserEmail::class => \App\Entity\User\UserEmail::class,
+            User\Entity\Username::class => \App\Entity\User\Username::class,
+            User\Entity\UserRole::class => \App\Entity\User\UserRole::class,
         ],
         'default_id_type' => 'uuid',
         'username_lookup' => [

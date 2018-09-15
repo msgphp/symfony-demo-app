@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1e7b4d0956c28f2122f51bd9197e05a1",
+    "content-hash": "1529402c56207b622f2abdf0e4a192c3",
     "packages": [
         {
             "name": "api-platform/api-pack",
@@ -44,16 +44,16 @@
         },
         {
             "name": "api-platform/core",
-            "version": "v2.3.1",
+            "version": "v2.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/api-platform/core.git",
-                "reference": "db8d1a67a60dcd47e3f608046feb6a2eee2148c0"
+                "reference": "c2329e456b680b73501b65c5298fae8f3c75bc0e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/api-platform/core/zipball/db8d1a67a60dcd47e3f608046feb6a2eee2148c0",
-                "reference": "db8d1a67a60dcd47e3f608046feb6a2eee2148c0",
+                "url": "https://api.github.com/repos/api-platform/core/zipball/c2329e456b680b73501b65c5298fae8f3c75bc0e",
+                "reference": "c2329e456b680b73501b65c5298fae8f3c75bc0e",
                 "shasum": ""
             },
             "require": {
@@ -162,7 +162,7 @@
                 "rest",
                 "swagger"
             ],
-            "time": "2018-08-22T11:00:09+00:00"
+            "time": "2018-09-19T07:50:25+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -2267,16 +2267,16 @@
         },
         {
             "name": "msgphp/domain",
-            "version": "v0.6.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/domain.git",
-                "reference": "a3c82bd436269c513f03e2d58e1174c40fc84d29"
+                "reference": "08a9c83d99103f7ed7871962e146c135b91433f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/domain/zipball/a3c82bd436269c513f03e2d58e1174c40fc84d29",
-                "reference": "a3c82bd436269c513f03e2d58e1174c40fc84d29",
+                "url": "https://api.github.com/repos/msgphp/domain/zipball/08a9c83d99103f7ed7871962e146c135b91433f9",
+                "reference": "08a9c83d99103f7ed7871962e146c135b91433f9",
                 "shasum": ""
             },
             "require": {
@@ -2292,17 +2292,17 @@
                 "ramsey/uuid-doctrine": "^1.4",
                 "simple-bus/message-bus": "^3.0",
                 "symfony/config": "^3.4|^4.0",
-                "symfony/dependency-injection": "^3.4|^4.0",
+                "symfony/dependency-injection": "^3.4.16|^4.0.16|^4.1.5",
                 "symfony/http-kernel": "^3.4|^4.0",
                 "symfony/messenger": "^4.1",
-                "symfony/phpunit-bridge": "^3.4|^4.0",
+                "symfony/phpunit-bridge": "^3.4.9|^4.0.9",
                 "symfony/property-access": "^3.4|^4.0",
                 "symfony/var-dumper": "^3.4|^4.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.x-dev"
+                    "dev-master": "0.7-dev"
                 }
             },
             "autoload": {
@@ -2325,37 +2325,45 @@
             ],
             "description": "A base domain layer to rapidly built other domain layers",
             "keywords": [
-                "entity"
+                "command query responsibility segregation",
+                "cqrs",
+                "ddd",
+                "domain model",
+                "domain-driven-design",
+                "entity",
+                "es",
+                "event sourcing",
+                "rich domain model"
             ],
-            "time": "2018-09-09T07:39:15+00:00"
+            "time": "2018-09-22T17:23:19+00:00"
         },
         {
             "name": "msgphp/eav",
-            "version": "v0.6.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/eav.git",
-                "reference": "c0f5afc9f5f33f9d9158e24576447f0bde6fa4a6"
+                "reference": "e0c7d56a439e631977b10571e7863d0a950517e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/eav/zipball/c0f5afc9f5f33f9d9158e24576447f0bde6fa4a6",
-                "reference": "c0f5afc9f5f33f9d9158e24576447f0bde6fa4a6",
+                "url": "https://api.github.com/repos/msgphp/eav/zipball/e0c7d56a439e631977b10571e7863d0a950517e4",
+                "reference": "e0c7d56a439e631977b10571e7863d0a950517e4",
                 "shasum": ""
             },
             "require": {
-                "msgphp/domain": "~0.6"
+                "msgphp/domain": "^0.7"
             },
             "require-dev": {
                 "doctrine/orm": "^2.6",
                 "ramsey/uuid": "^3.7",
-                "symfony/phpunit-bridge": "^3.4|^4.0",
+                "symfony/phpunit-bridge": "^3.4.9|^4.0.9",
                 "symfony/var-dumper": "^3.4|^4.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.x-dev"
+                    "dev-master": "0.7-dev"
                 }
             },
             "autoload": {
@@ -2379,26 +2387,27 @@
             "description": "A domain layer providing basic EAV management",
             "keywords": [
                 "eav",
-                "entity-attribute-value"
+                "entity-attribute-value",
+                "rich domain model"
             ],
-            "time": "2018-09-09T11:40:36+00:00"
+            "time": "2018-09-22T17:55:39+00:00"
         },
         {
             "name": "msgphp/eav-bundle",
-            "version": "v0.6.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/eav-bundle.git",
-                "reference": "4d6e8e46b1b4d9d69939cb55f292fd1ccff1b4e8"
+                "reference": "cb3fdacf586dfa811b7a312d1b9819da4180fed2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/eav-bundle/zipball/4d6e8e46b1b4d9d69939cb55f292fd1ccff1b4e8",
-                "reference": "4d6e8e46b1b4d9d69939cb55f292fd1ccff1b4e8",
+                "url": "https://api.github.com/repos/msgphp/eav-bundle/zipball/cb3fdacf586dfa811b7a312d1b9819da4180fed2",
+                "reference": "cb3fdacf586dfa811b7a312d1b9819da4180fed2",
                 "shasum": ""
             },
             "require": {
-                "msgphp/eav": "~0.6",
+                "msgphp/eav": "^0.7",
                 "symfony/config": "^3.4|^4.0",
                 "symfony/dependency-injection": "^3.4|^4.0",
                 "symfony/http-kernel": "^3.4|^4.0"
@@ -2406,13 +2415,13 @@
             "require-dev": {
                 "doctrine/doctrine-bundle": "^1.8",
                 "doctrine/orm": "^2.6",
-                "symfony/phpunit-bridge": "^3.4|^4.0",
+                "symfony/phpunit-bridge": "^3.4.9|^4.0.9",
                 "symfony/var-dumper": "^3.4|^4.0"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.x-dev"
+                    "dev-master": "0.7-dev"
                 }
             },
             "autoload": {
@@ -2436,36 +2445,38 @@
             "description": "Basic entity-attribute-value management (the `EAV` domain)",
             "keywords": [
                 "eav",
-                "entity-attribute-value"
+                "entity-attribute-value",
+                "rich domain model",
+                "symfony"
             ],
-            "time": "2018-09-09T11:40:36+00:00"
+            "time": "2018-09-22T17:55:39+00:00"
         },
         {
             "name": "msgphp/user",
-            "version": "v0.6.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user.git",
-                "reference": "76e8e2da918195b8457dc7df58fb3e5d65042493"
+                "reference": "1eae9180f59008e75a83a3afd095837f84ffb910"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/user/zipball/76e8e2da918195b8457dc7df58fb3e5d65042493",
-                "reference": "76e8e2da918195b8457dc7df58fb3e5d65042493",
+                "url": "https://api.github.com/repos/msgphp/user/zipball/1eae9180f59008e75a83a3afd095837f84ffb910",
+                "reference": "1eae9180f59008e75a83a3afd095837f84ffb910",
                 "shasum": ""
             },
             "require": {
-                "msgphp/domain": "~0.6"
+                "msgphp/domain": "^0.7"
             },
             "require-dev": {
                 "doctrine/orm": "^2.6",
                 "lexik/jwt-authentication-bundle": "^2.5",
-                "msgphp/eav": "~0.6",
+                "msgphp/eav": "^0.7",
                 "sensio/framework-extra-bundle": "^5.1",
                 "symfony/console": "^3.4|^4.0",
                 "symfony/form": "^3.4|^4.0",
                 "symfony/http-kernel": "^3.4|^4.0",
-                "symfony/phpunit-bridge": "^3.4|^4.0",
+                "symfony/phpunit-bridge": "^3.4.9|^4.0.9",
                 "symfony/security-core": "^3.4|^4.0",
                 "symfony/validator": "^3.4|^4.0",
                 "symfony/var-dumper": "^3.4|^4.0"
@@ -2476,7 +2487,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.x-dev"
+                    "dev-master": "0.7-dev"
                 }
             },
             "autoload": {
@@ -2499,27 +2510,28 @@
             ],
             "description": "A domain layer providing basic user management",
             "keywords": [
+                "rich domain model",
                 "security",
                 "user"
             ],
-            "time": "2018-09-09T11:40:36+00:00"
+            "time": "2018-09-22T17:55:39+00:00"
         },
         {
             "name": "msgphp/user-bundle",
-            "version": "v0.6.0",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user-bundle.git",
-                "reference": "9d6a20b0021f7754e040954c3dce6fb2acc9e9fe"
+                "reference": "949190415b677814e317fbbf0207d0fff3dcba35"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/user-bundle/zipball/9d6a20b0021f7754e040954c3dce6fb2acc9e9fe",
-                "reference": "9d6a20b0021f7754e040954c3dce6fb2acc9e9fe",
+                "url": "https://api.github.com/repos/msgphp/user-bundle/zipball/949190415b677814e317fbbf0207d0fff3dcba35",
+                "reference": "949190415b677814e317fbbf0207d0fff3dcba35",
                 "shasum": ""
             },
             "require": {
-                "msgphp/user": "~0.6",
+                "msgphp/user": "^0.7",
                 "symfony/config": "^3.4|^4.0",
                 "symfony/dependency-injection": "^3.4|^4.0",
                 "symfony/http-kernel": "^3.4|^4.0"
@@ -2528,13 +2540,13 @@
                 "doctrine/doctrine-bundle": "^1.8",
                 "doctrine/orm": "^2.6",
                 "lexik/jwt-authentication-bundle": "^2.5",
-                "msgphp/eav-bundle": "~0.5",
+                "msgphp/eav-bundle": "^0.7",
                 "simple-bus/symfony-bridge": "^5.1",
                 "symfony/console": "^3.4|^4.0",
                 "symfony/form": "^3.4|^4.0",
                 "symfony/maker-bundle": "^1.5",
                 "symfony/messenger": "^4.1",
-                "symfony/phpunit-bridge": "^3.4|^4.0",
+                "symfony/phpunit-bridge": "^3.4.9|^4.0.9",
                 "symfony/security-bundle": "^3.4|^4.0",
                 "symfony/twig-bundle": "^3.4|^4.0",
                 "symfony/validator": "^3.4|^4.0",
@@ -2546,7 +2558,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.x-dev"
+                    "dev-master": "0.7-dev"
                 }
             },
             "autoload": {
@@ -2569,10 +2581,12 @@
             ],
             "description": "Basic user management (the `User` domain)",
             "keywords": [
+                "rich domain model",
                 "security",
+                "symfony",
                 "user"
             ],
-            "time": "2018-09-09T11:40:36+00:00"
+            "time": "2018-09-22T17:55:39+00:00"
         },
         {
             "name": "namshi/jose",
@@ -2962,16 +2976,16 @@
         },
         {
             "name": "php-http/client-common",
-            "version": "1.7.0",
+            "version": "1.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/client-common.git",
-                "reference": "9accb4a082eb06403747c0ffd444112eda41a0fd"
+                "reference": "949ee8a8cba5fa2abe839c87bf7b885ac3330589"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/client-common/zipball/9accb4a082eb06403747c0ffd444112eda41a0fd",
-                "reference": "9accb4a082eb06403747c0ffd444112eda41a0fd",
+                "url": "https://api.github.com/repos/php-http/client-common/zipball/949ee8a8cba5fa2abe839c87bf7b885ac3330589",
+                "reference": "949ee8a8cba5fa2abe839c87bf7b885ac3330589",
                 "shasum": ""
             },
             "require": {
@@ -2993,7 +3007,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.7-dev"
+                    "dev-master": "1.8-dev"
                 }
             },
             "autoload": {
@@ -3019,7 +3033,7 @@
                 "http",
                 "httplug"
             ],
-            "time": "2017-11-30T11:06:59+00:00"
+            "time": "2018-06-22T12:36:17+00:00"
         },
         {
             "name": "php-http/discovery",
@@ -4229,16 +4243,16 @@
         },
         {
             "name": "swiftmailer/swiftmailer",
-            "version": "v6.1.2",
+            "version": "v6.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/swiftmailer/swiftmailer.git",
-                "reference": "7d760881d266d63c5e7a1155cbcf2ac656a31ca8"
+                "reference": "8ddcb66ac10c392d3beb54829eef8ac1438595f4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/7d760881d266d63c5e7a1155cbcf2ac656a31ca8",
-                "reference": "7d760881d266d63c5e7a1155cbcf2ac656a31ca8",
+                "url": "https://api.github.com/repos/swiftmailer/swiftmailer/zipball/8ddcb66ac10c392d3beb54829eef8ac1438595f4",
+                "reference": "8ddcb66ac10c392d3beb54829eef8ac1438595f4",
                 "shasum": ""
             },
             "require": {
@@ -4284,7 +4298,7 @@
                 "mail",
                 "mailer"
             ],
-            "time": "2018-07-13T07:04:35+00:00"
+            "time": "2018-09-11T07:12:52+00:00"
         },
         {
             "name": "symfony/asset",
@@ -4600,16 +4614,16 @@
         },
         {
             "name": "symfony/dependency-injection",
-            "version": "v4.1.4",
+            "version": "4.1.x-dev",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/dependency-injection.git",
-                "reference": "bae4983003c9d451e278504d7d9b9d7fc1846873"
+                "reference": "985ebee0d4cadaadef4d81aaccf0018443cf2560"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/bae4983003c9d451e278504d7d9b9d7fc1846873",
-                "reference": "bae4983003c9d451e278504d7d9b9d7fc1846873",
+                "url": "https://api.github.com/repos/symfony/dependency-injection/zipball/985ebee0d4cadaadef4d81aaccf0018443cf2560",
+                "reference": "985ebee0d4cadaadef4d81aaccf0018443cf2560",
                 "shasum": ""
             },
             "require": {
@@ -4667,7 +4681,7 @@
             ],
             "description": "Symfony DependencyInjection Component",
             "homepage": "https://symfony.com",
-            "time": "2018-08-08T11:48:58+00:00"
+            "time": "2018-09-21T12:49:42+00:00"
         },
         {
             "name": "symfony/doctrine-bridge",
@@ -7536,16 +7550,16 @@
         },
         {
             "name": "illuminate/config",
-            "version": "v5.7.2",
+            "version": "v5.7.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/config.git",
-                "reference": "4bf5ad8913e41e934160fa0d9ba8f42f4cd3cee6"
+                "reference": "3cc6f07804b0a349c81b6479765a0bb58050fea0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/config/zipball/4bf5ad8913e41e934160fa0d9ba8f42f4cd3cee6",
-                "reference": "4bf5ad8913e41e934160fa0d9ba8f42f4cd3cee6",
+                "url": "https://api.github.com/repos/illuminate/config/zipball/3cc6f07804b0a349c81b6479765a0bb58050fea0",
+                "reference": "3cc6f07804b0a349c81b6479765a0bb58050fea0",
                 "shasum": ""
             },
             "require": {
@@ -7580,16 +7594,16 @@
         },
         {
             "name": "illuminate/container",
-            "version": "v5.7.2",
+            "version": "v5.7.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
-                "reference": "b2adca648536dfdfc13c2b93a2d717149794b682"
+                "reference": "0fc33b14ae6cf9a1e694fd43f2a274e590a824b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/container/zipball/b2adca648536dfdfc13c2b93a2d717149794b682",
-                "reference": "b2adca648536dfdfc13c2b93a2d717149794b682",
+                "url": "https://api.github.com/repos/illuminate/container/zipball/0fc33b14ae6cf9a1e694fd43f2a274e590a824b2",
+                "reference": "0fc33b14ae6cf9a1e694fd43f2a274e590a824b2",
                 "shasum": ""
             },
             "require": {
@@ -7624,16 +7638,16 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v5.7.2",
+            "version": "v5.7.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
-                "reference": "fd5d68eddfe49647f8354ac4c5f09cb88ccece7a"
+                "reference": "2daf3c078610f744e2a4dc2f44fb5060cce9835b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/contracts/zipball/fd5d68eddfe49647f8354ac4c5f09cb88ccece7a",
-                "reference": "fd5d68eddfe49647f8354ac4c5f09cb88ccece7a",
+                "url": "https://api.github.com/repos/illuminate/contracts/zipball/2daf3c078610f744e2a4dc2f44fb5060cce9835b",
+                "reference": "2daf3c078610f744e2a4dc2f44fb5060cce9835b",
                 "shasum": ""
             },
             "require": {
@@ -7664,20 +7678,20 @@
             ],
             "description": "The Illuminate Contracts package.",
             "homepage": "https://laravel.com",
-            "time": "2018-09-05T21:56:43+00:00"
+            "time": "2018-09-18T12:50:05+00:00"
         },
         {
             "name": "illuminate/support",
-            "version": "v5.7.2",
+            "version": "v5.7.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
-                "reference": "3dabc8fe2eebf614ba133fa34a4c160119ec7241"
+                "reference": "f7c68e8c8aab200cc8ad84f974d5511cda58a742"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/support/zipball/3dabc8fe2eebf614ba133fa34a4c160119ec7241",
-                "reference": "3dabc8fe2eebf614ba133fa34a4c160119ec7241",
+                "url": "https://api.github.com/repos/illuminate/support/zipball/f7c68e8c8aab200cc8ad84f974d5511cda58a742",
+                "reference": "f7c68e8c8aab200cc8ad84f974d5511cda58a742",
                 "shasum": ""
             },
             "require": {
@@ -7723,7 +7737,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2018-09-06T13:40:39+00:00"
+            "time": "2018-09-19T18:36:57+00:00"
         },
         {
             "name": "jackiedo/dotenv-editor",
@@ -7776,16 +7790,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "1.33.0",
+            "version": "1.34.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "55667c1007a99e82030874b1bb14d24d07108413"
+                "reference": "1dbd3cb01c5645f3e7deda7aa46ef780d95fcc33"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/55667c1007a99e82030874b1bb14d24d07108413",
-                "reference": "55667c1007a99e82030874b1bb14d24d07108413",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/1dbd3cb01c5645f3e7deda7aa46ef780d95fcc33",
+                "reference": "1dbd3cb01c5645f3e7deda7aa46ef780d95fcc33",
                 "shasum": ""
             },
             "require": {
@@ -7827,20 +7841,20 @@
                 "datetime",
                 "time"
             ],
-            "time": "2018-08-07T08:39:47+00:00"
+            "time": "2018-09-20T19:36:25+00:00"
         },
         {
             "name": "nikic/php-parser",
-            "version": "v4.0.3",
+            "version": "v4.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nikic/PHP-Parser.git",
-                "reference": "bd088dc940a418f09cda079a9b5c7c478890fb8d"
+                "reference": "fa6ee28600d21d49b2b4e1006b48426cec8e579c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/bd088dc940a418f09cda079a9b5c7c478890fb8d",
-                "reference": "bd088dc940a418f09cda079a9b5c7c478890fb8d",
+                "url": "https://api.github.com/repos/nikic/PHP-Parser/zipball/fa6ee28600d21d49b2b4e1006b48426cec8e579c",
+                "reference": "fa6ee28600d21d49b2b4e1006b48426cec8e579c",
                 "shasum": ""
             },
             "require": {
@@ -7878,7 +7892,7 @@
                 "parser",
                 "php"
             ],
-            "time": "2018-07-15T17:25:16+00:00"
+            "time": "2018-09-18T07:03:24+00:00"
         },
         {
             "name": "sroze/companienv",
@@ -7921,7 +7935,7 @@
             ],
             "authors": [
                 {
-                    "name": "Samuel Roze",
+                    "name": "Samuel ROZE",
                     "email": "samuel.roze@gmail.com"
                 }
             ],
@@ -8552,7 +8566,14 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "msgphp/domain": 20,
+        "msgphp/eav": 20,
+        "msgphp/eav-bundle": 20,
+        "msgphp/user": 20,
+        "msgphp/user-bundle": 20,
+        "symfony/dependency-injection": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

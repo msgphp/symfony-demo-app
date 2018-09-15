@@ -12,7 +12,12 @@
                 <nav>
                     <ul>
                         {% if app.user %}
-                            <li>Welcome <em>{{ msgphp_user.current.email }}</em></li>
+                            <li>
+                                Welcome <em>{{ msgphp_user.current.email }}</em>
+                                {% if app.user.originUsername is not null and app.user.originUsername is not same as(msgphp_user.current.email) %}
+                                    (Logged in using <em>{{ app.user.originUsername }}</em>)
+                                {% endif %}
+                            </li>
                             <li><a href="{{ path('my_account') }}">My account</a></li>
                             <li><a href="{{ path('logout') }}">Logout</a></li>
                         {% else %}
