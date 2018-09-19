@@ -9,7 +9,6 @@ use App\Form\User\AddEmailType;
 use App\Form\User\ChangePasswordType;
 use App\Security\PasswordConfirmation;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
-use MsgPhp\Domain\Factory\EntityAwareFactoryInterface;
 use MsgPhp\User\Command\ChangeUserCredentialCommand;
 use MsgPhp\User\Command\AddUserEmailCommand;
 use MsgPhp\User\Command\DeleteUserEmailCommand;
@@ -43,7 +42,6 @@ final class MyAccountController
         MessageBusInterface $bus,
         PasswordConfirmation $passwordConfirmation,
         SendEmailConfirmationUrl $sendEmailConfirmationUrl,
-        EntityAwareFactoryInterface $factory,
         UserInterface $securityUser
     ): Response
     {
