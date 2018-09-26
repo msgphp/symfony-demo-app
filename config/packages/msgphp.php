@@ -25,6 +25,11 @@ return function (ContainerConfigurator $container) {
         'username_lookup' => [
             ['target' => User\Entity\UserEmail::class, 'field' => 'email', 'mapped_by' => 'user'],
         ],
+        'role_providers' => [
+            'default' => [\App\Security\RoleProvider::ROLE_USER],
+            User\Role\UserRoleProvider::class,
+            \App\Security\RoleProvider::class,
+        ],
     ]);
 
     $container->services()

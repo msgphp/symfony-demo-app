@@ -32,9 +32,8 @@ services:
     App\Security\PasswordConfirmation:
         arguments:
             '$secret': '%kernel.secret%'
+    App\Security\RoleProvider: ~
     App\Security\UserChecker: ~
-    App\Security\UserRolesProvider: ~
-    MsgPhp\User\Infra\Security\UserRolesProviderInterface: '@App\Security\UserRolesProvider'
 
     # Messenger
     App\EventSubscriber\:
