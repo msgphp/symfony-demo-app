@@ -20,7 +20,6 @@
         "ramsey/uuid-doctrine": "^1.5",
         "sensio/framework-extra-bundle": "^5.2",
         "symfony/console": "^4.1",
-        "symfony/dependency-injection": "@dev",
         "symfony/flex": "^1.1",
         "symfony/form": "^4.1",
         "symfony/framework-bundle": "^4.1",
