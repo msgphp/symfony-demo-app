@@ -2,6 +2,7 @@ name: msgphp
 recipe: lemp
 
 config:
+  php: 7.2
   webroot: public
   database: mariadb
 

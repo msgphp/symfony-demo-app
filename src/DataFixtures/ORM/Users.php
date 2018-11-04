@@ -10,7 +10,7 @@ use App\Entity\User\User;
 use App\Entity\User\UserAttributeValue;
 use App\Entity\User\UserEmail;
 use App\Entity\User\UserRole;
-use App\Security\UserRolesProvider;
+use App\Security\RoleProvider;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use MsgPhp\Domain\Factory\EntityAwareFactoryInterface;
@@ -32,7 +32,7 @@ final class Users extends Fixture
     public function load(ObjectManager $manager)
     {
         // roles
-        $manager->persist($adminRole = new Role(UserRolesProvider::ROLE_ADMIN));
+        $manager->persist($adminRole = new Role(RoleProvider::ROLE_ADMIN));
 
         // attributes
         $manager->persist($this->createAttribute(Attribute::GOOGLE_OAUTH_ID));

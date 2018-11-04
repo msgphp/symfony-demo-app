@@ -3,43 +3,44 @@
     "type": "project",
     "license": "MIT",
     "description": "A message driven Symfony demo application with basic user management, a REST/GraphQL API and OAuth/JWT authentication.",
+    "prefer-stable": true,
+    "minimum-stability": "dev",
     "require": {
         "api-platform/api-pack": "^1.1",
         "elasticsearch/elasticsearch": "^6.0",
         "hwi/oauth-bundle": "^0.6",
-        "lexik/jwt-authentication-bundle": "^2.5",
-        "msgphp/domain": "@dev",
-        "msgphp/eav": "@dev",
-        "msgphp/eav-bundle": "^0.8@dev",
-        "msgphp/user": "@dev",
-        "msgphp/user-bundle": "^0.8@dev",
+        "lexik/jwt-authentication-bundle": "^2.6",
+        "msgphp/eav-bundle": "^0.8",
+        "msgphp/user-bundle": "^0.8",
+        "msgphp/user-eav": "^0.8",
         "pascaldevink/shortuuid": "^2.1",
         "php-http/guzzle6-adapter": "^1.1",
-        "php-http/httplug-bundle": "^1.11",
+        "php-http/httplug-bundle": "^1.12",
         "ramsey/uuid": "^3.8",
         "ramsey/uuid-doctrine": "^1.5",
         "sensio/framework-extra-bundle": "^5.2",
-        "symfony/console": "^4.1",
+        "symfony/console": "^4.2",
         "symfony/flex": "^1.1",
-        "symfony/form": "^4.1",
-        "symfony/framework-bundle": "^4.1",
-        "symfony/messenger": "^4.2@dev",
+        "symfony/form": "^4.2",
+        "symfony/framework-bundle": "^4.2",
+        "symfony/messenger": "^4.2",
         "symfony/monolog-bundle": "^3.3",
         "symfony/orm-pack": "^1.0",
-        "symfony/security-bundle": "^4.1",
+        "symfony/security-bundle": "^4.2",
+        "symfony/serializer": "^4.2@dev",
         "symfony/swiftmailer-bundle": "^3.2",
-        "symfony/translation": "^4.1",
-        "symfony/validator": "^4.1",
-        "webonyx/graphql-php": "^0.11"
+        "symfony/translation": "^4.2",
+        "symfony/validator": "^4.2",
+        "webonyx/graphql-php": "^0.12"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.0",
-        "sroze/companienv": "^0.0.9",
+        "sroze/companienv": "^0.0.10",
         "symfony/debug-pack": "^1.0",
-        "symfony/dotenv": "^4.1",
-        "symfony/maker-bundle": "^1.6",
-        "symfony/phpunit-bridge": "^4.1",
-        "symfony/web-server-bundle": "^4.1"
+        "symfony/dotenv": "^4.2",
+        "symfony/maker-bundle": "^1.9",
+        "symfony/phpunit-bridge": "^4.2",
+        "symfony/web-server-bundle": "^4.2"
     },
     "config": {
         "preferred-install": {
@@ -57,10 +58,18 @@
             "App\\Tests\\": "tests/"
         }
     },
+    "replace": {
+        "paragonie/random_compat": "2.*",
+        "symfony/polyfill-ctype": "*",
+        "symfony/polyfill-iconv": "*",
+        "symfony/polyfill-php71": "*",
+        "symfony/polyfill-php70": "*",
+        "symfony/polyfill-php56": "*"
+    },
     "scripts": {
         "auto-scripts": {
-            "assets:install --symlink --relative %PUBLIC_DIR%": "symfony-cmd",
-            "cache:clear": "symfony-cmd"
+            "cache:clear": "symfony-cmd",
+            "assets:install %PUBLIC_DIR%": "symfony-cmd"
         },
         "post-install-cmd": [
             "@auto-scripts"
@@ -75,7 +84,8 @@
     "extra": {
         "symfony": {
             "id": "01BTK0AY5K45QX57R6VCT18RPJ",
-            "allow-contrib": true
+            "allow-contrib": true,
+            "require": "4.2.*"
         }
     }
 }
