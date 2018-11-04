@@ -675,16 +675,16 @@
         },
         {
             "name": "doctrine/doctrine-cache-bundle",
-            "version": "1.3.3",
+            "version": "1.3.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/DoctrineCacheBundle.git",
-                "reference": "4c8e363f96427924e7e519c5b5119b4f54512697"
+                "reference": "5514c90d9fb595e1095e6d66ebb98ce9ef049927"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/DoctrineCacheBundle/zipball/4c8e363f96427924e7e519c5b5119b4f54512697",
-                "reference": "4c8e363f96427924e7e519c5b5119b4f54512697",
+                "url": "https://api.github.com/repos/doctrine/DoctrineCacheBundle/zipball/5514c90d9fb595e1095e6d66ebb98ce9ef049927",
+                "reference": "5514c90d9fb595e1095e6d66ebb98ce9ef049927",
                 "shasum": ""
             },
             "require": {
@@ -697,7 +697,7 @@
                 "instaclick/coding-standard": "~1.1",
                 "instaclick/object-calisthenics-sniffs": "dev-master",
                 "instaclick/symfony2-coding-standard": "dev-remaster",
-                "phpunit/phpunit": "~4|~5",
+                "phpunit/phpunit": "~4.8.36|~5.6|~6.5|~7.0",
                 "predis/predis": "~0.8",
                 "satooshi/php-coveralls": "^1.0",
                 "squizlabs/php_codesniffer": "~1.5",
@@ -721,7 +721,10 @@
             "autoload": {
                 "psr-4": {
                     "Doctrine\\Bundle\\DoctrineCacheBundle\\": ""
-                }
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -754,12 +757,12 @@
                 }
             ],
             "description": "Symfony Bundle for Doctrine Cache",
-            "homepage": "http://www.doctrine-project.org",
+            "homepage": "https://www.doctrine-project.org",
             "keywords": [
                 "cache",
                 "caching"
             ],
-            "time": "2018-03-27T09:22:12+00:00"
+            "time": "2018-11-09T06:25:35+00:00"
         },
         {
             "name": "doctrine/doctrine-migrations-bundle",
@@ -2272,12 +2275,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/domain.git",
-                "reference": "f3c98bb9436c9dfbb90dcbeaac0fc165ec78c847"
+                "reference": "91e5aff19cbfada83e7af9ca7b623a15f48fdafb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/domain/zipball/f3c98bb9436c9dfbb90dcbeaac0fc165ec78c847",
-                "reference": "f3c98bb9436c9dfbb90dcbeaac0fc165ec78c847",
+                "url": "https://api.github.com/repos/msgphp/domain/zipball/91e5aff19cbfada83e7af9ca7b623a15f48fdafb",
+                "reference": "91e5aff19cbfada83e7af9ca7b623a15f48fdafb",
                 "shasum": ""
             },
             "require": {
@@ -2338,7 +2341,7 @@
                 "event sourcing",
                 "rich domain model"
             ],
-            "time": "2018-11-07T11:54:12+00:00"
+            "time": "2018-11-10T07:07:22+00:00"
         },
         {
             "name": "msgphp/eav",
@@ -2458,12 +2461,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user.git",
-                "reference": "9861bc3886930459537eb834a9c7c336d43418d4"
+                "reference": "867bfdcc62b81f148042b84d3e36007215e5a7ab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/user/zipball/9861bc3886930459537eb834a9c7c336d43418d4",
-                "reference": "9861bc3886930459537eb834a9c7c336d43418d4",
+                "url": "https://api.github.com/repos/msgphp/user/zipball/867bfdcc62b81f148042b84d3e36007215e5a7ab",
+                "reference": "867bfdcc62b81f148042b84d3e36007215e5a7ab",
                 "shasum": ""
             },
             "require": {
@@ -2481,6 +2484,7 @@
                 "symfony/validator": "^3.4|^4.0"
             },
             "suggest": {
+                "ext-sodium": "To clear plain passwords from memory if applicable",
                 "msgphp/user-eav": "To enable user attribute values"
             },
             "type": "library",
@@ -2515,7 +2519,7 @@
                 "security",
                 "user"
             ],
-            "time": "2018-11-03T11:52:58+00:00"
+            "time": "2018-11-07T12:39:10+00:00"
         },
         {
             "name": "msgphp/user-bundle",
@@ -7967,16 +7971,16 @@
         },
         {
             "name": "nesbot/carbon",
-            "version": "1.34.0",
+            "version": "1.34.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/briannesbitt/Carbon.git",
-                "reference": "1dbd3cb01c5645f3e7deda7aa46ef780d95fcc33"
+                "reference": "19201b87f7dba2a7cbf1cccdf0e1da13c04ee9c9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/1dbd3cb01c5645f3e7deda7aa46ef780d95fcc33",
-                "reference": "1dbd3cb01c5645f3e7deda7aa46ef780d95fcc33",
+                "url": "https://api.github.com/repos/briannesbitt/Carbon/zipball/19201b87f7dba2a7cbf1cccdf0e1da13c04ee9c9",
+                "reference": "19201b87f7dba2a7cbf1cccdf0e1da13c04ee9c9",
                 "shasum": ""
             },
             "require": {
@@ -8018,7 +8022,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2018-09-20T19:36:25+00:00"
+            "time": "2018-11-08T13:33:47+00:00"
         },
         {
             "name": "nikic/php-parser",
