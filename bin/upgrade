@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+SF="dev-master"
+FLEX="^1.1"
+ORM_PACK="^1.0"
+DEBUG_PACK="^1.0"
+SWIFT_MAILER="^3.2"
+MONOLOG="^3.3"
+MAKER="^1.9"
+
+rm -rf .gitignore phpunit.xml.dist symfony.lock composer.lock vendor/ var/cache/* var/log/* var/sessions/* && \
+rm -rf bin/console bin/phpunit src/Kernel.php public/bundles public/index.php && \
+sed -i -E "s/(\"symfony\/.+\"\s*:\s*\").+(\"\s*,?)/\1${SF}\2/" composer.json  && \
+sed -i -E "s/(\"symfony\/flex\"\s*:\s*\").+(\"\s*,?)/\1${FLEX}\2/" composer.json  && \
+sed -i -E "s/(\"symfony\/orm-pack\"\s*:\s*\").+(\"\s*,?)/\1${ORM_PACK}\2/" composer.json  && \
+sed -i -E "s/(\"symfony\/debug-pack\"\s*:\s*\").+(\"\s*,?)/\1${DEBUG_PACK}\2/" composer.json  && \
+sed -i -E "s/(\"symfony\/swiftmailer-bundle\"\s*:\s*\").+(\"\s*,?)/\1${SWIFT_MAILER}\2/" composer.json  && \
+sed -i -E "s/(\"symfony\/monolog-bundle\"\s*:\s*\").+(\"\s*,?)/\1${MONOLOG}\2/" composer.json  && \
+sed -i -E "s/(\"symfony\/maker-bundle\"\s*:\s*\").+(\"\s*,?)/\1${MAKER}\2/" composer.json  && \
+sed -i -E "s/(\"symfony\/polyfill-.+\"\s*:\s*\").+(\"\s*,?)/\1*\2/" composer.json  && \
+sed -i -E "s/(\"symfony\/symfony\"\s*:\s*\").+(\"\s*,?)/\1*\2/" composer.json  && \
+php -dmemory_limit=-1 "$(which composer)" update && \
+rm -rf src/Controller/.gitignore src/Entity/.gitignore translations/.gitignore
