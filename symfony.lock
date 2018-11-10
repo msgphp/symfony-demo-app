@@ -131,21 +131,6 @@
             "ref": "20cacc9b2da49d96ea55c8a8dd31324c5be88bc9"
         }
     },
-    "illuminate/config": {
-        "version": "v5.7.11"
-    },
-    "illuminate/container": {
-        "version": "v5.7.11"
-    },
-    "illuminate/contracts": {
-        "version": "v5.7.11"
-    },
-    "illuminate/support": {
-        "version": "v5.7.11"
-    },
-    "jackiedo/dotenv-editor": {
-        "version": "1.0.7"
-    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
@@ -208,9 +193,6 @@
             "version": "1.5",
             "ref": "f0436fc35fca88eada758311f8de43bfb61f1980"
         }
-    },
-    "nesbot/carbon": {
-        "version": "1.34.1"
     },
     "nikic/php-parser": {
         "version": "v4.1.0"
@@ -307,9 +289,6 @@
             "version": "5.2",
             "ref": "fb7e19da7f013d0d422fa9bce16f5c510e27609b"
         }
-    },
-    "sroze/companienv": {
-        "version": "dev-master"
     },
     "swiftmailer/swiftmailer": {
         "version": "v6.1.3"
