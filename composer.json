@@ -19,27 +19,27 @@
         "ramsey/uuid": "^3.8",
         "ramsey/uuid-doctrine": "^1.5",
         "sensio/framework-extra-bundle": "^5.2",
-        "symfony/console": "^4.2",
+        "symfony/console": "dev-master",
         "symfony/flex": "^1.1",
-        "symfony/form": "^4.2",
-        "symfony/framework-bundle": "^4.2",
-        "symfony/messenger": "^4.2",
+        "symfony/form": "dev-master",
+        "symfony/framework-bundle": "dev-master",
+        "symfony/messenger": "dev-master",
         "symfony/monolog-bundle": "^3.3",
         "symfony/orm-pack": "^1.0",
-        "symfony/security-bundle": "^4.2",
+        "symfony/security-bundle": "dev-master",
         "symfony/swiftmailer-bundle": "^3.2",
-        "symfony/translation": "^4.2",
-        "symfony/validator": "^4.2",
+        "symfony/translation": "dev-master",
+        "symfony/validator": "dev-master",
         "webonyx/graphql-php": "^0.12"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.0",
         "sroze/companienv": "dev-master",
         "symfony/debug-pack": "^1.0",
-        "symfony/dotenv": "^4.2",
+        "symfony/dotenv": "dev-master",
         "symfony/maker-bundle": "^1.9",
-        "symfony/phpunit-bridge": "^4.2",
-        "symfony/web-server-bundle": "^4.2"
+        "symfony/phpunit-bridge": "dev-master",
+        "symfony/web-server-bundle": "dev-master"
     },
     "config": {
         "preferred-install": {

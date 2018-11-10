@@ -48,7 +48,7 @@
         }
     },
     "doctrine/doctrine-cache-bundle": {
-        "version": "1.3.3"
+        "version": "1.3.5"
     },
     "doctrine/doctrine-fixtures-bundle": {
         "version": "3.0",
@@ -56,7 +56,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "3.0",
-            "ref": "2ea6070ecf365f9a801ccaed4b31d4a3b7af5693"
+            "ref": "fc52d86631a6dfd9fdf3381d0b7e3df2069e51b3"
         }
     },
     "doctrine/doctrine-migrations-bundle": {
@@ -162,7 +162,7 @@
         }
     },
     "monolog/monolog": {
-        "version": "1.23.0"
+        "version": "1.24.0"
     },
     "moontoast/math": {
         "version": "1.1.2"
@@ -210,16 +210,13 @@
         }
     },
     "nesbot/carbon": {
-        "version": "1.34.0"
+        "version": "1.34.1"
     },
     "nikic/php-parser": {
         "version": "v4.1.0"
     },
-    "ocramius/package-versions": {
-        "version": "1.3.0"
-    },
     "ocramius/proxy-manager": {
-        "version": "2.1.1"
+        "version": "2.2.2"
     },
     "pascaldevink/shortuuid": {
         "version": "2.1.0"
@@ -312,7 +309,7 @@
         }
     },
     "sroze/companienv": {
-        "version": "0.0.9"
+        "version": "dev-master"
     },
     "swiftmailer/swiftmailer": {
         "version": "v6.1.3"
@@ -332,11 +329,11 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "3.3",
-            "ref": "e3868d2f4a5104f19f844fe551099a00c6562527"
+            "ref": "b5026d7ffdb43b4d66f4cc091b1e6f94e6023986"
         }
     },
     "symfony/contracts": {
-        "version": "1.0-dev"
+        "version": "v1.0.0-beta1"
     },
     "symfony/debug": {
         "version": "v4.1.7"
@@ -360,7 +357,7 @@
         "version": "v4.1.7"
     },
     "symfony/dotenv": {
-        "version": "v4.2.0-beta1"
+        "version": "4.2-dev"
     },
     "symfony/event-dispatcher": {
         "version": "v4.1.7"
@@ -380,11 +377,11 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "1.0",
-            "ref": "e921bdbfe20cdefa3b82f379d1cd36df1bc8d115"
+            "ref": "e5c4877367a8528f164fe900753da0369fee3aaa"
         }
     },
     "symfony/form": {
-        "version": "v4.2.0-beta1"
+        "version": "4.2-dev"
     },
     "symfony/framework-bundle": {
         "version": "4.2",
@@ -392,7 +389,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "4.2",
-            "ref": "34b48c0aa063b493dbba650c6b65fb29fa5049bf"
+            "ref": "fca11a1b9ec60ceb224a1293660b62ee9c8bec7d"
         }
     },
     "symfony/http-foundation": {
@@ -449,7 +446,7 @@
             "repo": "github.com/symfony/recipes",
             "branch": "master",
             "version": "4.1",
-            "ref": "b14c7f62fabeedf256d3211b0f704402b5530ba1"
+            "ref": "e637a1337f5faf0b2529b1c9a47de5e8286679f0"
         }
     },
     "symfony/polyfill-intl-icu": {
@@ -504,7 +501,7 @@
         "version": "v4.2.0-beta1"
     },
     "symfony/serializer": {
-        "version": "v4.1.7"
+        "version": "v4.2.0-beta1"
     },
     "symfony/stopwatch": {
         "version": "v4.1.7"
@@ -585,7 +582,7 @@
         "version": "1.3.0"
     },
     "webonyx/graphql-php": {
-        "version": "v0.11.6"
+        "version": "v0.12.6"
     },
     "willdurand/negotiation": {
         "version": "v2.3.1"
