@@ -8,6 +8,11 @@ SWIFT_MAILER="^3.2"
 MONOLOG="^3.3"
 MAKER="^1.9"
 
+source .env
+if [[ -f .env.local ]] ; then
+    source .env.local
+fi
+
 rm -rf .gitignore phpunit.xml.dist symfony.lock composer.lock vendor/ var/cache/* var/log/* var/sessions/* && \
 rm -rf bin/console bin/phpunit src/Kernel.php public/bundles public/index.php && \
 sed -i -E "s/(\"symfony\/.+\"\s*:\s*\").+(\"\s*,?)/\1${SF}\2/" composer.json  && \

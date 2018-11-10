@@ -1,16 +1,16 @@
 #!/usr/bin/env bash
 
+source .env
+if [[ -f .env.local ]] ; then
+    source .env.local
+fi
+
 composer install && \
 bin/console doctrine:database:drop --force --if-exists && \
 bin/console doctrine:database:create && \
 bin/console doctrine:schema:update --force && \
 bin/console doctrine:fixtures:load -n
 [[ $? -ne 0 ]] && echo "Environment setup failed" && exit 1
-
-source .env
-if [[ -f .env.local ]] ; then
-    source .env.local
-fi
 
 if [[ ! -z $ELASTICSEARCH_HOST ]] ; then
     bin/console projection:initialize-types --force && \
