@@ -4,5 +4,5 @@ services:
         autoconfigure: true
         public: false
 
-    App\DataFixtures\ORM\:
-        resource: '../src/DataFixtures/ORM'
+    App\DataFixtures\:
+        resource: '../src/DataFixtures'

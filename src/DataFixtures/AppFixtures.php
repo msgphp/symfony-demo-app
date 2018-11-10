@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataFixtures\ORM;
+namespace App\DataFixtures;
 
 use App\Entity\Eav\Attribute;
 use App\Entity\Eav\AttributeValue;
@@ -16,7 +16,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use MsgPhp\Domain\Factory\EntityAwareFactoryInterface;
 use MsgPhp\User\Password\PasswordHashingInterface;
 
-final class Users extends Fixture
+final class AppFixtures extends Fixture
 {
     private const PASSWORD = 'pass';
 
