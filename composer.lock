@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0c61a0f3020cb70dccf8fe9315532f08",
+    "content-hash": "ed7cfd30970d7145b6a81715d1307d7b",
     "packages": [
         {
             "name": "api-platform/api-pack",
@@ -2275,12 +2275,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/domain.git",
-                "reference": "91e5aff19cbfada83e7af9ca7b623a15f48fdafb"
+                "reference": "796c8fffdf07b74a781497ecd6f403eb88a539d3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/domain/zipball/91e5aff19cbfada83e7af9ca7b623a15f48fdafb",
-                "reference": "91e5aff19cbfada83e7af9ca7b623a15f48fdafb",
+                "url": "https://api.github.com/repos/msgphp/domain/zipball/796c8fffdf07b74a781497ecd6f403eb88a539d3",
+                "reference": "796c8fffdf07b74a781497ecd6f403eb88a539d3",
                 "shasum": ""
             },
             "require": {
@@ -2303,7 +2303,8 @@
                 "symfony/http-kernel": "^3.4|^4.0",
                 "symfony/messenger": "^4.2",
                 "symfony/phpunit-bridge": "^3.4.9|^4.0.9",
-                "symfony/property-access": "^3.4|^4.0"
+                "symfony/property-access": "^3.4|^4.0",
+                "symfony/var-exporter": "^4.2"
             },
             "type": "library",
             "extra": {
@@ -2341,7 +2342,7 @@
                 "event sourcing",
                 "rich domain model"
             ],
-            "time": "2018-11-10T07:07:22+00:00"
+            "time": "2018-11-10T12:02:41+00:00"
         },
         {
             "name": "msgphp/eav",
@@ -2405,12 +2406,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/eav-bundle.git",
-                "reference": "c85a82ae56e8ce90277cd8669b27e0307ae82298"
+                "reference": "ad165675e93b81ba3ea98ed44b6f27715b2ade40"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/eav-bundle/zipball/c85a82ae56e8ce90277cd8669b27e0307ae82298",
-                "reference": "c85a82ae56e8ce90277cd8669b27e0307ae82298",
+                "url": "https://api.github.com/repos/msgphp/eav-bundle/zipball/ad165675e93b81ba3ea98ed44b6f27715b2ade40",
+                "reference": "ad165675e93b81ba3ea98ed44b6f27715b2ade40",
                 "shasum": ""
             },
             "require": {
@@ -2453,7 +2454,7 @@
                 "eav",
                 "entity-attribute-value"
             ],
-            "time": "2018-11-04T13:45:03+00:00"
+            "time": "2018-11-10T07:42:47+00:00"
         },
         {
             "name": "msgphp/user",
@@ -2461,12 +2462,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user.git",
-                "reference": "867bfdcc62b81f148042b84d3e36007215e5a7ab"
+                "reference": "01ccce544dfc8dfafb97c4c3d5c67c6fc7314075"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/user/zipball/867bfdcc62b81f148042b84d3e36007215e5a7ab",
-                "reference": "867bfdcc62b81f148042b84d3e36007215e5a7ab",
+                "url": "https://api.github.com/repos/msgphp/user/zipball/01ccce544dfc8dfafb97c4c3d5c67c6fc7314075",
+                "reference": "01ccce544dfc8dfafb97c4c3d5c67c6fc7314075",
                 "shasum": ""
             },
             "require": {
@@ -2519,7 +2520,7 @@
                 "security",
                 "user"
             ],
-            "time": "2018-11-07T12:39:10+00:00"
+            "time": "2018-11-10T12:43:13+00:00"
         },
         {
             "name": "msgphp/user-bundle",
@@ -2527,12 +2528,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user-bundle.git",
-                "reference": "7e2a3374e268c1cb0b257a5b323e3d5a61eb2e50"
+                "reference": "277834731e69054a8a2be67a51425fa48ee6ea7c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/user-bundle/zipball/7e2a3374e268c1cb0b257a5b323e3d5a61eb2e50",
-                "reference": "7e2a3374e268c1cb0b257a5b323e3d5a61eb2e50",
+                "url": "https://api.github.com/repos/msgphp/user-bundle/zipball/277834731e69054a8a2be67a51425fa48ee6ea7c",
+                "reference": "277834731e69054a8a2be67a51425fa48ee6ea7c",
                 "shasum": ""
             },
             "require": {
@@ -2590,7 +2591,7 @@
                 "security",
                 "user"
             ],
-            "time": "2018-11-04T13:47:58+00:00"
+            "time": "2018-11-10T08:00:53+00:00"
         },
         {
             "name": "msgphp/user-eav",
@@ -5073,16 +5074,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.1.1",
+            "version": "v1.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "9fb60f232af0764d58002e7872acb43a74506d25"
+                "reference": "27473c8bdf817b462dd26e9e4581795aa095d445"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/9fb60f232af0764d58002e7872acb43a74506d25",
-                "reference": "9fb60f232af0764d58002e7872acb43a74506d25",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/27473c8bdf817b462dd26e9e4581795aa095d445",
+                "reference": "27473c8bdf817b462dd26e9e4581795aa095d445",
                 "shasum": ""
             },
             "require": {
@@ -5116,7 +5117,7 @@
                 }
             ],
             "description": "Composer plugin for Symfony",
-            "time": "2018-09-03T08:17:12+00:00"
+            "time": "2018-11-10T12:25:57+00:00"
         },
         {
             "name": "symfony/form",
@@ -8077,16 +8078,16 @@
         },
         {
             "name": "sroze/companienv",
-            "version": "0.0.10",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sroze/companienv.git",
-                "reference": "c725fd8c0c65a710f7a58e0ceb4fb6b05b74e796"
+                "reference": "67591cb8b4fc2fdac7c3b9a657d633c7d4fff7bd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sroze/companienv/zipball/c725fd8c0c65a710f7a58e0ceb4fb6b05b74e796",
-                "reference": "c725fd8c0c65a710f7a58e0ceb4fb6b05b74e796",
+                "url": "https://api.github.com/repos/sroze/companienv/zipball/67591cb8b4fc2fdac7c3b9a657d633c7d4fff7bd",
+                "reference": "67591cb8b4fc2fdac7c3b9a657d633c7d4fff7bd",
                 "shasum": ""
             },
             "require": {
@@ -8126,7 +8127,7 @@
                 "configuration",
                 "dotenv"
             ],
-            "time": "2018-08-27T18:48:49+00:00"
+            "time": "2018-09-22T14:02:21+00:00"
         },
         {
             "name": "symfony/debug-bundle",
@@ -8748,7 +8749,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
-        "symfony/serializer": 20
+        "sroze/companienv": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

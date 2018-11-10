@@ -27,7 +27,6 @@
         "symfony/monolog-bundle": "^3.3",
         "symfony/orm-pack": "^1.0",
         "symfony/security-bundle": "^4.2",
-        "symfony/serializer": "^4.2@dev",
         "symfony/swiftmailer-bundle": "^3.2",
         "symfony/translation": "^4.2",
         "symfony/validator": "^4.2",
@@ -35,7 +34,7 @@
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.0",
-        "sroze/companienv": "^0.0.10",
+        "sroze/companienv": "dev-master",
         "symfony/debug-pack": "^1.0",
         "symfony/dotenv": "^4.2",
         "symfony/maker-bundle": "^1.9",
