@@ -9,8 +9,9 @@ bin/console doctrine:schema:update --force && \
 bin/console doctrine:fixtures:load -n
 [[ $? -ne 0 ]] && echo "Environment setup failed" && exit 1
 
-if [[ -f .env ]] ; then
-    source .env
+source .env
+if [[ -f .env.local ]] ; then
+    source .env.local
 fi
 
 if [[ ! -z $ELASTICSEARCH_HOST ]] ; then
