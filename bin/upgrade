@@ -8,7 +8,10 @@ SWIFT_MAILER="^3.2"
 MONOLOG="^3.3"
 MAKER="^1.9"
 
-source .env
+source .env.dist
+if [[ -f .env ]] ; then
+    source .env
+fi
 if [[ -f .env.local ]] ; then
     source .env.local
 fi
