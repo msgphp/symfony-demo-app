@@ -19,26 +19,26 @@
         "ramsey/uuid": "^3.8",
         "ramsey/uuid-doctrine": "^1.5",
         "sensio/framework-extra-bundle": "^5.2",
-        "symfony/console": "dev-master",
+        "symfony/console": "*",
         "symfony/flex": "^1.1",
-        "symfony/form": "dev-master",
-        "symfony/framework-bundle": "dev-master",
-        "symfony/messenger": "dev-master",
+        "symfony/form": "*",
+        "symfony/framework-bundle": "*",
+        "symfony/messenger": "*",
         "symfony/monolog-bundle": "^3.3",
         "symfony/orm-pack": "^1.0",
-        "symfony/security-bundle": "dev-master",
+        "symfony/security-bundle": "*",
         "symfony/swiftmailer-bundle": "^3.2",
-        "symfony/translation": "dev-master",
-        "symfony/validator": "dev-master",
+        "symfony/translation": "*",
+        "symfony/validator": "*",
         "webonyx/graphql-php": "^0.12"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.0",
         "symfony/debug-pack": "^1.0",
-        "symfony/dotenv": "dev-master",
+        "symfony/dotenv": "*",
         "symfony/maker-bundle": "^1.9",
-        "symfony/phpunit-bridge": "dev-master",
-        "symfony/web-server-bundle": "dev-master"
+        "symfony/phpunit-bridge": "*",
+        "symfony/web-server-bundle": "*"
     },
     "config": {
         "preferred-install": {
