@@ -13,7 +13,7 @@ use MsgPhp\Eav\Entity\AttributeValue as BaseAttributeValue;
  */
 class AttributeValue extends BaseAttributeValue
 {
-    /** @ORM\Id @ORM\Column(type="msgphp_attribute_value_id") */
+    /** @ORM\Id @ORM\Column(type="msgphp_attribute_value_id", length=191) */
     private $id;
 
     public function __construct(AttributeValueIdInterface $id, Attribute $attribute, $value)

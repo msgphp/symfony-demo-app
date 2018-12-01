@@ -12,7 +12,7 @@ use MsgPhp\User\Entity\Role as BaseRole;
  */
 class Role extends BaseRole
 {
-    /** @ORM\Id() @ORM\Column() */
+    /** @ORM\Id() @ORM\Column(length=191) */
     private $name;
 
     public function __construct(string $name)

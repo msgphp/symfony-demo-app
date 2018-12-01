@@ -6,7 +6,7 @@ use App\Entity\User\User;
 use MsgPhp\Domain\Projection\ProjectionDocumentTransformerInterface;
 use MsgPhp\Domain\Projection\ProjectionDocument;
 use Psr\Container\ContainerInterface;
-use Symfony\Component\DependencyInjection\ServiceSubscriberInterface;
+use Symfony\Contracts\Service\ServiceSubscriberInterface;
 
 final class DocumentTransformer implements ProjectionDocumentTransformerInterface, ServiceSubscriberInterface
 {

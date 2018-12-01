@@ -1,17 +1,11 @@
 #!/usr/bin/env bash
 
-composer install --no-scripts --quiet && \
-vendor/bin/companienv && \
-composer run-script post-install-cmd && \
-bin/console doctrine:database:drop --force  && \
+composer install && \
+bin/console doctrine:database:drop --force --if-exists && \
 bin/console doctrine:database:create && \
 bin/console doctrine:schema:update --force && \
 bin/console doctrine:fixtures:load -n
 [[ $? -ne 0 ]] && echo "Environment setup failed" && exit 1
-
-if [[ -f .env ]] ; then
-    source .env
-fi
 
 if [[ ! -z $ELASTICSEARCH_HOST ]] ; then
     bin/console projection:initialize-types --force && \

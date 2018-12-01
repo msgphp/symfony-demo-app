@@ -1,24 +1,21 @@
-parameters:
-    env(GOOGLE_OAUTH_CLIENT_ID): ~
-    env(GOOGLE_OAUTH_CLIENT_SECRET): ~
-    env(FACEBOOK_OAUTH_CLIENT_ID): ~
-    env(FACEBOOK_OAUTH_CLIENT_SECRET): ~
-
 hwi_oauth:
-    firewall_names:
-        - main
+    # list of names of the firewalls in which this bundle is active, this setting MUST be set
+    firewall_names: [main]
+
+    # https://github.com/hwi/HWIOAuthBundle/blob/master/Resources/doc/2-configuring_resource_owners.md
     resource_owners:
+        facebook:
+            type:                facebook
+            client_id:           '%env(FB_ID)%'
+            client_secret:       '%env(FB_SECRET)%'
+            scope:               "email"
+            options:
+                display: popup
+                csrf: true
         google:
             type: google
-            client_id: '%env(GOOGLE_OAUTH_CLIENT_ID)%'
-            client_secret: '%env(GOOGLE_OAUTH_CLIENT_SECRET)%'
-            scope: email
-            options:
-                csrf: true
-        facebook:
-            type: facebook
-            client_id: '%env(FACEBOOK_OAUTH_CLIENT_ID)%'
-            client_secret: '%env(FACEBOOK_OAUTH_CLIENT_SECRET)%'
+            client_id: '%env(GOOGLE_ID)%'
+            client_secret: '%env(GOOGLE_SECRET)%'
             scope: email
             options:
                 csrf: true
