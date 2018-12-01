@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "13de4ae8565d9bd992b0e13ff2157139",
+    "content-hash": "5b9e2da7cbc5977c0c228d58ea36c17c",
     "packages": [
         {
             "name": "api-platform/api-pack",
@@ -2272,7 +2272,7 @@
         },
         {
             "name": "msgphp/domain",
-            "version": "dev-master",
+            "version": "v0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/domain.git",
@@ -2347,7 +2347,7 @@
         },
         {
             "name": "msgphp/eav",
-            "version": "dev-master",
+            "version": "v0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/eav.git",
@@ -2403,7 +2403,7 @@
         },
         {
             "name": "msgphp/eav-bundle",
-            "version": "dev-master",
+            "version": "v0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/eav-bundle.git",
@@ -2459,7 +2459,7 @@
         },
         {
             "name": "msgphp/user",
-            "version": "dev-master",
+            "version": "v0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user.git",
@@ -2525,16 +2525,16 @@
         },
         {
             "name": "msgphp/user-bundle",
-            "version": "dev-master",
+            "version": "v0.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user-bundle.git",
-                "reference": "277834731e69054a8a2be67a51425fa48ee6ea7c"
+                "reference": "b08aba1488f1f251c33de869f7102a677c72e1d8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/user-bundle/zipball/277834731e69054a8a2be67a51425fa48ee6ea7c",
-                "reference": "277834731e69054a8a2be67a51425fa48ee6ea7c",
+                "url": "https://api.github.com/repos/msgphp/user-bundle/zipball/b08aba1488f1f251c33de869f7102a677c72e1d8",
+                "reference": "b08aba1488f1f251c33de869f7102a677c72e1d8",
                 "shasum": ""
             },
             "require": {
@@ -2592,7 +2592,7 @@
                 "security",
                 "user"
             ],
-            "time": "2018-11-10T08:00:53+00:00"
+            "time": "2018-12-01T10:00:20+00:00"
         },
         {
             "name": "msgphp/user-eav",

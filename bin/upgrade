@@ -1,13 +1,5 @@
 #!/usr/bin/env bash
 
-source .env.dist
-if [[ -f .env ]] ; then
-    source .env
-fi
-if [[ -f .env.local ]] ; then
-    source .env.local
-fi
-
 rm -rf .gitignore phpunit.xml.dist symfony.lock composer.lock vendor/ var/cache/* var/log/* && \
 rm -rf bin/console bin/phpunit src/Kernel.php public/bundles public/index.php && \
 php -dmemory_limit=-1 "$(which composer)" update && \
