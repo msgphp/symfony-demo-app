@@ -43,9 +43,9 @@ final class OauthUserProvider implements OAuthAwareUserProviderInterface
         }
 
         $attributeId = $this->factory->identify(Attribute::class, constant($const));
-        $userAttributeValue = $this->userAttributeValueRepository->findAllByAttributeIdAndValue($attributeId, $username)->first();
+        $userAttributeValues = $this->userAttributeValueRepository->findAllByAttributeIdAndValue($attributeId, $username);
 
-        if (!$userAttributeValue) {
+        if ($userAttributeValues->isEmpty()) {
             if (null === $email = $response->getEmail()) {
                 throw new CustomUserMessageAuthenticationException(sprintf('Oauth resource owner "%s" requires e-mail availability and appropriate read-privilege.', $owner));
             }
@@ -69,6 +69,7 @@ final class OauthUserProvider implements OAuthAwareUserProviderInterface
             $this->bus->dispatch(new AddUserAttributeValueCommand($userId, $attributeId, $username));
         } else {
             /** @var UserAttributeValue $userAttributeValue */
+            $userAttributeValue = $userAttributeValues->first();
             $user = $userAttributeValue->getUser();
         }
 
