@@ -1,10 +1,3 @@
-services:
-    _defaults:
-        public: false
-
-    api_name_converter:
-        class: Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter
-
 api_platform:
     title: MsgPHP demo API
     version: 1.0.0
@@ -12,6 +5,8 @@ api_platform:
     path_segment_name_generator: api_platform.path_segment_name_generator.dash
     resource_class_directories:
         - '%kernel.project_dir%/src/Api/Projection'
+#    mapping:
+#        paths: ['%kernel.project_dir%/src/Api/Projection']
     graphql:
         enabled: true
         graphiql:
@@ -21,3 +16,7 @@ api_platform:
     swagger:
         api_keys:
             - { name: Authorization, type: header }
+
+services:
+    api_name_converter:
+        class: Symfony\Component\Serializer\NameConverter\CamelCaseToSnakeCaseNameConverter
