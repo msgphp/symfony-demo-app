@@ -77,7 +77,7 @@ final class OneTimeLoginAuthenticator extends AbstractGuardAuthenticator
     {
         $oneTimeLoginToken = $this->getOneTimeLoginTokenOnce($this->getCredentials($request));
 
-        return new RedirectResponse($oneTimeLoginToken->getRedirectUrl() ?? $this->urlGenerator->generate('my_account'));
+        return new RedirectResponse($oneTimeLoginToken->getRedirectUrl() ?? $this->urlGenerator->generate('profile'));
     }
 
     public function supportsRememberMe(): bool

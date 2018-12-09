@@ -8,7 +8,7 @@
     <body>
         {% block header %}
             <header>
-                <span>★ <a href="{{ path('index') }}">The App</a></span>
+                <span>★ <a href="{{ path('home') }}">The App</a></span>
                 <nav>
                     <ul>
                         {% if app.user %}
@@ -18,14 +18,14 @@
                                     (Logged in using <em>{{ app.user.originUsername }}</em>)
                                 {% endif %}
                             </li>
-                            <li><a href="{{ path('my_account') }}">My account</a></li>
+                            <li><a href="{{ path('profile') }}">My Profile</a></li>
                             <li><a href="{{ path('logout') }}">Logout</a></li>
                         {% else %}
                             <li><a href="{{ path('login') }}">Login</a></li>
                             <li><a href="{{ path('register') }}">Register</a></li>
                         {% endif %}
                         {% if is_granted('ROLE_ADMIN') %}
-                            <li><a href="{{ path('index', {_switch_user: 'user@domain.dev'}) }}">Impersonate</a></li>
+                            <li><a href="{{ path('home', {_switch_user: 'user@domain.dev'}) }}">Impersonate</a></li>
                         {% endif %}
                     </ul>
                 </nav>

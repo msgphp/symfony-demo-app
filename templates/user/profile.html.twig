@@ -7,7 +7,7 @@
 } %}
 
 {% block body %}
-    <h1>My Account</h1>
+    <h1>My Profile</h1>
 
     <fieldset>
         <legend>Information</legend>
@@ -41,7 +41,7 @@
     <fieldset>
         <legend>API</legend>
         <ul>
-            <li>JWT token: <a href="{{ path('my_account', {'generate-jwt': true}) }}">Generate</a></li>
+            <li>JWT token: <a href="{{ path(app.request.attributes.get('_route'), {'generate-jwt': true}) }}">Generate</a></li>
         </ul>
     </fieldset>
 
@@ -54,12 +54,12 @@
                     {{ userEmail.email }}
                     {% if userEmail.confirmed %}
                         - Confirmed
-                        - <a href="{{ path('my_account', {'primary-email': userEmail.email}) }}">Mark primary</a>
+                        - <a href="{{ path(app.request.attributes.get('_route'), {'primary-email': userEmail.email}) }}">Mark primary</a>
                     {% else %}
                         - Unconfirmed
-                        - <a href="{{ path('my_account', {'confirm-email': userEmail.email}) }}">Send confirmation link</a>
+                        - <a href="{{ path(app.request.attributes.get('_route'), {'confirm-email': userEmail.email}) }}">Send confirmation link</a>
                     {% endif %}
-                    - <a href="{{ path('my_account', {'delete-email': userEmail.email}) }}">Delete</a>
+                    - <a href="{{ path(app.request.attributes.get('_route'), {'delete-email': userEmail.email}) }}">Delete</a>
                 </li>
             {% endfor %}
         </ul>

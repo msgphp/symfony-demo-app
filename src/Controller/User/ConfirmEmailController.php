@@ -10,8 +10,12 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
+/**
+ * @Route("/profile/confirm-email/{token}", name="email_confirm")
+ */
 final class ConfirmEmailController
 {
     /**
@@ -29,6 +33,6 @@ final class ConfirmEmailController
         $bus->dispatch(new ConfirmUserEmailCommand($userEmail->getEmail()));
         $flashBag->add('success', sprintf('Hi %s, your e-mail is confirmed.', $user->getEmail()));
 
-        return new RedirectResponse($urlGenerator->generate('my_account'));
+        return new RedirectResponse($urlGenerator->generate('profile'));
     }
 }

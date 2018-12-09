@@ -20,12 +20,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Twig\Environment;
 
-final class MyAccountController
+/**
+ * @Route("/profile", name="profile")
+ */
+final class ProfileController
 {
     /**
      * @ParamConverter("user", converter="msgphp.current_user")
@@ -49,7 +53,7 @@ final class MyAccountController
         if ($request->query->getBoolean('generate-jwt')) {
             $flashBag->add('success', sprintf('Generated JWT token: %s', $jwtTokenManager->create($securityUser)));
 
-            return new RedirectResponse($urlGenerator->generate('my_account'));
+            return new RedirectResponse($urlGenerator->generate('profile'));
         }
 
         // add email
@@ -60,7 +64,7 @@ final class MyAccountController
             $bus->dispatch(new AddUserEmailCommand($user->getId(), $email = $emailForm->getData()['email']));
             $flashBag->add('success', sprintf('E-mail %s added. We\'ve send you a confirmation link.', $email));
 
-            return new RedirectResponse($urlGenerator->generate('my_account'));
+            return new RedirectResponse($urlGenerator->generate('profile'));
         }
 
         // mark primary email
@@ -80,7 +84,7 @@ final class MyAccountController
             $bus->dispatch(new AddUserEmailCommand($user->getId(), $currentEmail, ['confirm' => true]));
             $flashBag->add('success', sprintf('E-mail %s marked primary.', $primaryEmail));
 
-            return new RedirectResponse($urlGenerator->generate('my_account'));
+            return new RedirectResponse($urlGenerator->generate('profile'));
         }
 
         // send email confirmation link
@@ -93,7 +97,7 @@ final class MyAccountController
             $sendEmailConfirmationUrl->notify($userEmail);
             $flashBag->add('success', 'We\'ve send you a e-mail confirmation link.');
 
-            return new RedirectResponse($urlGenerator->generate('my_account'));
+            return new RedirectResponse($urlGenerator->generate('profile'));
         }
 
         // delete email
@@ -109,7 +113,7 @@ final class MyAccountController
             $bus->dispatch(new DeleteUserEmailCommand($deleteEmail));
             $flashBag->add('success', sprintf('E-mail %s deleted.', $deleteEmail));
 
-            return new RedirectResponse($urlGenerator->generate('my_account'));
+            return new RedirectResponse($urlGenerator->generate('profile'));
         }
 
         // change password
@@ -120,11 +124,11 @@ final class MyAccountController
             $bus->dispatch(new ChangeUserCredentialCommand($user->getId(), ['password' => $passwordForm->getData()['password']]));
             $flashBag->add('success', 'Your password is now changed.');
 
-            return new RedirectResponse($urlGenerator->generate('my_account'));
+            return new RedirectResponse($urlGenerator->generate('profile'));
         }
 
         // render view
-        return new Response($twig->render('user/my_account.html.twig', [
+        return new Response($twig->render('user/profile.html.twig', [
             'email_form' => $emailForm->createView(),
             'password_form' => $passwordForm->createView(),
         ]));

@@ -10,10 +10,14 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Twig\Environment;
 
+/**
+ * @Route("/forgot-password", name="forgot_password")
+ */
 final class ForgotPasswordController
 {
     public function __invoke(
@@ -33,7 +37,7 @@ final class ForgotPasswordController
             $bus->dispatch(new RequestUserPasswordCommand($repository->findByUsername($email = $form->getData()['email'])->getId()));
             $flashBag->add('success', sprintf('Hi %s, we\'ve send you a password reset link.', $email));
 
-            return new RedirectResponse($urlGenerator->generate('index'));
+            return new RedirectResponse($urlGenerator->generate('home'));
         }
 
         return new Response($twig->render('user/forgot_password.html.twig', [
