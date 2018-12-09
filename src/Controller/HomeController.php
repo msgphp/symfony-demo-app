@@ -2,17 +2,18 @@
 
 namespace App\Controller;
 
+use App\Http\Responder;
+use App\Http\RespondTemplate;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Twig\Environment;
 
 /**
  * @Route("/", name="home")
  */
 final class HomeController
 {
-    public function __invoke(Environment $twig): Response
+    public function __invoke(Responder $responder): Response
     {
-        return new Response($twig->render('default.html.twig'));
+        return $responder->respond(new RespondTemplate('home.html.twig'));
     }
 }
