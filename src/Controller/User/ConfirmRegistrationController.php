@@ -3,14 +3,13 @@
 namespace App\Controller\User;
 
 use App\Entity\User\User;
+use App\Http\Responder;
+use App\Http\RespondRouteRedirect;
 use MsgPhp\User\Command\ConfirmUserCommand;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * @Route("/register/confirm/{token}", name="confirm_registration")
@@ -22,14 +21,14 @@ final class ConfirmRegistrationController
      */
     public function __invoke(
         User $user,
-        FlashBagInterface $flashBag,
-        UrlGeneratorInterface $urlGenerator,
+        Responder $responder,
         MessageBusInterface $bus
     ): Response
     {
         $bus->dispatch(new ConfirmUserCommand($user->getId()));
-        $flashBag->add('success', sprintf('Hi %s, your registration is confirmed. You can now login.', $user->getCredential()->getUsername()));
 
-        return new RedirectResponse($urlGenerator->generate('login'));
+        return $responder->respond((new RespondRouteRedirect('login'))->withFlashes([
+            'success' => sprintf('Hi %s, your registration is confirmed. You can now login.', $user->getEmail()),
+        ]));
     }
 }
