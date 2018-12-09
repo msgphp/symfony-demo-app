@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-rm -rf .gitignore phpunit.xml.dist symfony.lock composer.lock vendor/ var/cache/* var/log/* && \
-rm -rf bin/console bin/phpunit src/Kernel.php public/bundles public/index.php && \
-php -dmemory_limit=-1 "$(which composer)" update && \
-rm -rf src/Controller/.gitignore src/Entity/.gitignore translations/.gitignore
+rm -f .gitignore phpunit.xml.dist symfony.lock composer.lock && \
+rm -rf bin/ config/ public/ src/ var/ vendor/ && \
+php -dmemory_limit=-1 "$(which composer)" update
