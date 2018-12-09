@@ -1,5 +1,5 @@
 {% extends 'email.txt.twig' %}
 
 {% block body %}
-Confirm your e-mail at {{ url('email_confirm', {token: userEmail.confirmationToken}) }}
+Confirm your e-mail at {{ url('confirm_email', {token: userEmail.confirmationToken}) }}
 {% endblock %}

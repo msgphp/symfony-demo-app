@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * @Route("/profile/confirm-email/{token}", name="email_confirm")
+ * @Route("/profile/confirm-email/{token}", name="confirm_email")
  */
 final class ConfirmEmailController
 {

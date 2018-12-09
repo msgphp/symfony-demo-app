@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
- * @Route("/register/confirm/{token}", name="register_confirm")
+ * @Route("/register/confirm/{token}", name="confirm_registration")
  */
 final class ConfirmRegistrationController
 {
