@@ -12,9 +12,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
+/**
+ * @Route("/reset-password/{token}", name="reset_password")
+ */
 final class ResetPasswordController
 {
     /**
@@ -37,7 +41,7 @@ final class ResetPasswordController
             $bus->dispatch(new ChangeUserCredentialCommand($user->getId(), ['password' => $form->getData()['password']]));
             $flashBag->add('success', sprintf('Hi %s, we\'ve reset your password.', $user->getEmail()));
 
-            return new RedirectResponse($urlGenerator->generate('index'));
+            return new RedirectResponse($urlGenerator->generate('home'));
         }
 
         return new Response($twig->render('user/reset_password.html.twig', [

@@ -10,9 +10,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Environment;
 
+/**
+ * @Route("/register", name="register")
+ */
 final class RegisterController
 {
     public function __invoke(
@@ -31,7 +35,7 @@ final class RegisterController
             $bus->dispatch(new CreateUserCommand($data = $form->getData()));
             $flashBag->add('success', sprintf('Hi %s, you\'re successfully registered. We\'ve send you a confirmation link.', $data['email']));
 
-            return new RedirectResponse($urlGenerator->generate('index'));
+            return new RedirectResponse($urlGenerator->generate('home'));
         }
 
         return new Response($twig->render('user/register.html.twig', [

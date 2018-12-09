@@ -39,7 +39,7 @@ security:
             form_login:
                 login_path: login
                 check_path: login
-                default_target_path: index
+                default_target_path: home
                 username_parameter: email
                 password_parameter: password
                 remember_me: true
@@ -65,8 +65,4 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        - { path: ^/(api/|oauth/)?login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/(forget|reset)\-password, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api/me, roles: IS_AUTHENTICATED_FULLY }
-        - { path: ^/my\-account, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/profile, roles: ROLE_USER }
