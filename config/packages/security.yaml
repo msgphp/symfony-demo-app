@@ -2,10 +2,10 @@ security:
     encoders:
         MsgPhp\User\Infra\Security\SecurityUser: bcrypt
 
+    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-         msgphp_user: { id: MsgPhp\User\Infra\Security\SecurityUserProvider }
-         msgphp_user_jwt: { id: MsgPhp\User\Infra\Security\Jwt\SecurityUserProvider }
-
+        msgphp_user: { id: MsgPhp\User\Infra\Security\SecurityUserProvider }
+        msgphp_user_jwt: { id: MsgPhp\User\Infra\Security\Jwt\SecurityUserProvider }
     firewalls:
         api_login:
             pattern: ^/api/login
@@ -31,7 +31,6 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
         main:
             anonymous: true
             provider: msgphp_user
@@ -57,15 +56,16 @@ security:
                     google: /oauth/login-check/google
                     facebook: /oauth/login-check/facebook
                 oauth_user_provider:
-                    service: App\Security\OauthUserProvider
+                   service: App\Security\OauthUserProvider
             guard:
                 authenticators:
                     - App\Security\OneTimeLoginAuthenticator
 
+    # Easy way to control access for large sections of your site
+    # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/(api/|oauth/)?login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/(forget|reset)\-password, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-
         - { path: ^/api/me, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/my\-account, roles: IS_AUTHENTICATED_FULLY }
