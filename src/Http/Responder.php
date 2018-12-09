@@ -27,22 +27,20 @@ final class Responder
         $this->flashBag = $flashBag;
     }
 
-    public function notFound(): HttpException
-    {
-        return new NotFoundHttpException();
-    }
-
-    public function badRequest(): HttpException
-    {
-        return new BadRequestHttpException();
-    }
-
     public function respond(Respond $respond): Response
     {
         foreach ($respond->flashes as $type => $messages) {
             foreach ((array) $messages as $message) {
                 $this->flashBag->add($type, $message);
             }
+        }
+
+        if ($respond instanceof RespondBadRequest) {
+            throw new BadRequestHttpException(null, null, 0, $respond->headers);
+        }
+
+        if ($respond instanceof RespondNotFound) {
+            throw new NotFoundHttpException(null, null, 0, $respond->headers);
         }
 
         if ($respond instanceof RespondTemplate) {

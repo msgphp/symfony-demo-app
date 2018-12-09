@@ -8,6 +8,7 @@ use App\EventSubscriber\SendEmailConfirmationUrl;
 use App\Form\User\AddEmailType;
 use App\Form\User\ChangePasswordType;
 use App\Http\Responder;
+use App\Http\RespondNotFound;
 use App\Http\RespondRouteRedirect;
 use App\Http\RespondTemplate;
 use App\Security\PasswordConfirmation;
@@ -68,7 +69,7 @@ final class ProfileController
         if ($primaryEmail = $request->query->get('primary-email')) {
             /** @var UserEmail $userEmail */
             if (!($userEmail = $user->getEmails()->get($primaryEmail)) || !$userEmail->isConfirmed()) {
-                throw $responder->notFound();
+                return $responder->respond(new RespondNotFound());
             }
 
             if (null !== $confirmResponse = $passwordConfirmation->confirm($request)) {
@@ -89,7 +90,7 @@ final class ProfileController
         if ($confirmEmail = $request->query->get('confirm-email')) {
             /** @var UserEmail $userEmail */
             if (!($userEmail = $user->getEmails()->get($confirmEmail)) || $userEmail->isConfirmed()) {
-                throw $responder->notFound();
+                return $responder->respond(new RespondNotFound());
             }
 
             $sendEmailConfirmationUrl->notify($userEmail);
@@ -102,7 +103,7 @@ final class ProfileController
         // delete email
         if ($deleteEmail = $request->query->get('delete-email')) {
             if (!$user->getEmails()->containsKey($deleteEmail)) {
-                throw $responder->notFound();
+                return $responder->respond(new RespondNotFound());
             }
 
             if (null !== $confirmResponse = $passwordConfirmation->confirm($request)) {
