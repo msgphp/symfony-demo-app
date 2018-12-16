@@ -9,4 +9,5 @@ COMPOSER="$(which php) -dmemory_limit=-1 $(which composer)"
 
 rm -rf var/cache var/log && \
 $COMPOSER update && \
-$COMPOSER symfony:sync-recipes --force
+$COMPOSER symfony:sync-recipes --force && \
+mv .env .env.dist

@@ -8,7 +8,7 @@ bin/console doctrine:schema:update --force && \
 bin/console doctrine:fixtures:load -n
 [[ $? -ne 0 ]] && echo "Environment setup failed" && exit 1
 
-source .env.dist .env .env.local
+source .env.dist .env.local
 
 if [[ ! -z $ELASTICSEARCH_HOST ]] ; then
     bin/console projection:initialize-types --force && \
@@ -17,6 +17,7 @@ if [[ ! -z $ELASTICSEARCH_HOST ]] ; then
 fi
 
 if [[ ! -f config/jwt/private.pem || ! -f config/jwt/public.pem ]] ; then
+    echo "Pass phrase: ${JWT_PASSPHRASE}"
     openssl genrsa -out config/jwt/private.pem -aes256 4096 && \
     openssl rsa -pubout -in config/jwt/private.pem -out config/jwt/public.pem
     [[ $? -ne 0 ]] && echo "JWT generation failed"
