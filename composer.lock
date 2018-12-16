@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5b9e2da7cbc5977c0c228d58ea36c17c",
+    "content-hash": "de827d2d255228d3fab5fb621524295b",
     "packages": [
         {
             "name": "api-platform/api-pack",
@@ -508,16 +508,16 @@
         },
         {
             "name": "doctrine/dbal",
-            "version": "v2.9.0",
+            "version": "v2.9.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/dbal.git",
-                "reference": "21fdabe2fc01e004e1966f200d900554876bc63c"
+                "reference": "ec74d6e300d78fbc896669c3ca57ef9719adc9c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/dbal/zipball/21fdabe2fc01e004e1966f200d900554876bc63c",
-                "reference": "21fdabe2fc01e004e1966f200d900554876bc63c",
+                "url": "https://api.github.com/repos/doctrine/dbal/zipball/ec74d6e300d78fbc896669c3ca57ef9719adc9c6",
+                "reference": "ec74d6e300d78fbc896669c3ca57ef9719adc9c6",
                 "shasum": ""
             },
             "require": {
@@ -586,7 +586,7 @@
                 "php",
                 "queryobject"
             ],
-            "time": "2018-12-04T04:39:48+00:00"
+            "time": "2018-12-14T04:51:13+00:00"
         },
         {
             "name": "doctrine/doctrine-bundle",
@@ -3000,16 +3000,16 @@
         },
         {
             "name": "php-http/client-common",
-            "version": "1.8.1",
+            "version": "1.8.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/client-common.git",
-                "reference": "0b9ce659aa46aee106f8c66597ea0c070fcd9dff"
+                "reference": "efe327f4305813aa9025662259b78323d25b9948"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/client-common/zipball/0b9ce659aa46aee106f8c66597ea0c070fcd9dff",
-                "reference": "0b9ce659aa46aee106f8c66597ea0c070fcd9dff",
+                "url": "https://api.github.com/repos/php-http/client-common/zipball/efe327f4305813aa9025662259b78323d25b9948",
+                "reference": "efe327f4305813aa9025662259b78323d25b9948",
                 "shasum": ""
             },
             "require": {
@@ -3057,7 +3057,7 @@
                 "http",
                 "httplug"
             ],
-            "time": "2018-10-09T06:46:29+00:00"
+            "time": "2018-12-14T22:12:45+00:00"
         },
         {
             "name": "php-http/discovery",
@@ -4236,16 +4236,16 @@
         },
         {
             "name": "sensio/framework-extra-bundle",
-            "version": "v5.2.3",
+            "version": "v5.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "1032c7077fd1a6f24f98b5a8377938000859f35d"
+                "reference": "1fdf591c4b388e62dbb2579de89c1560b33f865d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/1032c7077fd1a6f24f98b5a8377938000859f35d",
-                "reference": "1032c7077fd1a6f24f98b5a8377938000859f35d",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/1fdf591c4b388e62dbb2579de89c1560b33f865d",
+                "reference": "1fdf591c4b388e62dbb2579de89c1560b33f865d",
                 "shasum": ""
             },
             "require": {
@@ -4303,7 +4303,7 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2018-11-30T18:25:56+00:00"
+            "time": "2018-12-11T16:59:23+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -5130,16 +5130,16 @@
         },
         {
             "name": "symfony/flex",
-            "version": "v1.1.8",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "955774ecf07b10230bb5b44e150ba078b45f68fa"
+                "reference": "4a7cd6d28041ebcdaecbe9f832cc3bc2f4ff4831"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/955774ecf07b10230bb5b44e150ba078b45f68fa",
-                "reference": "955774ecf07b10230bb5b44e150ba078b45f68fa",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/4a7cd6d28041ebcdaecbe9f832cc3bc2f4ff4831",
+                "reference": "4a7cd6d28041ebcdaecbe9f832cc3bc2f4ff4831",
                 "shasum": ""
             },
             "require": {
@@ -5148,7 +5148,8 @@
             },
             "require-dev": {
                 "composer/composer": "^1.0.2",
-                "symfony/phpunit-bridge": "^3.2.8"
+                "symfony/phpunit-bridge": "^3.4.19|^4.1.8",
+                "symfony/process": "^2.7|^3.0|^4.0"
             },
             "type": "composer-plugin",
             "extra": {
@@ -5173,7 +5174,7 @@
                 }
             ],
             "description": "Composer plugin for Symfony",
-            "time": "2018-11-15T06:11:38+00:00"
+            "time": "2018-12-11T14:13:56+00:00"
         },
         {
             "name": "symfony/form",
@@ -7910,25 +7911,25 @@
         },
         {
             "name": "symfony/debug-pack",
-            "version": "v1.0.6",
+            "version": "v1.0.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug-pack.git",
-                "reference": "630548c117a5f9e27d3385787641629945b6de50"
+                "reference": "09a4a1e9bf2465987d4f79db0ad6c11cc632bc79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug-pack/zipball/630548c117a5f9e27d3385787641629945b6de50",
-                "reference": "630548c117a5f9e27d3385787641629945b6de50",
+                "url": "https://api.github.com/repos/symfony/debug-pack/zipball/09a4a1e9bf2465987d4f79db0ad6c11cc632bc79",
+                "reference": "09a4a1e9bf2465987d4f79db0ad6c11cc632bc79",
                 "shasum": ""
             },
             "require": {
                 "easycorp/easy-log-handler": "^1.0.7",
                 "php": "^7.0",
-                "symfony/debug-bundle": "^3.3|^4.0",
+                "symfony/debug-bundle": "*",
                 "symfony/monolog-bundle": "^3.0",
-                "symfony/profiler-pack": "^1.0",
-                "symfony/var-dumper": "^3.3|^4.0"
+                "symfony/profiler-pack": "*",
+                "symfony/var-dumper": "*"
             },
             "type": "symfony-pack",
             "notification-url": "https://packagist.org/downloads/",
@@ -7936,7 +7937,7 @@
                 "MIT"
             ],
             "description": "A debug pack for Symfony projects",
-            "time": "2018-08-10T15:18:32+00:00"
+            "time": "2018-12-10T12:11:11+00:00"
         },
         {
             "name": "symfony/dotenv",
@@ -7997,16 +7998,16 @@
         },
         {
             "name": "symfony/maker-bundle",
-            "version": "v1.9.0",
+            "version": "v1.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/maker-bundle.git",
-                "reference": "e873047b6022a0343c9354f65d5d47b9e351dd53"
+                "reference": "aa37ea1323ac888913bdd3e5f83d846798729449"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/e873047b6022a0343c9354f65d5d47b9e351dd53",
-                "reference": "e873047b6022a0343c9354f65d5d47b9e351dd53",
+                "url": "https://api.github.com/repos/symfony/maker-bundle/zipball/aa37ea1323ac888913bdd3e5f83d846798729449",
+                "reference": "aa37ea1323ac888913bdd3e5f83d846798729449",
                 "shasum": ""
             },
             "require": {
@@ -8059,7 +8060,7 @@
                 "scaffold",
                 "scaffolding"
             ],
-            "time": "2018-11-03T18:25:11+00:00"
+            "time": "2018-12-13T18:54:47+00:00"
         },
         {
             "name": "symfony/phpunit-bridge",
@@ -8233,23 +8234,23 @@
         },
         {
             "name": "symfony/profiler-pack",
-            "version": "v1.0.3",
+            "version": "v1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/profiler-pack.git",
-                "reference": "fa2e2dad522a3bef322196abad28ffce6d0fdbc5"
+                "reference": "99c4370632c2a59bb0444852f92140074ef02209"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/profiler-pack/zipball/fa2e2dad522a3bef322196abad28ffce6d0fdbc5",
-                "reference": "fa2e2dad522a3bef322196abad28ffce6d0fdbc5",
+                "url": "https://api.github.com/repos/symfony/profiler-pack/zipball/99c4370632c2a59bb0444852f92140074ef02209",
+                "reference": "99c4370632c2a59bb0444852f92140074ef02209",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.0",
-                "symfony/stopwatch": "^3.3|^4.0",
-                "symfony/twig-bundle": "^3.3|^4.0",
-                "symfony/web-profiler-bundle": "^3.3|^4.0"
+                "symfony/stopwatch": "*",
+                "symfony/twig-bundle": "*",
+                "symfony/web-profiler-bundle": "*"
             },
             "type": "symfony-pack",
             "notification-url": "https://packagist.org/downloads/",
@@ -8257,7 +8258,7 @@
                 "MIT"
             ],
             "description": "A pack for the Symfony web profiler",
-            "time": "2017-12-12T01:48:24+00:00"
+            "time": "2018-12-10T12:11:44+00:00"
         },
         {
             "name": "symfony/var-dumper",

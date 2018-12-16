@@ -21,7 +21,7 @@
         "sensio/framework-extra-bundle": "^5.2",
         "symfony/console": "*",
         "symfony/contracts": "^1.0",
-        "symfony/flex": "^1.1",
+        "symfony/flex": "^1.1.9",
         "symfony/form": "*",
         "symfony/framework-bundle": "*",
         "symfony/messenger": "*",

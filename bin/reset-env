@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+rm -rf var/cache var/log && \
 composer install && \
 bin/console doctrine:database:drop --force --if-exists && \
 bin/console doctrine:database:create && \
