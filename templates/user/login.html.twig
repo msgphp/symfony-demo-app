@@ -11,15 +11,15 @@
 
         <div>
             <input type="submit" value="Login" />
-            <p><a href="{{ url('forgot_password') }}">Forgot password?</a></p>
+            <p><a href="{{ url('forgot_password') }}">Forgot your password?</a></p>
         </div>
     {{ form_end(form) }}
 
-    <h2>Or login using:</h2>
+    <h2>Or Login Using:</h2>
 
-    {% include 'partials/oauth_providers.html.twig' %}
+    {% include 'partials/oauth/login_entrypoint.html.twig' %}
 
-    <h2>Got a one-time-login token?</h2>
+    <h2>Got a One-Time-Login Token?</h2>
 
     {{ form_start(oneTimeLoginForm) }}
         {{ form_errors(oneTimeLoginForm) }}

@@ -13,7 +13,6 @@
         <legend>Information</legend>
         <ul>
             <li>ID: <code>{{ userId }}</code></li>
-            <li>Premium account: {{ msgphp_user.userType(user, 'App\\Entity\\User\\PremiumUser') ? '✔ Yes' : '✗ No' }}</li>
             <li>
                 Linked  accounts:
                 <ul>
@@ -29,7 +28,7 @@
                 Roles:
                 <ul>
                     {% for role in app.user.roles %}
-                        <li>{{ ('roles.' ~ role)|trans }}</li>
+                        <li>{{ ('role.' ~ role)|trans }}</li>
                     {% else %}
                         <li><em>None</em></li>
                     {% endfor %}
@@ -75,7 +74,7 @@
     </fieldset>
 
     <fieldset>
-        <legend>Change password</legend>
+        <legend>Change Password</legend>
         {{ form_start(password_form) }}
             {{ form_errors(password_form) }}
             {{ form_row(password_form.currentPassword.password, {label: 'Current password', translation_domain: false}) }}

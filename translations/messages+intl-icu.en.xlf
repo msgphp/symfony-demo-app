@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <!-- Role Names -->
+            <trans-unit id="role.ROLE_USER">
+                <source>role.ROLE_USER</source>
+                <target>Regular User</target>
+            </trans-unit>
+            <trans-unit id="role.ROLE_DISABLED_USER">
+                <source>role.ROLE_DISABLED_USER</source>
+                <target>Inactive User</target>
+            </trans-unit>
+            <trans-unit id="role.ROLE_ENABLED_USER">
+                <source>role.ROLE_ENABLED_USER</source>
+                <target>Active User</target>
+            </trans-unit>
+            <trans-unit id="role.ROLE_PREMIUM_USER">
+                <source>role.ROLE_PREMIUM_USER</source>
+                <target>Premium User</target>
+            </trans-unit>
+            <trans-unit id="role.ROLE_ADMIN">
+                <source>role.ROLE_ADMIN</source>
+                <target>Administrator</target>
+            </trans-unit>
+
+            <!-- OAuth Resource Owner Names -->
+            <trans-unit id="oauth.resource_owner.facebook">
+                <source>oauth.resource_owner.facebook</source>
+                <target>Facebook</target>
+            </trans-unit>
+            <trans-unit id="oauth.resource_owner.google">
+                <source>oauth.resource_owner.google</source>
+                <target>Google</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

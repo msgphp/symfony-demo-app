@@ -1,0 +1,5 @@
+<ul>
+    {% for owner in hwi_oauth_resource_owners() %}
+        <li><a href="{{ hwi_oauth_login_url(owner) }}">{{ ('oauth.resource_owner.' ~ owner)|trans }}</a></li>
+    {% endfor %}
+</ul>
