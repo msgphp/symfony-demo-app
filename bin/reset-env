@@ -10,7 +10,7 @@ bin/console doctrine:fixtures:load -n
 
 source .env.dist .env.local
 
-if [[ -n $ELASTICSEARCH_HOST ]]; then
+if [[ ${ELASTICSEARCH_HOST} ]]; then
     bin/console projection:initialize-types --force && \
     bin/console projection:synchronize
     [[ $? -ne 0 ]] && echo "Projection synchronization failed"
