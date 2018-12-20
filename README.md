@@ -2,7 +2,7 @@
 
 A message driven Symfony demo application with basic user management, a REST/GraphQL API and OAuth/JWT authentication.
 
-[![Latest Stable Version](https://poser.pugx.org/msgphp/symfony-demo-app/v/stable)](https://packagist.org/packages/msgphp/symfony-demo-app)
+[![Latest Stable Version](https://poser.pugx.org/msgphp/symfony-demo-app/v/stable)](https://packagist.org/packages/msgphp/symfony-demo-app) [![Build Status](https://travis-ci.org/msgphp/symfony-demo-app.svg?branch=master)](https://travis-ci.org/msgphp/symfony-demo-app)
 
 > [MsgPHP](https://msgphp.github.io/) is a project that aims to provide (common) message based domain layers for your application. It has a low development time overhead and avoids being overly opinionated.
 
