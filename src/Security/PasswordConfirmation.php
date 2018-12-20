@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Security;
 
 use MsgPhp\User\Infra\Form\Type\HashedPasswordType;
@@ -29,14 +31,16 @@ final class PasswordConfirmation
 
     public function confirm(Request $request): ?Response
     {
-        if (null === $session = $request->getSession()) {
+        $session = $request->getSession();
+
+        if (null === $session) {
             throw new \LogicException('Session not available.');
         }
 
         $hash = md5(implode("\0", [
             $this->secret,
             $request->getClientIp(),
-            $request->getUriForPath($request->getRequestUri())
+            $request->getUriForPath($request->getRequestUri()),
         ]));
 
         if ($session->has($hash)) {

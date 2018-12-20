@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api\Projection;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
@@ -37,16 +39,16 @@ class UserProjection implements ProjectionInterface, DocumentMappingProviderInte
     public $id;
 
     /**
-     * @var string Primary e-mail address
-     * @Groups({"read", "write"})
-     */
-    public $email;
-
-    /**
      * @var string|null Globally unique domain identifier (Optional in "write")
      * @Groups({"read", "write"})
      */
     public $userId;
+
+    /**
+     * @var string Primary e-mail address
+     * @Groups({"read", "write"})
+     */
+    public $email;
 
     /**
      * @var string|null Plain password (Required in "write")
@@ -55,14 +57,14 @@ class UserProjection implements ProjectionInterface, DocumentMappingProviderInte
     public $password;
 
     /**
-     * @return $this
+     * @return static
      */
     public static function fromDocument(array $document): ProjectionInterface
     {
         $projection = new static();
         $projection->id = $document['id'] ?? null;
-        $projection->email = $document['email'] ?? null;
         $projection->userId = $document['user_id'] ?? null;
+        $projection->email = $document['email'] ?? null;
 
         return $projection;
     }
@@ -71,8 +73,8 @@ class UserProjection implements ProjectionInterface, DocumentMappingProviderInte
     {
         yield static::class => [
             'id' => 'text',
-            'email' => 'text',
             'user_id' => 'text',
+            'email' => 'text',
         ];
     }
 }

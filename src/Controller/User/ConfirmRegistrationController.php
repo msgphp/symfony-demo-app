@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\User;
 
 use App\Entity\User\User;
@@ -23,8 +25,7 @@ final class ConfirmRegistrationController
         User $user,
         Responder $responder,
         MessageBusInterface $bus
-    ): Response
-    {
+    ): Response {
         $bus->dispatch(new ConfirmUserCommand($user->getId()));
 
         return $responder->respond((new RespondRouteRedirect('login'))->withFlashes([

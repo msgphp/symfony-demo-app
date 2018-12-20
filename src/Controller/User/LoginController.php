@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\User;
 
 use App\Form\User\LoginType;
@@ -23,8 +25,9 @@ final class LoginController
         Responder $responder,
         FormFactoryInterface $formFactory,
         AuthenticationUtils $authenticationUtils
-    ): Response
-    {
+    ): Response {
+        $lastAuthError = $authenticationUtils->getLastAuthenticationError(true);
+
         // one-time login
         $oneTimeLoginForm = $formFactory->createNamed('', OneTimeLoginType::class);
 
@@ -33,8 +36,8 @@ final class LoginController
             'email' => $authenticationUtils->getLastUsername(),
         ]);
 
-        if (null !== $error = $authenticationUtils->getLastAuthenticationError(true)) {
-            $form->addError(new FormError($error->getMessage(), $error->getMessageKey(), $error->getMessageData()));
+        if (null !== $lastAuthError) {
+            $form->addError(new FormError($lastAuthError->getMessage(), $lastAuthError->getMessageKey(), $lastAuthError->getMessageData()));
         }
 
         return $responder->respond(new RespondTemplate('user/login.html.twig', [

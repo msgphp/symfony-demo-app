@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Security;
 
 use App\Entity\User\OneTimeLoginToken;
@@ -48,7 +50,9 @@ final class OneTimeLoginAuthenticator extends AbstractGuardAuthenticator
 
     public function getUser($credentials, UserProviderInterface $userProvider): ?UserInterface
     {
-        if (null === $oneTimeLoginToken = $this->getOneTimeLoginToken($credentials)) {
+        $oneTimeLoginToken = $this->getOneTimeLoginToken($credentials);
+
+        if (null === $oneTimeLoginToken) {
             return null;
         }
 
@@ -61,7 +65,9 @@ final class OneTimeLoginAuthenticator extends AbstractGuardAuthenticator
             return false;
         }
 
-        if (null === $oneTimeLoginToken = $this->getOneTimeLoginToken($credentials)) {
+        $oneTimeLoginToken = $this->getOneTimeLoginToken($credentials);
+
+        if (null === $oneTimeLoginToken) {
             return false;
         }
 
@@ -76,6 +82,10 @@ final class OneTimeLoginAuthenticator extends AbstractGuardAuthenticator
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): ?Response
     {
         $oneTimeLoginToken = $this->getOneTimeLoginTokenOnce($this->getCredentials($request));
+
+        if (null === $oneTimeLoginToken) {
+            return null;
+        }
 
         return new RedirectResponse($oneTimeLoginToken->getRedirectUrl() ?? $this->urlGenerator->generate('profile'));
     }

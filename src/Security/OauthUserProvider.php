@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Security;
 
 use App\Entity\Eav\Attribute;
@@ -38,11 +40,11 @@ final class OauthUserProvider implements OAuthAwareUserProviderInterface
         $owner = $response->getResourceOwner()->getName();
         $username = $response->getUsername();
 
-        if (!defined($const = Attribute::class.'::'.strtoupper($owner).'_OAUTH_ID')) {
+        if (!\defined($const = Attribute::class.'::'.strtoupper($owner).'_OAUTH_ID')) {
             throw new \LogicException(sprintf('Missing constant "%s" for OAuth resoure owner "%s"', $const, $owner));
         }
 
-        $attributeId = $this->factory->identify(Attribute::class, constant($const));
+        $attributeId = $this->factory->identify(Attribute::class, \constant($const));
         $userAttributeValues = $this->userAttributeValueRepository->findAllByAttributeIdAndValue($attributeId, $username);
 
         if ($userAttributeValues->isEmpty()) {

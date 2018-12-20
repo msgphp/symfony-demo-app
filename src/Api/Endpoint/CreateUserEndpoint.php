@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api\Endpoint;
 
 use App\Api\Projection\Document\DocumentIdentity;
@@ -9,6 +11,7 @@ use MsgPhp\User\Infra\Uuid\UserId;
 use MsgPhp\User\Password\PasswordHashingInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -19,6 +22,10 @@ final class CreateUserEndpoint
         $userId = UserId::fromValue($data->userId);
         $docId = $documentIdentity->identifyId($userId);
         $locationUrl = $urlGenerator->generate('api_users_get_item', ['id' => $docId], UrlGeneratorInterface::ABSOLUTE_URL);
+
+        if (null === $data->password) {
+            throw new BadRequestHttpException('Missing password field.');
+        }
 
         $bus->dispatch(new CreateUserCommand([
             'id' => $userId,

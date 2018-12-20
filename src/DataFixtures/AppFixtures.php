@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DataFixtures;
 
 use App\Entity\Eav\Attribute;
@@ -29,7 +31,7 @@ final class AppFixtures extends Fixture
         $this->passwordHashing = $passwordHashing;
     }
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
         // roles
         $manager->persist($adminRole = new Role(RoleProvider::ROLE_ADMIN));
@@ -93,7 +95,10 @@ final class AppFixtures extends Fixture
 
     private function createPremiumUser(string $email, string $password = self::PASSWORD): PremiumUser
     {
-        return $this->createUser($email, $password, PremiumUser::class);
+        /** @var PremiumUser $user */
+        $user = $this->createUser($email, $password, PremiumUser::class);
+
+        return $user;
     }
 
     private function createUserAttributeValue(User $user, Attribute $attribute, $value): UserAttributeValue

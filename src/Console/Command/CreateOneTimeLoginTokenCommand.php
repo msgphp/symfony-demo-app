@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Command;
 
 use App\Entity\User\OneTimeLoginToken;
@@ -39,8 +41,17 @@ final class CreateOneTimeLoginTokenCommand extends Command
     {
         $io = new SymfonyStyle($input, $output);
         $token = $input->getOption('token');
-        if (null !== $token && null !== $this->em->find(OneTimeLoginToken::class, $token)) {
-            throw new \LogicException(sprintf('The token "%s" already exists.', $token));
+
+        if (null !== $token) {
+            if (!is_scalar($token)) {
+                throw new \UnexpectedValueException('Unexpected token');
+            }
+
+            $token = (string) $token;
+
+            if (null !== $this->em->find(OneTimeLoginToken::class, $token)) {
+                throw new \LogicException(sprintf('The token "%s" already exists.', $token));
+            }
         }
 
         $username = $input->getArgument('username');

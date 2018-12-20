@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Form\User;
 
 use MsgPhp\User\Infra\Form\Type\HashedPasswordType;
@@ -9,7 +11,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class ChangePasswordType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('currentPassword', HashedPasswordType::class, [
             'password_confirm_current' => true,

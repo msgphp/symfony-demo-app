@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\User;
 
 use App\Entity\User\User;
@@ -44,8 +46,7 @@ final class ProfileController
         PasswordConfirmation $passwordConfirmation,
         SendEmailConfirmationUrl $sendEmailConfirmationUrl,
         UserInterface $securityUser
-    ): Response
-    {
+    ): Response {
         // generate JWT token
         if ($request->query->getBoolean('generate-jwt')) {
             return $responder->respond((new RespondRouteRedirect('profile'))->withFlashes([
@@ -72,7 +73,9 @@ final class ProfileController
                 return $responder->respond(new RespondNotFound());
             }
 
-            if (null !== $confirmResponse = $passwordConfirmation->confirm($request)) {
+            $confirmResponse = $passwordConfirmation->confirm($request);
+
+            if (null !== $confirmResponse) {
                 return $confirmResponse;
             }
 
@@ -106,7 +109,9 @@ final class ProfileController
                 return $responder->respond(new RespondNotFound());
             }
 
-            if (null !== $confirmResponse = $passwordConfirmation->confirm($request)) {
+            $confirmResponse = $passwordConfirmation->confirm($request);
+
+            if (null !== $confirmResponse) {
                 return $confirmResponse;
             }
 

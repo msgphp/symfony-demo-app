@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api\Projection\Document\Transformer;
 
 use App\Api\Projection\Document\DocumentIdentity;
@@ -22,8 +24,8 @@ final class UserDocumentTransformer
 
         return new ProjectionDocument(UserProjection::class, $docId, [
             'id' => $docId,
-            'email' => $user->getEmail(),
             'user_id' => $userId->toString(),
+            'email' => $user->getEmail(),
         ]);
     }
 }

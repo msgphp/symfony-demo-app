@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\User;
 
 use App\Entity\User\User;
@@ -26,8 +28,7 @@ final class ConfirmEmailController
         UserEmail $userEmail,
         Responder $responder,
         MessageBusInterface $bus
-    ): Response
-    {
+    ): Response {
         $bus->dispatch(new ConfirmUserEmailCommand($userEmail->getEmail()));
 
         return $responder->respond((new RespondRouteRedirect('profile'))->withFlashes([

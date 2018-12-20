@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+if [[ $# -ne 0 ]]; then
+    echo "Usage: $0"
+    exit 1
+fi
+
+RETURN=0
+
+for FILE in $(find . -type f -name "*.php" -not -path "*/vendor/*" -not -path "./var/*" -not -path "./bin/.phpunit/*"); do
+    echo -en "\e[0K\r${FILE}"
+    RESULT=$(php -l "${FILE}")
+    [[ $? -ne 0 ]] && RETURN=$?
+
+    if [[ ${RESULT} != "No syntax errors detected in "* ]]; then
+        echo ""
+        echo "${RESULT}"
+    fi
+done
+
+echo ""
+exit ${RETURN}
