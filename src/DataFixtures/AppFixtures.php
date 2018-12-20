@@ -95,7 +95,10 @@ final class AppFixtures extends Fixture
 
     private function createPremiumUser(string $email, string $password = self::PASSWORD): PremiumUser
     {
-        return $this->createUser($email, $password, PremiumUser::class);
+        /** @var PremiumUser $user */
+        $user = $this->createUser($email, $password, PremiumUser::class);
+
+        return $user;
     }
 
     private function createUserAttributeValue(User $user, Attribute $attribute, $value): UserAttributeValue

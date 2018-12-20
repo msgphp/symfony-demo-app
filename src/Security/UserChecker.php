@@ -19,7 +19,7 @@ final class UserChecker implements UserCheckerInterface
     private $repository;
     private $logger;
 
-    public function __construct(UserRepositoryInterface $repository, LoggerInterface $logger = null)
+    public function __construct(UserRepositoryInterface $repository, ?LoggerInterface $logger = null)
     {
         $this->repository = $repository;
         $this->logger = $logger ?? new NullLogger();

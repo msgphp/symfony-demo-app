@@ -22,7 +22,7 @@ class OneTimeLoginToken
     /** @ORM\Column(nullable=true) */
     private $redirectUrl;
 
-    public function __construct(User $user, string $token = null, string $redirectUrl = null)
+    public function __construct(User $user, ?string $token = null, ?string $redirectUrl = null)
     {
         $this->user = $user;
         $this->token = $token ?? bin2hex(random_bytes(32));

@@ -31,7 +31,9 @@ final class PasswordConfirmation
 
     public function confirm(Request $request): ?Response
     {
-        if (null === $session = $request->getSession()) {
+        $session = $request->getSession();
+
+        if (null === $session) {
             throw new \LogicException('Session not available.');
         }
 

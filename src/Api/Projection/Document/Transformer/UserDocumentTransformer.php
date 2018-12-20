@@ -24,8 +24,8 @@ final class UserDocumentTransformer
 
         return new ProjectionDocument(UserProjection::class, $docId, [
             'id' => $docId,
-            'email' => $user->getEmail(),
             'user_id' => $userId->toString(),
+            'email' => $user->getEmail(),
         ]);
     }
 }

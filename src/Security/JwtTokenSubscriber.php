@@ -9,7 +9,6 @@ use Lexik\Bundle\JWTAuthenticationBundle\Event\AuthenticationSuccessEvent;
 use Lexik\Bundle\JWTAuthenticationBundle\Event\JWTFailureEventInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Events;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -35,10 +34,6 @@ final class JwtTokenSubscriber implements EventSubscriberInterface
     public function handleFailure(JWTFailureEventInterface $event): void
     {
         $exception = $event->getException();
-
-        if ($exception instanceof HttpException) {
-            throw $exception;
-        }
 
         throw new UnauthorizedHttpException('Bearer', $exception->getMessage(), $exception);
     }

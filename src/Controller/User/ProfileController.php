@@ -73,7 +73,9 @@ final class ProfileController
                 return $responder->respond(new RespondNotFound());
             }
 
-            if (null !== $confirmResponse = $passwordConfirmation->confirm($request)) {
+            $confirmResponse = $passwordConfirmation->confirm($request);
+
+            if (null !== $confirmResponse) {
                 return $confirmResponse;
             }
 
@@ -107,7 +109,9 @@ final class ProfileController
                 return $responder->respond(new RespondNotFound());
             }
 
-            if (null !== $confirmResponse = $passwordConfirmation->confirm($request)) {
+            $confirmResponse = $passwordConfirmation->confirm($request);
+
+            if (null !== $confirmResponse) {
                 return $confirmResponse;
             }
 
