@@ -1,0 +1,30 @@
+<?php
+
+use PhpCsFixer\Config;
+use PhpCsFixer\Finder;
+
+$rules = [
+    '@PSR2' => true,
+    '@Symfony' => true,
+    '@Symfony:risky' => true,
+    '@PHP70Migration' => true,
+    '@PHP70Migration:risky' => true,
+    '@PHP71Migration' => true,
+    '@PHP71Migration:risky' => true,
+    '@PHPUnit60Migration:risky' => true,
+    'array_syntax' => ['syntax' => 'short'],
+    'compact_nullable_typehint' => true,
+    'explicit_string_variable' => true,
+    'fully_qualified_strict_types' => true,
+    'list_syntax' => ['syntax' => 'short'],
+    'php_unit_test_case_static_method_calls' => ['call_type' => 'self'],
+    'single_import_per_statement' => false,
+];
+
+return Config::create()
+    ->setUsingCache(true)
+    ->setCacheFile(__DIR__.'/var/cache/php_cs.cache')
+    ->setRules($rules)
+    ->setRiskyAllowed(true)
+    ->setFinder(Finder::create()->in(__DIR__))
+;

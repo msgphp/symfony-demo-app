@@ -1,0 +1,38 @@
+dist: trusty
+language: php
+
+notifications:
+  email: false
+
+branches:
+  only:
+    - master
+    - /^\d\.\d$/
+
+php: 7.2
+
+jobs:
+  include:
+    - stage: Unit-tests
+    - stage: Code-quality
+      install:
+        - travis_retry composer install --no-progress --prefer-dist --no-interaction --no-suggest --no-scripts
+      script:
+        - curl -Lso var/cache/php-cs-fixer.phar https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.13.1/php-cs-fixer.phar && chmod +x var/cache/php-cs-fixer.phar
+        - var/cache/php-cs-fixer.phar fix --dry-run --verbose --diff src/
+        - vendor/bin/phpstan.phar analyse src/
+
+before_install:
+  - phpenv config-rm xdebug.ini || true
+
+install:
+  - travis_retry composer install --no-progress --prefer-dist --no-interaction --no-suggest
+  - travis_retry bin/phpunit install
+
+script:
+  - bin/phpunit
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+    - var/cache
