@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\User;
 
 use App\Form\User\LoginType;
@@ -23,8 +25,7 @@ final class LoginController
         Responder $responder,
         FormFactoryInterface $formFactory,
         AuthenticationUtils $authenticationUtils
-    ): Response
-    {
+    ): Response {
         // one-time login
         $oneTimeLoginForm = $formFactory->createNamed('', OneTimeLoginType::class);
 

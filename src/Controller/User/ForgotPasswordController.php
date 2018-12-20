@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\User;
 
 use App\Form\User\ForgotPasswordType;
@@ -25,8 +27,7 @@ final class ForgotPasswordController
         FormFactoryInterface $formFactory,
         MessageBusInterface $bus,
         UserRepositoryInterface $repository
-    ): Response
-    {
+    ): Response {
         $form = $formFactory->createNamed('', ForgotPasswordType::class);
         $form->handleRequest($request);
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\User;
 
 use App\Entity\User\User;
@@ -29,8 +31,7 @@ final class ResetPasswordController
         Responder $responder,
         FormFactoryInterface $formFactory,
         MessageBusInterface $bus
-    ): Response
-    {
+    ): Response {
         $form = $formFactory->createNamed('', ResetPasswordType::class);
         $form->handleRequest($request);
 

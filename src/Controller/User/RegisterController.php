@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller\User;
 
 use App\Form\User\RegisterType;
@@ -23,8 +25,7 @@ final class RegisterController
         Responder $responder,
         FormFactoryInterface $formFactory,
         MessageBusInterface $bus
-    ): Response
-    {
+    ): Response {
         $form = $formFactory->createNamed('', RegisterType::class);
         $form->handleRequest($request);
 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api\Projection\Document;
 
 use App\Entity\User\User;
@@ -29,7 +31,7 @@ final class DocumentTransformer implements ProjectionDocumentTransformerInterfac
             }
         }
 
-        throw new \LogicException(sprintf('No supporting transformer found for class "%s".', get_class($object)));
+        throw new \LogicException(sprintf('No supporting transformer found for class "%s".', \get_class($object)));
     }
 
     public static function getSubscribedServices(): array

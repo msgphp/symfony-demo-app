@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api\Projection\Document\Transformer;
 
 use App\Api\Projection\Document\DocumentIdentity;

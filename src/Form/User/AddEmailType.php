@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Form\User;
 
 use MsgPhp\User\Infra\Validator\UniqueUsername as UniqueEmail;
@@ -11,7 +13,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 final class AddEmailType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder->add('email', EmailType::class, [
             'constraints' => [new NotBlank(), new Email(), new UniqueEmail()],
