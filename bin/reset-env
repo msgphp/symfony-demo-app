@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+[[ $# -ne 0 ]] && echo "Usage: $0" exit 1
+
 rm -rf var/cache var/log && \
 composer install && \
 bin/console doctrine:database:drop --force --if-exists && \
@@ -8,7 +10,8 @@ bin/console doctrine:schema:update --force && \
 bin/console doctrine:fixtures:load -n
 [[ $? -ne 0 ]] && echo "Environment setup failed" && exit 1
 
-source .env.dist .env.local
+source .env.dist
+[[ -f .env.local ]] && source .env.local
 
 if [[ ${ELASTICSEARCH_HOST} ]]; then
     bin/console projection:initialize-types --force && \

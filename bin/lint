@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 
-if [[ $# -ne 0 ]]; then
-    echo "Usage: $0"
-    exit 1
-fi
+[[ $# -ne 0 ]] && echo "Usage: $0" exit 1
 
 RETURN=0
 
