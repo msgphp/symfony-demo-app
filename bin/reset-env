@@ -3,7 +3,7 @@
 [[ $# -ne 0 ]] && echo "Usage: $0" exit 1
 
 rm -rf var/cache var/log && \
-composer install && \
+composer install --prefer-dist --no-suggest && \
 bin/console doctrine:database:drop --force --if-exists && \
 bin/console doctrine:database:create && \
 bin/console doctrine:schema:update --force && \
