@@ -35,7 +35,7 @@ bin/console server:run
 # or using Lando / mariadb
 # see https://docs.devwithlando.io
 lando start
-lando reset-env
+lando run bin/reset-env
 ```
 
 ## Documentation
