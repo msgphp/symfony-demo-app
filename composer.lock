@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "619d85e33368f9af7b844b01f7b7d25f",
+    "content-hash": "48d4c809f3a588386fc15720dd40908c",
     "packages": [
         {
             "name": "api-platform/api-pack",
@@ -5136,12 +5136,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/flex.git",
-                "reference": "faca89864228928bf512d9f5d5fbfa5151456ef4"
+                "reference": "7adc5237c7222c920a55ec46cb278caf3980b8ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/flex/zipball/faca89864228928bf512d9f5d5fbfa5151456ef4",
-                "reference": "faca89864228928bf512d9f5d5fbfa5151456ef4",
+                "url": "https://api.github.com/repos/symfony/flex/zipball/7adc5237c7222c920a55ec46cb278caf3980b8ba",
+                "reference": "7adc5237c7222c920a55ec46cb278caf3980b8ba",
                 "shasum": ""
             },
             "require": {
@@ -5156,7 +5156,7 @@
             "type": "composer-plugin",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "1.2-dev"
                 },
                 "class": "Symfony\\Flex\\Flex"
             },
@@ -5176,7 +5176,7 @@
                 }
             ],
             "description": "Composer plugin for Symfony",
-            "time": "2018-12-20T10:53:10+00:00"
+            "time": "2018-12-25T09:56:50+00:00"
         },
         {
             "name": "symfony/form",
@@ -7368,20 +7368,21 @@
         },
         {
             "name": "webmozart/assert",
-            "version": "1.3.0",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webmozart/assert.git",
-                "reference": "0df1908962e7a3071564e857d86874dad1ef204a"
+                "reference": "83e253c8e0be5b0257b881e1827274667c5c17a9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webmozart/assert/zipball/0df1908962e7a3071564e857d86874dad1ef204a",
-                "reference": "0df1908962e7a3071564e857d86874dad1ef204a",
+                "url": "https://api.github.com/repos/webmozart/assert/zipball/83e253c8e0be5b0257b881e1827274667c5c17a9",
+                "reference": "83e253c8e0be5b0257b881e1827274667c5c17a9",
                 "shasum": ""
             },
             "require": {
-                "php": "^5.3.3 || ^7.0"
+                "php": "^5.3.3 || ^7.0",
+                "symfony/polyfill-ctype": "^1.8"
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.6",
@@ -7414,7 +7415,7 @@
                 "check",
                 "validate"
             ],
-            "time": "2018-01-29T19:49:41+00:00"
+            "time": "2018-12-25T11:19:39+00:00"
         },
         {
             "name": "webonyx/graphql-php",
