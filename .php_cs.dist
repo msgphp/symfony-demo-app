@@ -23,7 +23,6 @@ $rules = [
     'escape_implicit_backslashes' => true,
     'explicit_indirect_variable' => true,
     'heredoc_to_nowdoc' => true,
-    'method_chaining_indentation' => true,
     'multiline_comment_opening_closing' => true,
     'multiline_whitespace_before_semicolons' => ['strategy' => 'new_line_for_chained_calls'],
     'no_alternative_syntax' => true,

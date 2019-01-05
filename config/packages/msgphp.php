@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 use MsgPhp\{Eav, User};
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
-return function (ContainerConfigurator $container) {
+return function (ContainerConfigurator $container): void {
     $container->extension('msgphp_eav', [
         'class_mapping' => [
             Eav\Entity\Attribute::class => \App\Entity\Eav\Attribute::class,
@@ -35,7 +37,8 @@ return function (ContainerConfigurator $container) {
     $container->parameters()
         ->set('msgphp.doctrine.mapping_config', [
             'key_max_length' => 191,
-        ]);
+        ])
+    ;
 
     $container->services()
         ->alias('msgphp.messenger.event_bus', 'event_bus')
