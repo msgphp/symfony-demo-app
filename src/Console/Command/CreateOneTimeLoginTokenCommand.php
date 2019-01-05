@@ -34,7 +34,8 @@ final class CreateOneTimeLoginTokenCommand extends Command
         $this
             ->setDescription('Create a one-time login token')
             ->addArgument('username', InputArgument::REQUIRED, 'Username to provide the token for')
-            ->addOption('token', null, InputOption::VALUE_REQUIRED, 'A pre-defined token, or a generated on otherwise');
+            ->addOption('token', null, InputOption::VALUE_REQUIRED, 'A pre-defined token, or a generated on otherwise')
+        ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

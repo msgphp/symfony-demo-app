@@ -37,7 +37,8 @@ final class ClassContextElementFactory implements ClassContextElementFactoryInte
                         })
                         ->normalizer(function (string $value): string {
                             return $this->passwordHashing->hash($value);
-                        });
+                        })
+                    ;
                 }
                 break;
         }

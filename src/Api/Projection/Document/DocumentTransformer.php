@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Api\Projection\Document;
 
 use App\Entity\User\User;
-use MsgPhp\Domain\Projection\ProjectionDocumentTransformerInterface;
 use MsgPhp\Domain\Projection\ProjectionDocument;
+use MsgPhp\Domain\Projection\ProjectionDocumentTransformerInterface;
 use Psr\Container\ContainerInterface;
 use Symfony\Contracts\Service\ServiceSubscriberInterface;
 

@@ -39,7 +39,7 @@ class UserProjection implements ProjectionInterface, DocumentMappingProviderInte
     public $id;
 
     /**
-     * @var string|null Globally unique domain identifier (Optional in "write")
+     * @var null|string Globally unique domain identifier (Optional in "write")
      * @Groups({"user:read", "user:write"})
      */
     public $userId;
@@ -51,7 +51,7 @@ class UserProjection implements ProjectionInterface, DocumentMappingProviderInte
     public $email;
 
     /**
-     * @var string|null Plain password (Required in "write")
+     * @var null|string Plain password (Required in "write")
      * @Groups({"user:write"})
      */
     public $password;

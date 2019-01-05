@@ -9,8 +9,8 @@ use App\Entity\User\User;
 use App\Entity\User\UserAttributeValue;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
-use MsgPhp\Domain\Factory\EntityAwareFactoryInterface;
 use MsgPhp\Domain\Exception\EntityNotFoundException;
+use MsgPhp\Domain\Factory\EntityAwareFactoryInterface;
 use MsgPhp\User\Command\{AddUserAttributeValueCommand, ConfirmUserCommand, CreateUserCommand};
 use MsgPhp\User\Infra\Security\SecurityUserProvider;
 use MsgPhp\User\Repository\{UserAttributeValueRepositoryInterface, UserRepositoryInterface};
@@ -56,7 +56,7 @@ final class OauthUserProvider implements OAuthAwareUserProviderInterface
                 $user = $this->userRepository->findByUsername($email);
                 $userId = $user->getId();
             } catch (EntityNotFoundException $e) {
-                //@todo validate username/email availability
+                /** @todo validate username/email availability */
                 $userId = $this->factory->nextIdentifier(User::class);
                 $this->bus->dispatch(new CreateUserCommand([
                     'id' => $userId,

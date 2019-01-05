@@ -35,7 +35,8 @@ final class SendRegistrationConfirmationUrl implements MessageHandlerInterface
         $message = (new \Swift_Message('Confirm your account at The App'))
             ->addTo($user->getEmail())
             ->setBody($this->twig->render('user/email/confirm_registration.txt.twig', $params), 'text/plain')
-            ->addPart($this->twig->render('user/email/confirm_registration.html.twig', $params), 'text/html');
+            ->addPart($this->twig->render('user/email/confirm_registration.html.twig', $params), 'text/html')
+        ;
 
         $this->mailer->send($message);
     }

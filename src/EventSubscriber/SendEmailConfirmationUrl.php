@@ -35,7 +35,8 @@ final class SendEmailConfirmationUrl implements MessageHandlerInterface
         $message = (new \Swift_Message('Confirm your e-mail at The App'))
             ->addTo($userEmail->getEmail())
             ->setBody($this->twig->render('user/email/confirm_email.txt.twig', $params), 'text/plain')
-            ->addPart($this->twig->render('user/email/confirm_email.html.twig', $params), 'text/html');
+            ->addPart($this->twig->render('user/email/confirm_email.html.twig', $params), 'text/html')
+        ;
 
         $this->mailer->send($message);
     }

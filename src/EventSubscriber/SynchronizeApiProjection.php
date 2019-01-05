@@ -18,15 +18,6 @@ final class SynchronizeApiProjection implements MessageSubscriberInterface
     private $bus;
     private $documentTransformer;
 
-    public static function getHandledMessages(): iterable
-    {
-        return [
-            UserCreatedEvent::class,
-            UserCredentialChangedEvent::class,
-            UserDeletedEvent::class,
-        ];
-    }
-
     public function __construct(MessageBusInterface $bus, DocumentTransformer $documentTransformer)
     {
         $this->bus = $bus;
@@ -53,6 +44,15 @@ final class SynchronizeApiProjection implements MessageSubscriberInterface
 
             return;
         }
+    }
+
+    public static function getHandledMessages(): iterable
+    {
+        return [
+            UserCreatedEvent::class,
+            UserCredentialChangedEvent::class,
+            UserDeletedEvent::class,
+        ];
     }
 
     public function notifySave($object): void

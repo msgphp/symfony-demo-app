@@ -62,7 +62,8 @@ final class PasswordConfirmation
             ->add('referer', HiddenType::class, [
                 'data' => $referer,
             ])
-            ->getForm();
+            ->getForm()
+        ;
 
         $form->handleRequest($request);
 
