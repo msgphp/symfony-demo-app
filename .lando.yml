@@ -4,10 +4,6 @@ recipe: lemp
 config:
   php: 7.2
   webroot: public
-  database: mariadb
-
-compose:
-  - config/lando/compose.yaml
 
 proxy:
   pma:
@@ -21,6 +17,13 @@ services:
     portforward: 3307
   pma:
     type: phpmyadmin
+  elasticsearch:
+    type: compose
+    services:
+      image: blacktop/elasticsearch:6.3
+      command: /elastic-entrypoint.sh elasticsearch
+      ports:
+        - "9200:9200"
 
 tooling:
   sf:

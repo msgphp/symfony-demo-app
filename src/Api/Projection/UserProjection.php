@@ -25,8 +25,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *             "controller"="App\Api\Endpoint\DeleteUserEndpoint",
  *         },
  *     },
- *     normalizationContext={"groups"={"read"}},
- *     denormalizationContext={"groups"={"write"}},
+ *     normalizationContext={"groups"={"user:read"}},
+ *     denormalizationContext={"groups"={"user:write"}},
  * )
  */
 class UserProjection implements ProjectionInterface, DocumentMappingProviderInterface
@@ -34,25 +34,25 @@ class UserProjection implements ProjectionInterface, DocumentMappingProviderInte
     /**
      * @var string Globally unique resource identifier
      * @ApiProperty(identifier=true)
-     * @Groups({"read"})
+     * @Groups({"user:read"})
      */
     public $id;
 
     /**
      * @var string|null Globally unique domain identifier (Optional in "write")
-     * @Groups({"read", "write"})
+     * @Groups({"user:read", "user:write"})
      */
     public $userId;
 
     /**
      * @var string Primary e-mail address
-     * @Groups({"read", "write"})
+     * @Groups({"user:read", "user:write"})
      */
     public $email;
 
     /**
      * @var string|null Plain password (Required in "write")
-     * @Groups({"write"})
+     * @Groups({"user:write"})
      */
     public $password;
 
