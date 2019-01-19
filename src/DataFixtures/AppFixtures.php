@@ -15,19 +15,19 @@ use App\Entity\User\UserRole;
 use App\Security\RoleProvider;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use MsgPhp\Domain\Factory\EntityAwareFactoryInterface;
+use MsgPhp\Eav\Infra\Uuid\AttributeId;
+use MsgPhp\Eav\Infra\Uuid\AttributeValueId;
+use MsgPhp\User\Infra\Uuid\UserId;
 use MsgPhp\User\Password\PasswordHashingInterface;
 
 final class AppFixtures extends Fixture
 {
     private const PASSWORD = 'pass';
 
-    private $factory;
     private $passwordHashing;
 
-    public function __construct(EntityAwareFactoryInterface $factory, PasswordHashingInterface $passwordHashing)
+    public function __construct(PasswordHashingInterface $passwordHashing)
     {
-        $this->factory = $factory;
         $this->passwordHashing = $passwordHashing;
     }
 
@@ -75,7 +75,7 @@ final class AppFixtures extends Fixture
         $manager->persist($user);
         $manager->persist(new UserRole($user, $adminRole));
 
-        $premiumUser = $this->createPremiumUser('user+premium@domain.dev');
+        $premiumUser = $this->createUser('user+premium@domain.dev', true);
         $premiumUser->enable();
         $premiumUser->confirm();
         $manager->persist($premiumUser);
@@ -85,24 +85,22 @@ final class AppFixtures extends Fixture
 
     private function createAttribute($id = null): Attribute
     {
-        return new Attribute(null === $id ? $this->factory->nextIdentifier(Attribute::class) : $this->factory->identify(Attribute::class, $id));
+        return new Attribute(AttributeId::fromValue($id));
     }
 
-    private function createUser(string $email, string $password = self::PASSWORD, $class = User::class): User
+    private function createUser(string $email, $premium = false, string $password = self::PASSWORD): User
     {
-        return new $class($this->factory->nextIdentifier(User::class), $email, $this->passwordHashing->hash($password));
-    }
+        $password = $this->passwordHashing->hash($password);
 
-    private function createPremiumUser(string $email, string $password = self::PASSWORD): PremiumUser
-    {
-        /** @var PremiumUser $user */
-        $user = $this->createUser($email, $password, PremiumUser::class);
+        if ($premium) {
+            return new PremiumUser(new UserId(), $email, $password);
+        }
 
-        return $user;
+        return new User(new UserId(), $email, $password);
     }
 
     private function createUserAttributeValue(User $user, Attribute $attribute, $value): UserAttributeValue
     {
-        return new UserAttributeValue($user, new AttributeValue($this->factory->nextIdentifier(AttributeValue::class), $attribute, $value));
+        return new UserAttributeValue($user, new AttributeValue(new AttributeValueId(), $attribute, $value));
     }
 }
