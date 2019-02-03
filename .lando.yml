@@ -12,9 +12,7 @@ proxy:
 services:
   appserver:
     config:
-      server: config/lando/nginx.conf
-  database:
-    portforward: 3307
+      vhosts: config/lando/nginx.conf
   pma:
     type: phpmyadmin
   elasticsearch:
@@ -30,19 +28,16 @@ tooling:
     service: appserver
     description: Run Symfony commands
     cmd: bin/console
-  php:
+  app-reinstall:
     service: appserver
-    description: Run PHP commands
-    cmd: php
-  composer:
+    cmd: bin/reinstall
+  app-upgrade:
     service: appserver
-    description: Run Composer commands
-    cmd: composer
-  run:
+    cmd: bin/upgrade
+  app-test:
     service: appserver
-    description: Run any command
-    cmd: ~
+    cmd: bin/phpunit
 
 events:
   post-start:
-    appserver: "composer install --working-dir=$LANDO_MOUNT"
+    - composer install --prefer-dist --no-suggest
