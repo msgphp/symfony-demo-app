@@ -35,7 +35,7 @@ bin/console server:run
 # or using Lando
 # see https://docs.devwithlando.io
 lando start
-lando app-reinstall
+lando ssh -c bin/reinstall
 ```
 
 ## Documentation

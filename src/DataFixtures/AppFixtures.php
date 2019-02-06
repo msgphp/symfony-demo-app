@@ -88,7 +88,7 @@ final class AppFixtures extends Fixture
         return new Attribute(AttributeId::fromValue($id));
     }
 
-    private function createUser(string $email, $premium = false, string $password = self::PASSWORD): User
+    private function createUser(string $email, bool $premium = false, string $password = self::PASSWORD): User
     {
         $password = $this->passwordHashing->hash($password);
 

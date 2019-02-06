@@ -1,38 +1,29 @@
-dist: trusty
-language: php
-
 notifications:
   email: false
+
+language: generic
+dist: xenial
+services:
+  - docker
 
 branches:
   only:
     - master
     - /^\d\.\d$/
 
-php: 7.2
-
 jobs:
   include:
-    - stage: Unit-tests
-    - stage: Code-quality
-      install:
-        - travis_retry composer install --no-progress --prefer-dist --no-interaction --no-suggest --no-scripts
+    - stage: Unit tests
+    - env: PHP=7.1
+    - stage: Code quality
       script:
-        - curl -Lso var/cache/php-cs-fixer.phar https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v2.14.0/php-cs-fixer.phar && chmod +x var/cache/php-cs-fixer.phar
-        - var/cache/php-cs-fixer.phar fix --dry-run --verbose --diff --config=.php_cs.dist config/ public/ src/
-        - vendor/bin/phpstan.phar analyse src/
-
-before_install:
-  - phpenv config-rm xdebug.ini || true
-
-install:
-  - travis_retry composer install --no-progress --prefer-dist --no-interaction --no-suggest
-  - travis_retry bin/phpunit install
+        - make cs
+        - make sa
 
 script:
-  - bin/phpunit
+  - make update
+  - make phpunit
 
 cache:
   directories:
-    - $HOME/.composer/cache
-    - var/cache
+    - var/
