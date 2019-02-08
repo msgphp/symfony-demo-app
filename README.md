@@ -2,6 +2,7 @@
 
 A message driven Symfony demo application with basic user management, a REST/GraphQL API and OAuth/JWT authentication.
 
+[![Build status][travis:img]][travis]
 [![Latest Stable Version][packagist:img]][packagist]
 
 > [MsgPHP](https://msgphp.github.io/) is a project that aims to provide (common) message based domain layers for your application. It has a low development time overhead and avoids being overly opinionated.
@@ -73,5 +74,7 @@ lando app-reinstall
 - [Decoupling the User entity with a new Symfony User Bundle](https://medium.com/@ro0NL/decoupling-the-user-entity-with-a-new-symfony-user-bundle-7d2d5d85bdf9)
 - [Building a new Symfony User Bundle](https://medium.com/@ro0NL/building-a-new-symfony-user-bundle-b4fe5a9d9d80)
 
+[travis]: https://travis-ci.org/msgphp/symfony-demo-app
+[travis:img]: https://img.shields.io/travis/msgphp/symfony-demo-app/master.svg?style=flat-square
 [packagist]: https://packagist.org/packages/msgphp/symfony-demo-app
 [packagist:img]: https://img.shields.io/packagist/v/msgphp/symfony-demo-app.svg?style=flat-square
