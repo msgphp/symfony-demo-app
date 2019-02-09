@@ -57,7 +57,7 @@ security:
                     google: /oauth/login-check/google
                     facebook: /oauth/login-check/facebook
                 oauth_user_provider:
-                   service: App\Security\OauthUserProvider
+                    service: App\Security\OauthUserProvider
             guard:
                 authenticators:
                     - App\Security\OneTimeLoginAuthenticator

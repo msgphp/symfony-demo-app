@@ -6,49 +6,49 @@
     "prefer-stable": true,
     "minimum-stability": "dev",
     "require": {
-        "api-platform/api-pack": "^1.1",
-        "elasticsearch/elasticsearch": "^6.0",
+        "api-platform/api-pack": "^1.2",
+        "elasticsearch/elasticsearch": "^6.1",
         "hwi/oauth-bundle": "^0.6",
         "lexik/jwt-authentication-bundle": "^2.6",
-        "msgphp/eav-bundle": "^0.8",
-        "msgphp/user-bundle": "^0.8",
-        "msgphp/user-eav": "^0.8",
+        "msgphp/eav-bundle": "^0.9",
+        "msgphp/user-bundle": "^0.9",
+        "msgphp/user-eav": "^0.9",
         "pascaldevink/shortuuid": "^2.1",
         "php-http/guzzle6-adapter": "^1.1",
         "php-http/httplug-bundle": "^1.14",
         "ramsey/uuid": "^3.8",
         "ramsey/uuid-doctrine": "^1.5",
         "sensio/framework-extra-bundle": "^5.2",
-        "symfony/console": "*",
+        "symfony/console": "^4.2",
         "symfony/contracts": "^1.0",
         "symfony/flex": "^1.2",
-        "symfony/form": "*",
-        "symfony/framework-bundle": "*",
-        "symfony/messenger": "*",
+        "symfony/form": "^4.2",
+        "symfony/framework-bundle": "^4.2",
+        "symfony/messenger": "^4.2",
         "symfony/monolog-bundle": "^3.3",
         "symfony/orm-pack": "^1.0",
-        "symfony/security-bundle": "*",
+        "symfony/security-bundle": "^4.2",
         "symfony/swiftmailer-bundle": "^3.2",
-        "symfony/translation": "*",
-        "symfony/validator": "*",
-        "webonyx/graphql-php": "^0.12"
+        "symfony/translation": "^4.2",
+        "symfony/validator": "^4.2",
+        "webonyx/graphql-php": "^0.13"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.1",
-        "phpstan/phpstan-phpunit": "^0.10",
-        "phpstan/phpstan-shim": "^0.10",
-        "phpunit/phpunit": "^7.5",
         "symfony/debug-pack": "^1.0",
-        "symfony/dotenv": "*",
+        "symfony/dotenv": "^4.2",
         "symfony/maker-bundle": "^1.11",
         "symfony/test-pack": "^1.0",
-        "symfony/web-server-bundle": "*"
+        "symfony/web-server-bundle": "^4.2"
     },
     "config": {
         "preferred-install": {
             "*": "dist"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "platform": {
+            "ext-bcmath": "7.2"
+        }
     },
     "autoload": {
         "psr-4": {

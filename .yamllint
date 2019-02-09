@@ -1,0 +1,16 @@
+extends: default
+rules:
+    braces:
+        min-spaces-inside: -1
+        max-spaces-inside: -1
+    colons:
+        max-spaces-before: -1
+        max-spaces-after: -1
+    document-start:
+        present: false
+    line-length:
+        max: 140
+    comments:
+        min-spaces-from-content: 1
+        require-starting-space: false
+    comments-indentation: false

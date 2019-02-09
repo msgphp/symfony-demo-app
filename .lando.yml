@@ -20,23 +20,12 @@ services:
     services:
       image: blacktop/elasticsearch:6.3
       command: /elastic-entrypoint.sh elasticsearch
-      ports:
-        - "9200:9200"
 
 tooling:
   sf:
     service: appserver
     description: Run Symfony commands
     cmd: bin/console
-  app-reinstall:
-    service: appserver
-    cmd: bin/reinstall
-  app-upgrade:
-    service: appserver
-    cmd: bin/upgrade
-  app-test:
-    service: appserver
-    cmd: bin/phpunit
 
 events:
   post-start:
