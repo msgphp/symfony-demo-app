@@ -5,23 +5,23 @@ declare(strict_types=1);
 namespace App\Security;
 
 use App\Entity\User\User;
+use Doctrine\ORM\EntityManagerInterface;
 use MsgPhp\User\Infra\Security\SecurityUser;
-use MsgPhp\User\Infra\Uuid\UserId;
-use MsgPhp\User\Repository\UserRepositoryInterface;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
+use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
 use Symfony\Component\Security\Core\Exception\DisabledException;
 use Symfony\Component\Security\Core\User\UserCheckerInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 final class UserChecker implements UserCheckerInterface
 {
-    private $repository;
+    private $em;
     private $logger;
 
-    public function __construct(UserRepositoryInterface $repository, ?LoggerInterface $logger = null)
+    public function __construct(EntityManagerInterface $em, ?LoggerInterface $logger = null)
     {
-        $this->repository = $repository;
+        $this->em = $em;
         $this->logger = $logger ?? new NullLogger();
     }
 
@@ -31,13 +31,17 @@ final class UserChecker implements UserCheckerInterface
             return;
         }
 
-        $userId = UserId::fromValue($user->getUsername());
+        $userId = $user->getUserId();
 
         /** @var User $user */
-        $user = $this->repository->find($userId);
+        $user = $this->em->find(User::class, $userId);
+
+        if (null === $user) {
+            throw new AuthenticationCredentialsNotFoundException('Bad credentials.');
+        }
 
         if (!$user->isEnabled()) {
-            $this->logger->info('Disabled user login attempt.', ['id' => $user->getId()->toString(), 'email' => $user->getEmail()]);
+            $this->logger->info('Disabled user login attempt.', ['id' => $userId->toString(), 'email' => $user->getEmail()]);
 
             throw new DisabledException('Bad credentials.');
         }
