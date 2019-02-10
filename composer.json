@@ -81,7 +81,8 @@
         ]
     },
     "conflict": {
-        "symfony/symfony": "*"
+        "symfony/symfony": "*",
+        "symfony/dependency-injection": "=4.2.3"
     },
     "extra": {
         "symfony": {
