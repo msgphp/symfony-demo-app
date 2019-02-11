@@ -46,7 +46,7 @@ shell:
 	${qa} /bin/sh
 link:
 	${composer} global require ${composer_args} ro0nl/link
-	if [ ! -d var/symfony-src/.git ]; then git clone git@github.com:symfony/symfony.git var/msgphp-src; fi
+	if [ ! -d var/symfony-src/.git ]; then git clone git@github.com:symfony/symfony.git var/symfony-src; fi
 	if [ ! -d var/msgphp-src/.git ]; then git clone git@github.com:msgphp/msgphp.git var/msgphp-src; fi
 	${composer} link --working-dir=var/symfony-src ../..
 	${composer} link --working-dir=var/msgphp-src ../..
