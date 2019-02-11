@@ -33,7 +33,7 @@ final class UserChecker implements UserCheckerInterface
 
         $userId = $user->getUserId();
 
-        /** @var User $user */
+        /** @var User|null $user */
         $user = $this->em->find(User::class, $userId);
 
         if (null === $user) {
