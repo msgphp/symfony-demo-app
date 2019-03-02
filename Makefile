@@ -30,6 +30,8 @@ phpunit:
 # code style / static analysis
 cs:
 	${qa} php-cs-fixer fix --dry-run --verbose --diff --config=.php_cs.dist src/ tests/
+cs-fix:
+	${qa} php-cs-fixer fix --config=.php_cs.dist src/ tests/
 sa: install phpunit-install
 	${qa} phpstan analyse
 	#${qa} psalm --show-info=false
