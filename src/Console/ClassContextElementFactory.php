@@ -32,7 +32,7 @@ final class ClassContextElementFactory implements ClassContextElementFactoryInte
                 if (User::class === $class || EmailPassword::class === $class) {
                     $element
                         ->hide()
-                        ->generator(function (): string {
+                        ->generator(static function (): string {
                             return bin2hex(random_bytes(8));
                         })
                         ->normalizer(function (string $value): string {
