@@ -48,9 +48,9 @@ shell:
 	${qa} /bin/sh
 composer-normalize: install
 	${qa} composer normalize
-link:
-	${composer} global require ${composer_args} ro0nl/link
-	if [ ! -d var/symfony-src/.git ]; then git clone -o upstream git@github.com:symfony/symfony.git var/symfony-src; fi
+link: install
 	if [ ! -d var/msgphp-src/.git ]; then git clone -o upstream git@github.com:msgphp/msgphp.git var/msgphp-src; fi
-	${composer} link --working-dir=var/symfony-src ../..
+	${composer} install --working-dir=var/msgphp-src
 	${composer} link --working-dir=var/msgphp-src ../..
+	if [ ! -d var/symfony-src/.git ]; then git clone -o upstream git@github.com:symfony/symfony.git var/symfony-src; fi
+	${qa} var/symfony-src/link .
