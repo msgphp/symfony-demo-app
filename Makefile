@@ -7,7 +7,7 @@ dockerized=docker run --init -it --rm \
 	-v $(shell pwd):/app \
 	-w /app
 qa=${dockerized} \
-	-e COMPOSER_HOME=/app/var/composer \
+	-e COMPOSER_CACHE_DIR=/app/var/composer \
 	jakzal/phpqa:php${PHP}-alpine
 
 phpunit=${qa} bin/phpunit
@@ -32,7 +32,7 @@ cs:
 	${qa} php-cs-fixer fix --dry-run --verbose --diff --config=.php_cs.dist src/ tests/
 cs-fix:
 	${qa} php-cs-fixer fix --config=.php_cs.dist src/ tests/
-sa: install phpunit-install
+sa: phpunit-install install
 	${qa} phpstan analyse
 	#${qa} psalm --show-info=false
 
@@ -46,6 +46,8 @@ clean:
 smoke-test: clean update phpunit cs sa
 shell:
 	${qa} /bin/sh
+composer-normalize: install
+	${qa} composer normalize
 link:
 	${composer} global require ${composer_args} ro0nl/link
 	if [ ! -d var/symfony-src/.git ]; then git clone -o upstream git@github.com:symfony/symfony.git var/symfony-src; fi

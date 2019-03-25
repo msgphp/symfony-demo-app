@@ -6,8 +6,7 @@ parameters:
     level: max
     paths:
         - src
-    autoload_directories:
-        - bin/.phpunit/phpunit-7.5/src
+        - tests
     tmpDir: var/phpstan
 
     ignoreErrors:
