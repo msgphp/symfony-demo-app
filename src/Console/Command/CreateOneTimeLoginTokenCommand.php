@@ -6,7 +6,7 @@ namespace App\Console\Command;
 
 use App\Entity\User\OneTimeLoginToken;
 use Doctrine\ORM\EntityManagerInterface;
-use MsgPhp\User\Repository\UserRepositoryInterface;
+use MsgPhp\User\Repository\UserRepository;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -21,7 +21,7 @@ final class CreateOneTimeLoginTokenCommand extends Command
     private $em;
     private $userRepository;
 
-    public function __construct(EntityManagerInterface $em, UserRepositoryInterface $userRepository)
+    public function __construct(EntityManagerInterface $em, UserRepository $userRepository)
     {
         parent::__construct();
 

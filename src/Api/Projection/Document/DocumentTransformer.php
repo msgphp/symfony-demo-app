@@ -6,11 +6,11 @@ namespace App\Api\Projection\Document;
 
 use App\Entity\User\User;
 use MsgPhp\Domain\Projection\ProjectionDocument;
-use MsgPhp\Domain\Projection\ProjectionDocumentTransformerInterface;
+use MsgPhp\Domain\Projection\ProjectionDocumentTransformer;
 use Psr\Container\ContainerInterface;
 use Symfony\Contracts\Service\ServiceSubscriberInterface;
 
-final class DocumentTransformer implements ProjectionDocumentTransformerInterface, ServiceSubscriberInterface
+final class DocumentTransformer implements ProjectionDocumentTransformer, ServiceSubscriberInterface
 {
     private const MAPPING = [
         User::class => Transformer\UserDocumentTransformer::class,

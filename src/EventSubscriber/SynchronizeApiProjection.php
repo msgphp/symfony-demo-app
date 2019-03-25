@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\EventSubscriber;
 
 use App\Api\Projection\Document\DocumentTransformer;
-use MsgPhp\Domain\Command\DeleteProjectionDocumentCommand;
-use MsgPhp\Domain\Command\SaveProjectionDocumentCommand;
-use MsgPhp\User\Event\UserCreatedEvent;
-use MsgPhp\User\Event\UserCredentialChangedEvent;
-use MsgPhp\User\Event\UserDeletedEvent;
+use MsgPhp\Domain\Projection\Command\DeleteProjectionDocument;
+use MsgPhp\Domain\Projection\Command\SaveProjectionDocument;
+use MsgPhp\User\Event\UserCreated;
+use MsgPhp\User\Event\UserCredentialChanged;
+use MsgPhp\User\Event\UserDeleted;
 use Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -26,20 +26,20 @@ final class SynchronizeApiProjection implements MessageSubscriberInterface
 
     public function __invoke($event): void
     {
-        if ($event instanceof UserCreatedEvent) {
+        if ($event instanceof UserCreated) {
             $this->notifySave($event->user);
 
             return;
         }
 
-        if ($event instanceof UserCredentialChangedEvent && $event->oldCredential->getUsername() !== $event->newCredential->getUsername()) {
+        if ($event instanceof UserCredentialChanged && $event->oldCredential->getUsername() !== $event->newCredential->getUsername()) {
             // @todo could be partial update
             $this->notifySave($event->user);
 
             return;
         }
 
-        if ($event instanceof UserDeletedEvent) {
+        if ($event instanceof UserDeleted) {
             $this->notifyDelete($event->user);
 
             return;
@@ -49,21 +49,21 @@ final class SynchronizeApiProjection implements MessageSubscriberInterface
     public static function getHandledMessages(): iterable
     {
         return [
-            UserCreatedEvent::class,
-            UserCredentialChangedEvent::class,
-            UserDeletedEvent::class,
+            UserCreated::class,
+            UserCredentialChanged::class,
+            UserDeleted::class,
         ];
     }
 
     public function notifySave($object): void
     {
-        $this->bus->dispatch(new SaveProjectionDocumentCommand($this->documentTransformer->transform($object)));
+        $this->bus->dispatch(new SaveProjectionDocument($this->documentTransformer->transform($object)));
     }
 
     public function notifyDelete($object): void
     {
         $document = $this->documentTransformer->transform($object);
 
-        $this->bus->dispatch(new DeleteProjectionDocumentCommand($document->getType(), $document->getId()));
+        $this->bus->dispatch(new DeleteProjectionDocument($document->getType(), $document->getId()));
     }
 }

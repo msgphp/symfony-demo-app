@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Security;
 
-use MsgPhp\User\Infra\Form\Type\HashedPasswordType;
+use MsgPhp\User\Infrastructure\Form\Type\HashedPasswordType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
 use Twig\Environment;
 
 final class PasswordConfirmation
@@ -57,7 +58,7 @@ final class PasswordConfirmation
 
         $form = $this->formFactory->createNamedBuilder($hash)
             ->add('currentPassword', HashedPasswordType::class, [
-                'password_confirm_current' => true,
+                'password_options' => ['constraints' => new UserPassword()],
             ])
             ->add('referer', HiddenType::class, [
                 'data' => $referer,
@@ -77,7 +78,7 @@ final class PasswordConfirmation
             $referer = $form->get('referer')->getData();
         }
 
-        if (null === $referer || $hash === md5($referer)) {
+        if (null === $referer) {
             throw new BadRequestHttpException('Unable to confirm current request.');
         }
 

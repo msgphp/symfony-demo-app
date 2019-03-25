@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\EventSubscriber;
 
 use App\Entity\User\User;
-use MsgPhp\User\Event\UserPasswordRequestedEvent;
+use MsgPhp\User\Event\UserPasswordRequested;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Twig\Environment;
 
@@ -20,7 +20,7 @@ final class SendPasswordResetUrl implements MessageHandlerInterface
         $this->twig = $twig;
     }
 
-    public function __invoke(UserPasswordRequestedEvent $event): void
+    public function __invoke(UserPasswordRequested $event): void
     {
         $this->notify($event->user);
     }

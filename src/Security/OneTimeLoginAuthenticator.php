@@ -6,8 +6,8 @@ namespace App\Security;
 
 use App\Entity\User\OneTimeLoginToken;
 use Doctrine\ORM\EntityManagerInterface;
-use MsgPhp\User\Infra\Security\SecurityUser;
-use MsgPhp\User\Infra\Security\SecurityUserProvider;
+use MsgPhp\User\Infrastructure\Security\SecurityUser;
+use MsgPhp\User\Infrastructure\Security\SecurityUserProvider;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\EventSubscriber;
 
 use App\Entity\User\User;
-use MsgPhp\User\Event\UserCreatedEvent;
+use MsgPhp\User\Event\UserCreated;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Twig\Environment;
 
@@ -20,7 +20,7 @@ final class SendRegistrationConfirmationUrl implements MessageHandlerInterface
         $this->twig = $twig;
     }
 
-    public function __invoke(UserCreatedEvent $event): void
+    public function __invoke(UserCreated $event): void
     {
         $this->notify($event->user);
     }

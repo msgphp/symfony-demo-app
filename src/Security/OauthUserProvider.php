@@ -9,14 +9,14 @@ use App\Entity\User\UserAttributeValue;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use MsgPhp\Domain\Exception\EntityNotFoundException;
-use MsgPhp\Eav\Infra\Uuid\AttributeId;
-use MsgPhp\User\Command\AddUserAttributeValueCommand;
-use MsgPhp\User\Command\ConfirmUserCommand;
-use MsgPhp\User\Command\CreateUserCommand;
-use MsgPhp\User\Infra\Security\SecurityUserProvider;
-use MsgPhp\User\Infra\Uuid\UserId;
-use MsgPhp\User\Repository\UserAttributeValueRepositoryInterface;
-use MsgPhp\User\Repository\UserRepositoryInterface;
+use MsgPhp\Eav\Infrastructure\Uuid\AttributeUuid;
+use MsgPhp\User\Command\AddUserAttributeValue;
+use MsgPhp\User\Command\ConfirmUser;
+use MsgPhp\User\Command\CreateUser;
+use MsgPhp\User\Infrastructure\Security\SecurityUserProvider;
+use MsgPhp\User\Infrastructure\Uuid\UserUuid;
+use MsgPhp\User\Repository\UserAttributeValueRepository;
+use MsgPhp\User\Repository\UserRepository;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -28,7 +28,7 @@ final class OauthUserProvider implements OAuthAwareUserProviderInterface
     private $securityUserProvider;
     private $bus;
 
-    public function __construct(UserRepositoryInterface $userRepository, UserAttributeValueRepositoryInterface $userAttributeValueRepository, SecurityUserProvider $securityUserProvider, MessageBusInterface $bus)
+    public function __construct(UserRepository $userRepository, UserAttributeValueRepository $userAttributeValueRepository, SecurityUserProvider $securityUserProvider, MessageBusInterface $bus)
     {
         $this->userRepository = $userRepository;
         $this->userAttributeValueRepository = $userAttributeValueRepository;
@@ -45,7 +45,7 @@ final class OauthUserProvider implements OAuthAwareUserProviderInterface
             throw new \LogicException(sprintf('Missing constant "%s" for OAuth resoure owner "%s"', $const, $owner));
         }
 
-        $attributeId = AttributeId::fromValue(\constant($const));
+        $attributeId = AttributeUuid::fromValue(\constant($const));
         $userAttributeValues = $this->userAttributeValueRepository->findAllByAttributeIdAndValue($attributeId, $username);
 
         if ($userAttributeValues->isEmpty()) {
@@ -57,19 +57,19 @@ final class OauthUserProvider implements OAuthAwareUserProviderInterface
                 $user = $this->userRepository->findByUsername($email);
                 $userId = $user->getId();
             } catch (EntityNotFoundException $e) {
-                $userId = new UserId();
+                $userId = new UserUuid();
                 // @todo validate username/email availability
-                $this->bus->dispatch(new CreateUserCommand([
+                $this->bus->dispatch(new CreateUser([
                     'id' => $userId,
                     'email' => $email,
                     'password' => bin2hex(random_bytes(32)),
                 ]));
-                $this->bus->dispatch(new ConfirmUserCommand($userId));
+                $this->bus->dispatch(new ConfirmUser($userId));
 
                 $user = $this->userRepository->find($userId);
             }
 
-            $this->bus->dispatch(new AddUserAttributeValueCommand($userId, $attributeId, $username));
+            $this->bus->dispatch(new AddUserAttributeValue($userId, $attributeId, $username));
         } else {
             /** @var UserAttributeValue $userAttributeValue */
             $userAttributeValue = $userAttributeValues->first();

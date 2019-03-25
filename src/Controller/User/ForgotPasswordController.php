@@ -8,8 +8,8 @@ use App\Form\User\ForgotPasswordType;
 use App\Http\Responder;
 use App\Http\RespondRouteRedirect;
 use App\Http\RespondTemplate;
-use MsgPhp\User\Command\RequestUserPasswordCommand;
-use MsgPhp\User\Repository\UserRepositoryInterface;
+use MsgPhp\User\Command\RequestUserPassword;
+use MsgPhp\User\Repository\UserRepository;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,13 +26,13 @@ final class ForgotPasswordController
         Responder $responder,
         FormFactoryInterface $formFactory,
         MessageBusInterface $bus,
-        UserRepositoryInterface $repository
+        UserRepository $repository
     ): Response {
         $form = $formFactory->createNamed('', ForgotPasswordType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $bus->dispatch(new RequestUserPasswordCommand($repository->findByUsername($email = $form->getData()['email'])->getId()));
+            $bus->dispatch(new RequestUserPassword($repository->findByUsername($email = $form->getData()['email'])->getId()));
 
             return $responder->respond((new RespondRouteRedirect('home'))->withFlashes([
                 'success' => sprintf('Hi %s, we\'ve send you a password reset link.', $email),

@@ -10,8 +10,8 @@ parameters:
     tmpDir: var/phpstan
 
     ignoreErrors:
-        - '# expects App\\Entity\\.+\\.+, MsgPhp\\.+\\Entity\\.+ given#'
-        - '# expects MsgPhp\\User\\Entity\\Credential\\.+, MsgPhp\\User\\CredentialInterface given#'
+        - '# expects App\\Entity\\.+\\.+, MsgPhp\\.+\\.+ given#'
+        - '# expects MsgPhp\\User\\Credential\\.+, MsgPhp\\User\\Credential\\Credential given#'
 
     excludes_analyse:
         - '*/vendor/*'

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Api\Projection\Document;
 
-use MsgPhp\Domain\DomainIdInterface;
+use MsgPhp\Domain\DomainId;
 use PascalDeVink\ShortUuid\ShortUuid;
 
 final class DocumentIdentity
@@ -16,7 +16,7 @@ final class DocumentIdentity
         return ShortUuid::uuid5(self::UUID_NS, sha1($value));
     }
 
-    public function identifyId(DomainIdInterface $id): string
+    public function identifyId(DomainId $id): string
     {
         if ($id->isEmpty()) {
             throw new \LogicException('A document identifier cannot be obtained from an empty identifier.');

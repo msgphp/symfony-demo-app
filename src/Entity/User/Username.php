@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Entity\User;
 
 use Doctrine\ORM\Mapping as ORM;
-use MsgPhp\User\Entity\Username as BaseUsername;
+use MsgPhp\User\Username as BaseUsername;
 
 /**
  * @ORM\Entity()

@@ -6,8 +6,8 @@ namespace App\Api\Projection;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
-use MsgPhp\Domain\Infra\Elasticsearch\DocumentMappingProviderInterface;
-use MsgPhp\Domain\Projection\ProjectionInterface;
+use MsgPhp\Domain\Infrastructure\Elasticsearch\DocumentMappingProvider;
+use MsgPhp\Domain\Projection\Projection;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -29,7 +29,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     denormalizationContext={"groups"={"user:write"}},
  * )
  */
-class UserProjection implements ProjectionInterface, DocumentMappingProviderInterface
+class UserProjection implements Projection, DocumentMappingProvider
 {
     /**
      * @var string Globally unique resource identifier
@@ -59,7 +59,7 @@ class UserProjection implements ProjectionInterface, DocumentMappingProviderInte
     /**
      * @return static
      */
-    public static function fromDocument(array $document): ProjectionInterface
+    public static function fromDocument(array $document): Projection
     {
         $projection = new static();
         $projection->id = $document['id'] ?? null;

@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\EventSubscriber;
 
 use App\Entity\User\UserEmail;
-use MsgPhp\User\Event\UserEmailAddedEvent;
+use MsgPhp\User\Event\UserEmailAdded;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Twig\Environment;
 
@@ -20,7 +20,7 @@ final class SendEmailConfirmationUrl implements MessageHandlerInterface
         $this->twig = $twig;
     }
 
-    public function __invoke(UserEmailAddedEvent $event): void
+    public function __invoke(UserEmailAdded $event): void
     {
         $this->notify($event->userEmail);
     }

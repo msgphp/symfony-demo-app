@@ -5,19 +5,19 @@ declare(strict_types=1);
 namespace App\Entity\User;
 
 use Doctrine\ORM\Mapping as ORM;
-use MsgPhp\Domain\Entity\Features\CanBeConfirmed;
-use MsgPhp\Domain\Entity\Features\CanBeEnabled;
-use MsgPhp\Domain\Entity\Fields\CreatedAtField;
-use MsgPhp\Domain\Event\DomainEventHandlerInterface;
+use MsgPhp\Domain\Event\DomainEventHandler;
 use MsgPhp\Domain\Event\DomainEventHandlerTrait;
-use MsgPhp\User\Entity\Credential\EmailPassword;
-use MsgPhp\User\Entity\Features\EmailPasswordCredential;
-use MsgPhp\User\Entity\Features\ResettablePassword;
-use MsgPhp\User\Entity\Fields\AttributeValuesField;
-use MsgPhp\User\Entity\Fields\EmailsField;
-use MsgPhp\User\Entity\Fields\RolesField;
-use MsgPhp\User\Entity\User as BaseUser;
-use MsgPhp\User\UserIdInterface;
+use MsgPhp\Domain\Model\CanBeConfirmed;
+use MsgPhp\Domain\Model\CanBeEnabled;
+use MsgPhp\Domain\Model\CreatedAtField;
+use MsgPhp\User\Credential\EmailPassword;
+use MsgPhp\User\Model\AttributeValuesField;
+use MsgPhp\User\Model\EmailPasswordCredential;
+use MsgPhp\User\Model\EmailsField;
+use MsgPhp\User\Model\ResettablePassword;
+use MsgPhp\User\Model\RolesField;
+use MsgPhp\User\User as BaseUser;
+use MsgPhp\User\UserId;
 
 /**
  * @ORM\Entity()
@@ -25,7 +25,7 @@ use MsgPhp\User\UserIdInterface;
  * @ORM\DiscriminatorColumn(name="discriminator", type="string")
  * @ORM\DiscriminatorMap({"user" = "User", "premium_user" = "PremiumUser"})
  */
-class User extends BaseUser implements DomainEventHandlerInterface
+class User extends BaseUser implements DomainEventHandler
 {
     use CreatedAtField;
     use EmailPasswordCredential;
@@ -40,7 +40,7 @@ class User extends BaseUser implements DomainEventHandlerInterface
     /** @ORM\Id() @ORM\Column(type="msgphp_user_id", length=191) */
     private $id;
 
-    public function __construct(UserIdInterface $id, string $email, string $password)
+    public function __construct(UserId $id, string $email, string $password)
     {
         $this->id = $id;
         $this->createdAt = new \DateTimeImmutable();
@@ -48,7 +48,7 @@ class User extends BaseUser implements DomainEventHandlerInterface
         $this->confirmationToken = bin2hex(random_bytes(32));
     }
 
-    public function getId(): UserIdInterface
+    public function getId(): UserId
     {
         return $this->id;
     }
