@@ -38,7 +38,6 @@
         "symfony/debug-pack": "^1.0",
         "symfony/dotenv": "^4.2",
         "symfony/maker-bundle": "^1.11",
-        "symfony/test-pack": "^1.0",
         "symfony/web-server-bundle": "^4.2"
     },
     "config": {
@@ -60,7 +59,7 @@
             "App\\Tests\\": "tests/"
         },
         "classmap": [
-            "bin/.phpunit/phpunit-7.5/src/"
+            "var/phpunit/phpunit-7.5/src/"
         ]
     },
     "replace": {
