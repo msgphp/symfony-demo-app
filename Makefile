@@ -16,9 +16,9 @@ composer=${qa} composer
 composer_args=--prefer-dist --no-progress --no-interaction --no-suggest
 
 # deps
-install:
+install: phpunit-install
 	${composer} install ${composer_args}
-update:
+update: phpunit-install
 	${composer} update ${composer_args}
 
 # tests
@@ -32,7 +32,7 @@ cs:
 	${qa} php-cs-fixer fix --dry-run --verbose --diff --config=.php_cs.dist src/ tests/
 cs-fix:
 	${qa} php-cs-fixer fix --config=.php_cs.dist src/ tests/
-sa: phpunit-install install
+sa: install
 	${qa} phpstan analyse
 	#${qa} psalm --show-info=false
 
