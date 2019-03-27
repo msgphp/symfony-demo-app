@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Entity\Eav;
 
 use Doctrine\ORM\Mapping as ORM;
-use MsgPhp\Eav\AttributeIdInterface;
-use MsgPhp\Eav\Entity\Attribute as BaseAttribute;
+use MsgPhp\Eav\Attribute as BaseAttribute;
+use MsgPhp\Eav\AttributeId;
 
 /**
  * @ORM\Entity()
@@ -21,12 +21,12 @@ class Attribute extends BaseAttribute
     /** @ORM\Id @ORM\Column(type="msgphp_attribute_id", length=191) */
     private $id;
 
-    public function __construct(AttributeIdInterface $id)
+    public function __construct(AttributeId $id)
     {
         $this->id = $id;
     }
 
-    public function getId(): AttributeIdInterface
+    public function getId(): AttributeId
     {
         return $this->id;
     }

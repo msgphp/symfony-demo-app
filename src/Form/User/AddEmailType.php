@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Form\User;
 
-use MsgPhp\User\Infra\Validator\UniqueUsername as UniqueEmail;
+use MsgPhp\User\Infrastructure\Validator\UniqueUsername as UniqueEmail;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;

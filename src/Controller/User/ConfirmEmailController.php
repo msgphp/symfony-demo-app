@@ -8,7 +8,7 @@ use App\Entity\User\User;
 use App\Entity\User\UserEmail;
 use App\Http\Responder;
 use App\Http\RespondRouteRedirect;
-use MsgPhp\User\Command\ConfirmUserEmailCommand;
+use MsgPhp\User\Command\ConfirmUserEmail;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
@@ -29,7 +29,7 @@ final class ConfirmEmailController
         Responder $responder,
         MessageBusInterface $bus
     ): Response {
-        $bus->dispatch(new ConfirmUserEmailCommand($userEmail->getEmail()));
+        $bus->dispatch(new ConfirmUserEmail($userEmail->getEmail()));
 
         return $responder->respond((new RespondRouteRedirect('profile'))->withFlashes([
             'success' => sprintf('Hi %s, your e-mail is confirmed.', $user->getEmail()),

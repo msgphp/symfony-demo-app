@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Entity\User;
 
 use Doctrine\ORM\Mapping as ORM;
-use MsgPhp\User\Entity\UserAttributeValue as BaseUserAttributeValue;
+use MsgPhp\User\UserAttributeValue as BaseUserAttributeValue;
 
 /**
  * @ORM\Entity()

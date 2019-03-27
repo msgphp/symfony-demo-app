@@ -10,9 +10,9 @@
         "elasticsearch/elasticsearch": "^6.1",
         "hwi/oauth-bundle": "^0.6",
         "lexik/jwt-authentication-bundle": "^2.6",
-        "msgphp/eav-bundle": "^0.9",
-        "msgphp/user-bundle": "^0.9",
-        "msgphp/user-eav": "^0.9",
+        "msgphp/eav-bundle": "^0.10",
+        "msgphp/user-bundle": "^0.10",
+        "msgphp/user-eav": "^0.10",
         "pascaldevink/shortuuid": "^2.1",
         "php-http/guzzle6-adapter": "^1.1",
         "php-http/httplug-bundle": "^1.14",
@@ -21,6 +21,7 @@
         "sensio/framework-extra-bundle": "^5.2",
         "symfony/console": "^4.2",
         "symfony/contracts": "^1.0",
+        "symfony/dependency-injection": "4.2.2",
         "symfony/flex": "^1.2",
         "symfony/form": "^4.2",
         "symfony/framework-bundle": "^4.2",
@@ -46,7 +47,7 @@
         },
         "sort-packages": true,
         "platform": {
-            "ext-bcmath": "7.2"
+            "ext-bcmath": "7"
         }
     },
     "autoload": {
@@ -83,8 +84,7 @@
         ]
     },
     "conflict": {
-        "symfony/symfony": "*",
-        "symfony/dependency-injection": "=4.2.3"
+        "symfony/symfony": "*"
     },
     "extra": {
         "symfony": {

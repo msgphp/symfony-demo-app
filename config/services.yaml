@@ -34,7 +34,7 @@ services:
     # Console
     App\Console\Command\:
         resource: '../src/Console/Command'
-    MsgPhp\Domain\Infra\Console\Context\ClassContextElementFactoryInterface: '@App\Console\ClassContextElementFactory'
+    MsgPhp\Domain\Infrastructure\Console\Context\ClassContextElementFactory: '@App\Console\ClassContextElementFactory'
 
     # Messenger
     App\EventSubscriber\:

@@ -6,7 +6,7 @@ namespace App\Security;
 
 use App\Entity\User\User;
 use Doctrine\ORM\EntityManagerInterface;
-use MsgPhp\User\Infra\Security\SecurityUser;
+use MsgPhp\User\Infrastructure\Security\SecurityUser;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
@@ -34,9 +34,7 @@ final class UserChecker implements UserCheckerInterface
         $userId = $user->getUserId();
 
         /** @var User|null $user */
-        $user = $this->em->find(User::class, $userId);
-
-        if (null === $user) {
+        if (null === $user = $this->em->find(User::class, $userId)) {
             throw new AuthenticationCredentialsNotFoundException('Bad credentials.');
         }
 

@@ -1,11 +1,11 @@
 security:
     encoders:
-        MsgPhp\User\Infra\Security\SecurityUser: bcrypt
+        MsgPhp\User\Infrastructure\Security\SecurityUser: bcrypt
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
-        msgphp_user: { id: MsgPhp\User\Infra\Security\SecurityUserProvider }
-        msgphp_user_jwt: { id: MsgPhp\User\Infra\Security\Jwt\SecurityUserProvider }
+        msgphp_user: { id: MsgPhp\User\Infrastructure\Security\SecurityUserProvider }
+        msgphp_user_jwt: { id: MsgPhp\User\Infrastructure\Security\Jwt\SecurityUserProvider }
     firewalls:
         api_login:
             pattern: ^/api/login

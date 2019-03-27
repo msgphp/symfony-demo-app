@@ -15,10 +15,10 @@ use App\Entity\User\UserRole;
 use App\Security\RoleProvider;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
-use MsgPhp\Eav\Infra\Uuid\AttributeId;
-use MsgPhp\Eav\Infra\Uuid\AttributeValueId;
-use MsgPhp\User\Infra\Uuid\UserId;
-use MsgPhp\User\Password\PasswordHashingInterface;
+use MsgPhp\Eav\Infrastructure\Uuid\AttributeUuid;
+use MsgPhp\Eav\Infrastructure\Uuid\AttributeValueUuid;
+use MsgPhp\User\Infrastructure\Uuid\UserUuid;
+use MsgPhp\User\Password\PasswordHashing;
 
 final class AppFixtures extends Fixture
 {
@@ -26,7 +26,7 @@ final class AppFixtures extends Fixture
 
     private $passwordHashing;
 
-    public function __construct(PasswordHashingInterface $passwordHashing)
+    public function __construct(PasswordHashing $passwordHashing)
     {
         $this->passwordHashing = $passwordHashing;
     }
@@ -85,7 +85,7 @@ final class AppFixtures extends Fixture
 
     private function createAttribute($id = null): Attribute
     {
-        return new Attribute(AttributeId::fromValue($id));
+        return new Attribute(AttributeUuid::fromValue($id));
     }
 
     private function createUser(string $email, bool $premium = false, string $password = self::PASSWORD): User
@@ -93,14 +93,14 @@ final class AppFixtures extends Fixture
         $password = $this->passwordHashing->hash($password);
 
         if ($premium) {
-            return new PremiumUser(new UserId(), $email, $password);
+            return new PremiumUser(new UserUuid(), $email, $password);
         }
 
-        return new User(new UserId(), $email, $password);
+        return new User(new UserUuid(), $email, $password);
     }
 
     private function createUserAttributeValue(User $user, Attribute $attribute, $value): UserAttributeValue
     {
-        return new UserAttributeValue($user, new AttributeValue(new AttributeValueId(), $attribute, $value));
+        return new UserAttributeValue($user, new AttributeValue(new AttributeValueUuid(), $attribute, $value));
     }
 }

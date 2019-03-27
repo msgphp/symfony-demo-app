@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Entity\User;
 
 use Doctrine\ORM\Mapping as ORM;
-use MsgPhp\User\Entity\Fields\UserField;
+use MsgPhp\User\Model\UserField;
 
 /**
  * @ORM\Entity()

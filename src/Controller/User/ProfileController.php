@@ -15,9 +15,9 @@ use App\Http\RespondRouteRedirect;
 use App\Http\RespondTemplate;
 use App\Security\PasswordConfirmation;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
-use MsgPhp\User\Command\AddUserEmailCommand;
-use MsgPhp\User\Command\ChangeUserCredentialCommand;
-use MsgPhp\User\Command\DeleteUserEmailCommand;
+use MsgPhp\User\Command\AddUserEmail;
+use MsgPhp\User\Command\ChangeUserCredential;
+use MsgPhp\User\Command\DeleteUserEmail;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -59,7 +59,7 @@ final class ProfileController
         $emailForm->handleRequest($request);
 
         if ($emailForm->isSubmitted() && $emailForm->isValid()) {
-            $bus->dispatch(new AddUserEmailCommand($user->getId(), $email = $emailForm->getData()['email']));
+            $bus->dispatch(new AddUserEmail($user->getId(), $email = $emailForm->getData()['email']));
 
             return $responder->respond((new RespondRouteRedirect('profile'))->withFlashes([
                 'success' => sprintf('E-mail %s added. We\'ve send you a confirmation link.', $email),
@@ -80,9 +80,9 @@ final class ProfileController
             }
 
             $currentEmail = $user->getEmail();
-            $bus->dispatch(new DeleteUserEmailCommand($primaryEmail));
-            $bus->dispatch(new ChangeUserCredentialCommand($user->getId(), ['email' => $primaryEmail]));
-            $bus->dispatch(new AddUserEmailCommand($user->getId(), $currentEmail, ['confirm' => true]));
+            $bus->dispatch(new DeleteUserEmail($primaryEmail));
+            $bus->dispatch(new ChangeUserCredential($user->getId(), ['email' => $primaryEmail]));
+            $bus->dispatch(new AddUserEmail($user->getId(), $currentEmail, ['confirm' => true]));
 
             return $responder->respond((new RespondRouteRedirect('profile'))->withFlashes([
                 'success' => sprintf('E-mail %s marked primary.', $primaryEmail),
@@ -115,7 +115,7 @@ final class ProfileController
                 return $confirmResponse;
             }
 
-            $bus->dispatch(new DeleteUserEmailCommand($deleteEmail));
+            $bus->dispatch(new DeleteUserEmail($deleteEmail));
 
             return $responder->respond((new RespondRouteRedirect('profile'))->withFlashes([
                 'success' => sprintf('E-mail %s deleted.', $deleteEmail),
@@ -127,7 +127,7 @@ final class ProfileController
         $passwordForm->handleRequest($request);
 
         if ($passwordForm->isSubmitted() && $passwordForm->isValid()) {
-            $bus->dispatch(new ChangeUserCredentialCommand($user->getId(), ['password' => $passwordForm->getData()['password']]));
+            $bus->dispatch(new ChangeUserCredential($user->getId(), $passwordForm->getData()));
 
             return $responder->respond((new RespondRouteRedirect('profile'))->withFlashes([
                 'success' => 'Your password is now changed.',

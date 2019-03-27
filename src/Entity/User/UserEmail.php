@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace App\Entity\User;
 
 use Doctrine\ORM\Mapping as ORM;
-use MsgPhp\Domain\Entity\Features\CanBeConfirmed;
-use MsgPhp\Domain\Event\DomainEventHandlerInterface;
+use MsgPhp\Domain\Event\DomainEventHandler;
 use MsgPhp\Domain\Event\DomainEventHandlerTrait;
-use MsgPhp\User\Entity\User;
-use MsgPhp\User\Entity\UserEmail as BaseUserEmail;
+use MsgPhp\Domain\Model\CanBeConfirmed;
+use MsgPhp\User\User;
+use MsgPhp\User\UserEmail as BaseUserEmail;
 
 /**
  * @ORM\Entity()
@@ -19,7 +19,7 @@ use MsgPhp\User\Entity\UserEmail as BaseUserEmail;
  *
  * @final
  */
-class UserEmail extends BaseUserEmail implements DomainEventHandlerInterface
+class UserEmail extends BaseUserEmail implements DomainEventHandler
 {
     use CanBeConfirmed;
     use DomainEventHandlerTrait;

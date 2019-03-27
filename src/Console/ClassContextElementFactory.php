@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace App\Console;
 
 use App\Entity\User\User;
-use MsgPhp\Domain\Infra\Console\Context\ClassContextElementFactoryInterface;
-use MsgPhp\Domain\Infra\Console\Context\ContextElement;
-use MsgPhp\User\Entity\Credential\EmailPassword;
-use MsgPhp\User\Password\PasswordHashingInterface;
+use MsgPhp\Domain\Infrastructure\Console\Context\ClassContextElementFactory as BaseClassContextElementFactory;
+use MsgPhp\Domain\Infrastructure\Console\Context\ContextElement;
+use MsgPhp\User\Credential\EmailPassword;
+use MsgPhp\User\Password\PasswordHashing;
 
-final class ClassContextElementFactory implements ClassContextElementFactoryInterface
+final class ClassContextElementFactory implements BaseClassContextElementFactory
 {
     private $passwordHashing;
 
-    public function __construct(PasswordHashingInterface $passwordHashing)
+    public function __construct(PasswordHashing $passwordHashing)
     {
         $this->passwordHashing = $passwordHashing;
     }

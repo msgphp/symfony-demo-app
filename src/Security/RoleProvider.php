@@ -6,10 +6,10 @@ namespace App\Security;
 
 use App\Entity\User\PremiumUser;
 use App\Entity\User\User;
-use MsgPhp\User\Entity\User as BaseUser;
-use MsgPhp\User\Role\RoleProviderInterface;
+use MsgPhp\User\Role\RoleProvider as BaseRoleProvider;
+use MsgPhp\User\User as BaseUser;
 
-final class RoleProvider implements RoleProviderInterface
+final class RoleProvider implements BaseRoleProvider
 {
     public const ROLE_USER = 'ROLE_USER';
     public const ROLE_PREMIUM_USER = 'ROLE_PREMIUM_USER';

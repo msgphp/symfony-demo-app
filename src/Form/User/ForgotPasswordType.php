@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Form\User;
 
-use MsgPhp\User\Infra\Validator\ExistingUsername as ExistingEmail;
+use MsgPhp\User\Infrastructure\Validator\ExistingUsername as ExistingEmail;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\FormBuilderInterface;

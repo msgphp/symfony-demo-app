@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\EventSubscriber;
 
 use App\Entity\User\User;
-use MsgPhp\User\Command\EnableUserCommand;
-use MsgPhp\User\Event\UserConfirmedEvent;
+use MsgPhp\User\Command\EnableUser;
+use MsgPhp\User\Event\UserConfirmed;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
@@ -19,7 +19,7 @@ final class EnableConfirmedUser implements MessageHandlerInterface
         $this->bus = $bus;
     }
 
-    public function __invoke(UserConfirmedEvent $event): void
+    public function __invoke(UserConfirmed $event): void
     {
         $this->notify($event->user);
     }
@@ -30,6 +30,6 @@ final class EnableConfirmedUser implements MessageHandlerInterface
             return;
         }
 
-        $this->bus->dispatch(new EnableUserCommand($user->getId()));
+        $this->bus->dispatch(new EnableUser($user->getId()));
     }
 }
