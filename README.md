@@ -7,24 +7,24 @@ A message driven Symfony demo application with basic user management, a REST/Gra
 
 > [MsgPHP](https://msgphp.github.io/) is a project that aims to provide (common) message based domain layers for your application. It has a low development time overhead and avoids being overly opinionated.
 
-## Enabled bundles
+# Enabled Bundles
 
-### Domain layer
+## Domain Layer
 [`MsgPhpUserBundle`](https://github.com/msgphp/user-bundle),
 [`MsgPhpEavBundle`](https://github.com/msgphp/eav-bundle)
 
-### ORM layer
+## ORM Layer
 [`DoctrineBundle`](https://github.com/doctrine/DoctrineBundle)
 
-### Security layer
+## Security Layer
 [`SecurityBundle`](https://github.com/symfony/security-bundle),
 [`HWIOAuthBundle`](https://github.com/hwi/HWIOAuthBundle),
 [`LexikJWTAuthenticationBundle`](https://github.com/lexik/LexikJWTAuthenticationBundle)
 
-### API layer
+## API Layer
 [`ApiPlatformBundle`](https://github.com/api-platform/api-platform)
 
-## Try it yourself
+# Try it Yourself
 
 ```bash
 composer create-project msgphp/symfony-demo-app && cd symfony-demo-app/
@@ -39,32 +39,36 @@ lando start
 lando ssh -c bin/reinstall
 ```
 
-## Documentation
+# Documentation
 
 - Read the [main documentation](https://msgphp.github.io/docs)
 - Get support on [Symfony's Slack `#msgphp` channel](https://symfony.com/slack-invite) or [raise an issue](https://github.com/msgphp/symfony-demo-app/issues/new)
 
-## Screenshots
+# Contributing
 
-### Web
+See [`CONTRIBUTING.md`](CONTRIBUTING.md)
+
+# Screenshots
+
+## Web
 
 ![image](https://user-images.githubusercontent.com/1047696/45264235-c79eaa80-b439-11e8-87b2-4e3551bdee09.png)
 
 ![image](https://user-images.githubusercontent.com/1047696/45264184-c9b43980-b438-11e8-97e8-55b5150c7b6b.png)
 
-### API
+## API
 
 ![image](https://user-images.githubusercontent.com/1047696/45264192-ea7c8f00-b438-11e8-9aa3-9bf490c4f2d1.png)
 
-### CLI
+## CLI
 
 ![image](https://user-images.githubusercontent.com/1047696/45264197-0b44e480-b439-11e8-83c3-45753ef79dbc.png)
 
-### Database UML
+## Database UML
 
 ![image](https://user-images.githubusercontent.com/1047696/45264216-62e35000-b439-11e8-9c04-f835f46a857b.png)
 
-## Blog posts
+# Blog Posts
 
 - [Domain-driven-design: Projections in practice with API Platform and Elasticsearch](https://medium.com/@ro0NL/domain-driven-design-projections-in-practice-with-api-platform-and-elasticsearch-c785ed6d660b)
 - [Adding user management to your Symfony application](https://medium.com/@ro0NL/adding-user-management-to-your-symfony-application-ceeefe2a2e9)
