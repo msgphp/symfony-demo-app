@@ -6,8 +6,8 @@ namespace App\Security;
 
 use App\Entity\User\OneTimeLoginToken;
 use Doctrine\ORM\EntityManagerInterface;
-use MsgPhp\User\Infrastructure\Security\SecurityUser;
-use MsgPhp\User\Infrastructure\Security\SecurityUserProvider;
+use MsgPhp\User\Infrastructure\Security\UserIdentity;
+use MsgPhp\User\Infrastructure\Security\UserIdentityProvider;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,13 +21,13 @@ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 final class OneTimeLoginAuthenticator extends AbstractGuardAuthenticator
 {
     private $em;
-    private $userProvider;
+    private $userIdentityProvider;
     private $urlGenerator;
 
-    public function __construct(EntityManagerInterface $em, SecurityUserProvider $userProvider, UrlGeneratorInterface $urlGenerator)
+    public function __construct(EntityManagerInterface $em, UserIdentityProvider $userIdentityProvider, UrlGeneratorInterface $urlGenerator)
     {
         $this->em = $em;
-        $this->userProvider = $userProvider;
+        $this->userIdentityProvider = $userIdentityProvider;
         $this->urlGenerator = $urlGenerator;
     }
 
@@ -50,28 +50,24 @@ final class OneTimeLoginAuthenticator extends AbstractGuardAuthenticator
 
     public function getUser($credentials, UserProviderInterface $userProvider): ?UserInterface
     {
-        $oneTimeLoginToken = $this->getOneTimeLoginToken($credentials);
-
-        if (null === $oneTimeLoginToken) {
+        if (null === $oneTimeLoginToken = $this->getOneTimeLoginToken($credentials)) {
             return null;
         }
 
-        return $this->userProvider->fromUser($oneTimeLoginToken->getUser());
+        return $this->userIdentityProvider->fromUser($oneTimeLoginToken->getUser());
     }
 
-    public function checkCredentials($credentials, UserInterface $user): bool
+    public function checkCredentials($credentials, UserInterface $identity): bool
     {
-        if (!$user instanceof SecurityUser) {
+        if (!$identity instanceof UserIdentity) {
             return false;
         }
 
-        $oneTimeLoginToken = $this->getOneTimeLoginToken($credentials);
-
-        if (null === $oneTimeLoginToken) {
+        if (null === $oneTimeLoginToken = $this->getOneTimeLoginToken($credentials)) {
             return false;
         }
 
-        return $oneTimeLoginToken->getUserId()->equals($user->getUserId());
+        return $oneTimeLoginToken->getUserId()->equals($identity->getUserId());
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
@@ -81,9 +77,7 @@ final class OneTimeLoginAuthenticator extends AbstractGuardAuthenticator
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): ?Response
     {
-        $oneTimeLoginToken = $this->getOneTimeLoginTokenOnce($this->getCredentials($request));
-
-        if (null === $oneTimeLoginToken) {
+        if (null === $oneTimeLoginToken = $this->getOneTimeLoginTokenOnce($this->getCredentials($request))) {
             return null;
         }
 
@@ -102,10 +96,10 @@ final class OneTimeLoginAuthenticator extends AbstractGuardAuthenticator
 
     private function getOneTimeLoginTokenOnce(string $token): ?OneTimeLoginToken
     {
-        $token = $this->getOneTimeLoginToken($token);
-
-        $this->em->remove($token);
-        $this->em->flush();
+        if (null !== $token = $this->getOneTimeLoginToken($token)) {
+            $this->em->remove($token);
+            $this->em->flush();
+        }
 
         return $token;
     }

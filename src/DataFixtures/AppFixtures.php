@@ -18,17 +18,17 @@ use Doctrine\Common\Persistence\ObjectManager;
 use MsgPhp\Eav\Infrastructure\Uuid\AttributeUuid;
 use MsgPhp\Eav\Infrastructure\Uuid\AttributeValueUuid;
 use MsgPhp\User\Infrastructure\Uuid\UserUuid;
-use MsgPhp\User\Password\PasswordHashing;
+use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
 final class AppFixtures extends Fixture
 {
     private const PASSWORD = 'pass';
 
-    private $passwordHashing;
+    private $passwordEncoder;
 
-    public function __construct(PasswordHashing $passwordHashing)
+    public function __construct(PasswordEncoderInterface $passwordEncoder)
     {
-        $this->passwordHashing = $passwordHashing;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     public function load(ObjectManager $manager): void
@@ -90,7 +90,7 @@ final class AppFixtures extends Fixture
 
     private function createUser(string $email, bool $premium = false, string $password = self::PASSWORD): User
     {
-        $password = $this->passwordHashing->hash($password);
+        $password = $this->passwordEncoder->encodePassword($password, '');
 
         if ($premium) {
             return new PremiumUser(new UserUuid(), $email, $password);

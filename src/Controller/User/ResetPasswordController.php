@@ -9,7 +9,7 @@ use App\Form\User\ResetPasswordType;
 use App\Http\Responder;
 use App\Http\RespondRouteRedirect;
 use App\Http\RespondTemplate;
-use MsgPhp\User\Command\ChangeUserCredential;
+use MsgPhp\User\Command\ResetUserPassword;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -36,7 +36,7 @@ final class ResetPasswordController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $bus->dispatch(new ChangeUserCredential($user->getId(), $form->getData()));
+            $bus->dispatch(new ResetUserPassword($user->getId(), $form->getData()['password']));
 
             return $responder->respond((new RespondRouteRedirect('home'))->withFlashes([
                 'success' => sprintf('Hi %s, we\'ve reset your password.', $user->getEmail()),

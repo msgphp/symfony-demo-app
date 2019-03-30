@@ -5,6 +5,8 @@
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: 'en'
+    msgphp.doctrine.mapping_config:
+        key_max_length: 191
 
 services:
     # default configuration for services in *this* file
@@ -37,6 +39,8 @@ services:
     MsgPhp\Domain\Infrastructure\Console\Context\ClassContextElementFactory: '@App\Console\ClassContextElementFactory'
 
     # Messenger
+    msgphp.messenger.command_bus: '@command_bus'
+    msgphp.messenger.event_bus: '@event_bus'
     App\EventSubscriber\:
         resource: '../src/EventSubscriber'
 
