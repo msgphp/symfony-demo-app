@@ -6,7 +6,7 @@ namespace App\Security;
 
 use App\Entity\User\User;
 use Doctrine\ORM\EntityManagerInterface;
-use MsgPhp\User\Infrastructure\Security\UserIdentity;
+use MsgPhp\User\Infrastructure\Security\SecurityUser;
 use Psr\Log\LoggerInterface;
 use Psr\Log\NullLogger;
 use Symfony\Component\Security\Core\Exception\AuthenticationCredentialsNotFoundException;
@@ -25,17 +25,19 @@ final class UserChecker implements UserCheckerInterface
         $this->logger = $logger ?? new NullLogger();
     }
 
-    public function checkPreAuth(UserInterface $identity): void
+    public function checkPreAuth(UserInterface $user): void
     {
-        if (!$identity instanceof UserIdentity) {
+        if (!$user instanceof SecurityUser) {
             return;
         }
 
-        if (null === $user = $this->em->find(User::class, $userId = $identity->getUserId())) {
+        $userId = $user->getUserId();
+
+        /** @var User|null $user */
+        if (null === $user = $this->em->find(User::class, $userId)) {
             throw new AuthenticationCredentialsNotFoundException('Bad credentials.');
         }
 
-        /** @var User $user */
         if (!$user->isEnabled()) {
             $this->logger->info('Disabled user login attempt.', ['id' => $userId->toString(), 'email' => $user->getEmail()]);
 

@@ -13,7 +13,7 @@ use MsgPhp\Eav\Infrastructure\Uuid\AttributeUuid;
 use MsgPhp\User\Command\AddUserAttributeValue;
 use MsgPhp\User\Command\ConfirmUser;
 use MsgPhp\User\Command\CreateUser;
-use MsgPhp\User\Infrastructure\Security\UserIdentityProvider;
+use MsgPhp\User\Infrastructure\Security\SecurityUserProvider;
 use MsgPhp\User\Infrastructure\Uuid\UserUuid;
 use MsgPhp\User\Repository\UserAttributeValueRepository;
 use MsgPhp\User\Repository\UserRepository;
@@ -25,14 +25,14 @@ final class OauthUserProvider implements OAuthAwareUserProviderInterface
 {
     private $userRepository;
     private $userAttributeValueRepository;
-    private $userIdentityProvider;
+    private $securityUserProvider;
     private $bus;
 
-    public function __construct(UserRepository $userRepository, UserAttributeValueRepository $userAttributeValueRepository, UserIdentityProvider $userIdentityProvider, MessageBusInterface $bus)
+    public function __construct(UserRepository $userRepository, UserAttributeValueRepository $userAttributeValueRepository, SecurityUserProvider $securityUserProvider, MessageBusInterface $bus)
     {
         $this->userRepository = $userRepository;
         $this->userAttributeValueRepository = $userAttributeValueRepository;
-        $this->userIdentityProvider = $userIdentityProvider;
+        $this->securityUserProvider = $securityUserProvider;
         $this->bus = $bus;
     }
 
@@ -76,6 +76,6 @@ final class OauthUserProvider implements OAuthAwareUserProviderInterface
             $user = $userAttributeValue->getUser();
         }
 
-        return $this->userIdentityProvider->fromUser($user);
+        return $this->securityUserProvider->fromUser($user);
     }
 }
