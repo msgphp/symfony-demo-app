@@ -24,7 +24,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -41,7 +40,6 @@ final class ProfileController
         Responder $responder,
         JWTTokenManagerInterface $jwtTokenManager,
         FormFactoryInterface $formFactory,
-        TokenStorageInterface $tokenStorage,
         MessageBusInterface $bus,
         PasswordConfirmation $passwordConfirmation,
         SendEmailConfirmationUrl $sendEmailConfirmationUrl,
