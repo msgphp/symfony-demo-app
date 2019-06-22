@@ -1,0 +1,3 @@
+.dockerignore
+**/.git*
+devops/docker/Dockerfile
