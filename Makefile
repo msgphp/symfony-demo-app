@@ -5,7 +5,7 @@ ifndef NGINX
 	NGINX=1.17
 endif
 ifndef MYSQL
-	MYSQL=8.0
+	MYSQL=5.7
 endif
 ifndef BUILD_ENV
 	BUILD_ENV=dev
