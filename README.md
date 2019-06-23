@@ -60,7 +60,7 @@ To run the application locally in development mode use:
 ```bash
 make start
 
-# application served at http://localhost:8080
+# by default application is served at http://localhost:8080
 ```
 
 Start a shell using:

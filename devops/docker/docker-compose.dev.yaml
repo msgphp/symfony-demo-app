@@ -15,16 +15,16 @@ services:
     volumes:
       - ../../public:/app/public:ro
     ports:
-      - "8080:80"
+      - "${NGINX_PORT:-8080}:80"
 
   db:
     build: ./mysql
     env_file:
-      - ./mysql/.env
+      - "${MYSQL_ENV_FILE:-mysql/.env.dist}"
     volumes:
       - db-data:/var/lib/mysql:rw
     ports:
-      - "3306:3306"
+      - "${MYSQL_PORT:-3306}:3306"
 
 volumes:
   db-data: {}
