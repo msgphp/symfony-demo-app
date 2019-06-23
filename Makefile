@@ -60,5 +60,5 @@ build: quit
 	${dc} build ${build_args}
 
 # misc
-inspect-compose:
+compose-config:
 	${dc} config

@@ -19,8 +19,11 @@ services:
 
   db:
     build: ./mysql
-    env_file:
-      - "${MYSQL_ENV_FILE:-mysql/.env.dist}"
+    environment:
+      - "MYSQL_DATABASE=${MYSQL_DATABASE:-app}"
+      - "MYSQL_USER=${MYSQL_USER:-app}"
+      - "MYSQL_PASSWORD=${MYSQL_PASSWORD:-pass}"
+      - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-pass}"
     volumes:
       - db-data:/var/lib/mysql:rw
     ports:

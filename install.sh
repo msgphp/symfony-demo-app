@@ -1,10 +1,10 @@
 #!/bin/sh
 
-. devops/docker/mysql/.env
+[ -f devops/docker/.env ] && . devops/docker/.env
 
-SKELETON="${SKELETON:-symfony/website-skeleton}"
 SF="${SF:-}"
 STABILITY="${STABILITY:-stable}"
+SKELETON="${SKELETON:-symfony/website-skeleton}"
 
 [ ! -z "${SF}" ] && [ $(echo "${SF}" | awk -F"." '{print NF-1}') -lt 2 ] && SF="${SF}.*"
 
@@ -25,5 +25,5 @@ mv ${tmp_dir}/* . && \
 rmdir ${tmp_dir} && \
 make build start && \
 rm public/index.php && \
-echo "DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}" > .env.dev && \
+echo "DATABASE_URL=mysql://${MYSQL_USER:-app}:${MYSQL_PASSWORD:-pass}@db:3306/${MYSQL_DATABASE:-app}" >> .env.dev && \
 make install
