@@ -1,4 +1,4 @@
-# see https://github.com/api-platform/api-platform
+# originally taken from https://github.com/api-platform/api-platform
 ARG PHP_VERSION=7.3
 
 
@@ -46,11 +46,13 @@ RUN ln -s $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini
 COPY php/conf.d/application.ini $PHP_INI_DIR/conf.d/application.ini
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
-# install Symfony Flex globally to speed up download of Composer packages (parallelized prefetching)
+ENV COMPOSER_CACHE_DIR=/tmp/composer
+ENV COMPOSER_HOME=/composer
+COPY php/composer.json /composer/composer.json
 RUN set -eux; \
-	composer global require "symfony/flex" --prefer-dist --no-progress --no-suggest --classmap-authoritative; \
+	composer global install --prefer-dist --no-progress --no-suggest --classmap-authoritative; \
 	composer clear-cache
-ENV PATH="${PATH}:/root/.composer/vendor/bin"
+ENV PATH="${PATH}:/composer/vendor/bin"
 
 WORKDIR /app
 
@@ -62,9 +64,14 @@ CMD ["php-fpm"]
 
 
 # "nginx" stage
-# depends on the "php" stage above
 FROM nginx:alpine AS stage_nginx
 
 COPY nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
 
 WORKDIR /app
+
+
+# "mysql" stage
+FROM mysql AS stage_mysql
+
+COPY mysql/conf.d/my.cnf /etc/mysql/conf.d/my.cnf

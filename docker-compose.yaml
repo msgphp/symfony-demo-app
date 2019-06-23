@@ -22,7 +22,9 @@ services:
       - "8080:80"
 
   db:
-    image: mysql
+    build:
+      context: ./devops/docker
+      target: stage_mysql
     environment:
       - MYSQL_DATABASE=app
       - MYSQL_USER=app
@@ -30,7 +32,6 @@ services:
       - MYSQL_ROOT_PASSWORD=pass
     volumes:
       - db-data:/var/lib/mysql:rw
-      - ./devops/docker/mysql/conf.d:/etc/mysql/conf.d
     ports:
       - "3306:3306"
 
