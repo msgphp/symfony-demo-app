@@ -11,6 +11,6 @@ dockerized="docker run --rm \
 
 tmp_dir=$(mktemp -d -t install-XXXXX --tmpdir=.)
 
-${dockerized} composer create-project --no-scripts --no-install symfony/website-skeleton ${tmp_dir} && \
+${dockerized} composer create-project --no-install symfony/website-skeleton ${tmp_dir} && \
 mv ${tmp_dir}/* . && \
 rmdir ${tmp_dir}

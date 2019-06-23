@@ -1,5 +1,5 @@
 ARG MYSQL
 
-FROM mysql:${MYSQL} AS stage_mysql
+FROM mysql:${MYSQL}
 
 COPY conf.d/my.cnf /etc/mysql/conf.d/my.cnf

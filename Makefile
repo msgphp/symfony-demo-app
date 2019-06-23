@@ -19,30 +19,42 @@ build_args=${BUILD_ARGS} --force-rm \
 	--build-arg PHP=${PHP} \
 	--build-arg NGINX=${NGINX} \
 	--build-arg MYSQL=${MYSQL}
-compose=docker-compose \
-	-p $(shell basename $(shell pwd)) \
+dc=docker-compose \
+	-p $(shell basename $(shell pwd))_${BUILD_ENV} \
 	-f devops/docker/docker-compose.${BUILD_ENV}.yaml \
 	--project-directory devops/docker
-exec=${compose} exec -u $(shell id -u):$(shell id -g)
-
-# containers
-start:
-	${compose} up -d
-restart:
-	${compose} restart
-stop:
-	${compose} stop
-quit:
-	${compose} down
-
-# images
-build: quit
-	${compose} build ${build_args}
+exec=${dc} exec -u $(shell id -u):$(shell id -g)
+app=${exec} app
+composer=${app} composer
 
 # application
+install:
+	${composer} -h
+update:
+	${composer} -h
 shell:
-	${exec} app sh
+	${app} sh
 
 # contributing
 smoke-test:
 	echo "noop"
+
+# containers
+init: build
+	${dc} up --no-build -d
+start:
+	${dc} up --no-build -d
+restart:
+	${dc} restart
+stop:
+	${dc} stop
+quit:
+	${dc} down
+
+# images
+build: quit
+	${dc} build ${build_args}
+
+# misc
+inspect-compose:
+	${dc} config

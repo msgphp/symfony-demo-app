@@ -1,7 +1,7 @@
 # originally taken from https://github.com/api-platform/api-platform/blob/master/api/Dockerfile
 ARG PHP
 
-FROM php:${PHP}-fpm-alpine AS stage_php
+FROM php:${PHP}-fpm-alpine
 
 ARG BUILD_ENV
 

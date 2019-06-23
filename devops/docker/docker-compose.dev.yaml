@@ -2,18 +2,14 @@ version: '3.7'
 
 services:
   app:
-    build:
-      context: ./php
-      target: stage_php
+    build: ./php
     depends_on:
       - db
     volumes:
       - ../../:/app:rw
 
   web:
-    build:
-      context: ./nginx
-      target: stage_nginx
+    build: ./nginx
     depends_on:
       - app
     volumes:
@@ -22,9 +18,7 @@ services:
       - "8080:80"
 
   db:
-    build:
-      context: ./mysql
-      target: stage_mysql
+    build: ./mysql
     env_file:
       - ./mysql/.env
     volumes:

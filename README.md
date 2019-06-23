@@ -2,6 +2,8 @@
 
 A template setup for new Symfony applications using Docker.
 
+## Stack
+
 - PHP-FPM
 - MySQL
 - NGINX
@@ -20,7 +22,7 @@ rm install.sh
 To run the application locally in development mode use:
 
 ```bash
-make start
+make init
 
 # application served at http://localhost:8080
 ```
@@ -44,6 +46,10 @@ Create a production build using:
 ```bash
 BUILD_ENV=prod make build
 ```
+
+## Deploy Application
+
+🏃
 
 # Contributing
 
