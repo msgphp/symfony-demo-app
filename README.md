@@ -6,6 +6,15 @@ A template setup for new Symfony applications using Docker.
 - MySQL
 - NGINX
 
+## Create Appliction
+
+Bootstrap the initial skeleton application first:
+
+```bash
+./install.sh
+rm install.sh
+```
+
 ## Run Application
 
 To run the application locally in development mode use:
