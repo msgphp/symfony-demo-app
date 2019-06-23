@@ -1,4 +1,5 @@
 #!/bin/sh
+# originally taken from https://github.com/api-platform/api-platform/blob/master/api/docker/php/docker-entrypoint.sh
 set -e
 
 # first arg is `-f` or `--some-option`

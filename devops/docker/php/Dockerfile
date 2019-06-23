@@ -1,9 +1,9 @@
-# originally taken from https://github.com/api-platform/api-platform
-ARG PHP_VERSION=7.3
+# originally taken from https://github.com/api-platform/api-platform/blob/master/api/Dockerfile
+ARG PHP
 
+FROM php:${PHP}-fpm-alpine AS stage_php
 
-# "php" stage
-FROM php:${PHP_VERSION}-fpm-alpine AS stage_php
+ARG BUILD_ENV
 
 RUN apk add --no-cache \
 		acl \
@@ -41,14 +41,14 @@ RUN set -eux; \
 	\
 	apk del .build-deps
 
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=composer /usr/bin/composer /usr/bin/composer
 RUN ln -s $PHP_INI_DIR/php.ini-production $PHP_INI_DIR/php.ini
-COPY php/conf.d/application.ini $PHP_INI_DIR/conf.d/application.ini
+COPY conf.d/application.ini $PHP_INI_DIR/conf.d/application.ini
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV COMPOSER_CACHE_DIR=/tmp/composer
 ENV COMPOSER_HOME=/composer
-COPY php/composer.json /composer/composer.json
+COPY composer.json /composer/composer.json
 RUN set -eux; \
 	composer global install --prefer-dist --no-progress --no-suggest --classmap-authoritative; \
 	composer clear-cache
@@ -56,22 +56,8 @@ ENV PATH="${PATH}:/composer/vendor/bin"
 
 WORKDIR /app
 
-COPY php/docker-entrypoint.sh /usr/local/bin/docker-entrypoint
+COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
 
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
-
-
-# "nginx" stage
-FROM nginx:alpine AS stage_nginx
-
-COPY nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
-
-WORKDIR /app
-
-
-# "mysql" stage
-FROM mysql AS stage_mysql
-
-COPY mysql/conf.d/my.cnf /etc/mysql/conf.d/my.cnf
