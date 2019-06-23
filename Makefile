@@ -19,6 +19,8 @@ build_args=${BUILD_ARGS} --force-rm \
 	--build-arg PHP=${PHP} \
 	--build-arg NGINX=${NGINX} \
 	--build-arg MYSQL=${MYSQL}
+composer_args=--prefer-dist --no-progress --no-interaction --no-suggest
+
 dc=docker-compose \
 	-p $(shell basename $(shell pwd))_${BUILD_ENV} \
 	-f devops/docker/docker-compose.${BUILD_ENV}.yaml \
@@ -28,10 +30,13 @@ app=${exec} app
 composer=${app} composer
 
 # application
+init: build start install
 install:
-	${composer} -h
+	${composer} install ${composer_args}
+install-dist:
+	${composer} install ${composer_args} --no-dev --no-scripts
 update:
-	${composer} -h
+	${composer} update ${composer_args}
 shell:
 	${app} sh
 
@@ -40,8 +45,6 @@ smoke-test:
 	echo "noop"
 
 # containers
-init: build
-	${dc} up --no-build -d
 start:
 	${dc} up --no-build -d
 restart:
