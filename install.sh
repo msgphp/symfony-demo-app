@@ -2,6 +2,8 @@
 
 [ ! -d ~/.composer ] && mkdir ~/.composer
 
+. devops/docker/mysql/.env
+
 dockerized="docker run --rm \
     -v ${HOME}/.composer:/tmp/composer \
     -v $(pwd):/app -w /app \
@@ -16,5 +18,5 @@ mv ${tmp_dir}/* . && \
 rmdir ${tmp_dir} && \
 make build start && \
 rm public/index.php && \
-echo "DATABASE_URL=mysql://app:pass@localhost:3306/app" > .env.dev && \
+echo "DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@db:3306/${MYSQL_DATABASE}" > .env.dev && \
 make install
