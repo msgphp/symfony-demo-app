@@ -25,5 +25,5 @@ mv ${tmp_dir}/* . && \
 rmdir ${tmp_dir} && \
 make build start && \
 rm public/index.php && \
-echo "DATABASE_URL=mysql://${MYSQL_USER:-app}:${MYSQL_PASSWORD:-pass}@db:3306/${MYSQL_DATABASE:-app}" >> .env.dev && \
+echo "DATABASE_URL=mysql://${MYSQL_USER:-app}:${MYSQL_PASSWORD:-pass}@db:3306/${MYSQL_DATABASE:-app}" >> .env.dev.local && \
 make install
