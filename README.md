@@ -1,6 +1,6 @@
 # Symfony & Docker
 
-A template setup for new Symfony applications using Docker.
+A template for new Symfony applications using Docker.
 
 ## Stack
 
