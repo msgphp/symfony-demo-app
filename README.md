@@ -13,7 +13,20 @@ A template for new Symfony applications using Docker.
 Bootstrap the initial skeleton first:
 
 ```bash
+# latest stable
 ./install.sh
+
+# specify version
+SF=x.y ./install.sh
+SF=x.y.z ./install.sh
+
+# specify stability
+STABILITY=dev ./install.sh
+```
+
+Cleanup the installer:
+
+```bash
 rm install.sh
 ```
 

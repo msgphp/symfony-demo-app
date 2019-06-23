@@ -1,8 +1,16 @@
 #!/bin/sh
 
-[ ! -d ~/.composer ] && mkdir ~/.composer
-
 . devops/docker/mysql/.env
+
+SKELETON="${SKELETON:-symfony/website-skeleton}"
+SF="${SF:-}"
+STABILITY="${STABILITY:-stable}"
+
+[ ! -z "${SF}" ] && [ $(echo "${SF}" | awk -F"." '{print NF-1}') -lt 2 ] && SF="${SF}.*"
+
+echo "Starting installation ..."
+
+[ ! -d ~/.composer ] && mkdir ~/.composer
 
 dockerized="docker run --rm \
     -v ${HOME}/.composer:/tmp/composer \
@@ -10,10 +18,9 @@ dockerized="docker run --rm \
     -u $(id -u):$(id -g) \
     -e COMPOSER_HOME=/tmp/composer"
 [ -t 1 ] && dockerized="${dockerized} -it"
-
 tmp_dir=$(mktemp -d -t install-XXXXX --tmpdir=.)
 
-${dockerized} composer create-project --no-install symfony/website-skeleton ${tmp_dir} && \
+${dockerized} composer create-project "${SKELETON} ${SF}" ${tmp_dir} -s "${STABILITY}" --no-install --remove-vcs && \
 mv ${tmp_dir}/* . && \
 rmdir ${tmp_dir} && \
 make build start && \
