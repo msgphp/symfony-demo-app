@@ -16,4 +16,5 @@ mv ${tmp_dir}/* . && \
 rmdir ${tmp_dir} && \
 make build start && \
 rm public/index.php && \
+echo "DATABASE_URL=mysql://app:pass@localhost:3306/app" > .env.dev && \
 make install
