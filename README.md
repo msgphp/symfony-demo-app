@@ -11,7 +11,7 @@ A template setup for new Symfony applications using Docker.
 ```bash
 make start
 
-# application served at https://localhost:8080
+# application served at http://localhost:8080
 ```
 
 Start a shell using:
