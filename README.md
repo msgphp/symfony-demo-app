@@ -8,13 +8,28 @@ A template setup for new Symfony applications using Docker.
 - MySQL
 - NGINX
 
-## Create Appliction
+## Create Application
 
-Bootstrap the initial skeleton application first:
+Bootstrap the initial skeleton first:
 
 ```bash
 ./install.sh
 rm install.sh
+```
+
+Commit the initial files:
+
+```bash
+git add --all
+git commit -m "Initial project structure"
+```
+
+## Install Application
+
+Install the application initially using:
+
+```bash
+make install
 ```
 
 ## Run Application
@@ -22,7 +37,7 @@ rm install.sh
 To run the application locally in development mode use:
 
 ```bash
-make init
+make start
 
 # application served at http://localhost:8080
 ```

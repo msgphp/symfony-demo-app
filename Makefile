@@ -30,13 +30,14 @@ app=${exec} app
 composer=${app} composer
 
 # application
-init: build start install
 install:
 	${composer} install ${composer_args}
 install-dist:
-	${composer} install ${composer_args} --no-dev --no-scripts
+	${composer} install ${composer_args} --no-scripts --no-dev
 update:
 	${composer} update ${composer_args}
+update-recipes:
+	${composer} symfony:sync-recipes --force ${composer_args}
 shell:
 	${app} sh
 

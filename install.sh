@@ -13,4 +13,7 @@ tmp_dir=$(mktemp -d -t install-XXXXX --tmpdir=.)
 
 ${dockerized} composer create-project --no-install symfony/website-skeleton ${tmp_dir} && \
 mv ${tmp_dir}/* . && \
-rmdir ${tmp_dir}
+rmdir ${tmp_dir} && \
+make build start && \
+rm public/index.php && \
+make install
