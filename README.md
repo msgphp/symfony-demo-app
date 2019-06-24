@@ -8,6 +8,16 @@ A template for new Symfony applications using Docker.
 - MySQL
 - NGINX
 
+## Local Environment
+
+To customize the local environment use:
+
+```bash
+cp -n devops/docker/.env.dist devops/docker/.env
+```
+
+Modify the (new) `.env` file to your needs.
+
 ## 0. Create Application
 
 Bootstrap the initial skeleton first:
@@ -36,6 +46,8 @@ Commit the initial files:
 git add --all
 git commit -m "Initial project structure"
 ```
+
+And done. The next steps only apply after a fresh clone of the project.
 
 ## 1. Build Application
 
