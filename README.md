@@ -83,13 +83,19 @@ make shell
 
 ## 4. Deploy Application
 
-Create a production build using:
+By default only a `dev` environment is provided, for any other stage an environment must be defined first:
+
+```bash
+cp devops/docker/docker-compose.dev.yaml devops/docker/docker-compose.prod.yaml
+```
+
+Modify the new `prod` environment to your needs, then create a build:
 
 ```bash
 BUILD_ENV=prod make build
 ```
 
-... 🏃
+Conceptually above steps can be applied for any new staging environment, e.g. `BUILD_ENV=acceptance make build`.
 
 # Contributing
 
