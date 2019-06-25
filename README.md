@@ -22,6 +22,8 @@ To create a new staging environment (e.g. `prod`) use:
 cp -R devops/environment/dev devops/environment/prod
 ```
 
+⚠️ Never commit secret values in `.env.dist` for non-dev environments.
+
 ## 0. Create Application
 
 Bootstrap the initial skeleton first:
@@ -38,7 +40,7 @@ SF=x.y.z ./install.sh
 STABILITY=dev ./install.sh
 ```
 
-Cleanup the installer:
+⚠️ Cleanup the installer:
 
 ```bash
 rm install.sh
