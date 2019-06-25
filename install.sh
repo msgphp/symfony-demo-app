@@ -26,4 +26,4 @@ rmdir ${tmp_dir} && \
 make build start && \
 rm public/index.php && \
 echo "DATABASE_URL=mysql://${MYSQL_USER:-app}:${MYSQL_PASSWORD:-pass}@db:${MYSQL_PORT:-3306}/${MYSQL_DATABASE:-app}" >> .env.dev.local && \
-make install normalize
+make install

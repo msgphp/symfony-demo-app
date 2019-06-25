@@ -62,10 +62,15 @@ build: quit
 	${dc} build ${build_args}
 
 # misc
+exec:
+	echo "${exec}"
+normalize:
+	${composer} normalize
+
+# debug
 composed-config:
 	${dc} config
 composed-images:
 	${dc} images
-normalize:
-	${composer} normalize --no-update-lock
-	${composer} update ${composer_args} --lock --no-scripts
+log:
+	${dc} logs -f

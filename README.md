@@ -106,6 +106,37 @@ Start a MySQL client using:
 make mysql
 ```
 
+# Miscellaneous
+
+## Run a One-Off Command
+
+```bash
+sh -c "$(make exec) app ls"
+```
+
+## Normalization
+
+Normalize source files (e.g. `composer.json`) using:
+
+```bash
+make normalize
+```
+
+## Debug
+
+See current docker-compose configuration and images using:
+
+```bash
+make composed-config
+make composed-images
+```
+
+Follow service logs:
+
+```bash
+make log
+```
+
 # Contributing
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md)
