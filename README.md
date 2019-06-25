@@ -53,9 +53,7 @@ git add --all
 git commit -m "Initial project structure"
 ```
 
-And done. The application is served at http://localhost:8080 (or the port as configured for the staging environment).
-
-The next steps only apply after a fresh clone of the project.
+And done. Continue to step 4 (step 1-3 only apply after a fresh clone).
 
 ## 1. Build Application
 
@@ -79,15 +77,17 @@ Install the application using:
 make install
 ```
 
-## 3. Run Application
+## 3. Start Application
 
-To run the application locally in development mode use:
+To start the application locally in development mode use:
 
 ```bash
 make start
 ```
 
-By default the application is served at http://localhost:8080 (or the port as configured for the staging environment).
+## 4. Run Application
+
+Visit the application at: http://localhost:8080 (or the port as configured in the `dev` environment).
 
 Start a shell using:
 
