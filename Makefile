@@ -68,6 +68,7 @@ exec:
 normalize:
 	${composer} normalize
 requirement-check:
+	[ -f public/index.php.orig ] && echo "Requirement check in progress?" && exit 1
 	${composer} require symfony/requirements-checker ${composer_args} --no-scripts
 	mv public/index.php public/index.php.orig
 	cp vendor/symfony/requirements-checker/public/check.php public/index.php
