@@ -1,6 +1,6 @@
 #!/bin/sh
 
-[ -f devops/docker/.env ] && . devops/docker/.env
+[ -f devops/environment/dev/.env ] && . devops/environment/dev/.env
 
 SF="${SF:-}"
 STABILITY="${STABILITY:-stable}"
