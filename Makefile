@@ -52,6 +52,7 @@ start:
 	${dc} up --no-build -d
 restart:
 	${dc} restart
+refresh: build start install
 stop:
 	${dc} stop
 quit:

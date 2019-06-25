@@ -74,15 +74,7 @@ Build the application for a specific staging environment using:
 BUILD_ENV=prod make build
 ```
 
-## 2. Install Application
-
-Install the application using:
-
-```bash
-make install
-```
-
-## 3. Start Application
+## 2. Start Application
 
 To start the application locally in development mode use:
 
@@ -90,9 +82,34 @@ To start the application locally in development mode use:
 make start
 ```
 
+Consider a restart to have fresh containers once started:
+
+```bash
+make restart
+```
+
+## 3. Install Application
+
+Install the application using:
+
+```bash
+make install
+```
+
+Consider a refresh (build/start/install) to install the application from scratch:
+
+```bash
+make refresh
+
+# ignore caches
+BUILD_ARGS=--no-cache make refresh
+```
+
 ## 4. Run Application
 
-Visit the application at: http://localhost:8080 (or the port as configured in the `dev` environment).
+Visit the application at: http://localhost:8080
+
+Optionally, configure the port to use in `devops/environment/dev/.env`
 
 Start a shell using:
 
@@ -124,7 +141,7 @@ make normalize
 
 ## Debug
 
-See current docker-compose configuration and images using:
+Display current docker-compose configuration and/or its images using:
 
 ```bash
 make composed-config
