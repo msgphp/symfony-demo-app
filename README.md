@@ -2,7 +2,7 @@
 
 A template for new Symfony applications using Docker.
 
-## Stack
+## Default Stack
 
 - PHP-FPM
 - MySQL
