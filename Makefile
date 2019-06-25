@@ -40,6 +40,8 @@ update-recipes:
 	${composer} symfony:sync-recipes --force ${composer_args}
 shell:
 	${app} sh
+mysql:
+	${exec} db sh -c "mysql -u \$${MYSQL_USER} -p\$${MYSQL_PASSWORD} \$${MYSQL_DATABASE}"
 
 # contributing
 smoke-test:

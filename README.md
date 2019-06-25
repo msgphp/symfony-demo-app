@@ -95,6 +95,12 @@ Start a shell using:
 make shell
 ```
 
+Start a MySQL client using:
+
+```bash
+make mysql
+```
+
 # Contributing
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md)
