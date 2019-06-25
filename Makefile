@@ -37,7 +37,7 @@ install-dist:
 update:
 	${composer} update ${composer_args}
 update-recipes:
-	${composer} symfony:sync-recipes --force ${composer_args}
+	${composer} symfony:sync-recipes --force
 shell:
 	${app} sh
 mysql:
@@ -66,3 +66,6 @@ composed-config:
 	${dc} config
 composed-images:
 	${dc} images
+normalize:
+	${composer} normalize --no-update-lock
+	${composer} update ${composer_args} --lock --no-scripts
