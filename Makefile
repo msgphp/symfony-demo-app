@@ -62,5 +62,7 @@ build: quit
 	${dc} build ${build_args}
 
 # misc
-compose-config:
+composed-config:
 	${dc} config
+composed-images:
+	${dc} images
