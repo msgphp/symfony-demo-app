@@ -8,15 +8,19 @@ A template for new Symfony applications using Docker.
 - MySQL
 - NGINX
 
-## Local Environment
+## Environment
 
-To customize the local environment use:
+To customize a staging environment use:
 
 ```bash
-cp -n devops/docker/.env.dist devops/docker/.env
+cp -n devops/environment/dev/.env.dist devops/environment/dev/.env
 ```
 
-Modify the (new) `.env` file to your needs.
+To create a new staging environment (e.g. `prod`) use:
+
+```bash
+cp -R devops/environment/dev devops/environment/prod
+```
 
 ## 0. Create Application
 
@@ -57,9 +61,15 @@ To create a default development build use:
 make build
 ```
 
+Build the application for a specific staging environment using:
+
+```bash
+BUILD_ENV=prod make build
+```
+
 ## 2. Install Application
 
-Install the application initially using:
+Install the application using:
 
 ```bash
 make install
@@ -71,31 +81,15 @@ To run the application locally in development mode use:
 
 ```bash
 make start
-
-# by default application is served at http://localhost:8080
 ```
+
+By default the application is served at http://localhost:8080 (or the port as configured for the staging environment).
 
 Start a shell using:
 
 ```bash
 make shell
 ```
-
-## 4. Deploy Application
-
-By default only a `dev` environment is provided, for any other stage an environment must be defined first:
-
-```bash
-cp devops/docker/docker-compose.dev.yaml devops/docker/docker-compose.prod.yaml
-```
-
-Modify the new `prod` environment to your needs, then create a build:
-
-```bash
-BUILD_ENV=prod make build
-```
-
-Conceptually above steps can be applied for any new staging environment, e.g. `BUILD_ENV=acceptance make build`.
 
 # Contributing
 

@@ -23,8 +23,8 @@ composer_args=--prefer-dist --no-progress --no-interaction --no-suggest
 
 dc=docker-compose \
 	-p $(shell basename $(shell pwd))_${BUILD_ENV} \
-	-f devops/docker/docker-compose.${BUILD_ENV}.yaml \
-	--project-directory devops/docker
+	-f devops/environment/${BUILD_ENV}/docker-compose.yaml \
+	--project-directory devops/environment/${BUILD_ENV}
 exec=${dc} exec -u $(shell id -u):$(shell id -g)
 app=${exec} app
 composer=${app} composer
