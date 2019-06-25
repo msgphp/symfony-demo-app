@@ -167,7 +167,7 @@ Fix any issues shown in the CLI. Then open `index.php` and comment out the `REMO
 Visit the application in your browser to verify web and fix any remaining issues. If all good, continue using:
 
 ```bash
-make no-requirement-check
+make requirement-check-disable
 ```
 
 # Contributing

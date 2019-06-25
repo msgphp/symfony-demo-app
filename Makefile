@@ -68,14 +68,14 @@ exec:
 normalize:
 	${composer} normalize
 requirement-check:
-	[ -f public/index.php.orig ] && echo "Requirement check in progress?" && exit 1
+	if [ -f public/index.php.orig ]; then echo "Requirement check in progress?" && exit 1; fi
 	${composer} require symfony/requirements-checker ${composer_args} --no-scripts
 	mv public/index.php public/index.php.orig
 	cp vendor/symfony/requirements-checker/public/check.php public/index.php
 	${app} vendor/bin/requirements-checker
-no-requirement-check:
+requirement-check-disable:
+	if [ -f public/index.php.orig ]; then mv public/index.php.orig public/index.php; fi
 	${composer} remove symfony/requirements-checker
-	mv public/index.php.orig public/index.php
 
 # debug
 composed-config:
