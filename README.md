@@ -46,14 +46,16 @@ STABILITY=dev ./install.sh
 rm install.sh
 ```
 
-Commit the initial files:
+Commit the initial project files:
 
 ```bash
 git add --all
 git commit -m "Initial project structure"
 ```
 
-And done. The next steps only apply after a fresh clone of the project.
+And done. The application is served at http://localhost:8080 (or the port as configured for the staging environment).
+
+The next steps only apply after a fresh clone of the project.
 
 ## 1. Build Application
 
