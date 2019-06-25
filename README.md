@@ -24,6 +24,11 @@ cp -R devops/environment/dev devops/environment/prod
 
 ⚠️ Never commit secret values in `.env.dist` for non-dev environments.
 
+ℹ️ Consider standard "DTAP" environments (Development, Testing, Acceptance and Production) a best practice.
+
+> This template by default assumes `dev` and `prod` for respectively Development and Production.
+> If you follow a different naming convention this needs to be accounted for in various template files (e.g. `install.sh`, `Dockerfile`).
+
 ## 0. Create Application
 
 Bootstrap the initial skeleton first:
