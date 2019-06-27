@@ -43,19 +43,15 @@ SF=x.y.z ./install.sh
 
 # specify stability
 STABILITY=dev ./install.sh
+
+# skip initial commit
+NO_COMMIT=1 ./install.sh
 ```
 
 ⚠️ Cleanup the installer:
 
 ```bash
 rm install.sh
-```
-
-Commit the initial project files:
-
-```bash
-git add --all
-git commit -m "Initial project structure"
 ```
 
 And done. Continue to step 4 (step 1-3 only apply after a fresh clone).

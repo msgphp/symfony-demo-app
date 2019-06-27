@@ -27,3 +27,12 @@ make build start && \
 rm public/index.php && \
 echo "DATABASE_URL=mysql://${MYSQL_USER:-app}:${MYSQL_PASSWORD:-pass}@db:${MYSQL_PORT:-3306}/${MYSQL_DATABASE:-app}" >> .env.dev.local && \
 make install
+
+[ ! $? -eq 0 ] && echo "Installation failed." && exit 1
+
+if [ ${NO_COMMIT:-0} -eq 0 ]; then
+    git add . && \
+    git reset HEAD "$0" && \
+    git commit -m "Initial project setup"
+    [ ! $? -eq 0 ] && echo "Commit failed." && exit 1
+fi
