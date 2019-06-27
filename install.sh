@@ -31,6 +31,7 @@ make install
 [ ! $? -eq 0 ] && echo "Installation failed." && exit 1
 
 if [ ${NO_COMMIT:-0} -eq 0 ]; then
+    [ ! -d .git ] && git init
     git add . && \
     git reset HEAD "$0" && \
     git commit -m "Initial project setup"
