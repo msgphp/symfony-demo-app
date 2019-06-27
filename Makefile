@@ -1,12 +1,3 @@
-ifndef PHP;
-	PHP=7.3
-endif
-ifndef NGINX
-	NGINX=1.17
-endif
-ifndef MYSQL
-	MYSQL=5.7
-endif
 ifndef BUILD_ENV
 	BUILD_ENV=dev
 endif
@@ -14,15 +5,12 @@ ifndef BUILD_ARGS
 	BUILD_ARGS=
 endif
 
-build_args=${BUILD_ARGS} --force-rm \
-	--build-arg BUILD_ENV=${BUILD_ENV} \
-	--build-arg PHP=${PHP} \
-	--build-arg NGINX=${NGINX} \
-	--build-arg MYSQL=${MYSQL}
+build_args=${BUILD_ARGS} --build-arg BUILD_ENV=${BUILD_ENV} --force-rm
 composer_args=--prefer-dist --no-progress --no-interaction --no-suggest
 
 dc=docker-compose \
 	-p $(shell basename $(shell pwd))_${BUILD_ENV} \
+	-f devops/environment/base/docker-compose.yaml \
 	-f devops/environment/${BUILD_ENV}/docker-compose.yaml \
 	--project-directory devops/environment/${BUILD_ENV}
 exec=${dc} exec -u $(shell id -u):$(shell id -g)
@@ -59,7 +47,10 @@ quit:
 	${dc} down
 
 # images
-build: quit
+setup:
+	cp -n devops/environment/${BUILD_ENV}/.env.dist devops/environment/${BUILD_ENV}/.env
+	sh -c "set -a && . devops/environment/${BUILD_ENV}/.env; export BUILD_ENV=${BUILD_ENV}; devops/setup.sh" 2>&1
+build: setup quit
 	${dc} build ${build_args}
 
 # misc

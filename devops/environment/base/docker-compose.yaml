@@ -1,0 +1,19 @@
+version: '3.7'
+
+services:
+  app:
+    build:
+      context: ../../docker/php
+      args:
+        version: "${PHP}"
+        icu: "${ICU}"
+
+  web:
+    build:
+      context: ../../docker/nginx
+      args:
+        version: "${NGINX}"
+    depends_on:
+      - app
+    ports:
+      - "${NGINX_PORT}:80"

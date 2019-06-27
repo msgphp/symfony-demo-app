@@ -1,11 +1,13 @@
 # originally taken from https://github.com/api-platform/api-platform/blob/master/api/Dockerfile
 # see also https://github.com/jakzal/docker-symfony-intl/blob/master/7.3/64.2/Dockerfile
-ARG PHP
+ARG version
 
-FROM php:${PHP}-fpm-alpine
+FROM php:${version}-fpm-alpine
 
-ARG BUILD_ENV
-ARG ICU=64.2
+ARG build_env
+ARG icu
+
+COPY icu/src-${icu}.tgz /tmp/icu.tgz
 
 RUN apk add --no-cache \
 		acl \
@@ -23,7 +25,6 @@ RUN set -eux; \
 		zlib-dev \
 	; \
 	\
-	curl -sS -o /tmp/icu.tgz -L "http://download.icu-project.org/files/icu4c/${ICU}/icu4c-${ICU//./_}-src.tgz"; \
 	tar -zxf /tmp/icu.tgz -C /tmp; \
 	cd /tmp/icu/source; CXXFLAGS="--std=c++0x" ./runConfigureICU Linux && make && make install; cd -; \
 	rm -rf /tmp/icu /tmp/icu.tgz; \

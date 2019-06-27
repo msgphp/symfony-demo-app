@@ -2,32 +2,29 @@ version: '3.7'
 
 services:
   app:
-    build: ../../docker/php
-    depends_on:
-      - db
     volumes:
       - ../../../:/app:rw
+    depends_on:
+      - db
 
   web:
-    build: ../../docker/nginx
-    depends_on:
-      - app
     volumes:
       - ../../../public:/app/public:ro
-    ports:
-      - "${NGINX_PORT:-8080}:80"
 
   db:
-    build: ../../docker/mysql
+    build:
+      context: ../../docker/mysql
+      args:
+        version: "${MYSQL}"
     environment:
-      - "MYSQL_DATABASE=${MYSQL_DATABASE:-app}"
-      - "MYSQL_USER=${MYSQL_USER:-app}"
-      - "MYSQL_PASSWORD=${MYSQL_PASSWORD:-pass}"
-      - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-pass}"
+      - "MYSQL_DATABASE=${MYSQL_DATABASE}"
+      - "MYSQL_USER=${MYSQL_USER}"
+      - "MYSQL_PASSWORD=${MYSQL_PASSWORD}"
+      - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
+    ports:
+      - "${MYSQL_PORT}:3306"
     volumes:
       - db-data:/var/lib/mysql:rw
-    ports:
-      - "${MYSQL_PORT:-3306}:3306"
 
 volumes:
   db-data: {}

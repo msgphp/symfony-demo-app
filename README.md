@@ -8,7 +8,15 @@ A template for new Symfony applications using Docker.
 - MySQL
 - NGINX
 
-## Environment
+## `devops/`
+
+The `devops` directory holds all DevOps related concepts, separate from the application concern.
+
+### `devops/environment/`
+
+The `environment` directory holds all available application staging environments, each environment containing a
+`docker-compose.yaml` file at least. By default environments inherit from the `base` directory, which is not an
+environment on itself.
 
 To customize a staging environment use:
 
@@ -24,10 +32,21 @@ cp -R devops/environment/dev devops/environment/prod
 
 ⚠️ Never commit secret values in `.env.dist` for non-dev environments.
 
-ℹ️ Consider standard "DTAP" environments (Development, Testing, Acceptance and Production) a best practice.
+ℹ️ Consider standard "DTAP" environments (Development, Testing, Acceptance and Production) a best practice
 
-> This template by default assumes `dev` and `prod` for respectively Development and Production.
-> If you follow a different naming convention this needs to be accounted for in various template files (e.g. `install.sh`, `Dockerfile`).
+> This template by default assumes `dev` and `prod` for respectively development and production
+
+### `devops/docker/`
+
+The `docker` directory holds all available application services. Each directory represents a single service, containing
+a `Dockerfile` at least.
+
+A `setup.sh` binary can be defined to setup the host system before building the service (e.g. pull in external sources).
+It is automatically invoked during build and may use staging environment variables sourced from `devops/environment/<env>/.env`.
+The current staging environment is identified by `BUID_ENV`.
+
+ℹ️ Consider a single service per concept, to be used across all staging environments and ensure a single source of truth,
+a best practice
 
 ## 0. Create Application
 
@@ -105,7 +124,7 @@ BUILD_ARGS=--no-cache make refresh
 
 Visit the application at: http://localhost:8080
 
-Optionally, configure the port to use in `devops/environment/dev/.env`
+Modify the staging environment its `.env` file to use a different port.
 
 Start a shell using:
 

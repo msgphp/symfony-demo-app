@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env sh
 
 [ -f devops/environment/dev/.env ] && . devops/environment/dev/.env
 
