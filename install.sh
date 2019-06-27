@@ -33,7 +33,7 @@ make install
 if [ ${NO_COMMIT:-0} -eq 0 ]; then
     [ ! -d .git ] && git init
     git add . && \
-    git reset HEAD "$0" && \
+    git rm --cached "$0" && \
     git commit -m "Initial project setup"
     [ ! $? -eq 0 ] && echo "Commit failed." && exit 1
 fi
