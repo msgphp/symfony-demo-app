@@ -1,9 +1,11 @@
 # originally taken from https://github.com/api-platform/api-platform/blob/master/api/Dockerfile
+# see also https://github.com/jakzal/docker-symfony-intl/blob/master/7.3/64.2/Dockerfile
 ARG PHP
 
 FROM php:${PHP}-fpm-alpine
 
 ARG BUILD_ENV
+ARG ICU=64.2
 
 RUN apk add --no-cache \
 		acl \
@@ -21,6 +23,12 @@ RUN set -eux; \
 		zlib-dev \
 	; \
 	\
+	curl -sS -o /tmp/icu.tgz -L "http://download.icu-project.org/files/icu4c/${ICU}/icu4c-${ICU//./_}-src.tgz"; \
+	tar -zxf /tmp/icu.tgz -C /tmp; \
+	cd /tmp/icu/source; CXXFLAGS="--std=c++0x" ./runConfigureICU Linux && make && make install; cd -; \
+	rm -rf /tmp/icu /tmp/icu.tgz; \
+	\
+	docker-php-ext-configure intl; \
 	docker-php-ext-configure zip --with-libzip; \
 	docker-php-ext-install -j$(nproc) \
 		intl \
