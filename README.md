@@ -152,19 +152,13 @@ make log
 
 ## Verify Symfony Requirements
 
-After a build verify if Symfony requirements are (still) met using:
+After any build it might be considered to verify if Symfony requirements are (still) met using:
 
 ```bash
 make requirement-check
 ```
 
-Fix any issues shown in the CLI. Then open `index.php` and comment out the `REMOTE_ADDR` check.
-
-Visit the application in your browser to verify web and fix any remaining issues. If all good, continue using:
-
-```bash
-make requirement-check-disable
-```
+Fix all issues raised.
 
 # Contributing
 
