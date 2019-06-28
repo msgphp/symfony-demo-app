@@ -59,12 +59,13 @@ RUN if [ "${build_env}" = 'dev' ]; then \
 ENV COMPOSER_HOME=/composer
 ENV COMPOSER_CACHE_DIR=/tmp/composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV COMPOSER_HTACCESS_PROTECT=0
 COPY --from=composer /usr/bin/composer /usr/bin/
 COPY composer/composer.json /composer/
+COPY composer/config.json /composer/
 RUN set -eux; \
-	composer global install --prefer-dist --no-progress --no-suggest --classmap-authoritative; \
+	composer global install --prefer-dist --no-progress --no-interaction --no-suggest --classmap-authoritative; \
 	composer clear-cache
-ENV PATH="${PATH}:/composer/vendor/bin"
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
