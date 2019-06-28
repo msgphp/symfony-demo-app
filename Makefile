@@ -5,7 +5,7 @@ ifndef BUILD_ARGS
 	BUILD_ARGS=
 endif
 
-build_args=${BUILD_ARGS} --build-arg BUILD_ENV=${BUILD_ENV} --force-rm
+build_args=${BUILD_ARGS} --build-arg build_env=${BUILD_ENV} --force-rm
 composer_args=--prefer-dist --no-progress --no-interaction --no-suggest
 
 dc=docker-compose \
@@ -33,7 +33,7 @@ mysql:
 
 # contributing
 smoke-test:
-	echo "noop"
+	echo "todo"
 
 # containers
 start:
@@ -56,6 +56,8 @@ build: setup quit
 # misc
 exec:
 	echo "${exec}"
+run:
+	echo "${dc} run --rm"
 normalize:
 	${composer} normalize
 requirement-check:

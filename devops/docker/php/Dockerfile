@@ -49,14 +49,18 @@ RUN set -eux; \
 	\
 	apk del .build-deps
 
-COPY --from=composer /usr/bin/composer /usr/bin/composer
-RUN ln -s ${PHP_INI_DIR}/php.ini-production ${PHP_INI_DIR}/php.ini
-COPY conf.d/application.ini ${PHP_INI_DIR}/conf.d/application.ini
+COPY conf.d/application.ini "${PHP_INI_DIR}/conf.d/"
+RUN if [ "${build_env}" = 'dev' ]; then \
+		ln -s "${PHP_INI_DIR}/php.ini-development" "${PHP_INI_DIR}/php.ini"; \
+	else \
+		ln -s "${PHP_INI_DIR}/php.ini-production" "${PHP_INI_DIR}/php.ini"; \
+	fi
 
-ENV COMPOSER_ALLOW_SUPERUSER=1
-ENV COMPOSER_CACHE_DIR=/tmp/composer
 ENV COMPOSER_HOME=/composer
-COPY composer.json /composer/composer.json
+ENV COMPOSER_CACHE_DIR=/tmp/composer
+ENV COMPOSER_ALLOW_SUPERUSER=1
+COPY --from=composer /usr/bin/composer /usr/bin/
+COPY composer.json /composer/
 RUN set -eux; \
 	composer global install --prefer-dist --no-progress --no-suggest --classmap-authoritative; \
 	composer clear-cache

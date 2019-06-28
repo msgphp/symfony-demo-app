@@ -8,9 +8,29 @@ A template for new Symfony applications using Docker.
 - MySQL
 - NGINX
 
-## `devops/`
+## Default Environment
 
-The `devops` directory holds all DevOps related concepts, separate from the application concern.
+```bash
+PHP=x.y
+ICU=x.y
+
+NGINX=x.y
+NGINX_PORT=8080
+
+# dev
+MYSQL=x.y
+MYSQL_PORT=3306
+MYSQL_DATABASE=app
+MYSQL_USER=app
+MYSQL_PASSWORD=pass
+MYSQL_ROOT_PASSWORD=pass
+```
+
+## The `devops/` Directory
+
+The `devops` directory holds all DevOps related concepts, thus separately from the application concern.
+
+ℹ️ Don't mix&match `.env` files, considering each concern may rely on a different parsing technique ([ref](https://github.com/symfony/recipes/pull/487))
 
 ### `devops/environment/`
 
@@ -75,7 +95,7 @@ NO_COMMIT=1 ./install.sh
 rm install.sh
 ```
 
-And done. Continue to [step 4](#4-run-application) (step 1-3 only apply after a fresh clone).
+And done. Continue to [step 4](#4-run-application) (start from [step 1](#1-build-application) after a fresh clone).
 
 ## 1. Build Application
 
@@ -124,9 +144,7 @@ BUILD_ARGS=--no-cache make refresh
 
 ## 4. Run Application
 
-Visit the application at: http://localhost:8080
-
-Modify the staging environment its `.env` file to use a different port.
+Visit the application at: http://localhost:8080 (`NGINX_PORT`)
 
 Start a shell using:
 
@@ -142,10 +160,16 @@ make mysql
 
 # Miscellaneous
 
-## Run a One-Off Command
+## One-Off Commands
 
 ```bash
 sh -c "$(make exec) app ls"
+```
+
+Alternatively, use `make run` to create a temporary container and run as `root` user by default.
+
+```bash
+sh -c "$(make run) --no-deps app whoami"
 ```
 
 ## Normalization
@@ -178,8 +202,6 @@ After any build it might be considered to verify if Symfony requirements are (st
 ```bash
 make requirement-check
 ```
-
-Fix all issues raised.
 
 # Contributing
 
