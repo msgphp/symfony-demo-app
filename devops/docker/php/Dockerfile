@@ -60,7 +60,7 @@ ENV COMPOSER_HOME=/composer
 ENV COMPOSER_CACHE_DIR=/tmp/composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
 COPY --from=composer /usr/bin/composer /usr/bin/
-COPY composer.json /composer/
+COPY composer/composer.json /composer/
 RUN set -eux; \
 	composer global install --prefer-dist --no-progress --no-suggest --classmap-authoritative; \
 	composer clear-cache

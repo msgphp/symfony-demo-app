@@ -1,6 +1,0 @@
-{
-    "require": {
-        "localheinz/composer-normalize": "*",
-        "symfony/flex": "*"
-    }
-}
