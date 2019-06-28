@@ -42,8 +42,10 @@ The `docker` directory holds all available application services. Each directory 
 a `Dockerfile` at least.
 
 A `setup.sh` binary can be defined to setup the host system before building the service (e.g. pull in external sources).
-It is automatically invoked during build and may use staging environment variables sourced from `devops/environment/<env>/.env`.
-The current staging environment is identified by `BUID_ENV`.
+It is automatically invoked during build.
+
+Setup files may use staging environment variables sourced from `devops/environment/<env>/.env`. The current staging
+environment is identified by `BUID_ENV`.
 
 ℹ️ Consider a single service per concept, to be used across all staging environments and ensure a single source of truth,
 a best practice
