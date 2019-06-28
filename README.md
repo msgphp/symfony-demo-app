@@ -188,3 +188,8 @@ make requirement-check
 # Contributing
 
 See [`CONTRIBUTING.md`](CONTRIBUTING.md)
+
+# References
+
+- https://github.com/api-platform/api-platform/blob/master/api/Dockerfile
+- https://github.com/jakzal/docker-symfony-intl/blob/master/Dockerfile-intl

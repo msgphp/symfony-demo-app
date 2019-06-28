@@ -1,5 +1,3 @@
-# originally taken from https://github.com/api-platform/api-platform/blob/master/api/Dockerfile
-# see also https://github.com/jakzal/docker-symfony-intl/blob/master/7.3/64.2/Dockerfile
 ARG version
 
 FROM php:${version}-fpm-alpine
