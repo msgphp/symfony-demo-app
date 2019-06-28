@@ -30,7 +30,7 @@ To create a new staging environment (e.g. `prod`) use:
 cp -R devops/environment/dev devops/environment/prod
 ```
 
-⚠️ Never commit secret values in `.env.dist` for non-dev environments.
+⚠️ Never commit secret values in `.env.dist` for non-dev environments
 
 ℹ️ Consider standard "DTAP" environments (Development, Testing, Acceptance and Production) a best practice
 
