@@ -73,7 +73,7 @@ NO_COMMIT=1 ./install.sh
 rm install.sh
 ```
 
-And done. Continue to step 4 (step 1-3 only apply after a fresh clone).
+And done. Continue to [step 4](#4-run-application) (step 1-3 only apply after a fresh clone).
 
 ## 1. Build Application
 
