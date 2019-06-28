@@ -10,7 +10,6 @@ ARG icu
 COPY icu/src-${icu}.tgz /tmp/icu.tgz
 
 RUN apk add --no-cache \
-		acl \
 		file \
 		gettext \
 		git \

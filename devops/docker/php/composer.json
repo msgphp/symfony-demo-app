@@ -1,7 +1,6 @@
 {
     "require": {
         "localheinz/composer-normalize": "*",
-        "ro0nl/link": "*",
         "symfony/flex": "*"
     }
 }
