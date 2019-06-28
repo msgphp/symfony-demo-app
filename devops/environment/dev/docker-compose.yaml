@@ -1,28 +1,53 @@
 version: '3.7'
 
+x-mysql:
+  &mysql
+  image: "${IMAGE_MYSQL:?}"
+  environment:
+    - "MYSQL_DATABASE=${MYSQL_DATABASE:?}"
+    - "MYSQL_USER=${MYSQL_USER:?}"
+    - "MYSQL_PASSWORD=${MYSQL_PASSWORD:?}"
+    - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:?}"
+
 services:
   app:
     volumes:
-      - ../../../:/app:rw
+      - "${APP_DIR:?}:/app:rw"
     depends_on:
       - db
+#  app-test:
+#    volumes:
+#      - "${APP_DIR:?}:/app:rw"
+#    build:
+#      context: .
+#      target: app_test
+#      args:
+#        image_app: "${COMPOSE_PROJECT_NAME:?}_app"
+#        image_phpqa: "${IMAGE_PHPQA:?}"
+#    depends_on:
+#      - db-test
 
   web:
     volumes:
-      - ../../../public:/app/public:ro
+      - "${APP_DIR:?}/public:/app/public:ro"
+    ports:
+      - "${NGINX_PORT:?}:80"
 
   db:
-    image: "mysql:${MYSQL}"
-    environment:
-      - "MYSQL_DATABASE=${MYSQL_DATABASE}"
-      - "MYSQL_USER=${MYSQL_USER}"
-      - "MYSQL_PASSWORD=${MYSQL_PASSWORD}"
-      - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
+    <<: *mysql
     ports:
-      - "${MYSQL_PORT}:3306"
+      - "${MYSQL_PORT:?}:3306"
     volumes:
       - ./db/mysql.cnf:/etc/mysql/conf.d/my.cnf:ro
       - db-data:/var/lib/mysql:rw
+  db-test:
+    <<: *mysql
+    ports:
+      - "${MYSQL_TEST_PORT:?}:3306"
+    volumes:
+      - ./db/mysql.cnf:/etc/mysql/conf.d/my.cnf:ro
+      - db-test-data:/var/lib/mysql:rw
 
 volumes:
   db-data: {}
+  db-test-data: {}

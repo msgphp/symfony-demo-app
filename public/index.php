@@ -1,5 +1,5 @@
 <?php
 
-// this is a boilerplate front controller
+// this is a placeholder
 
 phpinfo();

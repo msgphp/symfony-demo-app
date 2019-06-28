@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-[ -f devops/environment/dev/.env ] && . devops/environment/dev/.env
+cp -n devops/environment/dev/.env.dist devops/environment/dev/.env; . devops/environment/dev/.env
 
 SF="${SF:-}"
 STABILITY="${STABILITY:-stable}"
@@ -25,7 +25,8 @@ mv ${tmp_dir}/* . && \
 rmdir ${tmp_dir} && \
 make build start && \
 rm public/index.php && \
-echo "DATABASE_URL=mysql://${MYSQL_USER:-app}:${MYSQL_PASSWORD:-pass}@db:${MYSQL_PORT:-3306}/${MYSQL_DATABASE:-app}" >> .env.dev.local && \
+echo "DATABASE_URL=mysql://${MYSQL_USER:?}:${MYSQL_PASSWORD:?}@db/${MYSQL_DATABASE:?}" >> .env.dev.local && \
+echo "DATABASE_URL=mysql://${MYSQL_USER:?}:${MYSQL_PASSWORD:?}@db-test/${MYSQL_DATABASE:?}" >> .env.test.local && \
 make install
 
 [ ! $? -eq 0 ] && echo "Installation failed." && exit 1

@@ -12,7 +12,7 @@ A template for new Symfony applications using Docker.
 
 The `devops` directory holds all DevOps related concepts, thus separately from the application concern.
 
-ℹ️ Don't mix&match `.env` files, considering each concern may rely on a different parsing technique ([ref](https://github.com/symfony/recipes/pull/487))
+ℹ️ Don't mix&match `.env` files; any concern could rely on a different parsing technique ([ref](https://github.com/symfony/recipes/pull/487))
 
 ### `devops/environment/`
 
@@ -34,7 +34,7 @@ cp -R devops/environment/dev devops/environment/prod
 
 ⚠️ Never commit secret values in `.env.dist` for non-dev environments
 
-ℹ️ Consider standard "DTAP" environments (Development, Testing, Acceptance and Production) a best practice
+ℹ️ Consider standard "DTAP" environments (_Development, Testing, Acceptance and Production_) a best practice
 
 > This template by default assumes `dev` and `prod` for respectively development and production
 
@@ -46,11 +46,12 @@ a `Dockerfile` at least.
 A `setup.sh` binary can be defined to setup the host system before building the service (e.g. pull in external sources).
 It is automatically invoked during build.
 
-Setup files may use staging environment variables sourced from `devops/environment/<env>/.env`. The current staging
-environment is identified by `BUID_ENV`.
+Setup files can leverage staging environment variables sourced from `devops/environment/<staging-env>/.env`. The current
+staging environment is identified by `$STAGING_ENV`.
 
-ℹ️ Consider a single service per concept, to be used across all staging environments and ensure a single source of truth,
-a best practice
+Services (`Dockerfile`) can obtain the current staging environment from a build argument, e.g. `ARG staging_env`.
+
+ℹ️ Consider a single service per concept, to be used across all staging environments, a best practice
 
 ## 0. Create Application
 
@@ -90,7 +91,7 @@ make build
 Build the application for a specific staging environment using:
 
 ```bash
-BUILD_ENV=prod make build
+STAGING_ENV=prod ARGS='--no-cache --build-arg foo=bar' make build
 ```
 
 ## 2. Start Application
@@ -119,9 +120,6 @@ Consider a refresh (build/start/install) to install the application from scratch
 
 ```bash
 make refresh
-
-# ignore caches
-BUILD_ARGS=--no-cache make refresh
 ```
 
 ## 4. Run Application
@@ -132,12 +130,18 @@ Start a shell using:
 
 ```bash
 make shell
+
+# enter web service 
+SERVICE=web make shell
 ```
 
 Start a MySQL client using:
 
 ```bash
 make mysql
+
+# enter test database
+SERVICE=db-test make mysql
 ```
 
 # Miscellaneous

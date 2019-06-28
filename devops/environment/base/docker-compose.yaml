@@ -3,17 +3,16 @@ version: '3.7'
 services:
   app:
     build:
-      context: ../../docker/php
+      context: "${APP_DIR:?}/devops/docker/php"
       args:
-        version: "${PHP}"
-        icu: "${ICU}"
+        image_php: "${IMAGE_PHP:?}"
+        icu: "${ICU:?}"
 
   web:
     build:
-      context: ../../docker/nginx
+      context: "${APP_DIR:?}/devops/environment/base"
+      target: nginx
       args:
-        version: "${NGINX}"
+        image_nginx: "${IMAGE_NGINX:?}"
     depends_on:
       - app
-    ports:
-      - "${NGINX_PORT}:80"

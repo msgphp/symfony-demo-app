@@ -1,8 +1,8 @@
-ARG version
+ARG image_php
 
-FROM php:${version}-fpm-alpine
+FROM ${image_php}
 
-ARG build_env
+ARG staging_env
 ARG icu
 
 COPY icu/src-${icu}.tgz /tmp/icu.tgz
@@ -48,7 +48,7 @@ RUN set -eux; \
 	apk del .build-deps
 
 COPY conf.d/application.ini "${PHP_INI_DIR}/conf.d/"
-RUN if [ "${build_env}" = 'dev' ]; then \
+RUN if [ "${staging_env}" = 'dev' ]; then \
 		ln -s "${PHP_INI_DIR}/php.ini-development" "${PHP_INI_DIR}/php.ini"; \
 	else \
 		ln -s "${PHP_INI_DIR}/php.ini-production" "${PHP_INI_DIR}/php.ini"; \
