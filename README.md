@@ -12,13 +12,25 @@ A template for new Symfony applications using Docker.
 
 The `devops` directory holds all DevOps related concepts, thus separately from the application concern.
 
-ℹ️ Don't mix&match `.env` files; any concern could rely on a different parsing technique ([ref](https://github.com/symfony/recipes/pull/487))
+ℹ️ Don't mix&match `.env` files, considering each concern can rely on a different parsing technique ([ref](https://github.com/symfony/recipes/pull/487))
+
+⚠️ Never commit secret values in `.env.dist` for non-dev concerns
 
 ### `devops/environment/`
 
 The `environment` directory holds all available application staging environments, each environment containing a
-`docker-compose.yaml` file at least. By default environments inherit from the `base` directory, which is not an
-environment on itself.
+`docker-compose.yaml` file at least. Its concern is to compose the final application logic.
+
+The following environment variables are automatically available in `docker-compose.yaml`.
+
+- [`$COMPOSE_PROJECT_NAME`]
+- `$APP_DIR`
+
+ℹ️ Consider standard [DTAP] environments a best practice. By default this template assumes `dev`, `test`, `accept` and 
+`prod` respectively. All environments inherit from `base`.
+
+ℹ️ Do not confuse _staging environments_ with the _application environment_. It's a matrix where conceptually each 
+application environment can run on any staging environment, either remote or locally.
 
 To customize a staging environment use:
 
@@ -29,29 +41,37 @@ cp -n devops/environment/dev/.env.dist devops/environment/dev/.env
 To create a new staging environment (e.g. `prod`) use:
 
 ```bash
-cp -R devops/environment/dev devops/environment/prod
+cp -R devops/environment/base devops/environment/prod
 ```
-
-⚠️ Never commit secret values in `.env.dist` for non-dev environments
-
-ℹ️ Consider standard "DTAP" environments (_Development, Testing, Acceptance and Production_) a best practice
-
-> This template by default assumes `dev` and `prod` for respectively development and production
 
 ### `devops/docker/`
 
 The `docker` directory holds all available application services. Each directory represents a single service, containing
-a `Dockerfile` at least.
-
-A `setup.sh` binary can be defined to setup the host system before building the service (e.g. pull in external sources).
-It is automatically invoked during build.
-
-Setup files can leverage staging environment variables sourced from `devops/environment/<staging-env>/.env`. The current
-staging environment is identified by `$STAGING_ENV`.
-
-Services (`Dockerfile`) can obtain the current staging environment from a build argument, e.g. `ARG staging_env`.
+a `Dockerfile` at least. Its concern is to create the initial environment logic required for the application to run.
 
 ℹ️ Consider a single service per concept, to be used across all staging environments, a best practice
+
+ℹ️ Use multi-stage builds for sub-concepts
+
+## Host Setup
+
+To `COPY` files outside the build context (e.g. pulled from an external source), the host OS needs a setup first. During
+build `setup.sh` is automatically invoked first, from the following locations:
+
+- `devops/docker/<service>/setup.sh`
+- `devops/environment/<staging-env>/setup.sh`
+
+The target staging environment its variables are sourced from `devops/environment/<staging-env>/.env` and may be used.
+The target staging environment itself and application directory are available using respectively `$STAGING_ENV` and
+`$APP_DIR`.
+
+ℹ️ A `Dockerfile` can obtain the target staging environment from a build argument, e.g. `ARG staging_env`
+
+To invoke the setup on-demand use:
+
+```bash
+make setup
+```
 
 ## 0. Create Application
 
@@ -124,15 +144,15 @@ make refresh
 
 ## 4. Run Application
 
-Visit the application at: http://localhost:8080 (`NGINX_PORT`)
+Visit the application at: http://localhost:8080 (`$NGINX_PORT`)
 
 Start a shell using:
 
 ```bash
 make shell
 
-# enter web service 
-SERVICE=web make shell
+# enter test app
+SERVICE=app-test make shell
 ```
 
 Start a MySQL client using:
@@ -197,3 +217,6 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
 - https://github.com/api-platform/api-platform/blob/master/api/Dockerfile
 - https://github.com/jakzal/docker-symfony-intl/blob/master/Dockerfile-intl
+
+[DTAP]: https://en.wikipedia.org/wiki/Development,_testing,_acceptance_and_production
+[`$COMPOSE_PROJECT_NAME`]: https://docs.docker.com/compose/reference/envvars/#compose_project_name

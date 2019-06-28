@@ -4,6 +4,7 @@ services:
   app:
     build:
       context: "${APP_DIR:?}/devops/docker/php"
+      target: php
       args:
         image_php: "${IMAGE_PHP:?}"
         icu: "${ICU:?}"

@@ -15,17 +15,18 @@ services:
       - "${APP_DIR:?}:/app:rw"
     depends_on:
       - db
-#  app-test:
-#    volumes:
-#      - "${APP_DIR:?}:/app:rw"
-#    build:
-#      context: .
-#      target: app_test
-#      args:
-#        image_app: "${COMPOSE_PROJECT_NAME:?}_app"
-#        image_phpqa: "${IMAGE_PHPQA:?}"
-#    depends_on:
-#      - db-test
+  app-test:
+    build:
+      context: "${APP_DIR:?}/devops/docker/php"
+      target: phpqa
+      args:
+        image_php: "${IMAGE_PHP:?}"
+        image_phpqa: "${IMAGE_PHPQA:?}"
+        icu: "${ICU:?}"
+    volumes:
+      - "${APP_DIR:?}:/app:rw"
+    depends_on:
+      - db-test
 
   web:
     volumes:

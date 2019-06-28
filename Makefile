@@ -3,9 +3,10 @@ ifndef STAGING_ENV
 endif
 
 project=$(shell basename $(shell pwd))_${STAGING_ENV}
+app_dir=$(shell pwd)
 composer_args=--prefer-dist --no-progress --no-interaction --no-suggest
 
-dc=COMPOSE_PROJECT_NAME=${project} APP_DIR=$(shell pwd)\
+dc=COMPOSE_PROJECT_NAME=${project} APP_DIR=${app_dir}\
 	docker-compose \
 	-f devops/environment/base/docker-compose.yaml \
 	-f devops/environment/${STAGING_ENV}/docker-compose.yaml \
@@ -45,7 +46,7 @@ quit:
 # images
 setup:
 	cp -n devops/environment/${STAGING_ENV}/.env.dist devops/environment/${STAGING_ENV}/.env
-	sh -c "set -a && . devops/environment/${STAGING_ENV}/.env; export STAGING_ENV=${STAGING_ENV}; devops/setup.sh" 2>&1
+	sh -c "set -a && . devops/environment/${STAGING_ENV}/.env; export STAGING_ENV=${STAGING_ENV}; export APP_DIR=${app_dir}; devops/setup.sh" 2>&1
 build: setup quit
 	if  [ ${STAGING_ENV} != dev ]; then sh -c "devops/archive.sh $(shell echo "$${GITREF:-HEAD}") devops/archive" 2>&1; fi
 	${dc} build ${ARGS} --parallel --force-rm --build-arg staging_env=${STAGING_ENV}
