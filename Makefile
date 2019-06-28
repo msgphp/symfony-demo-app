@@ -47,6 +47,7 @@ setup:
 	cp -n devops/environment/${STAGING_ENV}/.env.dist devops/environment/${STAGING_ENV}/.env
 	sh -c "set -a && . devops/environment/${STAGING_ENV}/.env; export STAGING_ENV=${STAGING_ENV}; devops/setup.sh" 2>&1
 build: setup quit
+	if  [ ${STAGING_ENV} != dev ]; then sh -c "devops/archive.sh $(shell echo "$${GITREF:-HEAD}") devops/archive" 2>&1; fi
 	${dc} build ${ARGS} --parallel --force-rm --build-arg staging_env=${STAGING_ENV}
 
 # misc
