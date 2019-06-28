@@ -12,10 +12,7 @@ services:
       - ../../../public:/app/public:ro
 
   db:
-    build:
-      context: ../../docker/mysql
-      args:
-        version: "${MYSQL}"
+    image: "mysql:${MYSQL}"
     environment:
       - "MYSQL_DATABASE=${MYSQL_DATABASE}"
       - "MYSQL_USER=${MYSQL_USER}"
@@ -24,6 +21,7 @@ services:
     ports:
       - "${MYSQL_PORT}:3306"
     volumes:
+      - ./db/mysql.cnf:/etc/mysql/conf.d/my.cnf:ro
       - db-data:/var/lib/mysql:rw
 
 volumes:

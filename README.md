@@ -8,24 +8,6 @@ A template for new Symfony applications using Docker.
 - MySQL
 - NGINX
 
-## Default Environment
-
-```bash
-PHP=x.y
-ICU=x.y
-
-NGINX=x.y
-NGINX_PORT=8080
-
-# dev
-MYSQL=x.y
-MYSQL_PORT=3306
-MYSQL_DATABASE=app
-MYSQL_USER=app
-MYSQL_PASSWORD=pass
-MYSQL_ROOT_PASSWORD=pass
-```
-
 ## The `devops/` Directory
 
 The `devops` directory holds all DevOps related concepts, thus separately from the application concern.
