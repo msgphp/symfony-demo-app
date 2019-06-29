@@ -26,8 +26,6 @@ x-app-test: &app-test
 
 x-web: &web
   build: *nginx
-  volumes:
-    - "${APP_DIR:?}/public:/app/public:ro"
 
 # application
 services:

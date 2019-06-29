@@ -51,12 +51,9 @@ setup:
 	export APP_DIR=${app_dir}; \
 	export STAGING_ENV=${STAGING_ENV}; \
 	devops/bin/setup.sh
-archive:
-	if  [ ${STAGING_ENV} != dev ]; then \
-		devops/bin/archive.sh HEAD devops/archive; \
-	fi
-build: setup quit archive
-	${dc} build --parallel --force-rm --build-arg staging_env=${STAGING_ENV}
+build: setup quit
+	devops/bin/symlink.sh ${STAGING_ENV}
+	#${dc} build --parallel --force-rm --build-arg staging_env=${STAGING_ENV}
 
 # misc
 exec:

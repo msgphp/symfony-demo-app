@@ -4,7 +4,7 @@ staging_env=${STAGING_ENV:?}
 ret=0
 
 for service in $(ls devops/docker/*/setup.sh 2>/dev/null); do
-    sh -xc "cd $(dirname ${service}); ./setup.sh" 2>&1
+    sh -xc "cd $(dirname "${service}"); ./setup.sh" 2>&1
     last=$?; [ ${last} -ne 0 ] && ret=${last}
 done
 
