@@ -1,19 +1,40 @@
 version: '3.7'
 
+# infrastructure
+x-php: &php
+  context: "${APP_DIR:?}/devops/docker/php"
+  target: php
+  args:
+    image_php: "${IMAGE_PHP:?}"
+    image_phpqa: "${IMAGE_PHPQA:?}"
+    icu: "${ICU:?}"
+
+x-nginx: &nginx
+  context: "${APP_DIR:?}/devops/environment/base"
+  target: nginx
+  args:
+    image_nginx: "${IMAGE_NGINX:?}"
+
+# domain
+x-app: &app
+  build: *php
+x-app-test: &app-test
+  build:
+    <<: *php
+    target: phpqa
+
+x-web: &web
+  build: *nginx
+  volumes:
+    - "${APP_DIR:?}/public:/app/public:ro"
+
+# application
 services:
   app:
-    build:
-      context: "${APP_DIR:?}/devops/docker/php"
-      target: php
-      args:
-        image_php: "${IMAGE_PHP:?}"
-        icu: "${ICU:?}"
+    <<: *app
+  app-test:
+    <<: *app-test
 
   web:
-    build:
-      context: "${APP_DIR:?}/devops/environment/base"
-      target: nginx
-      args:
-        image_nginx: "${IMAGE_NGINX:?}"
-    depends_on:
-      - app
+    <<: *web
+    depends_on: [app]

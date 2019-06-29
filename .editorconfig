@@ -15,3 +15,7 @@ max_line_length = 120
 
 [{Makefile, Dockerfile}]
 indent_style = tab
+
+[docker-compose.yaml]
+indent_style = space
+indent_size = 2

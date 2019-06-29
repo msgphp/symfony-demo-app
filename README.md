@@ -24,6 +24,7 @@ The `environment` directory holds all the application its staging environments, 
 The following environment variables are automatically available in `docker-compose.yaml`.
 
 - [`$COMPOSE_PROJECT_NAME`]
+- `$STAGING__ENV`
 - `$APP_DIR`
 
 ℹ️ Do not confuse _staging environments_ with the _application environment_. It's a matrix where conceptually each 
@@ -115,6 +116,13 @@ Build the application for a specific staging environment using:
 ```bash
 STAGING_ENV=prod ARGS='--no-cache --build-arg foo=bar' make build
 ```
+
+### Tagging Images
+
+After the build images are tagged `latest` by default. Any other form of tagging (e.g. semantic versioning) is out of 
+scope of this template repository.
+
+👍 Consider tagging images by VCS tag a best practice, e.g. `image:v1` is an artifact of the `v1` GIT tag
 
 ## 2. Start Application
 

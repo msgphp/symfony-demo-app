@@ -1,56 +1,53 @@
 version: '3.7'
 
-x-app-vol-backend: &app-vol-backend
+# infrastructure
+x-nginx: &nginx
+  ports:
+    - "${NGINX_PORT:?}:80"
+
+# domain
+x-app: &app
   volumes:
     - "${APP_DIR:?}:/app:rw"
 
-x-app-vol-frontend: &app-vol-frontend
+x-web: &web
+  <<: *nginx
   volumes:
     - "${APP_DIR:?}/public:/app/public:ro"
 
-x-mysql: &mysql
+x-db: &db
   image: "${IMAGE_MYSQL:?}"
   environment:
     - "MYSQL_DATABASE=${MYSQL_DATABASE:?}"
     - "MYSQL_USER=${MYSQL_USER:?}"
     - "MYSQL_PASSWORD=${MYSQL_PASSWORD:?}"
     - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:?}"
+  ports:
+    - "${MYSQL_PORT:?}:3306"
 
+# application
 services:
   app:
-    <<: *app-vol-backend
-    depends_on:
-      - db
+    <<: *app
+    depends_on: [db]
   app-test:
-    build:
-      context: "${APP_DIR:?}/devops/docker/php"
-      target: phpqa
-      args:
-        image_php: "${IMAGE_PHP:?}"
-        image_phpqa: "${IMAGE_PHPQA:?}"
-        icu: "${ICU:?}"
-    <<: *app-vol-backend
-    depends_on:
-      - db-test
+    <<: *app
+    depends_on: [db-test]
 
   web:
-    <<: *app-vol-frontend
-    ports:
-      - "${NGINX_PORT:?}:80"
+    <<: *web
 
   db:
-    <<: *mysql
-    ports:
-      - "${MYSQL_PORT:?}:3306"
+    <<: *db
     volumes:
-      - ./db/mysql.cnf:/etc/mysql/conf.d/my.cnf:ro
+      - ./mysql/conf.d/my.cnf:/etc/mysql/conf.d/my.cnf:ro
       - db-data:/var/lib/mysql:rw
   db-test:
-    <<: *mysql
+    <<: *db
     ports:
       - "${MYSQL_TEST_PORT:?}:3306"
     volumes:
-      - ./db/mysql.cnf:/etc/mysql/conf.d/my.cnf:ro
+      - ./mysql/conf.d/my.cnf:/etc/mysql/conf.d/my.cnf:ro
       - db-test-data:/var/lib/mysql:rw
 
 volumes:
