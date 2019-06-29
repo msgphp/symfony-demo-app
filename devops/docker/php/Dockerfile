@@ -1,6 +1,8 @@
 ARG image_php
 ARG image_phpqa
 
+# --- STAGE php
+
 FROM ${image_php} AS php
 
 ARG staging_env
@@ -73,6 +75,7 @@ WORKDIR /app
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
 
+# --- STAGE phpqa
 
 FROM ${image_phpqa} AS toolbox
 FROM php AS phpqa

@@ -2,8 +2,8 @@ ifndef STAGING_ENV
 	STAGING_ENV=dev
 endif
 
-project=$(shell basename $(shell pwd))_${STAGING_ENV}
 app_dir=$(shell pwd)
+project=$(shell basename ${app_dir})_${STAGING_ENV}
 composer_args=--prefer-dist --no-progress --no-interaction --no-suggest
 
 dc=COMPOSE_PROJECT_NAME=${project} APP_DIR=${app_dir} STAGING_ENV=${STAGING_ENV} \
@@ -47,14 +47,16 @@ quit:
 setup:
 	cp -n devops/environment/${STAGING_ENV}/.env.dist devops/environment/${STAGING_ENV}/.env
 	set -a && . devops/environment/${STAGING_ENV}/.env; \
-	export STAGING_ENV=${STAGING_ENV}; \
+	export COMPOSE_PROJECT_NAME=${project}; \
 	export APP_DIR=${app_dir}; \
-	devops/setup.sh
-build: setup quit
+	export STAGING_ENV=${STAGING_ENV}; \
+	devops/bin/setup.sh
+archive:
 	if  [ ${STAGING_ENV} != dev ]; then \
-		devops/archive.sh HEAD devops/archive; \
+		devops/bin/archive.sh HEAD devops/archive; \
 	fi
-	${dc} build ${ARGS} --parallel --force-rm --build-arg staging_env=${STAGING_ENV}
+build: setup quit archive
+	${dc} build --parallel --force-rm --build-arg staging_env=${STAGING_ENV}
 
 # misc
 exec:

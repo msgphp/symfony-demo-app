@@ -11,15 +11,9 @@ A template for new Symfony applications using Docker.
 ## Features
 
 ```bash
-time sh -c "./install.sh; curl -I http://localhost:8080"
-...
-X-Debug-Token-Link: http://localhost:8080/_profiler/079d79
-
-
-real    0m47.135s
-user    0m2.927s
-sys     0m0.484s
-# initial build/setup time excluded and Composer caches available
+sh -c "./install.sh; curl -I http://localhost:8080"
+# ...
+# X-Debug-Token-Link: http://localhost:8080/_profiler/079d79
 ```
 
 - Bare Symfony defaults
@@ -30,7 +24,7 @@ sys     0m0.484s
 
 ## The `devops/` Directory
 
-The `devops` directory holds all DevOps related concepts, thus separately from the application concern.
+The `devops/` directory holds all DevOps related concepts, thus separately from the application concern.
 
 ℹ️ Don't mix&match `.env` files, considering each concern can rely on a different parsing technique ([ref](https://github.com/symfony/recipes/pull/487))
 
@@ -38,20 +32,15 @@ The `devops` directory holds all DevOps related concepts, thus separately from t
 
 ### `devops/environment/`
 
-The `environment` directory holds all the application its staging environments, each environment containing a
-`docker-compose.yaml` file at least. Its concern is to compose the final application logic.
+The `environment/` directory holds all the application its staging environments, each containing a `docker-compose.yaml`
+file at least. Its concern is to compose the final application logic based upon services.
 
-The following environment variables are automatically available in `docker-compose.yaml`.
+The following environment variables are automatically available in `docker-compose.yaml`:
 
-- [`$COMPOSE_PROJECT_NAME`]
-- `$STAGING__ENV`
+- `.env` (see [Docker Compose `.env`])
+- `$COMPOSE_PROJECT_NAME` (see [Docker Compose `$COMPOSE_PROJECT_NAME`])
 - `$APP_DIR`
-
-ℹ️ Do not confuse _staging environments_ with the _application environment_. It's a matrix where conceptually each 
-application environment can run on any staging environment, either remote or locally.
-
-👍 Consider standard [DTAP] environments a best practice. This template assumes `dev`, `test`, `accept` and `prod`
-respectively. All environments inherit from `base`.
+- `$STAGING_ENV`
 
 To customize a staging environment use:
 
@@ -62,31 +51,49 @@ cp -n devops/environment/dev/.env.dist devops/environment/dev/.env
 To create a new staging environment (e.g. `prod`) use:
 
 ```bash
-cp -R devops/environment/base devops/environment/prod
+cp -R devops/environment/dev devops/environment/prod
 ```
+
+All environments implicitly inherit from `base` due [Docker Compose `-f`], i.e. consider `docker-compose` being invoked
+like:
+
+```
+docker-compose \
+    -f devops/environment/base/docker-compose.yaml \
+    -f devops/environment/$STAGING_ENV/docker-compose.yaml \
+    --project-directory devops/environment/$STAGING_ENV
+```
+
+ℹ️ Do not confuse _staging environments_ with the _application environment_ (it's a matrix where conceptually each 
+application environment can run on any staging environment, either remote or locally)
+
+👍 Consider standard [DTAP] environments a best practice (this template assumes `dev`, `test`, `accept` and `prod`
+respectively)
 
 ### `devops/docker/`
 
-The `docker` directory holds all available application services. Each directory represents a single service, containing
-a `Dockerfile` at least. Its concern is to create the initial environment logic required for the application to run.
+The `docker/` directory holds all available application services, each containing a `Dockerfile` at least. Its concern is
+to create the initial service its environment logic, required for the application to run.
 
-👍 Consider a single service per concept, to be used across all staging environments, a best practice
+👍 Consider a single service per concept a best practice, use [Docker multi-stage builds] for sub-concepts
 
-👍 Use multi-stage builds for sub-concepts
+ℹ️ A `Dockerfile` can obtain the targeted staging environment from a build argument, e.g. `ARG staging_env`
 
 ## Host Setup
 
-To `COPY` files outside the build context (e.g. pulled from an external source), the host OS needs a setup first. During
-build `setup.sh` is automatically invoked first, from the following locations:
+To `COPY` files from outside the build context (e.g. pulled from an external source), the host OS needs a setup first.
+During build `setup.sh` is automatically invoked first, from the following locations:
 
 - `devops/docker/<service>/setup.sh`
-- `devops/environment/<staging-env>/setup.sh`
+- `devops/environment/base/setup.sh`
+- `devops/environment/<targeted-staging-env>/setup.sh`
 
-The target staging environment its variables are sourced from `devops/environment/<staging-env>/.env` and may be used.
-The target staging environment itself and application directory are available using respectively `$STAGING_ENV` and
-`$APP_DIR`.
+The following environment variables are automatically available in `setup.sh`:
 
-ℹ️ A `Dockerfile` can obtain the target staging environment from a build argument, e.g. `ARG staging_env`
+- `.env` (see [Docker Compose `.env`])
+- `$COMPOSE_PROJECT_NAME` (see [Docker Compose `$COMPOSE_PROJECT_NAME`])
+- `$APP_DIR`
+- `$STAGING_ENV`
 
 To invoke the setup on-demand use:
 
@@ -134,7 +141,7 @@ make build
 Build the application for a specific staging environment using:
 
 ```bash
-STAGING_ENV=prod ARGS='--no-cache --build-arg foo=bar' make build
+STAGING_ENV=prod make build
 ```
 
 ### Tagging Images
@@ -249,4 +256,7 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md)
 - https://github.com/jakzal/docker-symfony-intl/blob/master/Dockerfile-intl
 
 [DTAP]: https://en.wikipedia.org/wiki/Development,_testing,_acceptance_and_production
-[`$COMPOSE_PROJECT_NAME`]: https://docs.docker.com/compose/reference/envvars/#compose_project_name
+[Docker multi-stage builds]: https://docs.docker.com/develop/develop-images/multistage-build/
+[Docker Compose `.env`]: https://docs.docker.com/compose/environment-variables/#the-env-file
+[Docker Compose `$COMPOSE_PROJECT_NAME`]: https://docs.docker.com/compose/reference/envvars/#compose_project_name
+[Docker Compose `-f`]: https://docs.docker.com/compose/extends/#multiple-compose-files

@@ -1,5 +1,7 @@
 ARG image_nginx
 
+# --- STAGE nginx
+
 FROM ${image_nginx} AS nginx
 
 COPY nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
