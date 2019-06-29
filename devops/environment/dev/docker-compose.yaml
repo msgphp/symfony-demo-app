@@ -1,5 +1,15 @@
 version: '3.7'
 
+x-app-vol-backend:
+  &app-vol-backend
+  volumes:
+    - "${APP_DIR:?}:/app:rw"
+
+x-app-vol-frontend:
+  &app-vol-frontend
+  volumes:
+    - "${APP_DIR:?}/public:/app/public:ro"
+
 x-mysql:
   &mysql
   image: "${IMAGE_MYSQL:?}"
@@ -11,8 +21,7 @@ x-mysql:
 
 services:
   app:
-    volumes:
-      - "${APP_DIR:?}:/app:rw"
+    <<: *app-vol-backend
     depends_on:
       - db
   app-test:
@@ -23,14 +32,12 @@ services:
         image_php: "${IMAGE_PHP:?}"
         image_phpqa: "${IMAGE_PHPQA:?}"
         icu: "${ICU:?}"
-    volumes:
-      - "${APP_DIR:?}:/app:rw"
+    <<: *app-vol-backend
     depends_on:
       - db-test
 
   web:
-    volumes:
-      - "${APP_DIR:?}/public:/app/public:ro"
+    <<: *app-vol-frontend
     ports:
       - "${NGINX_PORT:?}:80"
 
