@@ -1,17 +1,11 @@
 version: '3.7'
 
-# infrastructure
-x-nginx: &nginx
-  ports:
-    - "${NGINX_PORT:?}:80"
-
 # domain
 x-app: &app
   volumes:
     - "${APP_DIR:?}:/app:rw"
 
 x-web: &web
-  <<: *nginx
   volumes:
     - "${APP_DIR:?}/public:/app/public:ro"
 
@@ -22,8 +16,6 @@ x-db: &db
     - "MYSQL_USER=${MYSQL_USER:?}"
     - "MYSQL_PASSWORD=${MYSQL_PASSWORD:?}"
     - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:?}"
-  ports:
-    - "${MYSQL_PORT:?}:3306"
 
 # application
 services:
@@ -36,9 +28,13 @@ services:
 
   web:
     <<: *web
+    ports:
+      - "${NGINX_PORT:?}:80"
 
   db:
     <<: *db
+    ports:
+      - "${MYSQL_PORT:?}:3306"
     volumes:
       - ./mysql/conf.d/my.cnf:/etc/mysql/conf.d/my.cnf:ro
       - db-data:/var/lib/mysql:rw
