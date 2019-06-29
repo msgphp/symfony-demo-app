@@ -18,7 +18,7 @@ The `devops` directory holds all DevOps related concepts, thus separately from t
 
 ### `devops/environment/`
 
-The `environment` directory holds all available application staging environments, each environment containing a
+The `environment` directory holds all the application its staging environments, each environment containing a
 `docker-compose.yaml` file at least. Its concern is to compose the final application logic.
 
 The following environment variables are automatically available in `docker-compose.yaml`.
