@@ -8,6 +8,26 @@ A template for new Symfony applications using Docker.
 - MySQL
 - NGINX
 
+## Features
+
+```bash
+time sh -c "./install.sh; curl -I http://localhost:8080"
+...
+X-Debug-Token-Link: http://localhost:8080/_profiler/079d79
+
+
+real    0m47.135s
+user    0m2.927s
+sys     0m0.484s
+# initial build/setup time excluded and Composer caches available
+```
+
+- Bare Symfony defaults
+- Testing and Quality-Assurance built-in
+- `Makefile` based
+- Multiple staging environments by design: `STAGING_ENV=prod make do-it`
+- No hosting / release process assumptions
+
 ## The `devops/` Directory
 
 The `devops` directory holds all DevOps related concepts, thus separately from the application concern.
