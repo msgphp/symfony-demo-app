@@ -98,7 +98,7 @@ NO_COMMIT=1 ./install.sh
 rm install.sh
 ```
 
-And done 🎉, continue to [step 4](#4-run-application)
+And done 🎉, you can continue with [step 4](#4-run-application).
 
 ℹ️ Start from [step 1](#1-build-application) after a fresh clone
 
