@@ -1,7 +1,4 @@
 ARG image_php
-ARG image_phpqa
-
-# --- STAGE php
 
 FROM ${image_php} AS php
 
@@ -74,12 +71,3 @@ RUN chmod +x /usr/local/bin/docker-entrypoint
 WORKDIR /app
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]
-
-# --- STAGE phpqa
-
-FROM ${image_phpqa} AS toolbox
-FROM php AS phpqa
-
-COPY --from=toolbox /tools/php-cs-fixer /tools/
-COPY --from=toolbox /tools/psalm /tools/
-ENV PATH "${PATH}:/tools"

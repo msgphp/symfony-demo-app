@@ -13,4 +13,4 @@ docker build --force-rm -q \
     --tag "${project}/php" \
     "${app_dir}/devops/docker/php" && \
 
-echo "Infrastructure OK"
+echo "Infrastructure setup OK"

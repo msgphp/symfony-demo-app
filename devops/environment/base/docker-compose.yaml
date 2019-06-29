@@ -1,27 +1,28 @@
 version: '3.7'
 
 # infrastructure
-x-php: &php
-  context: "${APP_DIR:?}/devops/docker/php"
-  target: php
+x-base: &base
+  context: "${APP_DIR:?}/devops/environment/base"
   args:
-    image_php: "${IMAGE_PHP:?}"
+    image_php: "${COMPOSE_PROJECT_NAME:?}/php"
     image_phpqa: "${IMAGE_PHPQA:?}"
-    icu: "${ICU:?}"
+    image_nginx: "${IMAGE_NGINX:?}"
 
 x-nginx: &nginx
-  context: "${APP_DIR:?}/devops/environment/base"
+  <<: *base
   target: nginx
-  args:
-    image_nginx: "${IMAGE_NGINX:?}"
 
 # domain
 x-app: &app
-  build: *php
-x-app-test: &app-test
   build:
-    <<: *php
-    target: phpqa
+    <<: *base
+    target: app
+
+x-app-test: &app-test
+  <<: *app
+  build:
+    <<: *base
+    target: app-test
 
 x-web: &web
   build: *nginx
