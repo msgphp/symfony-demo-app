@@ -26,11 +26,11 @@ The following environment variables are automatically available in `docker-compo
 - [`$COMPOSE_PROJECT_NAME`]
 - `$APP_DIR`
 
-ℹ️ Consider standard [DTAP] environments a best practice. By default this template assumes `dev`, `test`, `accept` and 
-`prod` respectively. All environments inherit from `base`.
-
 ℹ️ Do not confuse _staging environments_ with the _application environment_. It's a matrix where conceptually each 
 application environment can run on any staging environment, either remote or locally.
+
+👍 Consider standard [DTAP] environments a best practice. This template assumes `dev`, `test`, `accept` and `prod`
+respectively. All environments inherit from `base`.
 
 To customize a staging environment use:
 
@@ -49,9 +49,9 @@ cp -R devops/environment/base devops/environment/prod
 The `docker` directory holds all available application services. Each directory represents a single service, containing
 a `Dockerfile` at least. Its concern is to create the initial environment logic required for the application to run.
 
-ℹ️ Consider a single service per concept, to be used across all staging environments, a best practice
+👍 Consider a single service per concept, to be used across all staging environments, a best practice
 
-ℹ️ Use multi-stage builds for sub-concepts
+👍 Use multi-stage builds for sub-concepts
 
 ## Host Setup
 
@@ -98,7 +98,9 @@ NO_COMMIT=1 ./install.sh
 rm install.sh
 ```
 
-And done. Continue to [step 4](#4-run-application) (start from [step 1](#1-build-application) after a fresh clone).
+And done 🎉, continue to [step 4](#4-run-application)
+
+ℹ️ Start from [step 1](#1-build-application) after a fresh clone
 
 ## 1. Build Application
 
