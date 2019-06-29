@@ -52,8 +52,8 @@ setup:
 	export STAGING_ENV=${STAGING_ENV}; \
 	devops/bin/setup.sh
 build: setup quit
-	devops/bin/symlink.sh ${STAGING_ENV}
-	#${dc} build --parallel --force-rm --build-arg staging_env=${STAGING_ENV}
+	devops/bin/build.sh ${project} ${STAGING_ENV}
+	${dc} build --parallel --force-rm --build-arg staging_env=${STAGING_ENV} 1>/dev/null
 
 # misc
 exec:

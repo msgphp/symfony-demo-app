@@ -48,11 +48,8 @@ RUN set -eux; \
 	apk del .build-deps
 
 COPY conf.d/application.ini "${PHP_INI_DIR}/conf.d/"
-RUN if [ "${staging_env}" = 'dev' ]; then \
-		ln -s "${PHP_INI_DIR}/php.ini-development" "${PHP_INI_DIR}/php.ini"; \
-	else \
-		ln -s "${PHP_INI_DIR}/php.ini-production" "${PHP_INI_DIR}/php.ini"; \
-	fi
+RUN if [ "${staging_env}" = 'dev' ]; then ln -s php.ini-development "${PHP_INI_DIR}/php.ini"; \
+	else ln -s php.ini-production "${PHP_INI_DIR}/php.ini"; fi
 
 ENV COMPOSER_HOME=/composer
 ENV COMPOSER_CACHE_DIR=/tmp/composer
@@ -68,6 +65,5 @@ RUN set -eux; \
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
 
-WORKDIR /app
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]

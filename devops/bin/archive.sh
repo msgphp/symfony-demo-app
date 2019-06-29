@@ -14,7 +14,7 @@ fi
 
 file="${dir}/${name}.tgz"
 if [ ! -f "${file}" ]; then
-    mkdir -p "${dir}" && git archive -9 --output "${file}" --format tgz "${hash}"
+    mkdir -p "${dir}" && git archive --output "${file}" --format tgz "${hash}"
     [ $? -ne 0 ] && exit 1
 fi
 

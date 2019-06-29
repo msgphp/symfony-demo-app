@@ -4,13 +4,10 @@ version: '3.7'
 x-base: &base
   context: "${APP_DIR:?}/devops/environment/base"
   args:
+    image_archive: "${COMPOSE_PROJECT_NAME:?}/archive"
     image_php: "${COMPOSE_PROJECT_NAME:?}/php"
     image_phpqa: "${IMAGE_PHPQA:?}"
     image_nginx: "${IMAGE_NGINX:?}"
-
-x-nginx: &nginx
-  <<: *base
-  target: nginx
 
 # domain
 x-app: &app
@@ -25,7 +22,9 @@ x-app-test: &app-test
     target: app-test
 
 x-web: &web
-  build: *nginx
+  build:
+    <<: *base
+    target: web
 
 # application
 services:
