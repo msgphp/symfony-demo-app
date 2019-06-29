@@ -1,17 +1,14 @@
 version: '3.7'
 
-x-app-vol-backend:
-  &app-vol-backend
+x-app-vol-backend: &app-vol-backend
   volumes:
     - "${APP_DIR:?}:/app:rw"
 
-x-app-vol-frontend:
-  &app-vol-frontend
+x-app-vol-frontend: &app-vol-frontend
   volumes:
     - "${APP_DIR:?}/public:/app/public:ro"
 
-x-mysql:
-  &mysql
+x-mysql: &mysql
   image: "${IMAGE_MYSQL:?}"
   environment:
     - "MYSQL_DATABASE=${MYSQL_DATABASE:?}"
