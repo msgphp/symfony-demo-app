@@ -7,6 +7,7 @@ staging_env=${STAGING_ENV:?}
 echo "Building ${staging_env} infrastructure ..."
 
 docker build --force-rm -q \
+    --build-arg "staging_env=${staging_env:?}" \
     --build-arg "image_php=${IMAGE_PHP:?}" \
     --build-arg "image_phpqa=${IMAGE_PHPQA:?}" \
     --build-arg "icu=${ICU:?}" \
