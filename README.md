@@ -33,7 +33,7 @@ The `devops/` directory holds all DevOps related concepts, thus separately from 
 ### `devops/environment/`
 
 The `environment/` directory holds all the application its staging environments, each containing a `docker-compose.yaml`
-file at least. Its concern is to compose the final application logic based upon services.
+file at least. Its concern is to compose the final application logic based upon infrastructural services.
 
 The following environment variables are automatically available in `docker-compose.yaml`:
 
@@ -72,8 +72,8 @@ respectively)
 
 ### `devops/docker/`
 
-The `docker/` directory holds all available application services, each containing a `Dockerfile` at least. Its concern is
-to create the initial service its environment logic, required for the application to run.
+The `docker/` directory holds all infrastructural services, each containing a `Dockerfile` at least. Its concern is to
+setup an initial environment, required for the application to run.
 
 👍 Consider a single service per concept a best practice, use [Docker multi-stage builds] for sub-concepts
 
