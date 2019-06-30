@@ -32,7 +32,7 @@ The `devops/` directory holds all DevOps related concepts, thus separately from 
 
 ⚠️ Never commit secret values in `.env.dist` for non-dev concerns
 
-### 📂 `devops/docker/`
+### `devops/docker/`
 
 The `docker/` directory holds all infrastructural services, each containing a `Dockerfile` at least. Its concern is to
 setup an initial environment, required for the application to run.
@@ -41,7 +41,7 @@ setup an initial environment, required for the application to run.
 
 ℹ️ A `Dockerfile` can obtain the targeted staging environment from a build argument, e.g. `ARG staging_env`
 
-### 📂 `devops/environment/`
+### `devops/environment/`
 
 The `environment/` directory holds all the application its staging environments, each containing a `docker-compose.yaml`
 file at least. Its concern is to compose the final application logic based upon infrastructural services.
