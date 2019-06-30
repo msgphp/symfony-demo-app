@@ -39,7 +39,7 @@ setup an initial environment, required for the application to run.
 
 👍 Consider a single service per concept a best practice, use [Docker multi-stage builds] for sub-concepts
 
-ℹ️ A `Dockerfile` can obtain the targeted staging environment from a build argument, e.g. `ARG staging_env`
+ℹ️ A `Dockerfile` can obtain the targeted staging environment from a build argument, i.e. `ARG staging_env`
 
 ### `devops/environment/`
 
