@@ -128,16 +128,18 @@ Bootstrap the initial skeleton first:
 # latest stable
 ./install.sh
 
-# specify version
+# specify stable
 SF=x.y ./install.sh
 SF=x.y.z ./install.sh
 
-# specify stability
-STABILITY=dev ./install.sh
+# install Symfony full
+FULL=1 ./install.sh
 
-# skip initial commit
-NO_COMMIT=1 ./install.sh
+# with initial GIT commit
+GIT=1 ./install.sh
 ```
+
+ℹ️ If available, the installer uses [Symfony client](https://symfony.com/download) or otherwise [Composer](https://getcomposer.org)  
 
 ⚠️ Cleanup the installer:
 
