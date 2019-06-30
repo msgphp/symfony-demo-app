@@ -54,8 +54,6 @@ exec:
 	echo "${exec}"
 run:
 	echo "${dc} run --rm"
-normalize:
-	${composer} normalize
 requirement-check:
 	${composer} require symfony/requirements-checker ${composer_args} --no-scripts -q
 	${app} vendor/bin/requirements-checker

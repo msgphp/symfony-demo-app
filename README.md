@@ -236,14 +236,6 @@ Alternatively, use `make run` to create a temporary container and run as `root` 
 sh -c "$(make run) --no-deps app whoami"
 ```
 
-## Normalization
-
-Normalize source files (e.g. `composer.json`) using:
-
-```bash
-make normalize
-```
-
 ## Debug
 
 Display current docker-compose configuration and/or its images using:
