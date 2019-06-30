@@ -5,8 +5,8 @@ A template for new Symfony applications using Docker.
 ## Default Stack
 
 - PHP-FPM
-- MySQL
 - NGINX
+- MySQL (for development)
 
 ## Features
 
