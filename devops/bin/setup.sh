@@ -19,7 +19,7 @@ for service in $(find devops/docker -mindepth 1 -maxdepth 2 -name setup.sh); do
 done
 
 if [ ${ret} -eq 0 ] && [ -f devops/environment/base/setup.sh ]; then
-    sh -xc "cd devops/environment/base; ./setup.sh" 2>&1
+    sh -xc 'cd devops/environment/base; ./setup.sh' 2>&1
     [ $? -ne 0 ] && ret=1
 fi
 
