@@ -18,10 +18,10 @@ sh -c "./install.sh; curl -I http://localhost:8080"
 
 - Bare Symfony defaults
 - Testing and Quality-Assurance built-in
-- `Makefile` based
-- Multiple staging environments by design: `STAGING_ENV=prod make do-it`
-- No hosting / release process assumptions
 - Out-of-the-box production optimized images
+- Multiple staging environments by design
+- No hosting / release process assumptions
+- Decoupled "devops"
 ___
 
 ## The `devops/` Directory
