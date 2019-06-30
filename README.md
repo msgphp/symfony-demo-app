@@ -21,6 +21,8 @@ sh -c "./install.sh; curl -I http://localhost:8080"
 - `Makefile` based
 - Multiple staging environments by design: `STAGING_ENV=prod make do-it`
 - No hosting / release process assumptions
+- Out-of-the-box production optimized images
+___
 
 ## The `devops/` Directory
 
@@ -30,7 +32,16 @@ The `devops/` directory holds all DevOps related concepts, thus separately from 
 
 ⚠️ Never commit secret values in `.env.dist` for non-dev concerns
 
-### `devops/environment/`
+### 📂 `devops/docker/`
+
+The `docker/` directory holds all infrastructural services, each containing a `Dockerfile` at least. Its concern is to
+setup an initial environment, required for the application to run.
+
+👍 Consider a single service per concept a best practice, use [Docker multi-stage builds] for sub-concepts
+
+ℹ️ A `Dockerfile` can obtain the targeted staging environment from a build argument, e.g. `ARG staging_env`
+
+### 📂 `devops/environment/`
 
 The `environment/` directory holds all the application its staging environments, each containing a `docker-compose.yaml`
 file at least. Its concern is to compose the final application logic based upon infrastructural services.
@@ -70,25 +81,18 @@ application environment can run on any staging environment, either remote or loc
 👍 Consider standard [DTAP] environments a best practice (this template assumes `dev`, `test`, `accept` and `prod`
 respectively)
 
-### `devops/docker/`
-
-The `docker/` directory holds all infrastructural services, each containing a `Dockerfile` at least. Its concern is to
-setup an initial environment, required for the application to run.
-
-👍 Consider a single service per concept a best practice, use [Docker multi-stage builds] for sub-concepts
-
-ℹ️ A `Dockerfile` can obtain the targeted staging environment from a build argument, e.g. `ARG staging_env`
-
 ## Host Setup
 
-To `COPY` files from outside the build context (e.g. pulled from an external source), the host OS needs a setup first.
-During build `setup.sh` is automatically invoked first, from the following locations:
+To `COPY` files from outside the build context (e.g. pulled from an external source), the host OS can be setup first.
+
+Prior to any build (to ensure freshness) `setup.sh` is automatically invoked from the following locations (in
+order of execution):
 
 - `devops/docker/<service>/setup.sh`
 - `devops/environment/base/setup.sh`
 - `devops/environment/<targeted-staging-env>/setup.sh`
 
-The following environment variables are automatically available in `setup.sh`:
+The following environment variables are automatically available:
 
 - `.env` (see [Docker Compose `.env`])
 - `$COMPOSE_PROJECT_NAME` (see [Docker Compose `$COMPOSE_PROJECT_NAME`])
@@ -100,6 +104,21 @@ To invoke the setup on-demand use:
 ```bash
 make setup
 ```
+
+By default the `base` environment builds all infrastructural services from `devops/docker/` during setup. The artifact
+images can then be leveraged by the application build (i.e. building from `docker-compose.yaml`).
+
+ℹ️ This creates a two-way process and allows to scale infrastructure as needed, e.g. use prepared external images instead
+
+## Source Archives
+
+During setup, the `devops/docker/archive` service creates a GIT archive from the current source code. This archive is
+distributed using a minimal image (e.g `FROM scratch`) and allows application services to obtain and unpack it on demand
+(e.g. `COPY --from=archive`).
+
+Effectively this creates a final application distribution image with source code included, e.g. ready for production. In
+development local volumes are used instead.
+___
 
 ## 0. Create Application
 
