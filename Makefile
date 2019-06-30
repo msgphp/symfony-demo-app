@@ -45,14 +45,8 @@ quit:
 
 # images
 setup:
-	cp -n devops/environment/${STAGING_ENV}/.env.dist devops/environment/${STAGING_ENV}/.env
-	set -a && . devops/environment/${STAGING_ENV}/.env; \
-	export COMPOSE_PROJECT_NAME=${project}; \
-	export APP_DIR=${app_dir}; \
-	export STAGING_ENV=${STAGING_ENV}; \
-	devops/bin/setup.sh
+	devops/bin/setup.sh "${STAGING_ENV}" "${app_dir}" "${project}"
 build: setup quit
-	devops/bin/build.sh ${project} ${STAGING_ENV}
 	${dc} build --parallel --force-rm --build-arg staging_env=${STAGING_ENV} 1>/dev/null
 
 # misc

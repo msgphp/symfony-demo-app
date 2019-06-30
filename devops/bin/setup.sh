@@ -1,6 +1,16 @@
 #!/usr/bin/env sh
 
-staging_env=${STAGING_ENV:?}
+staging_env=${1:?}
+app_dir=${2:?}
+project=${3:?}
+
+cp -n "devops/environment/${staging_env}/.env.dist" "devops/environment/${staging_env}/.env"
+
+set -a && . "devops/environment/${staging_env}/.env"
+export COMPOSE_PROJECT_NAME=${project};
+export APP_DIR=${app_dir};
+export STAGING_ENV=${staging_env};
+
 ret=0
 
 for service in $(find devops/docker -mindepth 1 -maxdepth 2 -name setup.sh); do
