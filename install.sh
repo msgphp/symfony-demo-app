@@ -9,19 +9,22 @@ commit=${GIT:-0}
 
 echo 'Starting installation ...'
 
-symfony=
-composer=
+symfony=$(command -v symfony)
+symfony_local=$(command -v "${HOME}/.symfony/bin/symfony")
+composer=$(command -v composer)
 
-if [ -x "$(command -v symfony)" ]; then
-    symfony="$(which symfony)"
+if [ -x "${symfony}" ]; then
     echo "Using global Symfony installer at ${symfony} ..."
-elif [ -x "$(command -v "${HOME}/.symfony/bin/symfony")" ]; then
-    symfony="${HOME}/.symfony/bin/symfony"
-    echo "Using local Symfony installer at ${symfony} ..."
-elif [ -x "$(command -v composer)" ]; then
-    composer="$(which composer)"
+    unset composer
+elif [ -x "${symfony_local}" ]; then
+    echo "Using local Symfony installer at ${symfony_local} ..."
+    symfony=${symfony_local}
+    unset composer
+elif [ -x "${composer}" ]; then
     echo "Using global Composer installer at ${composer} ..."
+    unset symfony
 else
+    echo 'Using containerized Composer installer ...'
     mkdir -p "${HOME}/.composer"
     composer="docker run --rm \
         -v ${HOME}/.composer:/tmp/composer \
@@ -30,7 +33,7 @@ else
         -e COMPOSER_HOME=/tmp/composer"
     [ -t 1 ] && composer="${composer} -it"
     composer="${composer} composer"
-    echo 'Using containerized Composer installer ...'
+    unset symfony
 fi
 
 cp -n devops/environment/dev/.env.dist devops/environment/dev/.env; . devops/environment/dev/.env
