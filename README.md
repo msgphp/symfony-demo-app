@@ -116,8 +116,8 @@ During setup, the `devops/docker/archive` service creates a GIT archive from the
 distributed using a minimal image (e.g `FROM scratch`) and allows application services to obtain and unpack it on demand
 (e.g. `COPY --from=archive`).
 
-Effectively this creates a final application distribution image with source code included, e.g. ready for production.
-For development local volumes are configured.
+Effectively this creates a final application image with source code included (e.g. production/distribution ready). For
+development local volumes are configured.
 ___
 
 ## 0. Create Application
