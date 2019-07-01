@@ -172,6 +172,30 @@ scope of this template repository.
 
 👍 Consider tagging images by VCS tag a best practice, e.g. `image:v1` is an artifact of the `v1` GIT tag
 
+### Naming Conventions
+
+The default project name is `<project-dirname>_<staging-env>` by convention. Infrastructural services are "slash"
+suffixed (e.g. `.../php`), whereas application services are "underscored" (e.g. `..._app` or `..._db`).
+
+👍 Consider the project name a local reference, use `docker tag` for alternative (distribution) names (e.g. `prod-org/product-name:v1`)
+
+## Containers
+
+Step 2-4 applies to running containers (with Docker Compose) from the images built previous, that is a working
+application. Conceptually we can create a containerized landscape from each staging environment's perspective, using
+`STAGING_ENV=prod make start` (see below).
+
+The good part is, this will actually use the production optimized images (thus great for local testing). The bad part
+however is, this may work completely different in production (e.g. with [Kubernetes]).
+
+See also [What is a Container Orchestrator, Anyway?](https://containerjournal.com/2017/05/29/container-orchestrator-anyway)
+
+👍 For a truly "dockerized" setup, consider Docker Compose files the source of truth, use e.g. `devops/environment/prod/kubernetes`
+to store any specific concept configurations
+
+👍 Ultimately, double configuration bookkeeping should be avoided (use environment variables, tools such as [Kompose],
+etc.)
+
 ## 2. Start Application
 
 To start the application locally in development mode use:
@@ -188,7 +212,7 @@ make restart
 
 ## 3. Install Application
 
-Install the application using:
+Install the application for development using:
 
 ```bash
 make install
@@ -202,7 +226,7 @@ make refresh
 
 ## 4. Run Application
 
-Visit the application at: http://localhost:8080 (`$NGINX_PORT`)
+Visit the application in development mode at: http://localhost:8080 (`$NGINX_PORT`)
 
 Start a shell using:
 
@@ -265,11 +289,15 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
 # References
 
+- https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
+- https://cloud.google.com/blog/products/gcp/7-best-practices-for-building-containers
 - https://github.com/api-platform/api-platform/blob/master/api/Dockerfile
 - https://github.com/jakzal/docker-symfony-intl/blob/master/Dockerfile-intl
 
 [DTAP]: https://en.wikipedia.org/wiki/Development,_testing,_acceptance_and_production
-[Docker multi-stage builds]: https://docs.docker.com/develop/develop-images/multistage-build/
+[Docker multi-stage builds]: https://docs.docker.com/develop/develop-images/multistage-build
 [Docker Compose `.env`]: https://docs.docker.com/compose/environment-variables/#the-env-file
 [Docker Compose `$COMPOSE_PROJECT_NAME`]: https://docs.docker.com/compose/reference/envvars/#compose_project_name
 [Docker Compose `-f`]: https://docs.docker.com/compose/extends/#multiple-compose-files
+[Kubernetes]: https://kubernetes.io
+[Kompose]: https://kompose.io
