@@ -177,7 +177,7 @@ scope of this template repository.
 The default project name is `<project-dirname>_<staging-env>` by convention. Infrastructural services are "slash"
 suffixed (e.g. `.../php`), whereas application services are "underscored" (e.g. `..._app` or `..._db`).
 
-👍 Consider the project name a local reference, use `docker tag` for alternative (distribution) names (e.g. `prod-org/product-name:v1`)
+👍 Consider the project name a local reference, use `docker tag` for alternative (distribution) names (e.g. `org/product-name:v1`)
 
 ## Containers
 
