@@ -33,15 +33,6 @@ The `devops/` directory holds all DevOps related concepts, thus separately from 
 
 ⚠️ Never commit secret values in `.env.dist` for non-dev concerns
 
-### `devops/docker/`
-
-The `docker/` directory holds all infrastructural services, each containing a `Dockerfile` at least. Its concern is to
-setup an initial environment, required for the application to run.
-
-ℹ️ A `Dockerfile` can obtain the targeted staging environment from a build argument (i.e. `ARG staging_env`)
-
-👍 Consider a single service per concept a best practice, use [Docker multi-stage builds] for sub-concepts
-
 ### `devops/environment/`
 
 The `environment/` directory holds all the application its staging environments, each containing a `docker-compose.yaml`
@@ -82,16 +73,28 @@ application environment can run on any staging environment, either remote or loc
 👍 Consider standard [DTAP] environments a best practice (this template assumes `dev`, `test`, `accept` and `prod`
 respectively)
 
+### `devops/docker/`
+
+The `docker/` directory holds all infrastructural services, each containing a `Dockerfile` at least. Its concern is to
+prepare a minimal environment, required for the application to run.
+
+ℹ️ A `Dockerfile` can obtain its targeted staging environment from a build argument (i.e. `ARG staging_env`)
+
+👍 Consider a single service per concept a best practice, use [Docker multi-stage builds] for sub-concepts
+
 ## Host Setup
 
-To `COPY` files from outside the build context (e.g. pulled from an external source), the host OS can be setup first.
+To `COPY` files from outside the build context the host OS is prepared first.
 
 Prior to any build (to ensure freshness) `setup.sh` is automatically invoked from the following locations (in
 order of execution):
 
 - `devops/docker/<service>/setup.sh`
+  - Use it to download files, create default directories, etc.
 - `devops/environment/base/setup.sh`
+  - Use it build default infrastructural images from `devops/docker/`, "pre-pull" external images, etc.
 - `devops/environment/<targeted-staging-env>/setup.sh`
+  - Use it build environment specific infrastructural images from `devops/docker/`, etc.
 
 The following environment variables are automatically available:
 
@@ -106,10 +109,8 @@ To invoke the setup on-demand use:
 make setup
 ```
 
-By default the `base` environment builds all infrastructural services from `devops/docker/` during setup. The artifact
-images can then be leveraged by the application build (i.e. building from `docker-compose.yaml`).
-
-ℹ️ This creates a two-way process and allows to scale infrastructure as needed (e.g. use prepared external images instead)
+ℹ️ This creates a two-way process and allows to scale infrastructure as needed (e.g. use pre-built images from your
+organization's [Docker Hub] instead)
 
 ## Source Archives
 
@@ -141,7 +142,8 @@ FULL=1 ./install.sh
 GIT=1 ./install.sh
 ```
 
-ℹ️ If available, the installer uses [Symfony client](https://symfony.com/download) or otherwise [Composer](https://getcomposer.org)  
+ℹ️ The installer uses the [Symfony client](https://symfony.com/download) if available, or [Composer](https://getcomposer.org)
+otherwise
 
 ⚠️ Cleanup the installer:
 
@@ -167,6 +169,8 @@ Build the application for a specific staging environment using:
 STAGING_ENV=prod make build
 ```
 
+ℹ️ The `STAGING_ENV` variable is global and can be applied to all `make` commands (`dev` by default)
+
 ### Tagging Images
 
 After the build images are tagged `latest` by default. Any other form of tagging (e.g. semantic versioning) is out of 
@@ -183,20 +187,21 @@ suffixed (e.g. `.../php`), whereas application services are "underscored" (e.g. 
 
 ## Containers
 
-Step 2-4 applies to running containers (with Docker Compose) from the images built previous, that is a working
-application. Conceptually we can create a containerized landscape from each staging environment's perspective, using
+Step 2-4 applies to running containers (with Docker Compose) from the images built previous (i.e. an "up&running"
+application).
+
+Conceptually we can create a containerized landscape from each staging environment's perspective, using
 `STAGING_ENV=prod make start` (see below).
 
-The good part is, this will actually use the production optimized images (thus great for local testing). The bad part
-however is, this may work completely different in production (e.g. with [Kubernetes]).
+The good part is, it uses the production optimized images (thus great for local testing). The bad part
+however is, this may work completely different for the true production environment" (e.g. with [Kubernetes]).
 
 See also [What is a Container Orchestrator, Anyway?](https://containerjournal.com/2017/05/29/container-orchestrator-anyway)
 
 👍 For a truly "dockerized" setup, consider Docker Compose files the source of truth, use e.g. `devops/environment/prod/kubernetes`
 to store any specific concept configurations
 
-👍 Ultimately, double configuration bookkeeping should be avoided (use environment variables, tools such as [Kompose],
-etc.)
+👍 Ultimately double configuration bookkeeping should be avoided, use environment variables, tools such as [Kompose], etc.
 
 ## 2. Start Application
 
@@ -297,9 +302,10 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md)
 - https://github.com/jakzal/docker-symfony-intl/blob/master/Dockerfile-intl
 
 [DTAP]: https://en.wikipedia.org/wiki/Development,_testing,_acceptance_and_production
-[Docker multi-stage builds]: https://docs.docker.com/develop/develop-images/multistage-build
+[Docker multi-stage builds]: https://docs.docker.com/develop/develop-images/multistage-build/
 [Docker Compose `.env`]: https://docs.docker.com/compose/environment-variables/#the-env-file
 [Docker Compose `$COMPOSE_PROJECT_NAME`]: https://docs.docker.com/compose/reference/envvars/#compose_project_name
 [Docker Compose `-f`]: https://docs.docker.com/compose/extends/#multiple-compose-files
-[Kubernetes]: https://kubernetes.io
-[Kompose]: https://kompose.io
+[Docker Hub]: https://hub.docker.com/
+[Kubernetes]: https://kubernetes.io/
+[Kompose]: https://kompose.io/
