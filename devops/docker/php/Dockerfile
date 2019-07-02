@@ -2,16 +2,14 @@ ARG image_php
 
 FROM ${image_php} AS php
 
-ARG staging_env
-ARG icu
-
-COPY icu/src-${icu}.tgz /tmp/icu.tgz
-
 RUN apk add --no-cache \
 		file \
 		gettext \
 		git \
 	;
+
+ARG icu
+COPY icu/src-${icu}.tgz /tmp/icu.tgz
 
 RUN set -eux; \
 	apk add --no-cache --virtual .build-deps \
@@ -48,8 +46,6 @@ RUN set -eux; \
 	apk del .build-deps
 
 COPY conf.d/application.ini "${PHP_INI_DIR}/conf.d/"
-RUN if [ "${staging_env}" = 'dev' ]; then ln -s php.ini-development "${PHP_INI_DIR}/php.ini"; \
-	else ln -s php.ini-production "${PHP_INI_DIR}/php.ini"; fi
 
 ENV COMPOSER_HOME=/composer
 ENV COMPOSER_CACHE_DIR=/tmp/composer
@@ -58,12 +54,18 @@ ENV COMPOSER_HTACCESS_PROTECT=0
 COPY --from=composer /usr/bin/composer /usr/bin/
 COPY composer/composer.json /composer/
 COPY composer/config.json /composer/
-RUN set -eux; \
-	composer global install --prefer-dist --no-progress --no-interaction --no-suggest --classmap-authoritative; \
-	composer clear-cache
 
 COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
 RUN chmod +x /usr/local/bin/docker-entrypoint
+
+ARG staging_env
+
+RUN if [ "${staging_env}" = 'dev' ]; then ln -s php.ini-development "${PHP_INI_DIR}/php.ini"; \
+	else ln -s php.ini-production "${PHP_INI_DIR}/php.ini"; fi
+
+RUN set -eux; \
+	composer global install --prefer-dist --no-progress --no-interaction --no-suggest --classmap-authoritative; \
+	composer clear-cache
 
 ENTRYPOINT ["docker-entrypoint"]
 CMD ["php-fpm"]

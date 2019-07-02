@@ -9,28 +9,15 @@ x-base: &base
     image_phpqa: "${IMAGE_PHPQA:?}"
     image_nginx: "${IMAGE_NGINX:?}"
 
-# domain
-x-app: &app
-  build:
-    <<: *base
-    target: app
-
-x-app-test: &app-test
-  <<: *app
-  build:
-    <<: *base
-    target: app-test
-
-x-web: &web
-  build:
-    <<: *base
-    target: web
-
 # application
 services:
-  app: *app
-  app-test: *app-test
+  app:
+    build:
+      <<: *base
+      target: "app-${STAGING_ENV:?}"
 
   web:
-    <<: *web
+    build:
+      <<: *base
+      target: web
     depends_on: [app]
