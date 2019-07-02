@@ -22,7 +22,8 @@ sh -c "./install.sh; curl -I http://localhost:8080"
 - Multiple staging environments by design
 - No hosting / release process assumptions
 - Decoupled "devops"
-___
+
+---
 
 ## The `devops/` Directory
 
@@ -37,9 +38,9 @@ The `devops/` directory holds all DevOps related concepts, thus separately from 
 The `docker/` directory holds all infrastructural services, each containing a `Dockerfile` at least. Its concern is to
 setup an initial environment, required for the application to run.
 
-👍 Consider a single service per concept a best practice, use [Docker multi-stage builds] for sub-concepts
+ℹ️ A `Dockerfile` can obtain the targeted staging environment from a build argument (i.e. `ARG staging_env`)
 
-ℹ️ A `Dockerfile` can obtain the targeted staging environment from a build argument, i.e. `ARG staging_env`
+👍 Consider a single service per concept a best practice, use [Docker multi-stage builds] for sub-concepts
 
 ### `devops/environment/`
 
@@ -65,8 +66,8 @@ To create a new staging environment (e.g. `prod`) use:
 cp -R devops/environment/dev devops/environment/prod
 ```
 
-All environments implicitly inherit from `base` due [Docker Compose `-f`], i.e. consider `docker-compose` being invoked
-like:
+All environments implicitly inherit from `base` (due [Docker Compose `-f`]). Consider `docker-compose` always being
+invoked as such:
 
 ```
 docker-compose \
@@ -108,7 +109,7 @@ make setup
 By default the `base` environment builds all infrastructural services from `devops/docker/` during setup. The artifact
 images can then be leveraged by the application build (i.e. building from `docker-compose.yaml`).
 
-ℹ️ This creates a two-way process and allows to scale infrastructure as needed, e.g. use prepared external images instead
+ℹ️ This creates a two-way process and allows to scale infrastructure as needed (e.g. use prepared external images instead)
 
 ## Source Archives
 
@@ -118,7 +119,8 @@ distributed using a minimal image (e.g `FROM scratch`) and allows application se
 
 Effectively this creates a final application image with source code included (e.g. production/distribution ready). For
 development local volumes are configured.
-___
+
+---
 
 ## 0. Create Application
 
@@ -170,7 +172,7 @@ STAGING_ENV=prod make build
 After the build images are tagged `latest` by default. Any other form of tagging (e.g. semantic versioning) is out of 
 scope of this template repository.
 
-👍 Consider tagging images by VCS tag a best practice, e.g. `image:v1` is an artifact of the `v1` GIT tag
+👍 Consider tagging images by VCS tag a best practice (e.g. `image:v1` is an artifact of the `v1` GIT tag)
 
 ### Naming Conventions
 
