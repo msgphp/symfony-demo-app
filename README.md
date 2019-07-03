@@ -25,7 +25,7 @@ sh -c "./install.sh; curl -I http://localhost:8080"
 ## Production Guidelines
 
 - Use a persistent database service from your cloud provider
-- Setup a reverse proxy for SSL termination on a load balance
+- Setup a reverse proxy for SSL termination on a load balancer
 
 ---
 
