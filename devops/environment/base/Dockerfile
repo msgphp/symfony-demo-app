@@ -33,7 +33,6 @@ RUN if [ "${staging_env}" != 'dev' ]; then \
 
 FROM app AS app-dev
 
-COPY --from=app /app /app
 COPY --from=phpqa /tools/php-cs-fixer /tools/
 COPY --from=phpqa /tools/psalm /tools/
 ENV PATH "${PATH}:/tools"
