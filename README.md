@@ -57,7 +57,15 @@ To create a new staging environment (e.g. `prod`) use:
 cp -R devops/environment/dev devops/environment/prod
 ```
 
-All environments implicitly inherit from `base` (due [Docker Compose `-f`]). Consider `docker-compose` always being
+ℹ️ Do not confuse _staging environments_ with the _application environment_ (it's a matrix where conceptually each 
+application environment can run on any staging environment, either remote or locally)
+
+👍 Consider standard [DTAP] environments a best practice (this template assumes `dev`, `test`, `accept` and `prod`
+respectively)
+
+#### The `base` environment
+
+All environments implicitly inherit from `base` due [Docker Compose `-f`]. Consider `docker-compose` always being
 invoked as such:
 
 ```
@@ -67,11 +75,29 @@ docker-compose \
     --project-directory devops/environment/$STAGING_ENV
 ```
 
-ℹ️ Do not confuse _staging environments_ with the _application environment_ (it's a matrix where conceptually each 
-application environment can run on any staging environment, either remote or locally)
+Because of the way Docker Compose works this defines all minimal available services for all staging environments,
+whereas specific services should be placed in a specific environment its `docker-compose.yaml` file (e.g. only needed
+for `prod`).
 
-👍 Consider standard [DTAP] environments a best practice (this template assumes `dev`, `test`, `accept` and `prod`
-respectively)
+Each environment may extend services from the base environment, e.g. to configure specific ports and volumes.
+
+The default services are built from the `base` Dockerfile. To extend it for e.g. the `dev` environment, conceptually
+it could be done with `FROM <project>_app AS base`, however, this will use the last image built (not the one currently
+being build).
+
+Alternatively one could copy the `app` service into `docker-compose.yaml` of the `dev` environment, and define a new
+`build` configuration. Effectively this is a huge copy-paste.
+
+To overcome, the `base` environment by default specifies the target staging environment in its build target, i.e.:
+
+```bash
+app:
+  build:
+    target: "app-${STAGING_ENV:?}"
+```
+
+This creates a flexible workflow where one can leverage `ARG staging_env` and build generics into the base image, or
+otherwise build concretes in the targeted stage (e.g. `FROM app-base AS app-dev`).
 
 ### `devops/docker/`
 

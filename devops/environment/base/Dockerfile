@@ -15,7 +15,7 @@ FROM ${image_nginx} AS nginx
 
 # --- STAGE domain
 
-FROM php AS app
+FROM php AS app-base
 
 COPY --from=archive /archive.tgz /
 
@@ -31,7 +31,7 @@ RUN if [ "${staging_env}" != 'dev' ]; then \
 		composer clear-cache; \
 	fi
 
-FROM app AS app-dev
+FROM app-base AS app-dev
 
 COPY --from=phpqa /tools/php-cs-fixer /tools/
 COPY --from=phpqa /tools/psalm /tools/
@@ -39,7 +39,7 @@ ENV PATH "${PATH}:/tools"
 
 FROM app-dev AS app-test
 
-FROM app AS app-accept
+FROM app-base AS app-accept
 
 FROM app-accept AS app-prod
 
@@ -48,6 +48,6 @@ FROM app-accept AS app-prod
 FROM nginx AS web
 
 COPY nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
-COPY --from=app /app /app
+COPY --from=app-base /app /app
 
 WORKDIR /app
