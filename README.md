@@ -6,14 +6,12 @@ A template for new Symfony applications using Docker.
 
 - PHP-FPM
 - NGINX
-- MySQL (for development)
+- MySQL (default for development)
 
 ## Features
 
 ```bash
 sh -c "./install.sh; curl -I http://localhost:8080"
-# ...
-# X-Debug-Token-Link: http://localhost:8080/_profiler/079d79
 ```
 
 - Bare Symfony defaults
@@ -22,6 +20,12 @@ sh -c "./install.sh; curl -I http://localhost:8080"
 - Multiple staging environments by design
 - No hosting / release process assumptions
 - Decoupled "devops"
+- Reverse proxy with SSL and HTTP2 for development
+
+## Production Guidelines
+
+- Use a persistent database service from your cloud provider
+- Setup a reverse proxy for SSL termination on a load balance
 
 ---
 
@@ -259,15 +263,18 @@ make refresh
 
 ## 4. Run Application
 
-Visit the application in development mode at: http://localhost:8080 (`$NGINX_PORT`)
+Visit the application in development mode:
+
+  - http://localhost:8080 (`$NGINX_PORT`)
+  - https://localhost:8443 (`$NGINX_PORT_SSL`)
 
 Start a shell using:
 
 ```bash
 make shell
 
-# enter test app
-SERVICE=app-test make shell
+# enter web service (i.e. NGINX)
+SERVICE=web make shell
 ```
 
 Start a MySQL client using:
@@ -324,6 +331,10 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
 - https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
 - https://cloud.google.com/blog/products/gcp/7-best-practices-for-building-containers
+- https://symfony.com/doc/current/setup/web_server_configuration.html#nginx
+
+## Dockerfiles
+- https://github.com/dunglas/symfony-docker/blob/master/Dockerfile
 - https://github.com/api-platform/api-platform/blob/master/api/Dockerfile
 - https://github.com/jakzal/docker-symfony-intl/blob/master/Dockerfile-intl
 

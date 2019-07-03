@@ -3,19 +3,14 @@ ARG image_php
 ARG image_phpqa
 ARG image_nginx
 
-# --- STAGE infrastructure
+# --- STAGE mixins
 
 FROM ${image_archive} AS archive
-
-FROM ${image_php} AS php
-
 FROM ${image_phpqa} AS phpqa
 
-FROM ${image_nginx} AS nginx
+# --- STAGE app domain
 
-# --- STAGE domain
-
-FROM php AS app-base
+FROM ${image_php} AS app-base
 
 COPY --from=archive /archive.tgz /
 
@@ -25,7 +20,7 @@ RUN tar --no-same-owner --no-same-permissions -zxf /archive.tgz -C .; rm -f /arc
 
 ARG staging_env
 
-RUN if [ "${staging_env}" != 'dev' ]; then \
+RUN if [ "${staging_env}" != 'dev' ] && [ -f composer.json ]; then \
 		set -eux; \
 		composer install --prefer-dist --no-progress --no-interaction --no-suggest --classmap-authoritative; \
 		composer clear-cache; \
@@ -43,11 +38,11 @@ FROM app-base AS app-accept
 
 FROM app-accept AS app-prod
 
-# --- STAGE web (domain)
+# --- STAGE web domain
 
-FROM nginx AS web
+FROM ${image_nginx} AS web
 
-COPY nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf
+COPY nginx/conf.d/default.conf /etc/nginx/conf.d/
 COPY --from=app-base /app /app
 
 WORKDIR /app
