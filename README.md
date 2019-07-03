@@ -36,7 +36,7 @@ The `devops/` directory holds all DevOps related concepts, thus separately from 
 
 ℹ️ Don't mix&match `.env` files, considering each concern can rely on a different parsing technique ([ref](https://github.com/symfony/recipes/pull/487))
 
-⚠️ Never commit secret values in `.env.dist` for non-dev concerns
+⚠️ Never commit secret values for _non-dev_ concerns
 
 ### `devops/environment/`
 
@@ -80,29 +80,31 @@ docker-compose \
     --project-directory devops/environment/$STAGING_ENV
 ```
 
-Because of the way Docker Compose works this defines all minimal available services for all staging environments,
-whereas specific services should be placed in a specific environment its `docker-compose.yaml` file (e.g. only needed
-for `prod`).
+Due the way Docker Compose works the `base` environment defines the minimal set of available services across all other
+staging environments.
 
-Each environment may extend services from the base environment, e.g. to configure specific ports and volumes.
+Specific services, as well as service overrides, can be placed in a staging environment its own `docker-compose.yaml`
+file (e.g. only needed for `prod`).
 
-The default services are built from the `base` Dockerfile. To extend it for e.g. the `dev` environment, conceptually
-it could be done with `FROM <project>_app AS base` in its own `Dockerfile`, however, this will use the last image
-built (not the one currently being build).
+The default services, built from the `base` Dockerfile, can be extended for a specific staging environment (e.g. `dev`)
+at build-time using [Docker multi-stage builds]. The default `app` service is configured as such by default:
 
-To solve it, one should could copy the `app` service into `docker-compose.yaml` of the `dev` environment, and define a
-new `build` configuration. Effectively this is a huge copy-paste.
-
-To overcome, the `base` environment by default specifies the target staging environment in its build target, i.e.:
-
-```bash
-app:
-  build:
-    target: "app-${STAGING_ENV:?}"
+```yaml
+# base
+services:
+  app:
+    build:
+      # ...
+      target: "app-${STAGING_ENV:?}"
 ```
 
-This creates a flexible workflow where one can leverage `ARG staging_env` and build generics into the base image, or
-otherwise build concretes in the targeted stage (e.g. `FROM app-base AS app-dev`).
+This creates a flexible build pattern where you can leverage either `ARG staging_env` and build generics into the base
+image (`if/else`, `"file-${staging_env}.conf"`, etc.), or specifically within a scoped stage (e.g. `FROM app-base AS app-dev`).
+
+👍 Avoid overriding the default build configuration (effectively it is a huge copy-paste)
+
+👍 Don't extend from the base image directly (e.g. `FROM "${project}_app"`) (it will will use the last image built, not
+the one currently being build)
 
 ### `devops/docker/`
 
