@@ -333,6 +333,7 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md)
 - https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
 - https://cloud.google.com/blog/products/gcp/7-best-practices-for-building-containers
 - https://symfony.com/doc/current/setup/web_server_configuration.html#nginx
+- https://www.lullabot.com/articles/debugging-php-email-with-mailhog
 
 ## Dockerfiles
 - https://github.com/dunglas/symfony-docker/blob/master/Dockerfile
