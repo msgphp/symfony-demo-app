@@ -2,34 +2,31 @@
 
 A template for new Symfony applications using Docker.
 
-Table of Contents
-=================
-
-* [Symfony & Docker](#symfony--docker)
-  * [Default Stack](#default-stack)
-  * [Features](#features)
-  * [Production Guidelines](#production-guidelines)
-  * [The `devops/` Directory](#the-devops-directory)
-     * [`devops/environment/`](#devopsenvironment)
-        * [The `base` Environment](#the-base-environment)
-     * [`devops/docker/`](#devopsdocker)
-  * [Host Setup](#host-setup)
-  * [Source Archives](#source-archives)
-  * [0. Create Application](#0-create-application)
-  * [1. Build Application](#1-build-application)
-     * [Tagging Images](#tagging-images)
-     * [Naming Conventions](#naming-conventions)
-  * [Containers](#containers)
-  * [2. Start Application](#2-start-application)
-  * [3. Install Application](#3-install-application)
-  * [4. Run Application](#4-run-application)
-* [Miscellaneous](#miscellaneous)
-  * [One-Off Commands](#one-off-commands)
-  * [Debug](#debug)
-  * [Verify Symfony Requirements](#verify-symfony-requirements)
-* [Contributing](#contributing)
-* [References](#references)
-  * [Dockerfiles](#dockerfiles)
+   * [Symfony & Docker](#symfony--docker)
+      * [Default Stack](#default-stack)
+      * [Features](#features)
+      * [Production Guidelines](#production-guidelines)
+   * [The `devops/` Directory](#the-devops-directory)
+      * [`devops/environment/`](#devopsenvironment)
+         * [The `base` Environment](#the-base-environment)
+      * [`devops/docker/`](#devopsdocker)
+   * [Host Setup](#host-setup)
+      * [Source Archives](#source-archives)
+   * [Create Application](#create-application)
+      * [1. Build Application](#1-build-application)
+         * [Tagging Images](#tagging-images)
+         * [Naming Conventions](#naming-conventions)
+   * [Application Containers](#application-containers)
+      * [2. Start Application](#2-start-application)
+      * [3. Install Application](#3-install-application)
+      * [4. Run Application](#4-run-application)
+   * [Miscellaneous](#miscellaneous)
+      * [One-Off Commands](#one-off-commands)
+      * [Debug](#debug)
+      * [Verify Symfony Requirements](#verify-symfony-requirements)
+   * [Contributing](#contributing)
+   * [References](#references)
+      * [Dockerfiles](#dockerfiles)
 
 ## Default Stack
 
@@ -57,9 +54,7 @@ sh -c "./install.sh; curl -I http://localhost:8080"
 - Use a persistent database service from your cloud provider
 - Setup a reverse proxy for SSL termination on a load balancer
 
----
-
-## The `devops/` Directory
+# The `devops/` Directory
 
 The `devops/` directory holds all DevOps related concepts, thus separately from the application concern.
 
@@ -67,7 +62,7 @@ The `devops/` directory holds all DevOps related concepts, thus separately from 
 
 ⚠️ Never commit secret values for _non-dev_ concerns
 
-### `devops/environment/`
+## `devops/environment/`
 
 The `environment/` directory holds all the application its staging environments, each containing a `docker-compose.yaml`
 file at least. Its concern is to compose the final application logic based upon infrastructural services.
@@ -97,7 +92,7 @@ application environment can run on any staging environment, either remote or loc
 👍 Consider standard [DTAP] environments a best practice (this template assumes `dev`, `test`, `accept` and `prod`
 respectively)
 
-#### The `base` Environment
+### The `base` Environment
 
 All environments implicitly inherit from `base` due [Docker Compose `-f`]. Consider `docker-compose` always being
 invoked as such:
@@ -135,7 +130,7 @@ image (`if/else`, `"file-${staging_env}.conf"`, etc.), or specifically within a 
 👍 Don't extend from the base image directly (e.g. `FROM "${project}_app"`) (it will will use the last image built, not
 the one currently being build)
 
-### `devops/docker/`
+## `devops/docker/`
 
 The `docker/` directory holds all infrastructural services, each containing a `Dockerfile` at least. Its concern is to
 prepare a minimal environment, required for the application to run.
@@ -144,7 +139,7 @@ prepare a minimal environment, required for the application to run.
 
 👍 Consider a single service per concept a best practice, use [Docker multi-stage builds] for sub-concepts
 
-## Host Setup
+# Host Setup
 
 To `COPY` files from outside the build context the host OS is prepared first.
 
@@ -183,9 +178,7 @@ distributed using a minimal image (e.g `FROM scratch`) and allows application se
 Effectively this creates a final application image with source code included (e.g. production/distribution ready). For
 development local volumes are configured.
 
----
-
-## 0. Create Application
+# Create Application
 
 Bootstrap the initial skeleton first:
 
@@ -247,7 +240,7 @@ suffixed (e.g. `.../php`), whereas application services are "underscored" (e.g. 
 
 👍 Consider the project name a local reference, use `docker tag` for alternative (distribution) names (e.g. `org/product-name:v1`)
 
-## Containers
+# Application Containers
 
 Step 2-4 applies to running containers (with Docker Compose) from the images built previous (i.e. an "up&running"
 application).
