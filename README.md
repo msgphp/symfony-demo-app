@@ -82,11 +82,11 @@ for `prod`).
 Each environment may extend services from the base environment, e.g. to configure specific ports and volumes.
 
 The default services are built from the `base` Dockerfile. To extend it for e.g. the `dev` environment, conceptually
-it could be done with `FROM <project>_app AS base`, however, this will use the last image built (not the one currently
-being build).
+it could be done with `FROM <project>_app AS base` in its own `Dockerfile`, however, this will use the last image
+built (not the one currently being build).
 
-Alternatively one could copy the `app` service into `docker-compose.yaml` of the `dev` environment, and define a new
-`build` configuration. Effectively this is a huge copy-paste.
+To solve it, one should could copy the `app` service into `docker-compose.yaml` of the `dev` environment, and define a
+new `build` configuration. Effectively this is a huge copy-paste.
 
 To overcome, the `base` environment by default specifies the target staging environment in its build target, i.e.:
 
