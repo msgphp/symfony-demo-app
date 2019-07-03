@@ -21,6 +21,7 @@ sh -c "./install.sh; curl -I http://localhost:8080"
 - No hosting / release process assumptions
 - Decoupled "devops"
 - Reverse proxy with SSL and HTTP2 for development
+- Catch-all mail for development
 
 ## Production Guidelines
 

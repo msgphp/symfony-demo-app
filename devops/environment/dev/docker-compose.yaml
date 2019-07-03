@@ -54,6 +54,12 @@ services:
       - ./mysql/conf.d/my.cnf:/etc/mysql/conf.d/my.cnf:ro
       - db-test-data:/var/lib/mysql:rw
 
+  mail:
+    image: "${IMAGE_MAILHOG:?}"
+    ports:
+      - "${MAILHOG_PORT:?}:8025"
+      - "${MAILHOG_PORT_SMTP:?}:1025"
+
 volumes:
   db-data: {}
   db-test-data: {}
