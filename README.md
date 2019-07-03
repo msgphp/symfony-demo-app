@@ -2,6 +2,35 @@
 
 A template for new Symfony applications using Docker.
 
+Table of Contents
+=================
+
+* [Symfony & Docker](#symfony--docker)
+  * [Default Stack](#default-stack)
+  * [Features](#features)
+  * [Production Guidelines](#production-guidelines)
+  * [The `devops/` Directory](#the-devops-directory)
+     * [`devops/environment/`](#devopsenvironment)
+        * [The `base` Environment](#the-base-environment)
+     * [`devops/docker/`](#devopsdocker)
+  * [Host Setup](#host-setup)
+  * [Source Archives](#source-archives)
+  * [0. Create Application](#0-create-application)
+  * [1. Build Application](#1-build-application)
+     * [Tagging Images](#tagging-images)
+     * [Naming Conventions](#naming-conventions)
+  * [Containers](#containers)
+  * [2. Start Application](#2-start-application)
+  * [3. Install Application](#3-install-application)
+  * [4. Run Application](#4-run-application)
+* [Miscellaneous](#miscellaneous)
+  * [One-Off Commands](#one-off-commands)
+  * [Debug](#debug)
+  * [Verify Symfony Requirements](#verify-symfony-requirements)
+* [Contributing](#contributing)
+* [References](#references)
+  * [Dockerfiles](#dockerfiles)
+
 ## Default Stack
 
 - PHP-FPM
@@ -68,7 +97,7 @@ application environment can run on any staging environment, either remote or loc
 👍 Consider standard [DTAP] environments a best practice (this template assumes `dev`, `test`, `accept` and `prod`
 respectively)
 
-#### The `base` environment
+#### The `base` Environment
 
 All environments implicitly inherit from `base` due [Docker Compose `-f`]. Consider `docker-compose` always being
 invoked as such:
