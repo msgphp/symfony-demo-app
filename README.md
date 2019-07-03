@@ -149,9 +149,9 @@ order of execution):
 - `devops/docker/<service>/setup.sh`
   - Use it to download files, create default directories, etc.
 - `devops/environment/base/setup.sh`
-  - Use it build default infrastructural images from `devops/docker/`, "pre-pull" external images, etc.
+  - Use it to build default infrastructural images from `devops/docker/`, "pre-pull" external images, etc.
 - `devops/environment/<targeted-staging-env>/setup.sh`
-  - Use it build environment specific infrastructural images from `devops/docker/`, etc.
+  - Use it to build environment specific infrastructural images from `devops/docker/`, etc.
 
 The following environment variables are automatically available:
 
