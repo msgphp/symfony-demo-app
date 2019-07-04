@@ -45,7 +45,7 @@ RUN set -eux; \
 	\
 	apk del .build-deps
 
-COPY conf.d/application.ini "${PHP_INI_DIR}/conf.d/"
+COPY conf.d/symfony.ini "${PHP_INI_DIR}/conf.d/"
 
 ENV COMPOSER_HOME=/composer
 ENV COMPOSER_CACHE_DIR=/tmp/composer

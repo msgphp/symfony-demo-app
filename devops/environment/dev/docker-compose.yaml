@@ -25,6 +25,8 @@ services:
     depends_on: [db, db-test]
     volumes:
       - "${APP_DIR:?}:/app:rw"
+      - ./mailhog/mhsendmail_linux_amd64:/usr/local/bin/mhsendmail:ro
+      - "./php/conf.d/application.ini:/usr/local/etc/php/conf.d/application.ini:ro"
 
   web:
     <<: *web
@@ -58,7 +60,6 @@ services:
     image: "${IMAGE_MAILHOG:?}"
     ports:
       - "${MAILHOG_PORT:?}:8025"
-      - "${MAILHOG_PORT_SMTP:?}:1025"
 
 volumes:
   db-data: {}
