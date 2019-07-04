@@ -293,6 +293,10 @@ Visit the application in development mode:
   - http://localhost:8080 (`$NGINX_PORT`)
   - https://localhost:8443 (`$NGINX_PORT_SSL`)
 
+Check e-mail:
+
+  - https://localhost:8025 (`$MAILHOG_PORT`)
+
 Start a shell using:
 
 ```bash
