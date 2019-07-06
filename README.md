@@ -29,7 +29,9 @@ A message driven Symfony demo application with basic user management, a REST/Gra
 ```bash
 composer create-project msgphp/symfony-demo-app && cd symfony-demo-app/
 
-# using built in web server / sqlite
+# using built in web server / mysql
+#   make sure elasticsearch is running, and change the ELASTICSEARCH_HOST in .env (or .env.local)
+#   ELASTICSEARCH_HOST=localhost:9200 
 bin/reinstall
 bin/console server:run
 
