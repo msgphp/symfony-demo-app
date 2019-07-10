@@ -16,7 +16,7 @@ ARG subject='/C=SS/ST=SS/L=The Internet/O=Symfony/CN=localhost'
 RUN openssl req -new \
 	-passout "pass:${password}" \
 	-key server.key -out server.csr \
-    -subj "${subject}"
+	-subj "${subject}"
 RUN openssl x509 -req -sha256 \
 	-days 3650 \
 	-in server.csr \
