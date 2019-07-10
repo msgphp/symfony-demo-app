@@ -37,7 +37,7 @@ services:
     build:
       <<: *dev
       target: web-ssl
-    depends_on: [app]
+    depends_on: [web]
     ports:
       - "${NGINX_PORT_SSL:?}:443"
 
