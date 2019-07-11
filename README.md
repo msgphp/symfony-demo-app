@@ -35,10 +35,13 @@ composer create-project msgphp/symfony-demo-app && cd symfony-demo-app/
 bin/reinstall
 bin/console server:run
 
-# or using Lando
+# using Lando
 # see https://docs.devwithlando.io
 lando start
 lando ssh -c bin/reinstall
+
+# using Docker
+# not available yet; see https://github.com/msgphp/symfony-demo-app/issues/107
 ```
 
 # Documentation
