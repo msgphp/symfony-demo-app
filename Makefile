@@ -5,46 +5,52 @@ ifndef PHPUNIT
 	PHPUNIT=7.5
 endif
 
+qa_image=jakzal/phpqa:php${PHP}-alpine
+composer_args=--prefer-dist --no-progress --no-interaction --no-suggest
+
 dockerized=docker run --init -it --rm \
 	-u $(shell id -u):$(shell id -g) \
 	-v $(shell pwd):/app \
 	-w /app
 qa=${dockerized} \
 	-e COMPOSER_CACHE_DIR=/app/var/composer \
-	-e SYMFONY_PHPUNIT_DIR=/app/var/phpunit \
-	-e SYMFONY_PHPUNIT_VERSION=${PHPUNIT} \
-	jakzal/phpqa:php${PHP}-alpine
-composer_args=--prefer-dist --no-progress --no-interaction --no-suggest
+	${qa_image}
 
 # deps
-install: phpunit-install
+install:
 	${qa} composer install ${composer_args}
-update: phpunit-install
+update:
 	${qa} composer update ${composer_args}
 
 # tests
-phpunit-install:
-	${qa} simple-phpunit install
 phpunit:
-	${qa} simple-phpunit
+	${qa} bin/phpunit
 
-# code style / static analysis
+# code style
 cs:
 	${qa} php-cs-fixer fix --dry-run --verbose --diff
 cs-fix:
 	${qa} php-cs-fixer fix
-sa: install
-	${qa} phpstan analyse
-	#${qa} psalm --show-info=false
+
+# static analysis
+psalm: install
+	${qa} psalm --show-info=false
+psalm-info: install
+	${qa} psalm --show-info=true
 
 # linting
 lint-yaml:
 	${dockerized} sdesbure/yamllint yamllint .yamllint .*.yml config/
 
+# phpqa
+qa-update:
+	docker rmi -f ${qa_image}
+	docker pull ${qa_image}
+
 # misc
 clean:
-	rm -rf var/cache var/log var/phpstan var/php-cs-fixer.cache
-smoke-test: clean update phpunit cs sa
+	git clean -dxf var/
+smoke-test: clean update phpunit cs psalm
 shell:
 	${qa} /bin/sh
 composer-normalize: install
