@@ -17,3 +17,4 @@ script: make update phpunit
 cache:
   directories:
     - var/
+    - bin/.phpunit/
