@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
-use App\Entity\User\User;
+use App\Entity\User;
 use MsgPhp\User\Command\EnableUser;
 use MsgPhp\User\Event\UserConfirmed;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;

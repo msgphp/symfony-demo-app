@@ -5,16 +5,24 @@ branches:
     - master
     - /^\d\.\d$/
 
+before_install:
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/1.24.0/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+
+install: make build start
+
 jobs:
   include:
     - stage: Unit tests
-    - env: PHP=7.4
     - stage: Code quality
-      script: make cs psalm
+      script: make cs #psalm
 
 script: make install phpunit
 
 cache:
   directories:
-    - var/
     - bin/.phpunit/
+    - devops/php/icu/
+    - var/

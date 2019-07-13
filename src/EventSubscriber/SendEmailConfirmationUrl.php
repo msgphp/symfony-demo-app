@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
-use App\Entity\User\UserEmail;
+use App\Entity\UserEmail;
 use MsgPhp\User\Event\UserEmailAdded;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Twig\Environment;

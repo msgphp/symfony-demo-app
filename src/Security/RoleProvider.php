@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Security;
 
-use App\Entity\User\PremiumUser;
-use App\Entity\User\User;
+use App\Entity\PremiumUser;
+use App\Entity\User;
 use MsgPhp\User\Role\RoleProvider as BaseRoleProvider;
 use MsgPhp\User\User as BaseUser;
 

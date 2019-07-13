@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Console\Command;
 
-use App\Entity\User\OneTimeLoginToken;
+use App\Entity\OneTimeLoginToken;
 use Doctrine\ORM\EntityManagerInterface;
 use MsgPhp\User\Repository\UserRepository;
 use Symfony\Component\Console\Command\Command;

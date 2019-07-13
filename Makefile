@@ -23,10 +23,6 @@ composer=${app} composer
 # application
 install:
 	${composer} install ${composer_args}
-	${app_console} doctrine:database:create --if-not-exists
-	${app_console} doctrine:schema:update --force
-	#${app_console} projection:initialize-types --force
-	#${app_console} projection:synchronize
 update:
 	${composer} update ${composer_args}
 update-recipes:
@@ -35,6 +31,16 @@ shell:
 	${exec} $${SERVICE:-app} sh
 mysql:
 	${exec} $${SERVICE:-db} sh -c "mysql -u \$${MYSQL_USER} -p\$${MYSQL_PASSWORD} \$${MYSQL_DATABASE}"
+db-migrate:
+	${app_console} doctrine:database:create --if-not-exists
+	${app_console} doctrine:migrations:migrate --allow-no-migration -n
+db-sync: db-migrate
+	${app_console} doctrine:schema:update --force
+db-fixtures: db-sync
+	${app_console} doctrine:fixtures:load -n
+api-sync:
+	#${app_console} projection:initialize-types --force
+	#${app_console} projection:synchronize
 
 # containers
 start:

@@ -2,8 +2,8 @@
 
 {% set userId, user = msgphp_user.currentId, msgphp_user.current %}
 {% set oauth_resources = {
-    (constant('App\\Entity\\Eav\\Attribute::GOOGLE_OAUTH_ID')): 'Google',
-    (constant('App\\Entity\\Eav\\Attribute::FACEBOOK_OAUTH_ID')): 'Facebook'
+    (constant('App\\Entity\\Attribute::GOOGLE_OAUTH_ID')): 'Google',
+    (constant('App\\Entity\\Attribute::FACEBOOK_OAUTH_ID')): 'Facebook'
 } %}
 
 {% block body %}
