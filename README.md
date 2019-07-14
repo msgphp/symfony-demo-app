@@ -19,14 +19,12 @@ Web API  | [`ApiPlatformBundle`]
 
 ## Try it Yourself
 
+Using [Symfony CLI][appsrv:sf]:
+
 ```bash
 composer create-project msgphp/symfony-demo-app
-cd symfony-demo-app/
-```
+cd symfony-demo-app
 
-### Using [Symfony CLI][appsrv:sf]
-
-```bash
 # Database and Elasticsearch must be running
 # Change DATABASE_URL and ELASTICSEARCH_HOST in .env.local, if needed
 
@@ -41,9 +39,13 @@ symfony server:start
 symfony open:local
 ``` 
 
-### Using [Docker][appsrv:docker]
+Using [Docker][appsrv:docker]:
 
 ```bash
+# assuming composer is not installed on the local machine
+git clone git@github.com:msgphp/symfony-demo-app.git
+cd symfony-demo-app
+
 echo 'DATABASE_URL=mysql://app:pass@db/app' >> .env.dev.local
 echo 'ELASTICSEARCH_HOST=elasticsearch' >> .env.dev.local
 
