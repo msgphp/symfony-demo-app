@@ -46,6 +46,8 @@ $rules = [
     'phpdoc_order' => true,
     'phpdoc_to_comment' => false,
     'phpdoc_trim_consecutive_blank_line_separation' => true,
+    'phpdoc_var_annotation_correct_order' => true,
+    'simple_to_complex_string_variable' => true,
     'static_lambda' => true,
     'strict_comparison' => true,
     'strict_param' => true,
@@ -59,9 +61,15 @@ return Config::create()
     ->setRiskyAllowed(true)
     ->setFinder(Finder::create()
         ->in([
+            __DIR__.'/config',
+            __DIR__.'/public',
             __DIR__.'/src',
             __DIR__.'/tests',
         ])
-        ->append([__FILE__, __DIR__.'/bin/console'])
+        ->append([
+            __FILE__,
+            __DIR__.'/bin/console',
+            __DIR__.'/bin/phpunit',
+        ])
     )
 ;
