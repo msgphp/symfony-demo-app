@@ -9,20 +9,12 @@ A message driven Symfony demo application with basic user management, a REST/Gra
 
 # Enabled Bundles
 
-## Domain Layer
-[`MsgPhpUserBundle`](https://github.com/msgphp/user-bundle),
-[`MsgPhpEavBundle`](https://github.com/msgphp/eav-bundle)
-
-## ORM Layer
-[`DoctrineBundle`](https://github.com/doctrine/DoctrineBundle)
-
-## Security Layer
-[`SecurityBundle`](https://github.com/symfony/security-bundle),
-[`HWIOAuthBundle`](https://github.com/hwi/HWIOAuthBundle),
-[`LexikJWTAuthenticationBundle`](https://github.com/lexik/LexikJWTAuthenticationBundle)
-
-## API Layer
-[`ApiPlatformBundle`](https://github.com/api-platform/api-platform)
+Concern  | Bundles
+---      | ---
+Domain   | [`MsgPhpUserBundle`], [`MsgPhpEavBundle`]
+ORM      | [`DoctrineBundle`]
+Security | [`SecurityBundle`], [`HWIOAuthBundle`], [`LexikJWTAuthenticationBundle`]
+Web API  | [`ApiPlatformBundle`]
 
 # Try it Yourself
 
@@ -67,23 +59,11 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
 # Screenshots
 
-## Web
-
-![image](https://user-images.githubusercontent.com/1047696/45264235-c79eaa80-b439-11e8-87b2-4e3551bdee09.png)
-
-![image](https://user-images.githubusercontent.com/1047696/45264184-c9b43980-b438-11e8-97e8-55b5150c7b6b.png)
-
-## API
-
-![image](https://user-images.githubusercontent.com/1047696/45264192-ea7c8f00-b438-11e8-9aa3-9bf490c4f2d1.png)
-
-## CLI
-
-![image](https://user-images.githubusercontent.com/1047696/45264197-0b44e480-b439-11e8-83c3-45753ef79dbc.png)
-
-## Database UML
-
-![image](https://user-images.githubusercontent.com/1047696/45264216-62e35000-b439-11e8-9c04-f835f46a857b.png)
+![image](https://user-images.githubusercontent.com/1047696/45264235-c79eaa80-b439-11e8-87b2-4e3551bdee09.png) | ![image](https://user-images.githubusercontent.com/1047696/45264184-c9b43980-b438-11e8-97e8-55b5150c7b6b.png)
+--- | ---
+![image](https://user-images.githubusercontent.com/1047696/45264192-ea7c8f00-b438-11e8-9aa3-9bf490c4f2d1.png) | ![image](https://user-images.githubusercontent.com/1047696/45264197-0b44e480-b439-11e8-83c3-45753ef79dbc.png)
+--- | ---
+![image](https://user-images.githubusercontent.com/1047696/45264216-62e35000-b439-11e8-9c04-f835f46a857b.png) |
 
 # Blog Posts
 
@@ -101,3 +81,10 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md)
 [packagist:img]: https://img.shields.io/packagist/v/msgphp/symfony-demo-app.svg?style=flat-square
 [appsrv:sf]: https://symfony.com/doc/current/setup/symfony_server.html
 [appsrv:docker]: https://github.com/ro0NL/symfony-docker
+[`MsgPhpUserBundle`]: https://github.com/msgphp/user-bundle
+[`MsgPhpEavBundle`]: https://github.com/msgphp/eav-bundle
+[`DoctrineBundle`]: https://github.com/doctrine/DoctrineBundle
+[`SecurityBundle`]: https://github.com/symfony/security-bundle
+[`HWIOAuthBundle`]: https://github.com/hwi/HWIOAuthBundle
+[`LexikJWTAuthenticationBundle`]: https://github.com/lexik/LexikJWTAuthenticationBundle
+[`ApiPlatformBundle`]: https://github.com/api-platform/api-platform
