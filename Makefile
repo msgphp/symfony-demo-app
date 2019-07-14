@@ -47,6 +47,13 @@ qa-update:
 	docker rmi -f ${qa_image}
 	docker pull ${qa_image}
 
+# devops
+devops-init:
+	git remote add devops git@github.com:ro0NL/symfony-docker.git
+devops-merge:
+	git fetch devops master
+	git merge --no-commit --no-ff --allow-unrelated-histories devops/master
+
 # misc
 clean:
 	git clean -dxf var/
