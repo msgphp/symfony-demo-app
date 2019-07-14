@@ -28,6 +28,7 @@ RUN set -eux; \
 	docker-php-ext-configure zip --with-libzip; \
 	docker-php-ext-install -j$(nproc) \
 		intl \
+		bcmath \
 		pdo_mysql \
 		zip \
 	; \
