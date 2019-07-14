@@ -30,6 +30,7 @@ FROM app-base AS app-dev
 
 COPY --from=phpqa /tools/php-cs-fixer /tools/
 COPY --from=phpqa /tools/psalm /tools/
+COPY --from=phpqa /tools/security-checker /tools/
 ENV PATH "${PATH}:/tools"
 
 FROM app-dev AS app-test
