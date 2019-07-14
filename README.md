@@ -24,7 +24,7 @@ A template for new Symfony applications using Docker.
       * [One-Off Commands](#one-off-commands)
       * [Debug](#debug)
       * [Verify Symfony Requirements](#verify-symfony-requirements)
-   * [Contributing](#contributing)
+      * [Doctrine Recipe](#doctrine-recipe)
    * [References](#references)
       * [Dockerfiles](#dockerfiles)
 
@@ -352,6 +352,20 @@ After any build it might be considered to verify if Symfony requirements are (st
 make requirement-check
 ```
 
+## Doctrine Recipe
+
+A set of make targets for usage with [DoctrineBundle].
+
+```bash
+migrate-db:
+	${app_console} doctrine:database:create --if-not-exists
+	${app_console} doctrine:migrations:migrate --allow-no-migration -n
+sync-db: migrate-db
+	${app_console} doctrine:schema:update --force
+load-fixtures: sync-db
+	${app_console} doctrine:fixtures:load -n
+```
+
 # References
 
 - https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
@@ -372,3 +386,4 @@ make requirement-check
 [Docker Hub]: https://hub.docker.com/
 [Kubernetes]: https://kubernetes.io/
 [Kompose]: https://kompose.io/
+[DoctrineBundle]: https://symfony.com/doc/current/bundles/DoctrineBundle/index.html
