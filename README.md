@@ -44,6 +44,9 @@ symfony open:local
 ### Using [Docker][appsrv:docker]
 
 ```bash
+echo 'DATABASE_URL=mysql://app:pass@db/app' >> .env.dev.local
+echo 'ELASTICSEARCH_HOST=elasticsearch' >> .env.dev.local
+
 make build start install db-fixtures api-sync
 
 # open https://localhost:8443
