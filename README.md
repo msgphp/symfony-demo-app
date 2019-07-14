@@ -59,11 +59,11 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md)
 
 # Screenshots
 
-![image](https://user-images.githubusercontent.com/1047696/45264235-c79eaa80-b439-11e8-87b2-4e3551bdee09.png) | ![image](https://user-images.githubusercontent.com/1047696/45264184-c9b43980-b438-11e8-97e8-55b5150c7b6b.png)
+`v1.x` | 08-2018
 --- | ---
-![image](https://user-images.githubusercontent.com/1047696/45264192-ea7c8f00-b438-11e8-9aa3-9bf490c4f2d1.png) | ![image](https://user-images.githubusercontent.com/1047696/45264197-0b44e480-b439-11e8-83c3-45753ef79dbc.png)
---- | ---
-![image](https://user-images.githubusercontent.com/1047696/45264216-62e35000-b439-11e8-9c04-f835f46a857b.png) |
+![screen:login] | ![screen:profile]
+![screen:api] | ![screen:cli]
+![screen:uml] |
 
 # Blog Posts
 
@@ -88,3 +88,8 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md)
 [`HWIOAuthBundle`]: https://github.com/hwi/HWIOAuthBundle
 [`LexikJWTAuthenticationBundle`]: https://github.com/lexik/LexikJWTAuthenticationBundle
 [`ApiPlatformBundle`]: https://github.com/api-platform/api-platform
+[screen:login]: https://user-images.githubusercontent.com/1047696/45264235-c79eaa80-b439-11e8-87b2-4e3551bdee09.png
+[screen:profile]: https://user-images.githubusercontent.com/1047696/45264184-c9b43980-b438-11e8-97e8-55b5150c7b6b.png
+[screen:api]: https://user-images.githubusercontent.com/1047696/45264192-ea7c8f00-b438-11e8-9aa3-9bf490c4f2d1.png
+[screen:cli]: https://user-images.githubusercontent.com/1047696/45264197-0b44e480-b439-11e8-83c3-45753ef79dbc.png
+[screen:uml]: https://user-images.githubusercontent.com/1047696/45264216-62e35000-b439-11e8-9c04-f835f46a857b.png
