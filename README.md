@@ -5,7 +5,7 @@ A message driven Symfony demo application with basic user management, a REST/Gra
 [![Build status][travis:img]][travis]
 [![Latest Stable Version][packagist:img]][packagist]
 
-> [MsgPHP] is a project that aims to provide reusable domain layers for your application. It has a low development time
+> MsgPHP is a project that aims to provide reusable domain layers for your application. It has a low development time
 overhead and avoids being overly opinionated.
 
 # Enabled Bundles
@@ -76,7 +76,6 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md)
 - [Decoupling the User entity with a new Symfony User Bundle](https://medium.com/@ro0NL/decoupling-the-user-entity-with-a-new-symfony-user-bundle-7d2d5d85bdf9)
 - [Building a new Symfony User Bundle](https://medium.com/@ro0NL/building-a-new-symfony-user-bundle-b4fe5a9d9d80)
 
-[MsgPHP]: https://msgphp.github.io/
 [travis]: https://travis-ci.org/msgphp/symfony-demo-app
 [travis:img]: https://img.shields.io/travis/msgphp/symfony-demo-app/master.svg?style=flat-square
 [packagist]: https://packagist.org/packages/msgphp/symfony-demo-app
