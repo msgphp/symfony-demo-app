@@ -1,6 +1,6 @@
 # Symfony Demo Application
 
-A message driven Symfony demo application with basic user management, a REST/GraphQL API and OAuth/JWT authentication.
+A Symfony demo application with basic user management, a REST/GraphQL API and OAuth/JWT authentication.
 
 [![Build status][travis:img]][travis]
 [![Latest Stable Version][packagist:img]][packagist]
