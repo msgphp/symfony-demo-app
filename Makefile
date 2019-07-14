@@ -92,10 +92,10 @@ clean:
 smoke-test: clean install phpunit cs psalm
 link: install
 	if [ ! -d var/msgphp-src/.git ]; then git clone -o upstream git@github.com:msgphp/msgphp.git var/msgphp-src; fi
-	${qa} composer install --working-dir=var/msgphp-src
-	${qa} composer link --working-dir=var/msgphp-src ../..
+	${app} composer install --working-dir=var/msgphp-src
+	${app} composer link --working-dir=var/msgphp-src ../..
 	if [ ! -d var/symfony-src/.git ]; then git clone -o upstream git@github.com:symfony/symfony.git var/symfony-src; fi
-	${qa} var/symfony-src/link .
+	${app} var/symfony-src/link .
 exec:
 	echo "${exec}"
 run:
