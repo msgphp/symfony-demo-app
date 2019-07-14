@@ -352,10 +352,6 @@ After any build it might be considered to verify if Symfony requirements are (st
 make requirement-check
 ```
 
-# Contributing
-
-See [`CONTRIBUTING.md`](CONTRIBUTING.md)
-
 # References
 
 - https://docs.docker.com/develop/develop-images/dockerfile_best-practices/

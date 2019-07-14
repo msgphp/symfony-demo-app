@@ -28,10 +28,6 @@ shell:
 mysql:
 	${exec} $${SERVICE:-db} sh -c "mysql -u \$${MYSQL_USER} -p\$${MYSQL_PASSWORD} \$${MYSQL_DATABASE}"
 
-# contributing
-smoke-test:
-	echo "todo"
-
 # containers
 start:
 	${dc} up --no-build -d
