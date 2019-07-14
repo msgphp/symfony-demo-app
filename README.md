@@ -310,9 +310,6 @@ Start a MySQL client using:
 
 ```bash
 make mysql
-
-# enter test database
-SERVICE=db-test make mysql
 ```
 
 # Miscellaneous

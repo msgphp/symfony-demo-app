@@ -61,7 +61,7 @@ mv -f ${tmp_dir}/* . && cp -Rf "${tmp_dir}/." . && \
 rm -rf "${tmp_dir}" && \
 
 echo "DATABASE_URL=mysql://${MYSQL_USER:?}:${MYSQL_PASSWORD:?}@db/${MYSQL_DATABASE:?}" >> .env.dev.local && \
-echo "DATABASE_URL=mysql://${MYSQL_USER:?}:${MYSQL_PASSWORD:?}@db-test/${MYSQL_DATABASE:?}" >> .env.test.local &&\
+echo 'DATABASE_URL=sqlite:///:memory:' >> .env.test &&\
 
 echo 'Initial source files created ...'
 
