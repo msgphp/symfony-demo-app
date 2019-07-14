@@ -1,0 +1,48 @@
+ARG image_archive
+ARG image_php
+ARG image_phpqa
+ARG image_nginx
+
+# --- STAGE mixins
+
+FROM ${image_archive} AS archive
+FROM ${image_phpqa} AS phpqa
+
+# --- STAGE app domain
+
+FROM ${image_php} AS app-base
+
+COPY --from=archive /archive.tgz /
+
+WORKDIR /app
+
+RUN tar --no-same-owner --no-same-permissions -zxf /archive.tgz -C .; rm -f /archive.tgz
+
+ARG staging_env
+
+RUN if [ "${staging_env}" != 'dev' ] && [ -f composer.json ]; then \
+		set -eux; \
+		composer install --prefer-dist --no-progress --no-interaction --no-suggest --classmap-authoritative; \
+		composer clear-cache; \
+	fi
+
+FROM app-base AS app-dev
+
+COPY --from=phpqa /tools/php-cs-fixer /tools/
+COPY --from=phpqa /tools/psalm /tools/
+ENV PATH "${PATH}:/tools"
+
+FROM app-dev AS app-test
+
+FROM app-base AS app-accept
+
+FROM app-accept AS app-prod
+
+# --- STAGE web domain
+
+FROM ${image_nginx} AS web
+
+COPY nginx/conf.d/default.conf /etc/nginx/conf.d/
+COPY --from=app-base /app /app
+
+WORKDIR /app

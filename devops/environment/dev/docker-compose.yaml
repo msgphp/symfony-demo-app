@@ -1,0 +1,66 @@
+version: '3.7'
+
+# infrastructure
+x-dev: &dev
+  context: "${APP_DIR:?}/devops/environment/dev"
+  args:
+    image_nginx: "${IMAGE_NGINX:?}"
+
+# domain
+x-web: &web
+  volumes:
+    - "${APP_DIR:?}/public:/app/public:ro"
+
+x-db: &db
+  image: "${IMAGE_MYSQL:?}"
+  environment:
+    - "MYSQL_DATABASE=${MYSQL_DATABASE:?}"
+    - "MYSQL_USER=${MYSQL_USER:?}"
+    - "MYSQL_PASSWORD=${MYSQL_PASSWORD:?}"
+    - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:?}"
+
+# application
+services:
+  app:
+    depends_on: [db, db-test]
+    volumes:
+      - "${APP_DIR:?}:/app:rw"
+      - ./mailhog/mhsendmail_linux_amd64:/usr/local/bin/mhsendmail:ro
+      - "./php/conf.d/application.ini:/usr/local/etc/php/conf.d/application.ini:ro"
+
+  web:
+    <<: *web
+    ports:
+      - "${NGINX_PORT:?}:80"
+  web-ssl:
+    <<: *web
+    build:
+      <<: *dev
+      target: web-ssl
+    depends_on: [web]
+    ports:
+      - "${NGINX_PORT_SSL:?}:443"
+
+  db:
+    <<: *db
+    ports:
+      - "${MYSQL_PORT:?}:3306"
+    volumes:
+      - ./mysql/conf.d/my.cnf:/etc/mysql/conf.d/my.cnf:ro
+      - db-data:/var/lib/mysql:rw
+  db-test:
+    <<: *db
+    ports:
+      - "${MYSQL_PORT_TEST:?}:3306"
+    volumes:
+      - ./mysql/conf.d/my.cnf:/etc/mysql/conf.d/my.cnf:ro
+      - db-test-data:/var/lib/mysql:rw
+
+  mail:
+    image: "${IMAGE_MAILHOG:?}"
+    ports:
+      - "${MAILHOG_PORT:?}:8025"
+
+volumes:
+  db-data: {}
+  db-test-data: {}

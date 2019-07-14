@@ -1,51 +1,77 @@
-ifndef PHP
-	PHP=7.2
-endif
-ifndef PHPUNIT
-	PHPUNIT=7.5
+ifndef STAGING_ENV
+	STAGING_ENV=dev
 endif
 
-qa_image=jakzal/phpqa:php${PHP}-alpine
+app_dir=$(shell pwd)
+project=$(shell basename ${app_dir})_${STAGING_ENV}
 composer_args=--prefer-dist --no-progress --no-interaction --no-suggest
 
 dockerized=docker run --init -it --rm \
 	-u $(shell id -u):$(shell id -g) \
 	-v $(shell pwd):/app \
 	-w /app
-qa=${dockerized} \
-	-e COMPOSER_CACHE_DIR=/app/var/composer \
-	${qa_image}
+dc=COMPOSE_PROJECT_NAME=${project} APP_DIR=${app_dir} STAGING_ENV=${STAGING_ENV} \
+	docker-compose \
+	-f devops/environment/base/docker-compose.yaml \
+	-f devops/environment/${STAGING_ENV}/docker-compose.yaml \
+	--project-directory devops/environment/${STAGING_ENV}
+exec=${dc} exec -u $(shell id -u):$(shell id -g)
+app=${exec} app
+app_console=${app} bin/console
+composer=${app} composer
 
-# deps
+# application
 install:
-	${qa} composer install ${composer_args}
+	${composer} install ${composer_args}
+	${app_console} doctrine:database:create --if-not-exists
+	${app_console} doctrine:schema:update --force
+	#${app_console} projection:initialize-types --force
+	#${app_console} projection:synchronize
 update:
-	${qa} composer update ${composer_args}
+	${composer} update ${composer_args}
+update-recipes:
+	${composer} symfony:sync-recipes --force
+shell:
+	${exec} $${SERVICE:-app} sh
+mysql:
+	${exec} $${SERVICE:-db} sh -c "mysql -u \$${MYSQL_USER} -p\$${MYSQL_PASSWORD} \$${MYSQL_DATABASE}"
+
+# containers
+start:
+	${dc} up --no-build -d
+restart:
+	${dc} restart
+refresh: build start install
+stop:
+	${dc} stop
+quit:
+	${dc} down --remove-orphans
+
+# images
+setup:
+	devops/bin/setup.sh "${STAGING_ENV}" "${app_dir}" "${project}"
+build: setup quit
+	${dc} build --parallel --force-rm --build-arg staging_env=${STAGING_ENV} 1>/dev/null
 
 # tests
 phpunit:
-	${qa} bin/phpunit
+	${app} bin/phpunit
 
 # code style
 cs:
-	${qa} php-cs-fixer fix --dry-run --verbose --diff
+	${app} php-cs-fixer fix --dry-run --verbose --diff
 cs-fix:
-	${qa} php-cs-fixer fix
+	${app} php-cs-fixer fix
 
 # static analysis
 psalm: install
-	${qa} psalm --show-info=false
+	${app} psalm --show-info=false
 psalm-info: install
-	${qa} psalm --show-info=true
+	${app} psalm --show-info=true
 
 # linting
 lint-yaml:
 	${dockerized} sdesbure/yamllint yamllint .yamllint .*.yml config/
-
-# phpqa
-qa-update:
-	docker rmi -f ${qa_image}
-	docker pull ${qa_image}
 
 # devops
 devops-init:
@@ -57,14 +83,26 @@ devops-merge:
 # misc
 clean:
 	git clean -dxf var/
-smoke-test: clean update phpunit cs psalm
-shell:
-	${qa} /bin/sh
-composer-normalize: install
-	${qa} composer normalize
+smoke-test: clean install phpunit cs psalm
 link: install
 	if [ ! -d var/msgphp-src/.git ]; then git clone -o upstream git@github.com:msgphp/msgphp.git var/msgphp-src; fi
 	${qa} composer install --working-dir=var/msgphp-src
 	${qa} composer link --working-dir=var/msgphp-src ../..
 	if [ ! -d var/symfony-src/.git ]; then git clone -o upstream git@github.com:symfony/symfony.git var/symfony-src; fi
 	${qa} var/symfony-src/link .
+exec:
+	echo "${exec}"
+run:
+	echo "${dc} run --rm"
+requirement-check:
+	${composer} require symfony/requirements-checker ${composer_args} --no-scripts -q
+	${app} vendor/bin/requirements-checker
+	${composer} remove symfony/requirements-checker -q
+
+# debug
+composed-config:
+	${dc} config
+composed-images:
+	${dc} images
+log:
+	${dc} logs -f

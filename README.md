@@ -27,21 +27,33 @@ A message driven Symfony demo application with basic user management, a REST/Gra
 # Try it Yourself
 
 ```bash
-composer create-project msgphp/symfony-demo-app && cd symfony-demo-app/
+composer create-project msgphp/symfony-demo-app
+cd symfony-demo-app/
+```
 
-# using built in web server / mysql
-#   make sure elasticsearch is running, and change the ELASTICSEARCH_HOST in .env (or .env.local)
-#   ELASTICSEARCH_HOST=localhost:9200 
-bin/reinstall
-bin/console server:run
+### Using [Symfony CLI][appsrv:sf]
 
-# using Lando
-# see https://docs.devwithlando.io
-lando start
-lando ssh -c bin/reinstall
+```bash
+# Database and Elasticsearch must be running
+# Change DATABASE_URL and ELASTICSEARCH_HOST in .env.local, if needed
 
-# using Docker
-# not available yet; see https://github.com/msgphp/symfony-demo-app/issues/107
+bin/console doctrine:database:create --if-not-exists
+bin/console doctrine:schema:update --force
+bin/console doctrine:fixtures:load -n
+
+bin/console projection:initialize-types --force
+bin/console projection:synchronize
+
+symfony server:start
+symfony open:local
+``` 
+
+### Using [Docker][appsrv:docker]
+
+```bash
+make build start
+
+# open https://localhost:8443
 ```
 
 # Documentation
@@ -87,3 +99,5 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md)
 [travis:img]: https://img.shields.io/travis/msgphp/symfony-demo-app/master.svg?style=flat-square
 [packagist]: https://packagist.org/packages/msgphp/symfony-demo-app
 [packagist:img]: https://img.shields.io/packagist/v/msgphp/symfony-demo-app.svg?style=flat-square
+[appsrv:sf]: https://symfony.com/doc/current/setup/symfony_server.html
+[appsrv:docker]: https://github.com/ro0NL/symfony-docker
