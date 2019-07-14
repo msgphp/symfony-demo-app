@@ -357,12 +357,12 @@ make requirement-check
 A set of make targets for usage with [DoctrineBundle].
 
 ```bash
-migrate-db:
+db-migrate:
 	${app_console} doctrine:database:create --if-not-exists
 	${app_console} doctrine:migrations:migrate --allow-no-migration -n
-sync-db: migrate-db
+db-sync: db-migrate
 	${app_console} doctrine:schema:update --force
-load-fixtures: sync-db
+db-fixtures: db-sync
 	${app_console} doctrine:fixtures:load -n
 ```
 
