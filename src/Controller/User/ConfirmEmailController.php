@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller\User;
 
-use App\Entity\User\User;
-use App\Entity\User\UserEmail;
+use App\Entity\User;
+use App\Entity\UserEmail;
 use App\Http\Responder;
 use App\Http\RespondRouteRedirect;
 use MsgPhp\User\Command\ConfirmUserEmail;

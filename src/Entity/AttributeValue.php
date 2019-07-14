@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Entity\Eav;
+namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use MsgPhp\Eav\AttributeValue as BaseAttributeValue;

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Api\Projection\Document;
 
-use App\Entity\User\User;
+use App\Entity\User;
 use MsgPhp\Domain\Projection\ProjectionDocument;
 use MsgPhp\Domain\Projection\ProjectionDocumentTransformer;
 use Psr\Container\ContainerInterface;

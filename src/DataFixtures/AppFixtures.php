@@ -4,31 +4,31 @@ declare(strict_types=1);
 
 namespace App\DataFixtures;
 
-use App\Entity\Eav\Attribute;
-use App\Entity\Eav\AttributeValue;
-use App\Entity\User\PremiumUser;
-use App\Entity\User\Role;
-use App\Entity\User\User;
-use App\Entity\User\UserAttributeValue;
-use App\Entity\User\UserEmail;
-use App\Entity\User\UserRole;
+use App\Entity\Attribute;
+use App\Entity\AttributeValue;
+use App\Entity\PremiumUser;
+use App\Entity\Role;
+use App\Entity\User;
+use App\Entity\UserAttributeValue;
+use App\Entity\UserEmail;
+use App\Entity\UserRole;
 use App\Security\RoleProvider;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 use MsgPhp\Eav\Infrastructure\Uuid\AttributeUuid;
 use MsgPhp\Eav\Infrastructure\Uuid\AttributeValueUuid;
 use MsgPhp\User\Infrastructure\Uuid\UserUuid;
-use MsgPhp\User\Password\PasswordHashing;
+use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
 final class AppFixtures extends Fixture
 {
     private const PASSWORD = 'pass';
 
-    private $passwordHashing;
+    private $passwordEncoder;
 
-    public function __construct(PasswordHashing $passwordHashing)
+    public function __construct(PasswordEncoderInterface $passwordEncoder)
     {
-        $this->passwordHashing = $passwordHashing;
+        $this->passwordEncoder = $passwordEncoder;
     }
 
     public function load(ObjectManager $manager): void
@@ -90,7 +90,7 @@ final class AppFixtures extends Fixture
 
     private function createUser(string $email, bool $premium = false, string $password = self::PASSWORD): User
     {
-        $password = $this->passwordHashing->hash($password);
+        $password = $this->passwordEncoder->encodePassword($password, '');
 
         if ($premium) {
             return new PremiumUser(new UserUuid(), $email, $password);

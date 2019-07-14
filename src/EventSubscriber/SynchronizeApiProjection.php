@@ -32,7 +32,7 @@ final class SynchronizeApiProjection implements MessageSubscriberInterface
             return;
         }
 
-        if ($event instanceof UserCredentialChanged && $event->oldCredential->getUsername() !== $event->newCredential->getUsername()) {
+        if ($event instanceof UserCredentialChanged && $event->oldCredential->getUsername() !== $event->user->getCredential()->getUsername()) {
             // @todo could be partial update
             $this->notifySave($event->user);
 

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
-use App\Entity\User\User;
+use App\Entity\User;
 use MsgPhp\User\Event\UserPasswordRequested;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
 use Twig\Environment;

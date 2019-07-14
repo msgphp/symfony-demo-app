@@ -51,7 +51,7 @@ symfony open:local
 ### Using [Docker][appsrv:docker]
 
 ```bash
-make build start
+make build start install db-fixtures api-sync
 
 # open https://localhost:8443
 ```

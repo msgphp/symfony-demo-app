@@ -6,7 +6,7 @@ namespace App\Api\Projection\Document\Transformer;
 
 use App\Api\Projection\Document\DocumentIdentity;
 use App\Api\Projection\UserProjection;
-use App\Entity\User\User;
+use App\Entity\User;
 use MsgPhp\Domain\Projection\ProjectionDocument;
 
 final class UserDocumentTransformer

@@ -57,7 +57,7 @@ final class PasswordConfirmation
             : $request->headers->get('referer');
 
         $form = $this->formFactory->createNamedBuilder($hash)
-            ->add('currentPassword', HashedPasswordType::class, [
+            ->add('password', HashedPasswordType::class, [
                 'password_options' => ['constraints' => new UserPassword()],
             ])
             ->add('referer', HiddenType::class, [
