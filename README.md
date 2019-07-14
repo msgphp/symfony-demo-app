@@ -8,7 +8,7 @@ A message driven Symfony demo application with basic user management, a REST/Gra
 > MsgPHP is a project that aims to provide reusable domain layers for your application. It has a low development time
 overhead and avoids being overly opinionated.
 
-# Enabled Bundles
+## Enabled Bundles
 
 Concern  | Bundles
 ---      | ---
@@ -17,7 +17,7 @@ ORM      | [`DoctrineBundle`]
 Security | [`SecurityBundle`], [`HWIOAuthBundle`], [`LexikJWTAuthenticationBundle`]
 Web API  | [`ApiPlatformBundle`]
 
-# Try it Yourself
+## Try it Yourself
 
 ```bash
 composer create-project msgphp/symfony-demo-app
