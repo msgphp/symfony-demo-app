@@ -2,7 +2,7 @@
     "name": "msgphp/symfony-demo-app",
     "type": "project",
     "license": "MIT",
-    "description": "A message driven Symfony demo application with basic user management, a REST/GraphQL API and OAuth/JWT authentication.",
+    "description": "A Symfony demo application with basic user management, a REST/GraphQL API and OAuth/JWT authentication.",
     "require": {
         "api-platform/api-pack": "^1.2",
         "elasticsearch/elasticsearch": "^6.7",
