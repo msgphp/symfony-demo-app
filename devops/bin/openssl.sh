@@ -14,4 +14,4 @@ EOF
     openssl="docker run --rm -v \$(pwd):/secrets -u $(id -u):$(id -g) $(whoami)/openssl"
 fi
 
-sh -c "${openssl} ${*}" 2>&1
+${openssl} ${@}

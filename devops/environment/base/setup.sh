@@ -17,3 +17,16 @@ docker build --force-rm -q \
     --tag "${project}/php" \
     "${app_dir}/devops/docker/php" \
 ;
+
+cd files
+
+case "${staging_env}" in
+    dev)
+        if [ ! -f mhsendmail ]; then
+            curl -sS -o mhsendmail --fail -L https://github.com/mailhog/mhsendmail/releases/download/v0.2.0/mhsendmail_linux_amd64
+            [ $? -ne 0 ] && cd - && exit 1
+        fi
+        ;;
+esac
+
+cd - >/dev/null

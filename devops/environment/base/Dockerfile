@@ -33,6 +33,9 @@ COPY --from=phpqa /tools/psalm /tools/
 COPY --from=phpqa /tools/security-checker /tools/
 ENV PATH "${PATH}:/tools"
 
+COPY files/mhsendmail /usr/local/bin/
+RUN chmod +x /usr/local/bin/mhsendmail
+
 FROM app-dev AS app-test
 
 FROM app-base AS app-accept
