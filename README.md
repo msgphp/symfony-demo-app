@@ -81,8 +81,8 @@ See [`CONTRIBUTING.md`](CONTRIBUTING.md)
 - [Decoupling the User entity with a new Symfony User Bundle](https://medium.com/@ro0NL/decoupling-the-user-entity-with-a-new-symfony-user-bundle-7d2d5d85bdf9)
 - [Building a new Symfony User Bundle](https://medium.com/@ro0NL/building-a-new-symfony-user-bundle-b4fe5a9d9d80)
 
-[travis]: https://travis-ci.org/msgphp/symfony-demo-app
-[travis:img]: https://img.shields.io/travis/msgphp/symfony-demo-app/master.svg?style=flat-square
+[travis]: https://travis-ci.com/msgphp/symfony-demo-app
+[travis:img]: https://img.shields.io/travis/com/msgphp/symfony-demo-app/master.svg?style=flat-square
 [packagist]: https://packagist.org/packages/msgphp/symfony-demo-app
 [packagist:img]: https://img.shields.io/packagist/v/msgphp/symfony-demo-app.svg?style=flat-square
 [appsrv:sf]: https://symfony.com/doc/current/setup/symfony_server.html
