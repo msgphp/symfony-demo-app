@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 
 openssl="${APP_DIR:?}/devops/bin/openssl.sh"
+
 cd secrets
 
 if [ ! -f nginx.key ] || [ ! -f nginx.crt ]; then
