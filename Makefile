@@ -43,7 +43,7 @@ quit:
 setup:
 	devops/bin/setup.sh "${STAGING_ENV}" "${app_dir}" "${project}"
 build: setup quit
-	${dc} build --parallel --force-rm --build-arg staging_env=${STAGING_ENV} 1>/dev/null
+	${dc} build --parallel --force-rm --build-arg staging_env=${STAGING_ENV}
 
 # devops
 devops-init:
