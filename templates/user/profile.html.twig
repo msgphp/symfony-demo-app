@@ -16,7 +16,7 @@
             <li>
                 Linked  accounts:
                 <ul>
-                    {% for attributeValue in user.attributeValues if attributeValue.attributeId.toString in oauth_resources|keys %}
+                    {% for attributeValue in user.attributeValues|filter(av => av.attributeId.toString in oauth_resources|keys) %}
                         {% set resource, id = oauth_resources[attributeValue.attributeId.toString], attributeValue.value %}
                         <li>{{ resource }}: <code>{{ id }}</code></li>
                     {% else %}
