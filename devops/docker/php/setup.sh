@@ -1,10 +1,12 @@
 #!/usr/bin/env sh
 
-version=${ICU:?}
+icu=${ICU:?}
 
-if [ ! -f "icu/src-${version}.tgz" ]; then
-    curl -sS -o "icu/src-${version}.tgz" --fail -L "http://download.icu-project.org/files/icu4c/${version}/icu4c-$(echo ${version} | tr '.' '_')-src.tgz"
-    [ $? -ne 0 ] && exit 1
+cd files
+
+if [ ! -f "icu-${icu}.tgz" ]; then
+    curl -sS -o "icu-${icu}.tgz" --fail -L "http://download.icu-project.org/files/icu4c/${icu}/icu4c-$(echo ${icu} | tr '.' '_')-src.tgz"
+    [ $? -ne 0 ] && cd - && exit 1
 fi
 
-exit 0
+cd - >/dev/null

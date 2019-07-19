@@ -8,9 +8,13 @@ hash=$(${git} rev-parse --verify -q --short HEAD)
 [ "$(${git} status --porcelain)" ] && echo 'WARNING: local changes are EXCLUDED in archive!' >&2
 [ ! "$(${git} branch -r --contains "${hash}")" ] && echo 'WARNING: un-pushed commits are INCLUDED in archive!' >&2
 
-if [ ! -f "dist/sha/${hash}.tgz" ]; then
-    mkdir -p dist/sha && ${git} archive --output "$(pwd)/dist/sha/${hash}.tgz" --format tgz "${hash}"
+cd dist
+
+if [ ! -f "sha/${hash}.tgz" ]; then
+    mkdir -p sha && ${git} archive --output "$(pwd)/sha/${hash}.tgz" --format tgz "${hash}"
     [ $? -ne 0 ] && exit 1
 fi
 
-ln -sf "sha/${hash}.tgz" "dist/${staging_env}-current.tgz"
+ln -sf "sha/${hash}.tgz" "${staging_env}-current.tgz"
+
+cd - >/dev/null

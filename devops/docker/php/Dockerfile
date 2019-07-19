@@ -9,7 +9,7 @@ RUN apk add --no-cache \
 	;
 
 ARG icu
-COPY icu/src-${icu}.tgz /tmp/icu.tgz
+COPY files/icu-${icu}.tgz /tmp/icu.tgz
 
 RUN set -eux; \
 	apk add --no-cache --virtual .build-deps \
