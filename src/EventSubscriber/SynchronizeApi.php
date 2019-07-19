@@ -4,24 +4,27 @@ declare(strict_types=1);
 
 namespace App\EventSubscriber;
 
-use App\Api\Projection\Document\DocumentTransformer;
-use MsgPhp\Domain\Projection\Command\DeleteProjectionDocument;
-use MsgPhp\Domain\Projection\Command\SaveProjectionDocument;
+use App\Api\DocumentIdentity;
+use MsgPhp\Domain\DomainId;
+use MsgPhp\Domain\Projection\Command\DeleteProjection;
+use MsgPhp\Domain\Projection\Command\SaveProjection;
 use MsgPhp\User\Event\UserCreated;
 use MsgPhp\User\Event\UserCredentialChanged;
 use MsgPhp\User\Event\UserDeleted;
 use Symfony\Component\Messenger\Handler\MessageSubscriberInterface;
 use Symfony\Component\Messenger\MessageBusInterface;
 
-final class SynchronizeApiProjection implements MessageSubscriberInterface
+final class SynchronizeApi implements MessageSubscriberInterface
 {
     private $bus;
     private $documentTransformer;
+    private $documentTypeResolver;
 
-    public function __construct(MessageBusInterface $bus, DocumentTransformer $documentTransformer)
+    public function __construct(MessageBusInterface $bus, callable $documentTransformer, callable $documentTypeResolver)
     {
         $this->bus = $bus;
         $this->documentTransformer = $documentTransformer;
+        $this->documentTypeResolver = $documentTypeResolver;
     }
 
     public function __invoke($event): void
@@ -40,7 +43,7 @@ final class SynchronizeApiProjection implements MessageSubscriberInterface
         }
 
         if ($event instanceof UserDeleted) {
-            $this->notifyDelete($event->user);
+            $this->notifyDelete($event->user, $event->user->getId());
 
             return;
         }
@@ -55,15 +58,13 @@ final class SynchronizeApiProjection implements MessageSubscriberInterface
         ];
     }
 
-    public function notifySave($object): void
+    private function notifySave(object $object): void
     {
-        $this->bus->dispatch(new SaveProjectionDocument($this->documentTransformer->transform($object)));
+        $this->bus->dispatch(new SaveProjection(($this->documentTypeResolver)($object), ($this->documentTransformer)($object)));
     }
 
-    public function notifyDelete($object): void
+    private function notifyDelete(object $object, DomainId $id): void
     {
-        $document = $this->documentTransformer->transform($object);
-
-        $this->bus->dispatch(new DeleteProjectionDocument($document->getType(), $document->getId()));
+        $this->bus->dispatch(new DeleteProjection(($this->documentTypeResolver)($object), DocumentIdentity::get($id)));
     }
 }

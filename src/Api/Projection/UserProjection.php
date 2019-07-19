@@ -6,8 +6,6 @@ namespace App\Api\Projection;
 
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
-use MsgPhp\Domain\Infrastructure\Elasticsearch\DocumentMappingProvider;
-use MsgPhp\Domain\Projection\Projection;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -29,7 +27,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     denormalizationContext={"groups"={"user:write"}},
  * )
  */
-class UserProjection implements Projection, DocumentMappingProvider
+class UserProjection
 {
     /**
      * @var string Globally unique resource identifier
@@ -55,26 +53,4 @@ class UserProjection implements Projection, DocumentMappingProvider
      * @Groups({"user:write"})
      */
     public $password;
-
-    /**
-     * @return static
-     */
-    public static function fromDocument(array $document): Projection
-    {
-        $projection = new static();
-        $projection->id = $document['id'] ?? null;
-        $projection->userId = $document['user_id'] ?? null;
-        $projection->email = $document['email'] ?? null;
-
-        return $projection;
-    }
-
-    public static function provideDocumentMappings(): iterable
-    {
-        yield static::class => [
-            'id' => 'text',
-            'user_id' => 'text',
-            'email' => 'text',
-        ];
-    }
 }

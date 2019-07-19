@@ -32,10 +32,12 @@ final class ForgotPasswordController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            /** @var User $user */
-            $user = $data['user'];
 
-            $bus->dispatch(new RequestUserPassword($user->getId()));
+            if (isset($data['user'])) {
+                /** @var User $user */
+                $user = $data['user'];
+                $bus->dispatch(new RequestUserPassword($user->getId()));
+            }
 
             return $responder->respond((new RespondRouteRedirect('home'))->withFlashes([
                 'success' => sprintf('Hi %s, we\'ve send you a password reset link.', $data['email']),

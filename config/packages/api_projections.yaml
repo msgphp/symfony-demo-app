@@ -1,56 +1,65 @@
 parameters:
-    projection_types:
-        - App\Api\Projection\UserProjection
-    env(ELASTICSEARCH_PROJECTION_INDEX): 'projections_%kernel.environment%'
+    api_projections.index_prefix: 'api_%kernel.environment%-'
+    api_projections.class_lookup:
+        App\Entity\User: user
+    api_projections.mappings:
+        user:
+            id: keyword
+            user_id: text
+            email: text
+    # https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-create-index.html#create-index-settings
+    api_projections.settings:
+        '*': {}
+        user: {}
 
 services:
     _defaults:
         autowire: true
         autoconfigure: true
         public: false
-        bind:
-            '$index': '%env(ELASTICSEARCH_PROJECTION_INDEX)%'
-            '$dataProviders':
-                - ['@MsgPhp\User\Repository\UserRepository', findAll]
-            '$documentProvider': '@MsgPhp\Domain\Projection\ProjectionDocumentProvider'
 
-    # Document identity
-    App\Api\Projection\Document\DocumentIdentity: ~
-
-    # Document transformer
-    App\Api\Projection\Document\Transformer\:
-        resource: '../../src/Api/Projection/Document/Transformer'
-    App\Api\Projection\Document\DocumentTransformer:
-        tags: [container.service_subscriber]
-    MsgPhp\Domain\Projection\ProjectionDocumentTransformer: '@App\Api\Projection\Document\DocumentTransformer'
-
-    # Document provider
-    MsgPhp\Domain\Projection\ProjectionDocumentProvider: ~
-
-    # Repository
-    MsgPhp\Domain\Infrastructure\Elasticsearch\ProjectionRepository: ~
-    MsgPhp\Domain\Projection\ProjectionRepository: '@MsgPhp\Domain\Infrastructure\Elasticsearch\ProjectionRepository'
+    # Type resolver
+    MsgPhp\Domain\Projection\ProjectionTypeResolver:
+        arguments:
+            '$classLookup': '%api_projections.class_lookup%'
 
     # Type registry
     MsgPhp\Domain\Infrastructure\Elasticsearch\ProjectionTypeRegistry:
         arguments:
-            '$mappings': '%projection_types%'
+            '$prefix': '%api_projections.index_prefix%'
+            '$mappings': '%api_projections.mappings%'
+            '$settings': '%api_projections.settings%'
     MsgPhp\Domain\Projection\ProjectionTypeRegistry: '@MsgPhp\Domain\Infrastructure\Elasticsearch\ProjectionTypeRegistry'
 
+    # Document transformer
+    MsgPhp\Domain\Infrastructure\Serializer\ProjectionDocumentTransformer: ~
+
+    # Document provider
+    MsgPhp\Domain\Projection\ProjectionDocumentProvider:
+        arguments:
+            '$dataProviders':
+                - ['@MsgPhp\User\Repository\UserRepository', findAll]
+            '$transformer': '@MsgPhp\Domain\Infrastructure\Serializer\ProjectionDocumentTransformer'
+            '$typeResolver': '@MsgPhp\Domain\Projection\ProjectionTypeResolver'
+
+    # Repository
+    MsgPhp\Domain\Infrastructure\Elasticsearch\ProjectionRepository:
+        arguments:
+            '$prefix': '%api_projections.index_prefix%'
+    MsgPhp\Domain\Projection\ProjectionRepository: '@MsgPhp\Domain\Infrastructure\Elasticsearch\ProjectionRepository'
+
     # Synchronization
-    MsgPhp\Domain\Projection\ProjectionSynchronization: ~
+    MsgPhp\Domain\Projection\ProjectionSynchronization:
+        arguments:
+            '$documentProvider': '@MsgPhp\Domain\Projection\ProjectionDocumentProvider'
 
     # Console
-    MsgPhp\Domain\Infrastructure\Console\Command\InitializeProjectionTypesCommand: ~
     MsgPhp\Domain\Infrastructure\Console\Command\SynchronizeProjectionsCommand: ~
 
-    # API Platform
-    MsgPhp\Domain\Infrastructure\ApiPlatform\ProjectionDataProvider: ~
-
     # Messenger
-    MsgPhp\Domain\Projection\Command\Handler\DeleteProjectionDocumentHandler:
+    MsgPhp\Domain\Projection\Command\Handler\DeleteProjectionHandler:
         tags:
             - { name: messenger.message_handler, bus: command_bus }
-    MsgPhp\Domain\Projection\Command\Handler\SaveProjectionDocumentHandler:
+    MsgPhp\Domain\Projection\Command\Handler\SaveProjectionHandler:
         tags:
             - { name: messenger.message_handler, bus: command_bus }
