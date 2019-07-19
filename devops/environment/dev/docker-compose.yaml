@@ -1,9 +1,6 @@
 version: '3.7'
 
 # domain
-x-web: &web
-  image: "${IMAGE_NGINX:?}"
-
 x-db: &db
   image: "${IMAGE_MYSQL:?}"
   environment:
@@ -21,12 +18,11 @@ services:
       - ./php/conf.d/application.ini:/usr/local/etc/php/conf.d/application.ini:ro
 
   web:
-    <<: *web
     ports: ["${NGINX_PORT:?}:80"]
     volumes:
       - "${APP_DIR:?}/public:/app/public:ro"
   web-ssl:
-    <<: *web
+    image: "${IMAGE_NGINX:?}"
     secrets: [nginx_cert, nginx_key]
     depends_on: [web]
     ports: ["${NGINX_PORT_SSL:?}:443"]
