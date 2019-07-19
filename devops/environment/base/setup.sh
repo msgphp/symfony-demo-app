@@ -30,3 +30,15 @@ case "${staging_env}" in
 esac
 
 cd - >/dev/null
+
+cd "../${staging_env}/secrets"
+openssl="${app_dir}/devops/bin/openssl.sh"
+
+if [ ! -f jwt-private.pem ] || [ ! -f jwt-public.pem ]; then
+    rm -f jwt-private.pem jwt-public.pem && \
+    ${openssl} genpkey -out jwt-private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096 -pass "pass:${JWT_PASSPHRASE:?}" && \
+    ${openssl} pkey -in jwt-private.pem -out jwt-public.pem -pubout -passin "pass:${JWT_PASSPHRASE:?}"
+    [ $? -ne 0 ] && cd - && exit 1
+fi
+
+cd - >/dev/null
