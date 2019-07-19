@@ -11,7 +11,7 @@ WORKDIR /secrets
 ENTRYPOINT ["openssl"]
 EOF
     )
-    openssl="docker run --rm -v $(pwd):/secrets -u $(id -u):$(id -g) $(whoami)/openssl"
+    openssl="docker run --init -it --rm -v $(pwd):/secrets -u $(id -u):$(id -g) $(whoami)/openssl"
 fi
 
 ${openssl} ${@}
