@@ -60,9 +60,12 @@ rm -f public/index.php && \
 mv -f ${tmp_dir}/* . && cp -Rf "${tmp_dir}/." . && \
 rm -rf "${tmp_dir}" && \
 
-echo "DATABASE_URL=mysql://${MYSQL_USER:?}:${MYSQL_PASSWORD:?}@db/${MYSQL_DATABASE:?}" >> .env.dev.local && \
-echo 'TRUSTED_PROXIES=10.0.0.0/8,172.16.0.0/12,192.168.0.0/18' >> .env.dev.local && \
-echo "TRUSTED_HOSTS='^localhost|web$'" >> .env.dev.local && \
+sed -i 's/Request::HEADER_X_FORWARDED_ALL ^ Request::HEADER_X_FORWARDED_HOST/Request::HEADER_X_FORWARDED_ALL/' public/index.php && \
+
+echo "DATABASE_URL=mysql://${MYSQL_USER:?}:${MYSQL_PASSWORD:?}@db/${MYSQL_DATABASE:?}" >> .env.local && \
+echo 'TRUSTED_PROXIES=10.0.0.0/8,172.16.0.0/12,192.168.0.0/18' >> .env.local && \
+echo "TRUSTED_HOSTS='^localhost|web$'" >> .env.local && \
+
 echo 'DATABASE_URL=sqlite:///:memory:' >> .env.test &&\
 
 echo 'Initial source files created ...'

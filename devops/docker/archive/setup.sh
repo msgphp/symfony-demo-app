@@ -12,9 +12,9 @@ cd dist
 
 if [ ! -f "sha/${hash}.tgz" ]; then
     mkdir -p sha && ${git} archive --output "$(pwd)/sha/${hash}.tgz" --format tgz "${hash}"
-    [ $? -ne 0 ] && exit 1
+    [ $? -ne 0 ] && cd - && exit 1
 fi
-
 ln -sf "sha/${hash}.tgz" "${staging_env}-current.tgz"
+[ $? -ne 0 ] && cd - && exit 1
 
 cd - >/dev/null

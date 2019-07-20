@@ -12,6 +12,7 @@ A template for new Symfony applications using Docker.
       * [`devops/docker/`](#devopsdocker)
    * [Host Setup](#host-setup)
       * [Source Archives](#source-archives)
+      * [Secret Management](#secret-management)
    * [Create Application](#create-application)
       * [1. Build Application](#1-build-application)
          * [Tagging Images](#tagging-images)
@@ -43,6 +44,7 @@ sh -c "./install.sh; curl -I http://localhost:8080"
 - Bare Symfony defaults
 - Testing and Quality-Assurance built-in
 - Out-of-the-box production optimized images
+- Built-in secret management
 - Multiple staging environments by design
 - No hosting / release process assumptions
 - Decoupled "devops"
@@ -177,6 +179,10 @@ distributed using a minimal image (e.g `FROM scratch`) and allows application se
 
 Effectively this creates a final application image with source code included (e.g. production/distribution ready). For
 development local volumes are configured.
+
+## Secret Management
+
+TODO
 
 # Create Application
 

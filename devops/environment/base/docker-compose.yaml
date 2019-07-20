@@ -21,3 +21,7 @@ services:
       <<: *base
       target: web
     depends_on: [app]
+
+secrets:
+  json_bucket:
+    file: ./secrets/bucket.json
