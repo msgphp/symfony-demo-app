@@ -15,6 +15,7 @@ services:
     build:
       <<: *base
       target: "app-${STAGING_ENV:?}"
+    secrets: [json_bucket, jwt_private, jwt_public]
 
   web:
     build:
@@ -25,3 +26,7 @@ services:
 secrets:
   json_bucket:
     file: ./secrets/bucket.json
+  jwt_private:
+    file: ./secrets/jwt-private.pem
+  jwt_public:
+    file: ./secrets/jwt-public.pem

@@ -48,7 +48,3 @@ secrets:
     file: ./secrets/nginx.crt
   nginx_key:
     file: ./secrets/nginx.key
-  jwt_private:
-    file: ./secrets/jwt-private.pem
-  jwt_public:
-    file: ./secrets/jwt-public.pem
