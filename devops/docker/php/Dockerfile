@@ -57,9 +57,6 @@ COPY --from=composer /usr/bin/composer /usr/bin/
 COPY composer/composer.json /composer/
 COPY composer/config.json /composer/
 
-COPY docker-entrypoint.sh /usr/local/bin/docker-entrypoint
-RUN chmod +x /usr/local/bin/docker-entrypoint
-
 ARG staging_env
 
 RUN if [ "${staging_env}" = 'dev' ]; then ln -s php.ini-development "${PHP_INI_DIR}/php.ini"; \
@@ -68,6 +65,3 @@ RUN if [ "${staging_env}" = 'dev' ]; then ln -s php.ini-development "${PHP_INI_D
 RUN set -eux; \
 	composer global install --prefer-dist --no-progress --no-interaction --no-suggest --classmap-authoritative; \
 	composer clear-cache
-
-ENTRYPOINT ["docker-entrypoint"]
-CMD ["php-fpm"]

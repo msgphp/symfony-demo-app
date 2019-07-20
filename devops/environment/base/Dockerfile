@@ -14,9 +14,10 @@ FROM ${image_php} AS app-base
 
 COPY --from=archive /archive.tgz /
 
+VOLUME /app/var
 WORKDIR /app
 
-RUN tar --no-same-owner --no-same-permissions -zxf /archive.tgz -C .; rm -f /archive.tgz
+RUN tar -zxf /archive.tgz -C .; rm -f /archive.tgz
 
 ARG staging_env
 
@@ -25,6 +26,10 @@ RUN if [ "${staging_env}" != 'dev' ] && [ -f composer.json ]; then \
 		composer install --prefer-dist --no-progress --no-interaction --no-suggest --classmap-authoritative; \
 		composer clear-cache; \
 	fi
+
+RUN set -eux; \
+	setfacl -dR -m u:www-data:rwX var; \
+	setfacl -dR -m u:www-data:rwX var
 
 FROM app-base AS app-dev
 
