@@ -45,9 +45,7 @@ Using [Docker][appsrv:docker]:
 # assuming composer is not installed on the local machine
 git clone git@github.com:msgphp/symfony-demo-app.git
 cd symfony-demo-app
-
-echo 'DATABASE_URL=mysql://app:pass@db/app' >> .env.dev.local
-echo 'ELASTICSEARCH_HOST=elasticsearch' >> .env.dev.local
+cp .env.local.dist .env.local
 
 make build start install db-fixtures api-sync
 
