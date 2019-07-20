@@ -65,3 +65,8 @@ RUN if [ "${staging_env}" = 'dev' ]; then ln -s php.ini-development "${PHP_INI_D
 RUN set -eux; \
 	composer global install --prefer-dist --no-progress --no-interaction --no-suggest --classmap-authoritative; \
 	composer clear-cache
+
+ARG run_uid
+RUN [ -n "${run_uid}" ] && sed -i "s/user = www-data/user = ${run_uid}/" /usr/local/etc/php-fpm.d/www.conf
+ARG run_gid
+RUN [ -n "${run_gid}" ] && sed -i "s/group = www-data/group = ${run_gid}/" /usr/local/etc/php-fpm.d/www.conf
