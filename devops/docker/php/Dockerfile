@@ -3,6 +3,7 @@ ARG image_php
 FROM ${image_php} AS php
 
 RUN apk add --no-cache \
+		acl \
 		file \
 		gettext \
 		git \
