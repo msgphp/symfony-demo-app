@@ -15,7 +15,8 @@ services:
     build:
       <<: *base
       target: "app-${STAGING_ENV:?}"
-    secrets: [json_bucket, jwt_private, jwt_public]
+    secrets: [json_bucket, env_bucket, jwt_private, jwt_public]
+    command: [sh, -c, "set -a && . /run/secrets/env_bucket && php-fpm"]
 
   web:
     build:
@@ -26,6 +27,8 @@ services:
 secrets:
   json_bucket:
     file: ./secrets/bucket.json
+  env_bucket:
+    file: ./secrets/bucket.env
   jwt_private:
     file: ./secrets/jwt-private.pem
   jwt_public:

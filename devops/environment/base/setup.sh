@@ -50,4 +50,7 @@ if [ ! -f jwt-private.pem ] || [ ! -f jwt-public.pem ]; then
     [ $? -ne 0 ] && cd - && exit 1
 fi
 
+${json} -e bucket.json bucket.env
+[ $? -ne 0 ] && cd - && exit 1
+
 cd - >/dev/null

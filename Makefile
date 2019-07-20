@@ -28,7 +28,7 @@ update:
 update-recipes:
 	${composer} symfony:sync-recipes --force
 shell:
-	${exec} $${SERVICE:-app} sh
+	${exec} $${SERVICE:-app} sh -c "if [ -f /run/secrets/env_bucket ]; then set -a && . /run/secrets/env_bucket; fi; sh"
 mysql:
 	${exec} $${SERVICE:-db} sh -c "mysql -u \$${MYSQL_USER} -p\$${MYSQL_PASSWORD} \$${MYSQL_DATABASE}"
 db-migrate:
