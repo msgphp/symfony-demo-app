@@ -318,7 +318,7 @@ Visit the application in development mode:
 
 Check e-mail:
 
-  - https://localhost:8025 (`$MAILHOG_PORT`)
+  - http://localhost:8025 (`$MAILHOG_PORT`)
 
 Start a shell using:
 
