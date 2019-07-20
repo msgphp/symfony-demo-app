@@ -46,8 +46,7 @@ if [ ! -f jwt-private.pem ] || [ ! -f jwt-public.pem ]; then
     [ -z "${pass}" ] && pass="$(${openssl} rand -hex 16)" && ${json} -f bucket.json "{\"JWT_PASSPHRASE\": \"${pass}\"}"
     rm -f jwt-private.pem jwt-public.pem && \
     ${openssl} genpkey -out jwt-private.pem -aes256 -algorithm rsa -pkeyopt rsa_keygen_bits:4096 -pass "pass:${pass}" && \
-    ${openssl} pkey -in jwt-private.pem -out jwt-public.pem -pubout -passin "pass:${pass}" && \
-    chmod +r jwt-private.pem
+    ${openssl} pkey -in jwt-private.pem -out jwt-public.pem -pubout -passin "pass:${pass}"
     [ $? -ne 0 ] && cd - && exit 1
 fi
 
