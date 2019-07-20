@@ -193,6 +193,9 @@ devops/bin/json.sh devops/environment/dev/secrets/bucket.json '{"SOME_SECRET": "
 
 # force overwrite value
 devops/bin/json.sh -f devops/environment/dev/secrets/bucket.json '{"SOME_SECRET": "value"}'
+
+# read value
+value=$(devops/bin/json.sh -r devops/environment/dev/secrets/bucket.json SOME_SECRET)
 ```
 
 The [OpenSSL] binary is available at:
