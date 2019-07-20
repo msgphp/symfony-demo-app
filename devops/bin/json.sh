@@ -10,10 +10,7 @@ source='{}'; [ -f "${file}" ] && source=$(cat "${file}")
 old=$(printf '%s' "${source}" | ${php} -r "var_export(json_decode(trim(file_get_contents('php://stdin')), true, 512, JSON_THROW_ON_ERROR));")
 new=$(printf '%s' "${json}" | ${php} -r "var_export(json_decode(trim(file_get_contents('php://stdin')), true, 512, JSON_THROW_ON_ERROR));")
 args="${new}, ${old}"; [ ${force} -eq 1 ] && args="${old}, ${new}"
-output=$(${php} -r "$(cat <<EOF
-echo json_encode(array_replace_recursive(${args}), JSON_PRETTY_PRINT|JSON_THROW_ON_ERROR);
-EOF
-)")
+output=$(${php} -r "echo json_encode(array_replace_recursive(${args}), JSON_PRETTY_PRINT|JSON_THROW_ON_ERROR);")
 [ $? -ne 0 ] && exit 1
 
 echo "${output}" > "${file}"
