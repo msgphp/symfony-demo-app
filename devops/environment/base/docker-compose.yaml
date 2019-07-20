@@ -15,7 +15,8 @@ services:
     build:
       <<: *base
       target: "app-${STAGING_ENV:?}"
-    secrets: [json_bucket]
+    secrets: [json_bucket, env_bucket]
+    command: [sh, -c, "set -a && . /run/secrets/env_bucket && php-fpm"]
 
   web:
     build:
@@ -26,3 +27,5 @@ services:
 secrets:
   json_bucket:
     file: ./secrets/bucket.json
+  env_bucket:
+    file: ./secrets/bucket.env

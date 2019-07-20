@@ -196,13 +196,18 @@ devops/bin/json.sh -f devops/environment/dev/secrets/bucket.json '{"SOME_SECRET"
 
 # read value
 value=$(devops/bin/json.sh -r devops/environment/dev/secrets/bucket.json SOME_SECRET)
+
+# export .env file
+devops/bin/json.sh -e devops/environment/dev/secrets/bucket.json devops/environment/dev/secrets/bucket.env
 ```
 
-The [OpenSSL] binary is available at:
+The [OpenSSL] binary is available using:
 
 ```bash
 devops/bin/openssl.sh genrsa ...
 ```
+
+ℹ️ The environment variables from `bucket.env` are sourced as real environment variables on start-up
 
 # Create Application
 

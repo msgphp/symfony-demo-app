@@ -40,4 +40,7 @@ cd "../${staging_env}/secrets"
 ${json} bucket.json "{\"APP_SECRET\": \"$(${openssl} rand -hex 16)\"}"
 [ $? -ne 0 ] && cd - && exit 1
 
+${json} -e bucket.json bucket.env
+[ $? -ne 0 ] && cd - && exit 1
+
 cd - >/dev/null
