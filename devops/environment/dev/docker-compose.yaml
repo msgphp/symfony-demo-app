@@ -15,6 +15,7 @@ services:
     depends_on: [db]
     volumes:
       - "${APP_DIR:?}:/app:rw"
+      - "${APP_DIR:?}/var:/app/var:rw"
       - ./php/conf.d/application.ini:/usr/local/etc/php/conf.d/application.ini:ro
 
   web:
