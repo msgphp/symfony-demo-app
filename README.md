@@ -182,7 +182,24 @@ development local volumes are configured.
 
 ## Secret Management
 
-TODO
+The `base` environment manages a `bucket.json` file with secret values per staging environment located in `devops/environment/<staging_env>/secrets/`.
+Th bucket is available in the container using [Docker Secrets]. By default the `APP_SECRET` key is created if not
+defined.
+
+Custom secrets can be managed using the JSON utility helper:
+
+```bash
+devops/bin/json.sh devops/environment/dev/secrets/bucket.json '{"SOME_SECRET": "default value"}'
+
+# force overwrite value
+devops/bin/json.sh -f devops/environment/dev/secrets/bucket.json '{"SOME_SECRET": "value"}'
+```
+
+The [OpenSSL] binary is available at:
+
+```bash
+devops/bin/openssl.sh genrsa ...
+```
 
 # Create Application
 
@@ -387,6 +404,8 @@ db-fixtures: db-sync
 [Docker Compose `$COMPOSE_PROJECT_NAME`]: https://docs.docker.com/compose/reference/envvars/#compose_project_name
 [Docker Compose `-f`]: https://docs.docker.com/compose/extends/#multiple-compose-files
 [Docker Hub]: https://hub.docker.com/
+[Docker Secrets]: https://docs.docker.com/engine/swarm/secrets/#use-secrets-in-compose
+[OpenSSL]: https://www.openssl.org/
 [Kubernetes]: https://kubernetes.io/
 [Kompose]: https://kompose.io/
 [DoctrineBundle]: https://symfony.com/doc/current/bundles/DoctrineBundle/index.html

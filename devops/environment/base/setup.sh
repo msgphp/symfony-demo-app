@@ -34,7 +34,7 @@ cd - >/dev/null
 # secret management
 cd "../${staging_env}/secrets"
 
-${json} -f bucket.json '{"APP_SECRET": "boo"}'
+${json} bucket.json "{\"APP_SECRET\": \"$(${openssl} rand -hex 16)\"}"
 [ $? -ne 0 ] && cd - && exit 1
 
 cd - >/dev/null
