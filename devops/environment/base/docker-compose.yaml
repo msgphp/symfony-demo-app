@@ -15,6 +15,7 @@ services:
     build:
       <<: *base
       target: "app-${STAGING_ENV:?}"
+    secrets: [json_bucket]
 
   web:
     build:
