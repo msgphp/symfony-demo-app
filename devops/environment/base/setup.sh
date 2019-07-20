@@ -15,7 +15,6 @@ docker build --force-rm \
 docker build --force-rm \
     --build-arg "staging_env=${staging_env:?}" \
     --build-arg "image_php=${IMAGE_PHP:?}" \
-    --build-arg "image_phpqa=${IMAGE_PHPQA:?}" \
     --build-arg "icu=${ICU:?}" \
     --tag "${project}/php" \
     "${app_dir}/devops/docker/php" \
