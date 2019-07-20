@@ -381,7 +381,7 @@ A set of make targets for usage with [DoctrineBundle].
 
 ```bash
 db-migrate:
-	${app_console} doctrine:database:create --if-not-exists | true
+	${app_console} doctrine:database:create --if-not-exists || true
 	${app_console} doctrine:migrations:migrate --allow-no-migration -n
 db-sync: db-migrate
 	${app_console} doctrine:schema:update --force
