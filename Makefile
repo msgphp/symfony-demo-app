@@ -39,8 +39,8 @@ db-sync: db-migrate
 db-fixtures: db-sync
 	${app_console} doctrine:fixtures:load -n
 api-sync:
-	#${app_console} projection:initialize-types --force
-	#${app_console} projection:synchronize
+	${app_console} projection:initialize-types --force
+	${app_console} projection:synchronize
 
 # containers
 start:

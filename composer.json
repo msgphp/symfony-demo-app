@@ -5,7 +5,7 @@
     "description": "A Symfony demo application with basic user management, a REST/GraphQL API and OAuth/JWT authentication.",
     "require": {
         "api-platform/api-pack": "^1.2",
-        "elasticsearch/elasticsearch": "^6.7",
+        "elasticsearch/elasticsearch": "^7.1",
         "hwi/oauth-bundle": "^0.6",
         "lexik/jwt-authentication-bundle": "^2.6",
         "msgphp/eav-bundle": "^0.11",

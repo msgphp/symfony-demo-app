@@ -1,7 +1,7 @@
 parameters:
     projection_types:
         - App\Api\Projection\UserProjection
-    env(ELASTICSEARCH_PROJECTION_INDEX): projections
+    env(ELASTICSEARCH_PROJECTION_INDEX): 'projections_%kernel.environment%'
 
 services:
     _defaults:

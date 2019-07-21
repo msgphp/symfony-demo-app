@@ -12,7 +12,7 @@ x-db: &db
 # application
 services:
   app:
-    depends_on: [db]
+    depends_on: [db, es]
     volumes:
       - "${APP_DIR:?}:/app:rw"
       - "${APP_DIR:?}/var:/app/var:rw"
@@ -41,8 +41,17 @@ services:
     image: "${IMAGE_MAILHOG:?}"
     ports: ["${MAILHOG_PORT:?}:8025"]
 
+  es:
+    image: "${IMAGE_ES:?}"
+    ports: ["${ES_PORT:?}:9200"]
+    volumes:
+      - es-data:/usr/share/elasticsearch/data:rw
+    environment:
+      - discovery.type=single-node
+
 volumes:
   db-data: {}
+  es-data: {}
 
 secrets:
   nginx_cert:
