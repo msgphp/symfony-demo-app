@@ -5,6 +5,10 @@ api_platform:
     path_segment_name_generator: api_platform.path_segment_name_generator.dash
     mapping:
         paths: ['%kernel.project_dir%/src/Api/Projection']
+    elasticsearch:
+        hosts: ['%env(ELASTICSEARCH_HOST)%']
+        mapping:
+            App\Api\Projection\UserProjection: { index: '%api_projections.index_prefix%user' }
     graphql:
         enabled: true
         graphiql:

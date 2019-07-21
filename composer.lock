@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "17b4bb99b6e4288d6a3c3d865e5e203e",
+    "content-hash": "3642b96e1a08c2d73901a31b85702200",
     "packages": [
         {
             "name": "api-platform/api-pack",
@@ -2381,16 +2381,16 @@
         },
         {
             "name": "msgphp/domain",
-            "version": "v0.11.0",
+            "version": "v0.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/domain.git",
-                "reference": "61461209314121d183994075182c34bfbf027660"
+                "reference": "2617bf4d5c9caba24794dc63209d565f44cdda27"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/domain/zipball/61461209314121d183994075182c34bfbf027660",
-                "reference": "61461209314121d183994075182c34bfbf027660",
+                "url": "https://api.github.com/repos/msgphp/domain/zipball/2617bf4d5c9caba24794dc63209d565f44cdda27",
+                "reference": "2617bf4d5c9caba24794dc63209d565f44cdda27",
                 "shasum": ""
             },
             "require": {
@@ -2408,7 +2408,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.11-dev"
+                    "dev-master": "0.12-dev"
                 }
             },
             "autoload": {
@@ -2443,24 +2443,24 @@
                 "repository",
                 "rich domain model"
             ],
-            "time": "2019-07-13T12:11:08+00:00"
+            "time": "2019-07-21T17:07:29+00:00"
         },
         {
             "name": "msgphp/eav",
-            "version": "v0.11.0",
+            "version": "v0.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/eav.git",
-                "reference": "2c830323f7d2b41564b2509ce490d3ccc8755757"
+                "reference": "c2a7f39ed5ce7cad35fd57244cf2355160c2b3c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/eav/zipball/2c830323f7d2b41564b2509ce490d3ccc8755757",
-                "reference": "2c830323f7d2b41564b2509ce490d3ccc8755757",
+                "url": "https://api.github.com/repos/msgphp/eav/zipball/c2a7f39ed5ce7cad35fd57244cf2355160c2b3c3",
+                "reference": "c2a7f39ed5ce7cad35fd57244cf2355160c2b3c3",
                 "shasum": ""
             },
             "require": {
-                "msgphp/domain": "^0.11"
+                "msgphp/domain": "^0.12"
             },
             "require-dev": {
                 "doctrine/orm": "^2.6",
@@ -2469,7 +2469,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.11-dev"
+                    "dev-master": "0.12-dev"
                 }
             },
             "autoload": {
@@ -2498,24 +2498,24 @@
                 "entity-attribute-value",
                 "rich domain model"
             ],
-            "time": "2019-07-13T12:11:08+00:00"
+            "time": "2019-07-21T17:07:29+00:00"
         },
         {
             "name": "msgphp/eav-bundle",
-            "version": "v0.11.0",
+            "version": "v0.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/eav-bundle.git",
-                "reference": "265e3845d478c63ee168480ebaa078701c50013d"
+                "reference": "127bb66fb73198f7c8a0b0e6722fe42de9bde1df"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/eav-bundle/zipball/265e3845d478c63ee168480ebaa078701c50013d",
-                "reference": "265e3845d478c63ee168480ebaa078701c50013d",
+                "url": "https://api.github.com/repos/msgphp/eav-bundle/zipball/127bb66fb73198f7c8a0b0e6722fe42de9bde1df",
+                "reference": "127bb66fb73198f7c8a0b0e6722fe42de9bde1df",
                 "shasum": ""
             },
             "require": {
-                "msgphp/eav": "^0.11",
+                "msgphp/eav": "^0.12",
                 "symfony/config": "^3.4 || ^4.2",
                 "symfony/dependency-injection": "^3.4 || ^4.2",
                 "symfony/http-kernel": "^3.4 || ^4.2"
@@ -2523,7 +2523,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.11-dev"
+                    "dev-master": "0.12-dev"
                 }
             },
             "autoload": {
@@ -2549,24 +2549,24 @@
                 "eav",
                 "entity-attribute-value"
             ],
-            "time": "2019-07-13T12:11:08+00:00"
+            "time": "2019-07-21T17:07:29+00:00"
         },
         {
             "name": "msgphp/user",
-            "version": "v0.11.0",
+            "version": "v0.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user.git",
-                "reference": "7924c0cf9d00d83a443d463f24acd5bab5d74ae1"
+                "reference": "b7d4bb55fb8a798cc28d665681e9479a3052611b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/user/zipball/7924c0cf9d00d83a443d463f24acd5bab5d74ae1",
-                "reference": "7924c0cf9d00d83a443d463f24acd5bab5d74ae1",
+                "url": "https://api.github.com/repos/msgphp/user/zipball/b7d4bb55fb8a798cc28d665681e9479a3052611b",
+                "reference": "b7d4bb55fb8a798cc28d665681e9479a3052611b",
                 "shasum": ""
             },
             "require": {
-                "msgphp/domain": "^0.11"
+                "msgphp/domain": "^0.12"
             },
             "require-dev": {
                 "doctrine/orm": "^2.6",
@@ -2577,7 +2577,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.11-dev"
+                    "dev-master": "0.12-dev"
                 }
             },
             "autoload": {
@@ -2606,24 +2606,24 @@
                 "security",
                 "user"
             ],
-            "time": "2019-07-13T12:11:08+00:00"
+            "time": "2019-07-21T17:07:29+00:00"
         },
         {
             "name": "msgphp/user-bundle",
-            "version": "v0.11.0",
+            "version": "v0.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user-bundle.git",
-                "reference": "9ff20115411f2ba348a5c70bf6a1b50e239a17b6"
+                "reference": "4d8fc94b157ec6a4d05b9d97a2b35ffc9e24b053"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/user-bundle/zipball/9ff20115411f2ba348a5c70bf6a1b50e239a17b6",
-                "reference": "9ff20115411f2ba348a5c70bf6a1b50e239a17b6",
+                "url": "https://api.github.com/repos/msgphp/user-bundle/zipball/4d8fc94b157ec6a4d05b9d97a2b35ffc9e24b053",
+                "reference": "4d8fc94b157ec6a4d05b9d97a2b35ffc9e24b053",
                 "shasum": ""
             },
             "require": {
-                "msgphp/user": "^0.11",
+                "msgphp/user": "^0.12",
                 "symfony/config": "^3.4 || ^4.2",
                 "symfony/dependency-injection": "^3.4 || ^4.2",
                 "symfony/http-kernel": "^3.4 || ^4.2"
@@ -2631,7 +2631,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.11-dev"
+                    "dev-master": "0.12-dev"
                 }
             },
             "autoload": {
@@ -2657,30 +2657,30 @@
                 "security",
                 "user"
             ],
-            "time": "2019-07-13T12:11:08+00:00"
+            "time": "2019-07-21T17:07:29+00:00"
         },
         {
             "name": "msgphp/user-eav",
-            "version": "v0.11.0",
+            "version": "v0.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/msgphp/user-eav.git",
-                "reference": "4750050c6e9676672aef0afc6666f5565c9b1ce0"
+                "reference": "8db872b5c0856cb42ec461550fe58c3912bddf84"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/msgphp/user-eav/zipball/4750050c6e9676672aef0afc6666f5565c9b1ce0",
-                "reference": "4750050c6e9676672aef0afc6666f5565c9b1ce0",
+                "url": "https://api.github.com/repos/msgphp/user-eav/zipball/8db872b5c0856cb42ec461550fe58c3912bddf84",
+                "reference": "8db872b5c0856cb42ec461550fe58c3912bddf84",
                 "shasum": ""
             },
             "require": {
-                "msgphp/eav": "^0.11",
-                "msgphp/user": "^0.11"
+                "msgphp/eav": "^0.12",
+                "msgphp/user": "^0.12"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.11-dev"
+                    "dev-master": "0.12-dev"
                 }
             },
             "autoload": {
@@ -2710,7 +2710,7 @@
                 "rich domain model",
                 "user"
             ],
-            "time": "2019-07-13T12:11:08+00:00"
+            "time": "2019-07-21T17:07:29+00:00"
         },
         {
             "name": "namshi/jose",

@@ -8,7 +8,7 @@ use App\Entity\Attribute;
 use App\Entity\UserAttributeValue;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
-use MsgPhp\Domain\Exception\EntityNotFoundException;
+use MsgPhp\Domain\Exception\EntityNotFound;
 use MsgPhp\Eav\Infrastructure\Uuid\AttributeUuid;
 use MsgPhp\User\Command\AddUserAttributeValue;
 use MsgPhp\User\Command\ConfirmUser;
@@ -56,7 +56,7 @@ final class OauthUserProvider implements OAuthAwareUserProviderInterface
             try {
                 $user = $this->userRepository->findByUsername($email);
                 $userId = $user->getId();
-            } catch (EntityNotFoundException $e) {
+            } catch (EntityNotFound $e) {
                 $userId = new UserUuid();
                 // @todo validate username/email availability
                 $this->bus->dispatch(new CreateUser([

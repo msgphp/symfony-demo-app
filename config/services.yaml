@@ -12,6 +12,8 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
         bind:
             'string $secret': '%kernel.secret%'
+            'callable $documentTransformer': '@MsgPhp\Domain\Infrastructure\Serializer\ProjectionDocumentTransformer'
+            'callable $documentTypeResolver': '@MsgPhp\Domain\Projection\ProjectionTypeResolver'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -25,7 +27,7 @@ services:
         resource: '../src/Controller'
         tags: ['controller.service_arguments']
 
-    # API endpoints
+    # API
     App\Api\Endpoint\:
         resource: '../src/Api/Endpoint'
         tags: [controller.service_arguments]
