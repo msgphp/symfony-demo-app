@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Api\Projection;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Elasticsearch\DataProvider\Filter\MatchFilter;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
@@ -26,6 +28,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *     normalizationContext={"groups"={"user:read"}},
  *     denormalizationContext={"groups"={"user:write"}},
  * )
+ * @ApiFilter(MatchFilter::class, properties={"email"})
  */
 class UserProjection
 {
