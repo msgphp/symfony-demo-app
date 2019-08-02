@@ -8,16 +8,16 @@ use App\Api\DocumentIdentity;
 use App\Api\Projection\UserProjection;
 use MsgPhp\User\Command\CreateUser;
 use MsgPhp\User\Infrastructure\Uuid\UserUuid;
-use MsgPhp\User\Password\PasswordHashing;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
 final class CreateUserEndpoint
 {
-    public function __invoke(Request $request, UserProjection $data, MessageBusInterface $bus, UrlGeneratorInterface $urlGenerator, PasswordHashing $passwordHashing)
+    public function __invoke(Request $request, UserProjection $data, MessageBusInterface $bus, UrlGeneratorInterface $urlGenerator, PasswordEncoderInterface $passwordHashing)
     {
         $userId = UserUuid::fromValue($data->userId);
         $docId = DocumentIdentity::get($userId);
@@ -30,7 +30,7 @@ final class CreateUserEndpoint
         $bus->dispatch(new CreateUser([
             'id' => $userId,
             'email' => $data->email,
-            'password' => $passwordHashing->hash($data->password),
+            'password' => $passwordHashing->encodePassword($data->password, null),
         ]));
 
         return new JsonResponse(['id' => $docId], JsonResponse::HTTP_CREATED, ['Location' => $locationUrl]);

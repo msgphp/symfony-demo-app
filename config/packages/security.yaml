@@ -1,6 +1,6 @@
 security:
     encoders:
-        MsgPhp\User\Infrastructure\Security\UserIdentity: bcrypt
+        MsgPhp\User\Infrastructure\Security\UserIdentity: auto
 
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
