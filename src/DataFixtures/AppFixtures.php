@@ -90,7 +90,7 @@ final class AppFixtures extends Fixture
 
     private function createUser(string $email, bool $premium = false, string $password = self::PASSWORD): User
     {
-        $password = $this->passwordEncoder->encodePassword($password, '');
+        $password = $this->passwordEncoder->encodePassword($password, null);
 
         if ($premium) {
             return new PremiumUser(new UserUuid(), $email, $password);
