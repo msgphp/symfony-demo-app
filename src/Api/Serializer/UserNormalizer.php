@@ -28,7 +28,7 @@ final class UserNormalizer implements NormalizerInterface, CacheableSupportsMeth
 
     public function supportsNormalization($data, $format = null): bool
     {
-        return 'document' === $format && $data instanceof User;
+        return $data instanceof User;
     }
 
     public function hasCacheableSupportsMethod(): bool
