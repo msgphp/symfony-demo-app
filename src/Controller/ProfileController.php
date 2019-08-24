@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\User;
+namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\UserEmail;
 use App\EventSubscriber\SendEmailConfirmationUrl;
-use App\Form\User\AddEmailType;
-use App\Form\User\ChangePasswordType;
+use App\Form\AddEmailType;
+use App\Form\ChangePasswordType;
 use App\Http\Responder;
 use App\Http\RespondNotFound;
 use App\Http\RespondRouteRedirect;

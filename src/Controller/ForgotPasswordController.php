@@ -2,15 +2,14 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\User;
+namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\User\ResetPasswordType;
+use App\Form\ForgotPasswordType;
 use App\Http\Responder;
 use App\Http\RespondRouteRedirect;
 use App\Http\RespondTemplate;
-use MsgPhp\User\Command\ResetUserPassword;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use MsgPhp\User\Command\RequestUserPassword;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,32 +17,34 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/reset-password/{token}", name="reset_password")
+ * @Route("/forgot-password", name="forgot_password")
  */
-final class ResetPasswordController
+final class ForgotPasswordController
 {
-    /**
-     * @ParamConverter("user", converter="doctrine.orm", options={"mapping": {"token": "passwordResetToken"}})
-     */
     public function __invoke(
-        User $user,
         Request $request,
         Responder $responder,
         FormFactoryInterface $formFactory,
         MessageBusInterface $bus
     ): Response {
-        $form = $formFactory->createNamed('', ResetPasswordType::class);
+        $form = $formFactory->createNamed('', ForgotPasswordType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $bus->dispatch(new ResetUserPassword($user->getId(), $form->getData()['password']));
+            $data = $form->getData();
+
+            if (isset($data['user'])) {
+                /** @var User $user */
+                $user = $data['user'];
+                $bus->dispatch(new RequestUserPassword($user->getId()));
+            }
 
             return $responder->respond((new RespondRouteRedirect('home'))->withFlashes([
-                'success' => sprintf('Hi %s, we\'ve reset your password.', $user->getEmail()),
+                'success' => sprintf('Hi %s, we\'ve send you a password reset link.', $data['email']),
             ]));
         }
 
-        return $responder->respond(new RespondTemplate('user/reset_password.html.twig', [
+        return $responder->respond(new RespondTemplate('user/forgot_password.html.twig', [
             'form' => $form->createView(),
         ]));
     }

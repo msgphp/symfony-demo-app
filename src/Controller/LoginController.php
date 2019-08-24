@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\User;
+namespace App\Controller;
 
-use App\Form\User\LoginType;
-use App\Form\User\OneTimeLoginType;
+use App\Form\LoginType;
+use App\Form\OneTimeLoginType;
 use App\Http\Responder;
 use App\Http\RespondTemplate;
 use Symfony\Component\Form\FormError;

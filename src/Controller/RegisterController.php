@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\User;
+namespace App\Controller;
 
-use App\Entity\User;
-use App\Form\User\ForgotPasswordType;
+use App\Form\RegisterType;
 use App\Http\Responder;
 use App\Http\RespondRouteRedirect;
 use App\Http\RespondTemplate;
-use MsgPhp\User\Command\RequestUserPassword;
+use MsgPhp\User\Command\CreateUser;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,9 +16,9 @@ use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/forgot-password", name="forgot_password")
+ * @Route("/register", name="register")
  */
-final class ForgotPasswordController
+final class RegisterController
 {
     public function __invoke(
         Request $request,
@@ -27,24 +26,18 @@ final class ForgotPasswordController
         FormFactoryInterface $formFactory,
         MessageBusInterface $bus
     ): Response {
-        $form = $formFactory->createNamed('', ForgotPasswordType::class);
+        $form = $formFactory->createNamed('', RegisterType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $data = $form->getData();
-
-            if (isset($data['user'])) {
-                /** @var User $user */
-                $user = $data['user'];
-                $bus->dispatch(new RequestUserPassword($user->getId()));
-            }
+            $bus->dispatch(new CreateUser($data = $form->getData()));
 
             return $responder->respond((new RespondRouteRedirect('home'))->withFlashes([
-                'success' => sprintf('Hi %s, we\'ve send you a password reset link.', $data['email']),
+                'success' => sprintf('Hi %s, you\'re successfully registered. We\'ve send you a confirmation link.', $data['email']),
             ]));
         }
 
-        return $responder->respond(new RespondTemplate('user/forgot_password.html.twig', [
+        return $responder->respond(new RespondTemplate('user/register.html.twig', [
             'form' => $form->createView(),
         ]));
     }

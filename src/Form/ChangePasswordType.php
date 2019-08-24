@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Form\User;
+namespace App\Form;
 
 use MsgPhp\User\Infrastructure\Form\Type\HashedPasswordType;
 use Symfony\Component\Form\AbstractType;
