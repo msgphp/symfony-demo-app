@@ -62,7 +62,7 @@ final class CreateOneTimeLoginTokenCommand extends Command
         $this->em->persist($oneTimeLoginToken);
         $this->em->flush();
 
-        $io->success(sprintf('Created token "%s" for user "%s".', $oneTimeLoginToken->getToken(), $oneTimeLoginToken->getUser()->getCredential()->getUsername()));
+        $io->success(sprintf('Created login token "%s" for user "%s".', $oneTimeLoginToken->getToken(), $oneTimeLoginToken->getUser()->getCredential()->getUsername()));
 
         return 0;
     }

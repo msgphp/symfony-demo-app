@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\UserInvitation;
 use App\Form\RegisterType;
 use App\Http\Responder;
 use App\Http\RespondRouteRedirect;
 use App\Http\RespondTemplate;
+use Doctrine\ORM\EntityManagerInterface;
 use MsgPhp\User\Command\CreateUser;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -24,13 +26,21 @@ final class RegisterController
         Request $request,
         Responder $responder,
         FormFactoryInterface $formFactory,
-        MessageBusInterface $bus
+        MessageBusInterface $bus,
+        EntityManagerInterface $em
     ): Response {
-        $form = $formFactory->createNamed('', RegisterType::class);
+        $data = [];
+        if (\is_string($token = $request->query->get('token')) && null !== $invitation = $em->find(UserInvitation::class, $token)) {
+            $data['email'] = $invitation->getEmail();
+        }
+
+        $form = $formFactory->createNamed('', RegisterType::class, $data);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $bus->dispatch(new CreateUser($data = $form->getData()));
+            $data = $form->getData();
+            $data['invitation_token'] = $token;
+            $bus->dispatch(new CreateUser($data));
 
             return $responder->respond((new RespondRouteRedirect('home'))->withFlashes([
                 'success' => sprintf('Hi %s, you\'re successfully registered. We\'ve send you a confirmation link.', $data['email']),
