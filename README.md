@@ -17,6 +17,13 @@ ORM      | [`DoctrineBundle`]
 Security | [`SecurityBundle`], [`HWIOAuthBundle`], [`LexikJWTAuthenticationBundle`]
 Web API  | [`ApiPlatformBundle`]
 
+## Features
+
+- Register, Login, Forgot Password, My Profile
+- One-Time-Login tokens
+- Register invitations
+- Primary e-mail and secondary e-mails
+
 ## Try it Yourself
 
 Using [Symfony CLI][appsrv:sf]:
