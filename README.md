@@ -39,7 +39,6 @@ bin/console doctrine:database:create --if-not-exists
 bin/console doctrine:schema:update --force
 bin/console doctrine:fixtures:load -n
 
-bin/console projection:initialize-types --force
 bin/console projection:synchronize
 
 symfony server:start
