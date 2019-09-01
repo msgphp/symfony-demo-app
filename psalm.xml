@@ -11,6 +11,7 @@
         <directory name="tests"/>
         <ignoreFiles>
             <directory name="vendor"/>
+            <file name="config/bootstrap.php"/>
         </ignoreFiles>
     </projectFiles>
 
@@ -23,7 +24,18 @@
         <PropertyNotSetInConstructor>
             <errorLevel type="suppress">
                 <directory name="tests"/>
+                <referencedProperty name="Doctrine\Common\DataFixtures\AbstractFixture::$referenceRepository"/>
             </errorLevel>
         </PropertyNotSetInConstructor>
+        <MissingPropertyType>
+            <errorLevel type="info">
+                <directory name="src"/>
+            </errorLevel>
+        </MissingPropertyType>
+        <MissingParamType>
+            <errorLevel type="info">
+                <directory name="src"/>
+            </errorLevel>
+        </MissingParamType>
     </issueHandlers>
 </psalm>

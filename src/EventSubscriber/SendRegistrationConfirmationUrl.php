@@ -22,6 +22,7 @@ final class SendRegistrationConfirmationUrl implements MessageHandlerInterface
 
     public function __invoke(UserCreated $event): void
     {
+        /** @psalm-suppress ArgumentTypeCoercion */
         $this->notify($event->user);
     }
 

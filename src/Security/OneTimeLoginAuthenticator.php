@@ -91,6 +91,7 @@ final class OneTimeLoginAuthenticator extends AbstractGuardAuthenticator
 
     private function getOneTimeLoginToken(string $token): ?OneTimeLoginToken
     {
+        /** @var OneTimeLoginToken|null */
         return $this->em->find(OneTimeLoginToken::class, $token);
     }
 

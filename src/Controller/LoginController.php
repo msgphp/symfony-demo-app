@@ -8,7 +8,6 @@ use App\Form\LoginType;
 use App\Form\OneTimeLoginType;
 use App\Http\Responder;
 use App\Http\RespondTemplate;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,21 +25,16 @@ final class LoginController
         FormFactoryInterface $formFactory,
         AuthenticationUtils $authenticationUtils
     ): Response {
-        $lastAuthError = $authenticationUtils->getLastAuthenticationError(true);
-
-        // one-time login
-        $oneTimeLoginForm = $formFactory->createNamed('', OneTimeLoginType::class);
-
         // regular form login
         $form = $formFactory->createNamed('', LoginType::class, [
             'email' => $authenticationUtils->getLastUsername(),
         ]);
 
-        if (null !== $lastAuthError) {
-            $form->addError(new FormError($lastAuthError->getMessage(), $lastAuthError->getMessageKey(), $lastAuthError->getMessageData()));
-        }
+        // one-time login
+        $oneTimeLoginForm = $formFactory->createNamed('', OneTimeLoginType::class);
 
         return $responder->respond(new RespondTemplate('user/login.html.twig', [
+            'error' => $authenticationUtils->getLastAuthenticationError(),
             'form' => $form->createView(),
             'oneTimeLoginForm' => $oneTimeLoginForm->createView(),
         ]));

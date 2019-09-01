@@ -26,6 +26,7 @@ install:
 update:
 	${composer} update ${composer_args}
 update-recipes:
+	rm symfony.lock
 	${composer} symfony:sync-recipes --force
 shell:
 	${exec} $${SERVICE:-app} sh -c "if [ -f /run/secrets/env_bucket ]; then set -a && . /run/secrets/env_bucket; fi; sh"

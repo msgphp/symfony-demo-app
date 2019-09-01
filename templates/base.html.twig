@@ -27,16 +27,15 @@
                         {% if is_granted('ROLE_ADMIN') %}
                             <li><a href="{{ path('home', {_switch_user: 'user@domain.dev'}) }}">Impersonate</a></li>
                         {% endif %}
+                        <li><a href="{{ path('api_entrypoint') }}">Web API</a></li>
                     </ul>
                 </nav>
             </header>
         {% endblock %}
-
-        {% block flashes %}
-            {% include 'partials/flashes.html.twig' with {flashes: app.flashes} only %}
+        {% block body %}
+            {{ include('partials/flash-messages.html.twig') }}
+            {% block main %}{% endblock %}
         {% endblock %}
-
-        {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>

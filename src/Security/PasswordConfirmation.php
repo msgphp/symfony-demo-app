@@ -34,6 +34,7 @@ final class PasswordConfirmation
     {
         $session = $request->getSession();
 
+        /** @psalm-suppress DocblockTypeContradiction */
         if (null === $session) {
             throw new \LogicException('Session not available.');
         }

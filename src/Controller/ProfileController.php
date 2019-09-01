@@ -15,6 +15,7 @@ use App\Http\RespondRouteRedirect;
 use App\Http\RespondTemplate;
 use App\Security\PasswordConfirmation;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use MsgPhp\Domain\Exception\UnknownCollectionElement;
 use MsgPhp\User\Command\AddUserEmail;
 use MsgPhp\User\Command\ChangeUserCredential;
 use MsgPhp\User\Command\DeleteUserEmail;
@@ -66,8 +67,16 @@ final class ProfileController
 
         // mark primary email
         if ($primaryEmail = $request->query->get('primary-email')) {
-            /** @var UserEmail $userEmail */
-            if (!($userEmail = $user->getEmails()->get($primaryEmail)) || !$userEmail->isConfirmed()) {
+            try {
+                /** @var UserEmail $userEmail */
+                $userEmail = $user->getEmails()->get($primaryEmail);
+                if (!$userEmail->isConfirmed()) {
+                    $userEmail = null;
+                }
+            } catch (UnknownCollectionElement $e) {
+                $userEmail = null;
+            }
+            if (null === $userEmail) {
                 return $responder->respond(new RespondNotFound());
             }
 
@@ -89,11 +98,20 @@ final class ProfileController
 
         // send email confirmation link
         if ($confirmEmail = $request->query->get('confirm-email')) {
-            /** @var UserEmail $userEmail */
-            if (!($userEmail = $user->getEmails()->get($confirmEmail)) || $userEmail->isConfirmed()) {
+            try {
+                /** @var UserEmail $userEmail */
+                $userEmail = $user->getEmails()->get($confirmEmail);
+                if ($userEmail->isConfirmed()) {
+                    $userEmail = null;
+                }
+            } catch (UnknownCollectionElement $e) {
+                $userEmail = null;
+            }
+            if (null === $userEmail) {
                 return $responder->respond(new RespondNotFound());
             }
 
+            /** @psalm-suppress ArgumentTypeCoercion */
             $sendEmailConfirmationUrl->notify($userEmail);
 
             return $responder->respond((new RespondRouteRedirect('profile'))->withFlashes([

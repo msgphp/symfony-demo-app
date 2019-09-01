@@ -12,6 +12,8 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 final class UserNormalizer implements NormalizerInterface, CacheableSupportsMethodInterface
 {
     /**
+     * @psalm-suppress MoreSpecificImplementedParamType
+     *
      * @param User        $object
      * @param string|null $format
      */

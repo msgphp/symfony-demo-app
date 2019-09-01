@@ -22,6 +22,7 @@ final class SendEmailConfirmationUrl implements MessageHandlerInterface
 
     public function __invoke(UserEmailAdded $event): void
     {
+        /** @psalm-suppress ArgumentTypeCoercion */
         $this->notify($event->userEmail);
     }
 

@@ -21,6 +21,7 @@ final class EnableConfirmedUser implements MessageHandlerInterface
 
     public function __invoke(UserConfirmed $event): void
     {
+        /** @psalm-suppress ArgumentTypeCoercion */
         $this->notify($event->user);
     }
 
