@@ -183,7 +183,7 @@ development local volumes are configured.
 ## Secret Management
 
 The `base` environment manages a `bucket.json` file with secret values per staging environment located in `devops/environment/<staging_env>/secrets/`.
-Th bucket is available in the container using [Docker Secrets]. By default the `APP_SECRET` key is created if not
+The bucket is available in the container using [Docker Secrets]. By default the `APP_SECRET` key is created if not
 defined.
 
 Custom secrets can be managed using the JSON utility helper:
