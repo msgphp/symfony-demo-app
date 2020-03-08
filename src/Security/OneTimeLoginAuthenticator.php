@@ -31,7 +31,7 @@ final class OneTimeLoginAuthenticator extends AbstractGuardAuthenticator
         $this->urlGenerator = $urlGenerator;
     }
 
-    public function start(Request $request, AuthenticationException $authException = null): Response
+    public function start(Request $request, ?AuthenticationException $authException = null): Response
     {
         return new RedirectResponse($this->urlGenerator->generate('login'));
     }
@@ -91,7 +91,7 @@ final class OneTimeLoginAuthenticator extends AbstractGuardAuthenticator
 
     private function getOneTimeLoginToken(string $token): ?OneTimeLoginToken
     {
-        /** @var OneTimeLoginToken|null */
+        /** @var null|OneTimeLoginToken */
         return $this->em->find(OneTimeLoginToken::class, $token);
     }
 

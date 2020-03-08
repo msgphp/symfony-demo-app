@@ -15,7 +15,7 @@ final class UserNormalizer implements NormalizerInterface, CacheableSupportsMeth
      * @psalm-suppress MoreSpecificImplementedParamType
      *
      * @param User        $object
-     * @param string|null $format
+     * @param null|string $format
      */
     public function normalize($object, $format = null, array $context = [])
     {

@@ -26,8 +26,8 @@ final class ClassContextElementFactory implements BaseClassContextElementFactory
         switch ($argument) {
             case 'email':
                 $element->label = 'E-mail';
-                break;
 
+                break;
             case 'password':
                 if (User::class === $class || EmailPassword::class === $class) {
                     $element
@@ -40,6 +40,7 @@ final class ClassContextElementFactory implements BaseClassContextElementFactory
                         })
                     ;
                 }
+
                 break;
         }
 

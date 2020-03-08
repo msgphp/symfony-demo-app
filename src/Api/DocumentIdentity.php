@@ -12,7 +12,7 @@ abstract class DocumentIdentity
     private const ID_NS = 'ee5b8c83-f12d-41f5-bcf9-3e83b7558317';
 
     /**
-     * @param string|DomainId $value
+     * @param DomainId|string $value
      */
     public static function get($value): string
     {
