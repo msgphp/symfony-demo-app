@@ -111,7 +111,6 @@ final class ProfileController
                 return $responder->respond(new RespondNotFound());
             }
 
-            /** @psalm-suppress ArgumentTypeCoercion */
             $sendEmailConfirmationUrl->notify($userEmail);
 
             return $responder->respond((new RespondRouteRedirect('profile'))->withFlashes([

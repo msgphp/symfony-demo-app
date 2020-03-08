@@ -71,9 +71,9 @@ cs-fix:
 
 # static analysis
 psalm: install
-	${app} psalm --show-info=false
+	${app} psalm --find-unused-psalm-suppress --show-info=false
 psalm-info: install
-	${app} psalm --show-info=true
+	${app} psalm --find-unused-psalm-suppress --show-info=true
 
 # linting
 lint-yaml:
