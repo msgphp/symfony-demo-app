@@ -31,9 +31,8 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
         main:
-            anonymous: true
+            anonymous: lazy
             provider: msgphp_user
             user_checker: App\Security\UserChecker
             form_login:

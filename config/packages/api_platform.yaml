@@ -15,7 +15,10 @@ api_platform:
             enabled: true
     http_cache:
         vary: [Accept, Authorization]
+    patch_formats:
+        json: ['application/merge-patch+json']
     swagger:
+        versions: [3]
         api_keys:
             - { name: Authorization, type: header }
 

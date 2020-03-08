@@ -18,6 +18,8 @@ final class RoleProvider implements BaseRoleProvider
     public const ROLE_ADMIN = 'ROLE_ADMIN';
 
     /**
+     * @psalm-suppress MoreSpecificImplementedParamType
+     *
      * @param User $user
      */
     public function getRoles(BaseUser $user): array

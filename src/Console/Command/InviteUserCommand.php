@@ -61,7 +61,8 @@ final class InviteUserCommand extends Command
             }
         }
 
-        $email = $input->getArgument('email');
+        /** @psalm-suppress PossiblyInvalidCast */
+        $email = (string) $input->getArgument('email');
 
         if ($this->userRepository->usernameExists($email) || null !== $this->em->getRepository(UserInvitation::class)->findOneBy(['email' => $email])) {
             throw new \LogicException(sprintf('The username "%s" already exists.', $email));

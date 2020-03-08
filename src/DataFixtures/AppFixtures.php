@@ -14,7 +14,7 @@ use App\Entity\UserEmail;
 use App\Entity\UserRole;
 use App\Security\RoleProvider;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\Persistence\ObjectManager;
 use MsgPhp\Eav\Infrastructure\Uuid\AttributeUuid;
 use MsgPhp\Eav\Infrastructure\Uuid\AttributeValueUuid;
 use MsgPhp\User\Infrastructure\Uuid\UserUuid;

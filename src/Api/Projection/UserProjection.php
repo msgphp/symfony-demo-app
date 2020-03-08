@@ -11,6 +11,8 @@ use ApiPlatform\Core\Bridge\Elasticsearch\DataProvider\Filter\MatchFilter;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
+ * @psalm-suppress MissingConstructor
+ *
  * @ApiResource(
  *     shortName="User",
  *     collectionOperations={

@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block main %}
     <h1>Login</h1>
+
+    {% if error %}
+        <p>{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+    {% endif %}
 
     {{ form_start(form) }}
         {{ form_errors(form) }}

@@ -22,6 +22,7 @@ final class SendPasswordResetUrl implements MessageHandlerInterface
 
     public function __invoke(UserPasswordRequested $event): void
     {
+        /** @psalm-suppress ArgumentTypeCoercion */
         $this->notify($event->user);
     }
 

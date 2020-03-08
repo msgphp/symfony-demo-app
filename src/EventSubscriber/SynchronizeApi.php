@@ -29,14 +29,7 @@ final class SynchronizeApi implements MessageSubscriberInterface
 
     public function __invoke($event): void
     {
-        if ($event instanceof UserCreated) {
-            $this->notifySave($event->user);
-
-            return;
-        }
-
-        if ($event instanceof UserCredentialChanged && $event->oldCredential->getUsername() !== $event->user->getCredential()->getUsername()) {
-            // @todo could be partial update
+        if ($event instanceof UserCreated || $event instanceof UserCredentialChanged) {
             $this->notifySave($event->user);
 
             return;
