@@ -7,13 +7,14 @@ namespace App\Console\Command;
 use App\Entity\UserInvitation;
 use Doctrine\ORM\EntityManagerInterface;
 use MsgPhp\User\Repository\UserRepository;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Twig\Environment;
+use Symfony\Component\Mailer\MailerInterface;
 
 final class InviteUserCommand extends Command
 {
@@ -22,16 +23,14 @@ final class InviteUserCommand extends Command
     private $em;
     private $userRepository;
     private $mailer;
-    private $twig;
 
-    public function __construct(EntityManagerInterface $em, UserRepository $userRepository, \Swift_Mailer $mailer, Environment $twig)
+    public function __construct(EntityManagerInterface $em, UserRepository $userRepository, MailerInterface $mailer)
     {
         parent::__construct();
 
         $this->em = $em;
         $this->userRepository = $userRepository;
         $this->mailer = $mailer;
-        $this->twig = $twig;
     }
 
     protected function configure(): void
@@ -77,10 +76,13 @@ final class InviteUserCommand extends Command
 
         if ($input->getOption('notify')) {
             $params = compact('invitation');
-            $message = (new \Swift_Message('You are invited to register at The App'))
-                ->addTo($email)
-                ->setBody($this->twig->render('user/email/invited.txt.twig', $params), 'text/plain')
-                ->addPart($this->twig->render('user/email/invited.html.twig', $params), 'text/html')
+            $message = (new TemplatedEmail())
+                ->from('webmaster@localhost')
+                ->to($email)
+                ->subject('You are invited to register at The App')
+                ->textTemplate('user/email/invited.txt.twig')
+                ->htmlTemplate('user/email/invited.html.twig')
+                ->context($params)
             ;
 
             $this->mailer->send($message);

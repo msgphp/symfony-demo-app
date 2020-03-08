@@ -6,18 +6,17 @@ namespace App\EventSubscriber;
 
 use App\Entity\UserEmail;
 use MsgPhp\User\Event\UserEmailAdded;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
-use Twig\Environment;
 
 final class SendEmailConfirmationUrl implements MessageHandlerInterface
 {
     private $mailer;
-    private $twig;
 
-    public function __construct(\Swift_Mailer $mailer, Environment $twig)
+    public function __construct(MailerInterface $mailer)
     {
         $this->mailer = $mailer;
-        $this->twig = $twig;
     }
 
     public function __invoke(UserEmailAdded $event): void
@@ -33,10 +32,13 @@ final class SendEmailConfirmationUrl implements MessageHandlerInterface
         }
 
         $params = ['userEmail' => $userEmail];
-        $message = (new \Swift_Message('Confirm your e-mail at The App'))
-            ->addTo($userEmail->getEmail())
-            ->setBody($this->twig->render('user/email/confirm_email.txt.twig', $params), 'text/plain')
-            ->addPart($this->twig->render('user/email/confirm_email.html.twig', $params), 'text/html')
+        $message = (new TemplatedEmail())
+            ->from('webmaster@localhost')
+            ->to($userEmail->getEmail())
+            ->subject('Confirm your e-mail at The App')
+            ->textTemplate('user/email/confirm_email.txt.twig')
+            ->htmlTemplate('user/email/confirm_email.html.twig')
+            ->context($params)
         ;
 
         $this->mailer->send($message);

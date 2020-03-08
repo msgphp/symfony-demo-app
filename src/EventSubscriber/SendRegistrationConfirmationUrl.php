@@ -6,18 +6,17 @@ namespace App\EventSubscriber;
 
 use App\Entity\User;
 use MsgPhp\User\Event\UserCreated;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
-use Twig\Environment;
 
 final class SendRegistrationConfirmationUrl implements MessageHandlerInterface
 {
     private $mailer;
-    private $twig;
 
-    public function __construct(\Swift_Mailer $mailer, Environment $twig)
+    public function __construct(MailerInterface $mailer)
     {
         $this->mailer = $mailer;
-        $this->twig = $twig;
     }
 
     public function __invoke(UserCreated $event): void
@@ -33,10 +32,13 @@ final class SendRegistrationConfirmationUrl implements MessageHandlerInterface
         }
 
         $params = ['user' => $user];
-        $message = (new \Swift_Message('Confirm your account at The App'))
-            ->addTo($user->getEmail())
-            ->setBody($this->twig->render('user/email/confirm_registration.txt.twig', $params), 'text/plain')
-            ->addPart($this->twig->render('user/email/confirm_registration.html.twig', $params), 'text/html')
+        $message = (new TemplatedEmail())
+            ->from('webmaster@localhost')
+            ->to($user->getEmail())
+            ->subject('Confirm your account at The App')
+            ->textTemplate('user/email/confirm_registration.txt.twig')
+            ->htmlTemplate('user/email/confirm_registration.html.twig')
+            ->context($params)
         ;
 
         $this->mailer->send($message);

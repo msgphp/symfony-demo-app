@@ -6,18 +6,17 @@ namespace App\EventSubscriber;
 
 use App\Entity\User;
 use MsgPhp\User\Event\UserPasswordRequested;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Messenger\Handler\MessageHandlerInterface;
-use Twig\Environment;
 
 final class SendPasswordResetUrl implements MessageHandlerInterface
 {
     private $mailer;
-    private $twig;
 
-    public function __construct(\Swift_Mailer $mailer, Environment $twig)
+    public function __construct(MailerInterface $mailer)
     {
         $this->mailer = $mailer;
-        $this->twig = $twig;
     }
 
     public function __invoke(UserPasswordRequested $event): void
@@ -33,10 +32,13 @@ final class SendPasswordResetUrl implements MessageHandlerInterface
         }
 
         $params = ['user' => $user];
-        $message = (new \Swift_Message('Reset your password at The App'))
-            ->addTo($user->getEmail())
-            ->setBody($this->twig->render('user/email/reset_password.txt.twig', $params), 'text/plain')
-            ->addPart($this->twig->render('user/email/reset_password.html.twig', $params), 'text/html')
+        $message = (new TemplatedEmail())
+            ->from('webmaster@localhost')
+            ->to($user->getEmail())
+            ->subject('Reset your password at The App')
+            ->textTemplate('user/email/reset_password.txt.twig')
+            ->htmlTemplate('user/email/reset_password.html.twig')
+            ->context($params)
         ;
 
         $this->mailer->send($message);
