@@ -12,6 +12,7 @@
         <ignoreFiles>
             <directory name="vendor"/>
             <file name="config/bootstrap.php"/>
+            <file name="src/Kernel.php"/>
         </ignoreFiles>
     </projectFiles>
 

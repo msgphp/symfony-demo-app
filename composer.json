@@ -4,32 +4,33 @@
     "license": "MIT",
     "description": "A Symfony demo application with basic user management, a REST/GraphQL API and OAuth/JWT authentication.",
     "require": {
+        "php": "^7.3",
         "api-platform/api-pack": "^1.2",
         "elasticsearch/elasticsearch": "^7.6",
-        "hwi/oauth-bundle": "^1.0",
+        "hwi/oauth-bundle": "^1.1@dev",
         "lexik/jwt-authentication-bundle": "^2.6",
-        "msgphp/eav-bundle": "^0.14",
-        "msgphp/user-bundle": "^0.14",
-        "msgphp/user-eav": "^0.14",
+        "msgphp/eav-bundle": "^0.15",
+        "msgphp/user-bundle": "^0.15",
+        "msgphp/user-eav": "^0.15",
         "pascaldevink/shortuuid": "^2.2",
         "php-http/guzzle6-adapter": "^2.0",
         "php-http/httplug-bundle": "^1.17",
         "ramsey/uuid": "^3.9",
         "ramsey/uuid-doctrine": "^1.6",
         "sensio/framework-extra-bundle": "^5.5",
-        "symfony/console": "4.4.*",
-        "symfony/dependency-injection": "4.4.*",
-        "symfony/dotenv": "4.4.*",
+        "symfony/console": "5.0.*",
+        "symfony/dependency-injection": "5.0.*",
+        "symfony/dotenv": "5.0.*",
         "symfony/flex": "^1.6",
-        "symfony/form": "4.4.*",
-        "symfony/framework-bundle": "4.4.*",
-        "symfony/mailer": "4.4.*",
-        "symfony/messenger": "4.4.*",
+        "symfony/form": "5.0.*",
+        "symfony/framework-bundle": "5.0.*",
+        "symfony/mailer": "5.0.*",
+        "symfony/messenger": "5.0.*",
         "symfony/monolog-bundle": "^3.4",
         "symfony/orm-pack": "^1.0",
-        "symfony/security-bundle": "4.4.*",
-        "symfony/translation": "4.4.*",
-        "symfony/validator": "4.4.*",
+        "symfony/security-bundle": "5.0.*",
+        "symfony/translation": "5.0.*",
+        "symfony/validator": "5.0.*",
         "webonyx/graphql-php": "^0.13"
     },
     "require-dev": {
@@ -59,6 +60,8 @@
         "paragonie/random_compat": "2.*",
         "symfony/polyfill-ctype": "*",
         "symfony/polyfill-iconv": "*",
+        "symfony/polyfill-php73": "*",
+        "symfony/polyfill-php72": "*",
         "symfony/polyfill-php71": "*",
         "symfony/polyfill-php70": "*",
         "symfony/polyfill-php56": "*"
@@ -81,7 +84,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": true,
-            "require": "4.4.*"
+            "require": "5.0.*"
         }
     }
 }
