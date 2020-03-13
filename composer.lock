@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "cb30f1c68d33c873c08ebdbcd6e80942",
+    "content-hash": "b3d564d7cc51784ad610b41c90465feb",
     "packages": [
         {
             "name": "api-platform/api-pack",
@@ -1862,12 +1862,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hwi/HWIOAuthBundle.git",
-                "reference": "e22319140d9c767500356676900884ca5b8e20b3"
+                "reference": "dfbe98a2ddbc3be06bc37a2c0e2895fc2b2603f0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/e22319140d9c767500356676900884ca5b8e20b3",
-                "reference": "e22319140d9c767500356676900884ca5b8e20b3",
+                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/dfbe98a2ddbc3be06bc37a2c0e2895fc2b2603f0",
+                "reference": "dfbe98a2ddbc3be06bc37a2c0e2895fc2b2603f0",
                 "shasum": ""
             },
             "require": {
@@ -2018,7 +2018,7 @@
                 "yandex",
                 "youtube"
             ],
-            "time": "2020-02-13T10:08:31+00:00"
+            "time": "2020-02-28T15:38:32+00:00"
         },
         {
             "name": "jdorn/sql-formatter",
