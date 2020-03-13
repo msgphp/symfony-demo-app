@@ -50,7 +50,7 @@ RUN set -eux; \
 COPY conf.d/symfony.ini "${PHP_INI_DIR}/conf.d/"
 
 ENV COMPOSER_HOME=/composer
-ENV COMPOSER_CACHE_DIR=/tmp/composer
+ENV COMPOSER_CACHE_DIR=/composer/cache
 ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV COMPOSER_HTACCESS_PROTECT=0
 COPY --from=composer /usr/bin/composer /usr/bin/
