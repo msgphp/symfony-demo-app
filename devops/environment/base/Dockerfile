@@ -17,7 +17,7 @@ COPY --from=archive /archive.tgz /
 VOLUME /app/var
 WORKDIR /app
 
-RUN tar -zxf /archive.tgz -C .; rm -f /archive.tgz; mkdir var
+RUN tar -zxf /archive.tgz -C .; rm -f /archive.tgz; mkdir -p var
 
 ARG staging_env
 
