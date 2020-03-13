@@ -17,7 +17,7 @@ COPY --from=archive /archive.tgz /
 VOLUME /app/var
 WORKDIR /app
 
-RUN tar -zxf /archive.tgz -C .; rm -f /archive.tgz
+RUN tar -zxf /archive.tgz -C .; rm -f /archive.tgz; mkdir -p var
 
 ARG staging_env
 
@@ -28,8 +28,8 @@ RUN if [ "${staging_env}" != 'dev' ] && [ -f composer.json ]; then \
 	fi
 
 RUN set -eux; \
-	setfacl -dR -m u:www-data:rwX var; \
-	setfacl -dR -m u:www-data:rwX var
+	setfacl -R -m u:www-data:rwX -m u:"$(whoami)":rwX var; \
+	setfacl -dR -m u:www-data:rwX -m u:"$(whoami)":rwX var
 
 FROM app-base AS app-dev
 

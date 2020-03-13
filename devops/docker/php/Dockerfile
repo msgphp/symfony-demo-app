@@ -50,7 +50,7 @@ RUN set -eux; \
 COPY conf.d/symfony.ini "${PHP_INI_DIR}/conf.d/"
 
 ENV COMPOSER_HOME=/composer
-ENV COMPOSER_CACHE_DIR=/tmp/composer
+ENV COMPOSER_CACHE_DIR=/composer/cache
 ENV COMPOSER_ALLOW_SUPERUSER=1
 ENV COMPOSER_HTACCESS_PROTECT=0
 COPY --from=composer /usr/bin/composer /usr/bin/
@@ -67,6 +67,15 @@ RUN set -eux; \
 	composer clear-cache
 
 ARG run_uid
-RUN [ -n "${run_uid}" ] && sed -i "s/user = www-data/user = ${run_uid}/" /usr/local/etc/php-fpm.d/www.conf
+
+RUN if [ -n "${run_uid}" ]; then \
+		sed -i "s/user = www-data/user = ${run_uid}/" /usr/local/etc/php-fpm.d/www.conf; \
+		chown -R "${run_uid}" /composer; \
+	fi
+
 ARG run_gid
-RUN [ -n "${run_gid}" ] && sed -i "s/group = www-data/group = ${run_gid}/" /usr/local/etc/php-fpm.d/www.conf
+
+RUN if [ -n "${run_gid}" ]; then \
+		sed -i "s/group = www-data/group = ${run_gid}/" /usr/local/etc/php-fpm.d/www.conf; \
+		chown -R ":${run_gid}" /composer; \
+	fi
