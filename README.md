@@ -1,3 +1,11 @@
+# NOT ACTIVELY SUPPORTED ANY MORE!!
+
+msgphp/* repositories are not actively developed/supported anymore.
+
+**Use in production on your own risks.**
+
+If you want to do some hotfixes - please do PR directly in target repository instead of previous msgphp/msgphp  monorepository
+
 # Symfony Demo Application
 
 A Symfony demo application with basic user management, a REST/GraphQL API and OAuth/JWT authentication.
